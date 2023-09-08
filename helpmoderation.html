@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="iso-8859-1">
+<title>Commandes aliases</title>
+</head>
+
+<body>
+
+
+<pre>
+;PSEUDO :
+; /pk [pseudo]
+; /ps [pseudo]
+/pk /kick # $1 Veuillez changer votre pseudo, merci.
+/ps /mode $chan +b * $+ $gettok($$1,1,124) $+ *!*@* | /kick # $$1 Veuillez changer votre pseudo, merci.
+
+
+;FLOOD :
+; /f [pseudo]
+; /bf [pseudo]
+/f /cs kick # $1 Le flood est interdit (répétition de lettres/mots), merci.
+/bf /Chanserv ban # $1 Trop de flood (répétition de lettres/mots), banni!
+
+
+;REPETITION :
+; /rpt [pseudo]
+; /brpt [pseudo]
+/rpt /cs kick # $1 Arrête de répéter toujours la même chose, merci.
+/brpt /Chanserv ban # $1 Trop de répétition, tue la répétition, banni!
+
+
+;PUB :
+; /pub [pseudo]
+; /bpub [pseudo]
+/pub /cs kick # $1 La publicité n'est pas toléré sur les salons officiels, merci.
+/bpub /Chanserv ban # $1 La publicité est interdite sur les salons officiels, banni!
+
+
+;MAJUSCULES :
+; /maj [pseudo]
+; /bmaj [pseudo]
+/maj /cs kick # $1 Attention à l'abus de majuscules dans le pseudo ou dans les messages, merci.
+/bmaj /Chanserv ban # $1 L'abus de majuscules dans les pseudos ou dans les messages est interdit, banni!
+
+
+;PROPOS :
+; /stop [pseudo]
+; /tg [pseudo]
+; /fr [pseudo]
+; /prop [pseudo]
+; /bprop [pseudo]
+; /bco [pseudo]
+/stop /cs kick # $$1 Stop
+/tg /cs kick # $$1 Parle correctement.
+/fr /cs kick # $$1 Parle en français.
+/prop /cs kick # $$1 Calme toi un peu.
+/bprop /Chanserv ban # $1 Ces propos ne sont pas tolérés, banni!
+/bco /Chanserv ban # $1 Comportement à revoir
+
+
+;SMS :
+; /sms [pseudo]
+; /bsms [pseudo]
+/sms /cs kick # $$1 tu dois t'exprimer en français et proscrire le langage SMS!
+/bsms /Chanserv ban # $1 Revois les règles, banni!
+
+
+;SEXE :
+; /cam [pseudo]
+; /bsex [pseudo]
+/cam /cs kick # $$1 Pas de demande en salon.
+/bsex /Chanserv ban # $1 Le sexe est interdit sur le serveur, banni!
+
+
+; AUTRES :
+; /k [pseudo] [motif]
+; /kb [pseudo]
+; /bautre [pseudo] [motif]
+; /ps [pseudo]
+; /qb [pseudo]
+/k /cs kick # $1 $2-
+/kb /ban # $1 | /cs kick # $1 $?"Raison :"
+/bautre /mode # +b $address($1,2) | /kick # $1 $2-
+/qb /mode $chan +b ~q:* $+ $gettok($$1,1,124) $+ *!*@*
+
+; /kickban [#salon] [pseudo] [motif]
+/kickban { 
+  /mode $$1 +b $address($$2,2)
+  /kick $$1 $$2 $$3-
+}
+
+;VOICE :
+; /vcs [pseudo]
+; /dvcs [pseudo]
+; /v [pseudo] {pseudo2} (jusqu'à 6 pseudos)
+; /dv [pseudo] {pseudo2} (jusqu'à 6 pseudos)
+/vcs /cs voice # $1
+/dvcs /cs devoice # $1
+/v /mode # +vvvvvv $1 $2 $3 $4 $5 $6
+/dv /mode # -vvvvvv $1 $2 $3 $4 $5 $6
+
+
+;AIDE :
+; /helptapavu [pseudo]
+; /helpnick [pseudo]
+; /helpuser [pseudo]
+; /helpvoice [pseudo]
+/helptapavu /notice $$1 La syntaxe du "tapavu" est la suivante : "!tapavu pseudo*" (Attention à ne pas oublier l'étoile à la fin du pseudo). Pour plus d'information, venir dans le privé de [Pseudo]. Merci.
+/helpnick /notice $$1 Pour changer de pseudo, il faut écrire dans cette fenêtre (Status) : "/nick Nouveau_Pseudo" en remplacant par votre nouveau pseudo. Pour plus d'information, venir dans le privé de [Pseudo]. Merci.
+/helpuser /notice $$1 Pour toute demande de renseignement sur le fonctionnement du t'chat, veuillez acceder à mon privé en double-cliquant sur mon pseudo. Pour plus d'information, venir dans le privé de [Pseudo]. Merci.
+/helpvoice /notice $$1 Le voice (couleur verte et repérable par un +), est un privilège accordé aux membres actifs d'un salon. Le "voicé" est alors considéré comme VIP jusqu'à ce qu'un modérateur décide de le "dévoicer". Il peut ainsi éviter les kicks du robot de modération (Live). Pour plus d'information, venir dans le privé de [Pseudo]. Merci. | /msg # [Note] Une notice d'aide à été envoyé à $$1.
+
+
+;DIVERS
+; /bjr
+; /rappel [message]
+/bjr /amsg [Global] Bonjour !
+/rappel /say [RAPPEL] $1-
+
+
+
+; Commandes qui peuvent servir :
+/j /join $$1 $2-
+/p /part #
+/w /whois $$1
+/hop /hop #
+/j /join #$$1 $2-
+/p /part #
+/n /names #$$1
+/w /whois $$1
+/k /kick # $$1
+/q /query $$1
+/send /dcc send $1 $2
+/chat /dcc chat $1
+/ping /ctcp $$1 ping
+
+/ban /mode # +b $address($2,2)
+/op /cs op # $1
+/deop /cs deop # $1
+/hp /cs halfop # $1
+/dhp /cs dehalfop # $1
+/voice /cs voice # $1
+/devoice /cs devoice # $1
+
+; /gp
+/gp /ns ghost %mmcNick %mmcPassword
+
+</pre>
+
+
+</body>
+</html>

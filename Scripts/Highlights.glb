@@ -1,0 +1,110 @@
+;-----------------------------------------------------------
+;                        Highlights
+;                          Par Xor
+;-----------------------------------------------------------
+
+alias hl dialog -m highlight highlight
+dialog highlight {
+  size -1 -1 300 200
+  title "Tgl0beSCRIPT - Highlights"
+  icon Images\icones\hl.ico
+  text "Réagir aux messages contenant les mots suivants :", 1, 4 3 297 20
+  list 2, 4 21 200 98, size
+  button "Ajouter", 3, 210 21 80 20, flat
+  button "Supprimer", 4, 210 46 80 20, flat
+  button "Fermer", 5, 210 96 80 20, ok flat
+  button "Son...", 6, 210 71 80 20, flat
+  check "Activer l'alerte sonore", 7, 4 130 150 15
+  check "Activer l'affichage en fenêtre active", 8, 4 150 200 15
+  check "Activer l'affichage en info-bulle", 9, 4 170 200 15
+}
+
+
+ON *:DIALOG:highlight:init:*:{
+  mdx SetMircVersion $version
+  mdx MarkDialog $dname
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 1 text 16711680
+  mdx SetColor $dname 1,2,7,8,9 textbg 16772585
+  mdx SetColor $dname 1,2,7,8,9 background 16772585
+  var %j 1
+  var %ini2 Scripts\highlights.txt
+  while (%j <= $lines(%ini2)) {
+    did -a highlight 2 $read(%ini2,%j)
+    inc %j
+  }
+  if (%hl.son.actif == 1) { did -c highlight 7 }
+  if (%hl.echo == 1) { did -c highlight 8 }
+  if (%hl.tip == 1) { did -c highlight 9 }
+}
+
+ON *:DIALOG:highlight:sclick:3:{
+  var %texte $$?="Texte du highlight"
+  did -a highlight 2 %texte
+  write Scripts\highlights.txt %texte
+}
+
+ON *:DIALOG:highlight:sclick:4:{
+  write -dl $+ $did(highlight,2).sel Scripts\highlights.txt
+  did -d highlight 2 $did(highlight,2).sel
+}
+ON *:DIALOG:highlight:sclick:6:{
+  set %hl.son $sfile($mircdirsounds\sounds\,Sélection d'un son, OK)
+}
+ON *:DIALOG:highlight:sclick:7:{
+  set %hl.son.actif $did(7).state
+}
+ON *:DIALOG:highlight:sclick:8:{
+  set %hl.echo $did(8).state
+}
+ON *:DIALOG:highlight:sclick:9:{
+  set %hl.tip $did(9).state
+}
+
+on *:text:*:#:{
+  if ( $me isin $strip( $1- ) ) {
+    if  ( ( %hl.echo == 1 ) && ( $active != $chan ) ) Echo -at   $+ $Color(HighLight Text) $+ $nick t'appelle sur  $+ $chan   $+ :  $1-
+    if ( %hl.tip == 1 ) var %tmp $tip(HL,Tgl0beSCRIPT : HighLights,2 $+ $chan / $nick : $1-,10,images/Icones/Tgl0be.ico,$null,join $chan,$null)
+    if ((%hl.son.actif == 1) && (%sons.etat == ON)) splay %hl.son
+    aline -p @Journal $timestamp 2HighLight de4 $nick 2sur4 $chan 2(4 $+ $server $+ 2) : $1-
+    halt
+  }
+  var %i 1
+  var %ini Scripts\highlights.txt
+  while (%i <= $lines(%ini)) {
+    if ($read(%ini,%i) isin $strip($1-)) {
+      if  ( ( %hl.echo == 1 ) && ( $active != $chan ) ) {
+        Echo -at   $+ $Color(HighLight Text) $+ $nick a prononcé $read(%ini,%i) sur  $+ $chan   $+ :  $1-
+      }    
+      aline -p @Journal $timestamp 2HighLight de4 $nick 2sur4 $chan 2(4 $+ $server $+ 2) : $1-  
+      if ( %hl.tip == 1 ) var %tmp $tip(HL,Tgl0beSCRIPT : HighLights,2 $+ $chan / $nick / " $+ $read(%ini,%i) $+ " : $1-,10,images/Icones/Tgl0be.ico,$null,join $chan,$null)
+      if ((%hl.son.actif == 1) && (%sons.etat == ON))   splay %hl.son
+      halt
+    }
+    inc %i
+  }
+}
+
+ON 1:action:*:#:{
+  if ( $me isin $strip( $1- ) )  {
+    if  ( ( %hl.echo == 1 ) && ( $active != $chan ) ) Echo -at   $+ $Color(HighLight Text) $+ $nick t'appelle sur  $+ $chan   $+ :  $1-
+    if ( %hl.tip == 1 ) var %tmp $tip(HL,Tgl0beSCRIPT : HighLights,2 $+ $chan / $nick : /me $1-,10,images/Icones/Tgl0be.ico,$null,join $chan,$null)
+    if ((%hl.son.actif == 1) && (%sons.etat == ON)) splay %hl.son
+    aline -p @Journal $timestamp 2HighLight de4 $nick 2sur4 $chan 2(4 $+ $server $+ 2) : $1-
+    halt
+  }
+  var %i 1
+  var %ini Scripts\highlights.txt
+  while (%i <= $lines(%ini)) {
+    if ($read(%ini,%i) isin $strip($1-)) {
+      if  ( ( %hl.echo == 1 ) && ( $active != $chan ) ) {
+        Echo -at   $+ $Color(HighLight Text) $+ $nick a prononcé $read(%ini,%i) sur  $+ $chan   $+ :  $1-
+      }      
+      aline -p @Journal $timestamp 2HighLight de4 $nick 2sur4 $chan 2(4 $+ $server $+ 2) : $1-
+      if ( %hl.tip == 1 ) var %tmp $tip(HL,Tgl0beSCRIPT : HighLights,2 $+ $chan / $nick / " $+ $read(%ini,%i) $+ " : /me $1-,10,images/Icones/Tgl0be.ico,$null,join $chan,$null)
+      if ((%hl.son.actif == 1) && (%sons.etat == ON)) splay %hl.son
+      halt
+    }
+    inc %i
+  }
+}

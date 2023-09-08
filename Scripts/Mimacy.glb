@@ -1,0 +1,6 @@
+alias helpmoderation {
+  var %x = $mircdir $+ helpmoderation.html
+  window -p @RaccourcisClavier
+  .echo -q $dll($mircdir $+ libs\nHTMLn_2.95.dll,attach,$window(@RaccourcisClavier).hwnd)
+  .echo -q $dll($mircdir $+ libs\nHTMLn_2.95.dll,navigate,%x)
+} 

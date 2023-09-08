@@ -1,0 +1,32 @@
+;-----------------------------------------------------------
+;                              Menus
+;                          Par Xor
+;-----------------------------------------------------------
+
+Menu MenuBar {
+  Historique
+  .Mes Bans $Chr(58) %Ban.Count 
+  ..$iif(%Histo.Ban == $True, Désactiver Historique ) : Set %Histo.Ban $False
+  ..$iif(%Histo.Ban == $False, Activer Historique ) : Set %Histo.Ban $True
+  .Mes Kicks $Chr(58) %Kick.Count 
+  ..$iif(%Histo.Kick == $True, Désactiver Historique ) : Set %Histo.Kick $False
+  ..$iif(%Histo.Kick == $False, Activer Historique ) : Set %Histo.Kick $True
+  ..-
+  ..$iif(%Histo.Kick == $True, Voir ) : VoirHistoKick
+  ..$iif(%Histo.Kick == $True, Effacer ) : EffacerHistoKick
+  .Remise à zéro
+  ..$iif( %Kick.RAZTime == $Duration(1day) , $Style(1) ) Tous les jours : Set %Kick.RAZTime $Duration(1day)
+  ..$iif( %Kick.RAZTime == $Duration(1wks) , $Style(1) ) Toutes les semaines : Set %Kick.RAZTime $Duration(1wks)
+  ..$iif( %Kick.RAZTime == $Duration(4wks) , $Style(1) ) Tous les mois : Set %Kick.RAZTime $Duration(4wks)
+  ..$iif( %Kick.RAZTime == $Duration(52wks) , $Style(1) ) Tous les ans : Set %Kick.RAZTime $Duration(52wks)
+  ..$iif( %Kick.RAZTime == $Null , $Style(1) ) Jamais : Unset %Kick.RAZTime
+  ..-
+  ..Remettre le compteur à zéro : { RAZKickCompteur }
+}
+Menu @HistoriqueKick {
+  DClick : Window -c @HistoriqueKick
+  Effacer le fichier : EffacerHistoKick
+  Remettre le compteur à zéro $Chr(58) %Kick.Count : { Set %Kick.Count 0 | Set %Kick.DernierRAZ $Ctime }
+  -
+  Fermer cette fenêtre : Window -c @HistoriqueKick
+}

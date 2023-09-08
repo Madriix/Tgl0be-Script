@@ -1,0 +1,27 @@
+;-----------------------------------------------------------
+;                    Scan Host précédent
+;                             Par Xor
+;-----------------------------------------------------------
+
+alias addnickp {
+  var %a $$1,%h = $gettok($$2,1,124)
+  if !$hget(NickP,%a) { hadd -m NickP %a %h }
+}
+
+off *:START:{ hmake NickP 100 }
+on *:part:*: { if ($comchan($nick,0) <= 1) { addnickp $site $nick } }
+on *:QUIT:{ addnickp $site $nick } 
+on *:KICK:*: { if ($comchan($knick,0) < 2) { addnickp $gettok($$address($knick,2),2,64) $knick } }
+
+on *:JOIN:#: {
+  if ($hget(nickp,$site)) && (*!*@ $+ $site != $ial($me)) {
+    var %npjoin = $hget(nickp,$site) 
+    if ($gettok($nick,1,124) != $gettok(%npjoin,$numtok(%npjoin,32),32)) {
+      var %oldnick = $gettok(%npjoin,-1,32)
+      if ($gettok(%oldnick,1,124) != $gettok($nick,1,124)) {
+        var %titre %symbol.aff.g $+ ScanHost $+ %symbol.aff.d
+        AfficheQuery $Color(Join Text) $Nick %titre  $+ $nick était précédemment connecté avec le pseudo : %oldnick
+      }
+    }
+  }
+}

@@ -1,0 +1,772 @@
+;-----------------------------------------------------------
+;                  Dialogue de Configuration
+;                          Par Xor
+;-----------------------------------------------------------
+
+Dialog Tgl0be {
+  TITLE  "Configuration de Tgl0beSCRIPT (F1)"
+  SIZE   -1 -1 600 400
+  icon images\icones\tgl0be.ico
+  menu "&Tgl0beSCRIPT", 1
+  item "&Présentation", 11
+  item "A&ide de Tgl0beSCRIPT",35
+  item break, 12
+  item "&Fermer", 13
+  menu "&Configurer", 2
+  item "&Away", 21
+  item "&Ecriture", 22
+  menu "Pr&otection des salons", 23,2
+  item "&Type de détection", 14
+  item "&Conditions d'action", 19
+  item "T&ake-Overs / Clônes", 15
+  item "&Format du Ban / Sons", 16
+  item "&Raccourcis Touches", 25,2
+  item "Ra&isons de Kick/Ban", 26
+  item "&Salons", 27
+  item "S&kins", 28
+  item "&Répondeur / Quit ...", 18
+  item "&CTCP / Informations personnelles", 17
+  item "&Mes Pseudos / Compteur de kicks", 4
+  menu "&Utilitaires", 3
+  ;item "MSN Messenger pour mIRC", 5 
+  item "Raccourcis &Bot CService" , 38
+  item "V&oice intelligent",31
+  menu "&Logviewer", 32, 3
+  item "&Configurer", 33
+  item "&Exécuter", 34
+  item "&Table de caractères", 36,3
+  item "Lecteur M&P3", 37
+  icon 40, 20 10 560 140,  $image(Script.jpg)
+  BOX  "CONFIGURATION DU SYSTEME DE AWAY", 61, 10 10 580 350
+  text "", 41, 1 1 1 1
+  BUTTON "&Fermer"                   , 42, 510 370 70 20, Flat,cancel
+  BOX "Pseudo / Raison"      , 62,  20 30 280  120
+  CHECK "&Extension durant l'absence"   , 43, 30  50 180 20,flat
+  COMBO                                      44, 30  70 180 100, Edit, Drop
+  TEXT "Raison :" , 45, 30  100 120 20
+  COMBO                                      46, 30  115 230 100, Edit, Drop
+  BOX "Away Automatique"      , 47,  20 160 280  80
+  CHECK "Acti&ver au bout de"     , 48,  30 180 110  20,flat
+  EDIT ""                                    , 49, 140 180  30  20
+  TEXT "minutes"                        ,50, 175 183  50  20
+  TEXT "Message :"                   ,51,   30 210  60 20
+  EDIT ""                                   ,52,   90 207 200 20, Autohs
+  BUTTON "-"                             ,53, 220 70 20 20, Flat
+  BUTTON "-"                             ,54, 270 115 20 20, Flat
+  BOX "Afficher sur les salons"      ,55,  20 250 280  90
+  CHECK "Votre départ"              ,56,  30 270 100  20,flat
+  CHECK "Répétition toutes les ",57,  30 290 120  20,flat
+  EDIT ""                                   ,58,150 290   20  20
+  TEXT "minutes"                       ,59,173 293   70  20
+  CHECK "Votre retour"              ,60,  30 310 100  20 ,flat
+  BOX "Raccourcis"      , 63,  320 30 260  120
+  TEXT "Pour activer le Away (ex : !away) :" , 64, 330  50 180 20
+  EDIT ""                                   ,65, 390 70 120 20
+  TEXT "Pour désactiver le Away (ex : !retour) :" , 66, 330  100 190 20
+  EDIT ""                                   ,67, 390 120 120 20
+  BOX "Aide"      , 68,  320 160 260  180
+  TEXT "Répondeur : les messages stockés (temporairement) sont ceux qui vous sont adressés durant votre absence en notice, en privé, ainsi que ceux contenant votre pseudo sur les salons sur lesquels vous vous trouviez lors de votre départ."     ,69, 330 180 240 140
+  TEXT "Pour activer l'Away suivez l'exemple suivant :"     ,70, 330 260 240 20
+  TEXT "Tapez !away raison nick    où nick représente le nick que vous voulez durant votre absence (si vous ne spécifiez pas de nick, votre pseudo sera celui par défaut suivi de OUT )"   ,71, 330 280 240 55
+  BOX  "CONFIGURATION DES RAISONS DE KICK/BAN", 72, 10 10 580 350
+  BUTTON "&Ajouter" , 74, 420  330    70    20, Flat
+  BUTTON "&Retirer"  , 75, 510  330    70    20, Flat
+  LIST                      76,   20    70  100  210, Sort
+  LIST                      77, 120    70  460  210, Sort
+  EDIT ""                , 78,   20    30  560    20, Autohs, Center,read
+  EDIT ""                , 79,   20    50  560    20, Autohs
+  BOX "Aide" ,80 ,20 260 560 60
+  TEXT "Vous pouvez ici configurer les raisons de vos Kicks/Bans (automatiques ou non). Pour donner des couleurs à une raison, appuyez sur CTRL+K et choisissez la couleur et le fond (ex: 0,12 pour blanc sur fond bleu).",81, 30 280 540 40
+  BOX  "CONFIGURATION DE L'ECRITURE - PAGE 1", 163, 10 10 580 330
+  Check "&Activer votre écriture"  ,82,  330 370 160  20, push
+  BOX "Salons !Officiels!",164,  20 30 270 80
+  Text "Couleur d'écriture :"      , 83,  30  50 110  20
+  Text "Couleur de fond :"         , 84,  30  70 110  20
+  Combo                                85, 125   44  90 270 , vsbar , drop , size
+  Combo                                86, 125   66  90 270 , vsbar , drop , size
+  Text "Symbole entre le pseudo et le texte :" , 91, 30 90 179  20
+  Edit ""                                                 , 92, 219 87  30  20, Autohs
+  Check "Gras"                                        , 94, 220  47    50  20,flat
+  Check "Souligné"                                   , 95, 220  64  60  20,flat
+  BOX "Salons Personnels", 165, 310 30 270 220
+  Text "Couleur d'écriture :"      , 96,  320  50 110  20
+  Text "Couleur de fond :"         , 97,  320  70 110  20
+  Combo                                98, 415  44  90 270 , vsbar , drop , size
+  Combo                                99, 415  66  90 270 , vsbar , drop , size
+  Text "Symbole entre le pseudo et le texte :" , 104, 320 90 179  20
+  Edit ""                                                 , 105, 509 87  30  20, Autohs
+  Box "Décorations"               , 106,   320 110 250  100
+  Text "Gauche :"                   , 107,   330 130   50  20
+  Text "Droite :"                     , 108,   330 170   50  20
+  Edit ""                               , 109,   380 127   50   20 , Autohs
+  Edit ""                               , 110,  380 167   50   20 , Autohs
+  Combo                                111, 430 127   60 270 , vsbar , drop , size
+  Combo                                112, 430 167   60 270, vsbar , drop , size
+  Combo                                113, 490 127   60 270 , vsbar , drop , size
+  Combo                                114,490 167   60 270 , vsbar , drop , size
+  Check "Gras"                     , 115, 430 147   50  20,flat
+  Check "Souligné"               , 116, 480 147   60  20,flat
+  Check "Gras"                     , 117, 430 187   50  20,flat
+  Check "Souligné"                , 118, 480 187   60  20,flat
+  Check "Gras"                                        , 120, 510  47    50  20,flat
+  Check "Souligné"                                   , 121, 510  64    60  20,flat
+  Check "Première lettre en majuscule :"       , 122, 320 220  160  20,flat
+  Combo                                                  124, 485  217  90 270, vsbar , drop , size
+  Box "Privés", 166, 20 120 270 200
+  Text "Couleur d'écriture"      , 125,  30  140 110  20
+  Text "Couleur de fond"         , 126,  30  160 110  20
+  Combo                                127, 125  134  90 270, vsbar , drop , size
+  Combo                                128, 125  156 90 270 , vsbar , drop , size
+  Box "Décorations"                 , 129,   30 180 250  100
+  Text "Gauche :"                     , 130,   40 200   50  20
+  Text "Droite :"                       , 131,   40 240   50  20
+  Edit ""                                 , 132,   90 197   50  20 , Autohs
+  Edit ""                                 , 133,   90 237   50  20 , Autohs
+  Combo                                 134, 140 197   60 270, vsbar , drop , size
+  Combo                                 135, 140 237   60 270 , vsbar , drop , size
+  Combo                                 136, 200 197   60 270, vsbar , drop , size
+  Combo                                 137, 200 237   60 270 , vsbar , drop , size
+  Check "Gras"                      , 138, 140 217   50  20,flat
+  Check "Souligné"                 , 139, 190 217   60  20,flat
+  Check "Gras"                      , 140, 140 257   50  20,flat
+  Check "Souligné"                 , 141, 190 257   60  20,flat
+  Check "Gras"                                        , 143, 220  137    50  20,flat
+  Check "Souligné"                                   , 144, 220  154    60  20,flat
+  Check "Première lettre en majuscule :"       , 145, 30 290  170  20,flat
+  Combo                                                  147, 195  287  90 270, vsbar , drop , size
+  BOX "Tous les Salons", 167, 310 260 270 60
+  Text "Format des pseudos :" , 87,  320 280 180  20
+  Check "Gras"                       , 88, 340 295  60  20,flat
+  Check "Souligné"                  , 89, 400  295 70  20,flat
+  Check "Inversé"             , 90,470 295  80  20,flat
+  Button "Page 2 >>>"                       , 168, 510 345 70  20, flat
+  Button "<<< Page 1"                       , 169, 510 345 70  20, flat
+  BOX  "CONFIGURATION DE L'ECRITURE - PAGE 2", 170, 10 10 580 330
+  BOX "Changer un caractère par un autre",148,  20 30 270 110
+  List                        149,   30 50 30 90
+  List                        150,   60 50 30 90
+  Edit ""                  , 151, 145 50 30   20, Autohs
+  text "par" , 171, 177 53 20 20
+  Edit ""                  , 152, 200 50 30   20, Autohs
+  Button "&Ajouter"  , 153, 135 110 50  20, Flat
+  Button "&Retirer"  , 154, 190  110 50  20, Flat
+  Combo                  155, 145 80 85 270 , vsbar , drop , size
+  BOX "Modèles Prédéfinis", 172, 310 30 270 220
+  List                          156,   320   50 140 170, Sort
+  Edit ""                    , 157,   320 220 140   20
+  Button "&Ajouter"   , 158, 473   50   90   20, Flat
+  Button "&Retirer"    , 159, 473 80   90   20, Flat
+  Button "&Charger"  , 160, 473 110   90   20, Flat
+  Box "En cours :"     , 161, 470 140 100   50
+  Text ""       , 162, 475 160 87   20,center
+  BOX "Aide",173,  20 150 270 180
+  Text "Changer un caractère par un autre :", 174, 30 170 250 20
+  Text "   Exemple : $@lut tt le m¤nde !!!",175, 30 185 250 20
+  text "   Conseil : utilisez la Table de Caractères (Menu Utilitaires)", 176, 30 200 250 25
+  Text "N'abusez pas trop de cet outil, sinon vous pourriez vite devenir illisible !", 177, 30 230 250 25
+  text "Modèles Prédéfinis :", 178, 30 270 250 20
+  Text "Définissez des Modèles multi-utilisateurs et chargez les rapidement à n'importe quel moment !", 179, 30 285 250 40
+  BOX  "GESTIONNAIRE DE SALONS", 201, 10 10 580 350
+  List                            180,   30   50  120  240 , sort, size, vsbar
+  Text "Nom du salon"  , 181, 170   55   80    20 
+  Edit ""                      , 182,  240  50  100    20 , AutoHs
+  Box "Access"            , 183,  170  110  150    90 
+  Text "Bot :"          , 184,  180  135   50    20 
+  Edit ""                      , 185,  220  130   90    20 , AutoHs   
+  Text "Pass :"              , 186,  180  155   70    20 
+  Edit ""                      , 187,  220  150   90    20 , Pass, AutoHs   
+  Check "Auto-Op en entrant"       , 188,  180  175   110    20 ,flat
+  Box "Messages"                              , 189,  340   90  230  165 
+  Check "Dire en rentrant :"            , 190,  350 110  150    20 ,flat
+  Edit ""                                            , 191,  350 130  210    20 , AutoHs
+  Check "Message d'accueil"               , 192,  350 160  150    20 ,flat
+  Edit ""                                            , 193,  350 180  210    20 , AutoHs
+  Check "Voice Automatique" , 194,  350 220  150    20 ,flat
+  Button "A&jouter"       , 195,  370 50 70 20 , flat
+  Button "&Supprimer"  , 196,  460 50 70 20 , flat
+  Check "Rejoindre en se connectant" , 197, 170 90 150 20 ,flat
+  Box "Serveur"          , 198,  170  205  150    50 
+  Combo                      199,  180  225  130  150 , Vsbar , Drop , Size
+  Text "" , 200 ,170  250  1 1 ,flat
+  BOX  "Aide", 202, 20 300 560 50
+  Text "Configurez ici vos access sur les robots de vos salons. Ces-derniers doivent être de type ''eggdrop''.",203, 30 320 540 30
+  BOX  "CONFIGURATION DES RACCOURCIS", 204, 10 10 580 350
+  TEXT    "F1"          , 205,   25   50   20   20
+  TEXT    "F2"          , 206,   25   70   20   20
+  TEXT    "F3"          , 207,   25   90   20   20
+  TEXT    "F4"          , 208,   25 110   20   20
+  TEXT    "F5"          , 209,   25 130   20   20
+  TEXT    "F6"          , 210,   25 150   20   20
+  TEXT    "F7"          , 211,   25 170   20   20
+  TEXT    "F8"          , 212,   25 190   20   20
+  TEXT    "F9"          , 213,   25 210   20   20
+  TEXT    "F10"        , 214,   25 230   20   20
+  TEXT    "F11"        , 215,   25 250   20   20
+  TEXT    "F12"        , 216,   25 270   20   20
+  EDIT    ""          , 217,   50   50   150  20, AutoHs,disabled
+  EDIT    ""          , 218,   50   70   150   20, AutoHs
+  EDIT    ""          , 219,   50   90   150   20, AutoHs
+  EDIT    ""          , 220,   50 110   150   20, AutoHs
+  EDIT    ""          , 221,   50 130   150   20, AutoHs
+  EDIT    ""          , 222,   50 150   150   20, AutoHs
+  EDIT    ""          , 223,   50 170   150   20, AutoHs
+  EDIT    ""          , 224,   50 190   150   20, AutoHs
+  EDIT    ""          , 225,   50 210   150   20, AutoHs
+  EDIT    ""          , 226,   50 230   150   20, AutoHs
+  EDIT    ""          , 227,   50 250   150   20, AutoHs
+  EDIT    ""          ,228,   50 270   150   20, AutoHs
+  TEXT    "F1"          , 229,   210   50   20   20
+  TEXT    "F2"          , 230,   210   70   20   20
+  TEXT    "F3"          , 231,   210   90   20   20
+  TEXT    "F4"          , 232,   210 110   20   20
+  TEXT    "F5"          , 233,   210 130   20   20
+  TEXT    "F6"          , 234,   210 150   20   20
+  TEXT    "F7"          , 235,   210 170   20   20
+  TEXT    "F8"          , 236,   210 190   20   20
+  TEXT    "F9"          , 237,   210 210   20   20
+  TEXT    "F10"        , 238,   210 230   20   20
+  TEXT    "F11"        , 239,   210 250   20   20
+  TEXT    "F12"        , 240,   210 270   20   20
+  EDIT    ""          , 241,   235   50   150  20, AutoHs
+  EDIT    ""          , 242,   235   70   150   20, AutoHs
+  EDIT    ""          , 243,   235   90   150   20, AutoHs
+  EDIT    ""          , 244,   235 110   150   20, AutoHs
+  EDIT    ""          , 245,   235 130   150   20, AutoHs
+  EDIT    ""          , 246,   235 150   150   20, AutoHs
+  EDIT    ""          , 247,   235 170   150   20, AutoHs
+  EDIT    ""          , 248,   235 190   150   20, AutoHs
+  EDIT    ""          , 249,   235 210   150   20, AutoHs
+  EDIT    ""          , 250,   235 230   150   20, AutoHs
+  EDIT    ""          , 251,   235 250   150   20, AutoHs
+  EDIT    ""          ,252,   235 270   150   20, AutoHs,disabled
+  TEXT    "F1"          , 253,   395   50   20   20
+  TEXT    "F2"          , 254,   395   70   20   20
+  TEXT    "F3"          , 255,   395   90   20   20
+  TEXT    "F4"          , 256,   395 110   20   20
+  TEXT    "F5"          , 257,   395 130   20   20
+  TEXT    "F6"          , 258,   395 150   20   20
+  TEXT    "F7"          , 259,   395 170   20   20
+  TEXT    "F8"          , 260,   395 190   20   20
+  TEXT    "F9"          , 261,   395 210   20   20
+  TEXT    "F10"        , 262,   395 230   20   20
+  TEXT    "F11"        , 263,   395 250   20   20
+  TEXT    "F12"        , 264,   395 270   20   20
+  EDIT    ""          , 265,   420   50   150  20, AutoHs
+  EDIT    ""          , 266,   420   70   150   20, AutoHs
+  EDIT    ""          , 267,   420   90   150   20, AutoHs
+  EDIT    ""          , 268,   420 110   150   20, AutoHs
+  EDIT    ""          , 269,   420 130   150   20, AutoHs
+  EDIT    ""          , 270,   420 150   150   20, AutoHs
+  EDIT    ""          , 271,   420 170   150   20, AutoHs
+  EDIT    ""          , 272,   420 190   150   20, AutoHs
+  EDIT    ""          , 273,   420 210   150   20, AutoHs
+  EDIT    ""          , 274,   420 230   150   20, AutoHs
+  EDIT    ""          , 275,   420 250   150   20, AutoHs
+  EDIT    ""          ,276,   420 270   150   20, AutoHs
+  Text "CONTROL +", 277, 235 30 150 20,center
+  Text "SHIFT +", 278, 420 30 150 20,center
+  Box "Aide", 279, 20 290 560 60
+  Text "Configurez ici vos touches de Raccourcis (par exemple des alias de votre création, des commandes mIRC de base telles que /join #tglobe etc...)", 280, 30 310 540 40
+  BOX  "PROTECTION DES SALONS : TYPE DE DETECTION", 281, 10 10 580 350
+  check "Afficher le contrôle dans une fenêtre", 282, 20 335 200 20,flat
+  check "Temps de l'ignore en cas d'attaque :", 283, 20 40 190 20,flat
+  edit %protect.ignore , 284, 210 40 30 20, center,tab2
+  button "A&vertissements", 285, 270 40 90 20, flat
+  Check "Flood"                              , 286, 20    70   120 20, Push,flat
+  text "Nombre de lignes :"                , 287, 150    73   110 20
+  edit %protect.flood.text.lim           , 288,240   70     30 20
+  text "en               secondes"      , 289,280   73   120 20
+  edit %protect.flood.text.timer        , 290,300   70     30 20
+  text "Nombre Max de caractères :"  , 291, 20  93   140 20 
+  edit ""                                          , 292,155 90     30 20 ,autohs
+  radio "Control"                             , 293,200  90     55 20, group,flat
+  radio "Kick"                                  , 294,260 90     50 20
+  radio "Kick Ban"                           , 295,310  90     65 20,flat
+  check "Majuscules"   , 296, 20 117 120 20, push,flat
+  text "%"                   , 297,175 120 30 20, center
+  edit ""                      , 298,155 117 30 20, center,autohs
+  radio "Control"         , 299, 200 117 55 20, group,flat
+  radio "Kick"              , 300, 260 117 50 20,flat
+  radio "Kick Ban"       , 301, 310 117 65 20,flat
+  check "Détection Publicité" , 302, 20 144 120 20, push,flat
+  radio "Control"                  , 303, 200 144 55 20, group,flat
+  radio "Kick"                      , 304, 260 144 50 20,flat
+  radio "Kick Ban"                , 305, 310 144 65 20,flat
+  check "Détection Insultes"  , 306, 20 171 120 20, push,flat
+  radio "Control"                 , 307, 200 171 55 20, group,flat
+  radio "Kick"                     , 308, 260 171 50 20,flat
+  radio "Kick Ban"               , 309, 310 171 65 20,flat
+  check "Détection Racisme" , 310,  20 198 120 20, push,flat
+  radio "Control"                  , 311, 200 198   55 20, group,flat
+  radio "Kick"                      , 312, 260 198    50 20,flat
+  radio "Kick Ban"                , 313, 310 198   65 20,flat
+  check "Détection Pseudo" , 314,   20  225  120    20, push,flat
+  radio "Control"                , 315, 200  225    55    20, group,flat
+  radio "Kick"                     , 316, 260  225    50    20,flat
+  radio "Kick Ban"              , 317, 310  225    65    20,flat
+  check "Détection Couleur", 318,   20  252  120    20, push,flat
+  radio "Control"                , 319, 200  252    55    20, group,flat
+  radio "Kick"                     , 320, 260  252    50    20,flat
+  radio "Kick Ban"              , 321, 310  252    65    20,flat
+  check "Détection Sexe" , 600,   20  279  120    20, push,flat
+  radio "Control"                , 601, 200  279    55    20, group,flat
+  radio "Kick"                     , 602, 260  279    50    20,flat
+  radio "Kick Ban"              , 603, 310  279    65    20,flat
+  check "Détection Incit. Flood" , 604,   20  306  120    20, push,flat
+  radio "Control"                , 605, 200  306    55    20, group,flat
+  radio "Kick"                     , 606, 260  306    50    20,flat
+  radio "Kick Ban"              , 607, 310  306   65    20,flat
+  list 322                    , 400    40  100 300, multi, vsbar, read
+  radio "&Insulte"       ,323, 500  40    80    20 , push, flat, group 
+  radio "Pu&blicité"     ,324, 500  60    80    20 , push, flat
+  radio "&Racisme"     ,325, 500  80    80    20 , push, flat
+  radio "&Pseudo"       ,326, 500  100  80    20 , push, flat
+  radio "&Sexe"       ,608, 500  120  80    20 , push, flat
+  radio "I&ncitation"       ,609, 500  140  80    20 , push, flat
+  button "A&jouter"     ,327, 500  190  80    20 , flat
+  button "Re&tirer"      ,328, 500  210  80    20 , flat
+  RADIO "Opérateur"    ,330, 410 47   80    20 , flat, group 
+  RADIO "Voice"           ,331, 410  67   80    20 , flat 
+  RADIO "Toujours"      ,332, 410  87   80    20 , flat
+  combo 333,40 50 220 200
+  button "Ajouter"         ,334, 40 252 220 28,flat
+  button "Supprimer"      ,335, 40 282 220 28,flat
+  button "Réinitialiser"    ,336, 40 312 220 28 ,flat
+  BOX  "PROTECTION DES SALONS : CONDITIONS DE PROTECTION", 337, 10 10 580 350
+  BOX "Salons Protégés", 338, 20 30 260 320
+  BOX  "Conditions", 339, 320 30 260 90
+  Text "Agir si je suis :" , 340, 330 50 70 20
+  BOX  "Aide", 329, 320 130 260 130
+  Text "Vous pouvez ici choisir les salons concernés par la protection, dans la liste de gauche (ATTENTION : entrez les salons sous la forme #salon).", 341, 330 150 240 50
+  Text "Parmi les salons surveillés, vous pouvez choisir quel doit être votre état pour que se déclenche la protection : +Voicé, @Op ou User normal. ", 342, 330 200 240 50
+  BOX  "PROTECTION DES SALONS : TAKE-OVERS / CLONES", 343, 10 10 580 350
+  box "DéOps"           , 344, 30 50 250 70
+  text "Maximum de", 345, 40 70 65 20
+  edit ""                  , 346, 100 67 40 20, center
+  text "Déops en"    , 347, 141 70 60 20
+  edit ""                  , 348, 190 67 30 20 , center
+  text "secondes"  , 349,  220 70 50 20 
+  radio "Control"       , 350, 70 90 55 20, group,flat
+  radio "Kick"         , 351, 130 90 50 20,flat
+  radio "Kick Ban"  , 352, 180 90 65 20,flat
+  box "Kicks"             , 353, 30 140 250 70
+  text "Maximum de"   , 354, 40 160 65 20
+  edit ""                      , 355, 100 157 40 20, center
+  text "Kicks en"           , 356, 143 160 60 20
+  edit ""                     , 357, 190 157 30 20 , center
+  text "secondes"       , 358,  220 160 50 20 
+  radio "Control"        , 359, 70 180 55 20, group,flat
+  radio "Kick"            , 360, 130 180 50 20,flat
+  radio "Kick Ban"      , 361, 180 180 65 20,flat
+  box "Bans"                , 362, 30 230 250 90
+  text "Maximum de"     , 363, 40 250 65 20
+  edit ""                       , 364, 100 247 40 20, center
+  text "Bans en"             , 365, 143 250 60 20
+  edit ""                       , 366, 190 247 30 20 , center
+  text "secondes"         , 367,  220 250 50 20 
+  Check "Se débannir"  ,368, 110 290 80 20, push, flat
+  radio "Control"          , 369, 70 270 55 20, group,flat
+  radio "Kick"              , 370, 130 270 50 20,flat
+  radio "Kick Ban"       , 371, 180 270 65 20,flat
+  check "Afficher les clônes"         ,372,   320   50  100 20, push, flattgs,flat
+  radio "Sur le salon"               ,373, 440    50   100 20, grouptgs,flat
+  radio "Dans une fenêtre"        ,374, 440    70   100 20tgs,flat
+  check "&Envoyer la notice"     ,375,   320  100   150 20tgs,flat
+  edit ""                                   ,376,   320  120   250 20,autohs
+  radio "Control"                      ,377, 490  150   70 20, grouptgs,flat
+  radio "Kick"      ,378, 490  170   70 20,flat
+  radio "KickBan"       ,379,  490  190   70 20,flat
+  Check "Agir en cas de clônes",380,   320  150   150 20, Push, Flattgs
+  Box "Attaque de clônes"           , 381,   320   210   250 80tgs
+  Check "Agir automatiquement" , 382,   375   230   140 20, push, flattgs
+  Text "pour"                             , 383, 400   260     30 20tgs
+  Edit ""                                    , 384, 425   257     20 20tgs
+  Text "clônes"                          , 385, 450   260     40 20tgs
+  BOX "Take-Overs", 386, 20 30 270 300
+  BOX  "Clônes", 387, 310 30 270 270
+  BOX "Aide", 388, 310 300 270 50
+  text "Take-Over : Vol de Salon",389, 320 318 250 11
+  text "Clônes : Personnes ayant la même adresse",390,320 332 250 20
+  BOX  "PROTECTION DES SALONS : FORMAT DE BAN / SONS", 391, 10 10 580 350
+  check "Sons :",392, 420 60 60 20,flat
+  radio "Control", 393, 480 60 55 20, flat
+  radio "Kick", 394, 480 80 50 20, flat
+  radio "Kick Ban", 395, 480 100 65 20, flat
+  radio "*!*User@Host.Domain"       , 396 , 30 60   180 20 ,group, Flat, Push
+  radio "*!*@Host.Domain"              , 397 , 30 90   180 20 , Flat, Push
+  radio "*!*User@*.Domain"            , 398, 30 120 180 20 , Flat, Push
+  radio "*!*@*.Domain"                  , 399 , 30 150 180 20 , Flat, Push
+  radio "Nick!User@Host.Domain"     , 400 , 30 180 180 20 , Flat, Push
+  radio "Nick!*User@Host.Domain"   ,401 , 30 210 180 20 , Flat, Push
+  radio "Nick!*@Host.Domain"          , 402 , 30 240 180 20 , Flat, Push
+  radio "Nick!*User@*.Domain"        , 403 , 30 270 180 20 , Flat, Push
+  radio "Nick!*@*.Domain"              , 404 , 30 300 180 20 , Flat, Push
+  radio "*!User@????.Domain"         , 405 , 210 60 180 20 , Flat, Push
+  radio "*!*User@????.Domain"        , 406 , 210 90 180 20 , Flat, Push
+  radio "*!*@????.Domain"              , 407 , 210 120 180 20 , Flat, Push
+  radio "*!*User@????Domain"        , 408, 210 150 180 20 , Flat, Push
+  radio "*!*@????.Domain"              , 409 , 210 180 180 20 , Flat, Push
+  radio "Nick!User@????.Domain"     , 410 , 210 210 180 20 , Flat, Push
+  radio "*nick*!*@*"     , 540 , 210 240 180 20 , Flat, Push
+  text "Temps du Ban ( 0 pour infini )" , 411 , 210 270 180 20, Flat, Center
+  edit "120" , 412, 280 300 40 20 , center 
+  BOX "Format de Ban", 413, 20 40 380 300
+  BOX  "Sons", 414, 410 40 170 100
+  BOX  "Aide", 415, 410 160 170 180
+  TExt "Format de Ban : Choisissez ici si vous préférez bannir une personne par son nick, son adresse, son Identd ou diverses combinaisons. ", 416, 420 180 150 90
+  TExt "Sons : Si un usager joue un son sur un salon, le Script le détecte et peut le kicker, bannir ou vous laisser le choix (Control).", 417, 420 250 150 90
+  BOX  "OPTIONS CTCP / INFORMATIONS PERSONNELLES", 431, 10 10 580 350
+  box "CTCP : Réponse au :", 418, 20 40 560 200
+  check "Pin&g" , 419, 70 60 50 20,flat
+  edit "" ,420, 140 60 360 20, autohs
+  check "&Version" ,421, 70 90 60 20,flat
+  edit "" , 422, 140 90 360 20, autohs
+  check "&Script" ,423, 70 120 60 20,flat
+  edit "" , 424, 140 120 360 20, autohs
+  check "&Help" ,425, 70 150 60 20,flat
+  edit "" , 426, 140 150 360 20, autohs
+  check "&Time" ,427, 70 180 60 20v,flat
+  edit "" , 428, 140 180 360 20, autohs
+  check "F&inger" ,429, 70 210 60 20,flat
+  edit "" , 430, 140 210 360 20, autohs
+  box "Informations Personnelles", 432, 20 250 560 100
+  text "Ces informations apparaitront sur le salon (ou en Privé) si vous tapez !asv  (ou !asv nick)", 433, 30 270 540 20,center
+  text "Age : ",434,230 290 25 20
+  edit "",435,255 287 25 20
+  text "ans",436,286 290 25 20
+  text "Sexe (H/F) : ",437,230 310 60 20
+  edit "",438,290 307 50 20
+  text "Ville : ",439,230 330 25 20
+  edit "",440,255 327 85 20
+  BOX  "CONFIGURATION DES SKINS", 441, 10 10 580 350
+  BOX  "Skin actuellement utilisé :", 442, 80 50 430 35
+  TEXT %Skin.Defaut, 443, 80 64 290 17, RIGHT
+  LIST 444, 130 95 190 150
+  BUTTON "&Créer",     445, 330  120 100 20, FLAT
+  BUTTON "&Modifier",  446, 330 145 100 20, FLAT
+  BUTTON "&Supprimer", 447, 330 170 100 20, FLAT
+  BUTTON "Char&ger",   448, 330 195 100 20, FLAT
+  BOX  "Aide", 450, 30 260 540 80
+  TEXT "Vous pouvez ici configurer/créer vos skins. Un skin regroupe diverses caractéristiques concernant les images de fond, les sons, les couleurs des events et des pseudos, etc. Les Skins sont enregistrés dans le répertoire ''Skins'' du script. N'hésitez pas à me proposer vos skins perso !!!", 449, 40 280 520 60
+  BOX  "CONFIGURATION DES COMMANDES D'UN BOT", 451, 10 10 580 350
+  List                                  454,  120   50 200  160, size, vsbar
+  Text "Pseudos des Bots :"       ,457,  20   30 100    20   
+  Button "&Ajouter"              ,460, 140   230   70    20, Flat
+  Button "&Retirer"              ,461, 215   230   70    20, Flat
+  Text "Pour OP"                 ,462,  440     35   60    20
+  Edit ""                             ,463,  515     30   50    20
+  Text "Pour DEOP"            ,464, 440     55   60    20
+  Edit ""                             ,465,515     50   50    20
+  Text "Pour VOICE"           ,466,  440     75   60    20
+  Edit ""                             ,467,  515    70   50    20
+  Text "Pour DEVOICE"       ,468,440    95   80    20
+  Edit ""                             ,469,515     90   50    20
+  Text "Pour KICK"             ,470,  440   115   80    20
+  Edit ""                             ,471,  515   110   50    20
+  Text "Pour BAN"              ,472,  440   135   80    20
+  Edit ""                             ,473,  515   130   50    20
+  Text "Pour DEBAN"          ,474,440    155   80    20
+  Edit ""                             ,475,515   150   50    20
+  Text "Pour KICKBAN"       ,476,440   175   80    20
+  Edit ""                             ,477,515   170   50    20
+  Text "" , 478, 20 180 1 1,center
+  BOX  "Aide", 452, 20 260 560 90
+  Text "Cet utilitaire vous permet d'utiliser simplement les commandes de base d'un bot. Par exemple, tapez +v User sur un salon ou le Bot CerBer3 se trouve, et si vous êtes authé CerBer3 voicera User. Vous pouvez utiliser cet utilitaire pour tous les bots fonctionnant de manière habituelle, c'est à dire répondant aux commandes VOICE, OP, DEVOICE, DEOP, BAN, KICK, UNBAN, KICKBAN.",453, 30 280 540 70
+  BOX  "CONFIGURATION DE L'INTERACTION SERVEUR/SCRIPT", 507, 10 10 580 350
+  BOX "Modes au démarrage :", 479, 20 30 190 80
+  CHECK "Etre en Invisible  ? (+i)", 480, 25 45 180 20, LEFT,flat
+  CHECK "Voir les notices du serveur ? (+s)", 481, 25 65 180 20, LEFT,flat
+  CHECK "Voir les WallOps ? (+w)", 482, 25 85 180 20, LEFT,flat
+  BOX "Message du jour (MOTD) :", 483, 20 120 190 80
+  CHECK "Afficher / Ne pas afficher ?", 484, 25 135 180 20, LEFT,flat
+  CHECK "Dans un Dialog", 485, 25 155 180 20, LEFT, PUSH,flat
+  CHECK "Dans la fenêtre active", 486, 25 175 180 20, LEFT, PUSH,flat
+  BOX "Whois :", 487, 380 30 200 80
+  CHECK "Dans la fenêtre active", 488, 385 45 190 20, LEFT, PUSH,flat
+  CHECK "Dans la fenêtre de Pv", 489, 385 65 190 20, LEFT, PUSH,flat
+  CHECK "Dans une fenêtre différente", 490, 385 85 190 20, LEFT, PUSH,flat
+  BOX "Scan des IrcOps :", 491, 220 30 150 80
+  CHECK "Activer / Désactiver ?", 492, 225 45 140 20, LEFT,flat
+  CHECK "A la connexion", 493, 225 65 140 20, LEFT, PUSH,flat
+  CHECK "En entrant dans un salon", 494, 225 85 140 20, LEFT, PUSH,flat
+  BOX "Scan des Clônes :", 495, 220 120 360 80
+  CHECK "Activer / Désactiver ?", 496, 225 135 350 20, LEFT,flat
+  CHECK "Quand JE rejoins un salon", 497, 225 155 350 20, LEFT, PUSH,flat
+  CHECK "Quand QUELQU'UN rentre dans un salon où je suis", 498, 225 175 350 20, LEFT, PUSH,flat
+  BOX "Message de Quit :", 499, 20 210 560 40
+  EDIT %Message.Quit, 500, 30 225 540 20,center,autohs
+  BOX "Pv :", 501, 20 260 560 90
+  CHECK "Activer / Désactiver le &répondeur ?", 502, 30 275 300 20,flat
+  EDIT %Pv.Message, 503, 30 295 540 20,center,autohs
+  CHECK "Activer / Désactiver la fermeture &automatique du Pv lorque la personne quitte ?", 504, 30 320 400 20,flat
+  EDIT %Pv.AutoCloseTimer, 505, 430 320 30 20
+  TEXT "seconde(s) plus tard", 506, 470 323 120 17
+  BOX "Historique des Kicks :", 509, 20 35 560 110
+  TEXT "", 510, 30 60 250 20
+  BUTTON "Remettre à zéro le compteur ?", 511, 30 80 200 20, FLAT
+  BUTTON "Voir l'historique", 512, 30 110 200 20, FLAT
+  TEXT "RAZ automatique :", 513, 420 48 115 15
+  RADIO "Tous les jours", 514, 420 65 85 15, FLAT
+  RADIO "Toutes les semaines", 515, 420 80 115 15, FLAT
+  RADIO "Tous les mois", 516, 420 95 115 15, FLAT
+  RADIO "Tous les ans", 517, 420 110 85 15, FLAT
+  RADIO "Jamais", 518, 420 125 85 15, FLAT
+  CHECK "&Afficher au démarrage du script ?", 508, 10 380 220 20,FLAT
+  BOX  "CONFIGURATION DE L'HISTORIQUE DES KICKS, DE MES PSEUDOS", 519, 10 10 580 350
+  TEXT "Commandes"                   , 521,  30    180    60   15
+  TEXT "Pseudos"                 , 522,  100    180  100    15
+  LIST                                         523 , 30  200    60  140
+  LIST                                         524 , 100  200  100  140
+  BUTTON "&Ajouter"                  , 525,210  300   50    20, Flat
+  BUTTON "&Retirer"                   , 526,210  280    50    20, Flat
+  CHECK "Afficher sur les salons" , 527,30  323  145    20,flat
+  BOX "Mes Pseudos :", 520, 20 165 260 180
+  BOX "Aide :", 528, 320 165 260 180
+  Text "RAZ signifie Remise A Zéro ;]   Vous avez également accès à l'historique des kicks (et des bans) par le menu Tgl0beSCRIPT. Vous pouvez définir divers pseudos que vous pourrez activer en tapant la commande désirée (exemple : !moi), cette commande pouvant être affichée sur le salon ou pas.", 529, 330 185 240 160
+  BOX  "AUTO-VOICE INTELLIGENT", 530, 10 10 580 350
+  TExt "Le Module Auto-Voice Intelligent (AVI) est encore à l'état de test, c'est à dire qu'il fonctionne pour l'instant uniquement sur 2 salons à la fois, et qu'aucune configuration n'est possible (peut-être dans une future version du script ;] ). Son principe est simple : après avoir prononcé quelques phrases, un user est voicé. Plus il parlera, plus il restera voicé longtemps. S'il ne parle pas, il bénéficie d'un répit d'environ 5min avant d'être dévoicé, s'il n'a rien dit entre temps ! Pour activer l'AVI sur le premier salon, tapez !av1 (!av2 pour un 2ème salon). Pour désactiver l'AVI sur le premier salon, tapez !av1off (!av2off pour un 2ème salon). Pour connaitre l'état de l'AVI, tapez !avinfo. AVIS AUX SCRIPTEURS : n'hésitez pas à me faire part de vos améliorations concernant ce module (interface graphique, configuration, etc...)",531, 20 130 560 130
+  Text "", 532, 20 160 0 0
+  TExt "", 533, 20 200 0 0
+  Text "Bienvenue et merci d'avoir téléchargé ce script. Vous avez accès à la configuration principale du script à partir du menu ''Configurer'' de cette fenêtre. Pour accéder à la configuration des autres modules, vous pouvez passer par le Panneau de Contrôle en tapant /tpann.", 534, 20 160 560 100,center
+  Text "Pour toute remarque ou suggestion, n'hésitez pas à me contacter :", 535, 20 230 560 100,center
+  Text "Auteur : Xor", 536, 20 290 560 20,center
+  Text "Salon : #tglobe@irc.tgl0be.org", 545, 20 310 560 20,center
+  Text "Mail : script@tgl0be.org", 537, 20 330 560 20,center
+  Text "Site web : http://script.tgl0be.org", 538, 20 350 560 20,center
+  Text "Version 9.9  ",539,300 385 300 20,right
+}
+on *:dialog:Tgl0be:init:*:{
+  mdx SetMircVersion $version
+  mdx  MarkDialog $dname
+  mdx  SetControlMDX 30 listview showsel rowselect infotip report extsel > $cc_views
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 61,72,163,170,201,204,281,337,343,391,431,441,451,507,519,530 text 255
+  mdx SetColor $dname 539,62,47,55,63,68,80,164,165,166,167,148,172,173,183,189,198,202,279,338,339,329,344,353,362,386,387,388,413,414,415,418,432,442,450,452,479,483,487,491,499,495,501,509,520,528 text 16711680
+  mdx SetColor $dname 61,62,43,45,47,48,50,51,55,56,57,59,60,63,64,66,68,69,70,71,72,80,81,163,82,164,83,84,91,94,95,165,96,97,104,106,107,108,115,116,117,118,120,121,122,166,125,126,129,130,131,138,139,140,141,143,144,145,167,87,88,89,90,170,148,171,172,161,162,173,174,175,176,177,178,179,201,181,183,184,186,188,189,190,192,194,197,198,200,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,229,230,231,232,233,234,235,236,237,238,239,240,253,254,255,256,257,258,259,260,261,262,263,264,277,278,279,280 textbg 16772585
+  mdx SetColor $dname 61,62,43,45,47,48,50,51,55,56,57,59,60,63,64,66,68,69,70,71,72,80,81,163,82,164,83,84,91,94,95,165,96,97,104,106,107,108,115,116,117,118,120,121,122,166,125,126,129,130,131,138,139,140,141,143,144,145,167,87,88,89,90,170,148,171,172,161,162,173,174,175,176,177,178,179,201,181,183,184,186,188,189,190,192,194,197,198,200,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,229,230,231,232,233,234,235,236,237,238,239,240,253,254,255,256,257,258,259,260,261,262,263,264,277,278,279,280 background 16772585
+  mdx SetColor $dname 281,282,283,286,287,289,291,293,294,295,296,297,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,323,324,325,326,330,331,332,337,338,339,340,329,341,342,343,344,345,347,349,350,351,352,353,354,356,358,359,360,361,362,363,365,367,368,369,370,371,372,373,374,375,377,378,379,380,381,382,383,385,386,387,388,389,390,391,392,393,394,395,411,413,414,415,416,417,431,418,419,421,423,425,427,429,432,433,434,436,437,439 textbg 16772585
+  mdx SetColor $dname 281,282,283,286,287,289,291,293,294,295,296,297,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,323,324,325,326,330,331,332,337,338,339,340,329,341,342,343,344,345,347,349,350,351,352,353,354,356,358,359,360,361,362,363,365,367,368,369,370,371,372,373,374,375,377,378,379,380,381,382,383,385,386,387,388,389,390,391,392,393,394,395,411,413,414,415,416,417,431,418,419,421,423,425,427,429,432,433,434,436,437,439 background 16772585
+  mdx SetColor $dname 601,602,603,605,606,607,441,442,443,450,449,451,457,462,464,466,468,470,472,474,476,478,452,453,507,479,480,481,482,483,487,491,495,499,501,502,504,506,509,510,513,514,515,516,517,518,508,519,521,522,527,520,528,529,530,531,532,533,534,535,536,537,538,539,484,492,496,545 textbg 16772585
+  mdx SetColor $dname 601,602,603,605,606,607,441,442,443,450,449,451,457,462,464,466,468,470,472,474,476,478,452,453,507,479,480,481,482,483,487,491,495,499,501,502,504,506,509,510,513,514,515,516,517,518,508,519,521,522,527,520,528,529,530,531,532,533,534,535,536,537,538,539,484,492,496,545 background 16772585
+}
+dialog protect2 {
+  title "Protection"
+  size -1 -1 200 150
+  text "Envoyer vos avertissement par : " ,1 , 20 20 155 20
+  radio "&Notice"             ,2,  40   45  120  20, push, flat
+  radio "&Sur le salon"     ,3,  40   65  120  20, push, flat
+  radio "&Message Privé" ,4,  40    85  120  20, push, flat
+  button "&Fermer"         ,5 ,  10  120  180  20, flat, ok
+}
+dialog ScanClones {
+  TITLE "Clônes détectés"
+  SIZE 80 80 150 140
+  LIST                          1,  0     0 150 120
+  BUTTON "&Fermer" , 10, 10 115 130   20, DEFAULT, FLAT, OK
+}
+Dialog SkinsMaj {
+  TITLE  ""
+  SIZE   -1 -1 450 300
+  BOX "Nom du skin :", 100, -1 -1 450 37
+  EDIT "", 101, 5 14 440 20
+  TAB "&Images", 1, 2 40 450 230
+  TAB "&Sons", 2
+  TAB "&Fenêtres", 3
+  TAB "&Events", 4
+  TAB "&Liste de pseudos", 5
+  LIST   201, 5 80 90 190, TAB1
+  TEXT   "Image actuelle :", 202, 110 85 120 20, TAB1
+  EDIT   "", 203, 190 80 245 20, TAB1
+  BUTTON "&Visualiser", 204, 190 105 245 20, TAB1, FLAT
+  BUTTON "&Effacer", 206, 190 140 245 20, TAB1, FLAT
+  BUTTON "&Modifier", 205, 190 165 245 20, TAB1, FLAT
+  LIST   301, 5 80 90 190, TAB2  
+  TEXT   "Son actuel :", 302, 110 85 120 20, TAB2
+  EDIT   "", 303, 190 80 245 20, TAB2
+  BUTTON "&Ecouter", 304, 190 105 245 20, TAB2, FLAT
+  BUTTON "&Effacer", 306, 190 140 245 20, TAB2, FLAT
+  BUTTON "&Modifier", 305, 190 165 245 20, TAB2, FLAT
+  BOX    "Editbox :",            410, 5 75 440 45, TAB3
+  TEXT   "Couleur d'écriture :", 411, 35 95 120 20, TAB3
+  COMBO                          412, 130 90 90 240, SIZE, DROP, HSBAR, TAB3
+  TEXT   "Couleur de fond :",    413, 240 95 120 20, TAB3
+  COMBO                          414, 330 90 90 240, SIZE, DROP, HSBAR, TAB3
+  BOX    "Pv et Salons :",       420, 5 135 440 45, TAB3
+  TEXT   "Couleur de fond :",    423, 240 155 120 20, TAB3
+  COMBO                          424, 330 150 90 240, SIZE, DROP, HSBAR, TAB3
+  BOX    "Nicklist :",           430, 5 195 440 45, TAB3
+  TEXT   "Couleur de fond :",    433, 240 215 120 20, TAB3
+  COMBO                          434, 330 210 90 240, SIZE, DROP, HSBAR, TAB3
+  LIST   501, 5 80 90 190, TAB4
+  TEXT   "Couleur actuelle :", 502, 110 90 120 20, TAB4
+  COMBO                        503, 210 85 90 240, SIZE, DROP, HSBAR, TAB4
+  LIST   601, 5 80 90 190, TAB5
+  TEXT   "Couleur actuelle :", 602, 110 90 120 20, TAB5
+  COMBO                        603, 210 85 90 240, SIZE, DROP, HSBAR, TAB5
+  BUTTON "&Enregistrer", 10, 230 275 100 20, FLAT
+  BUTTON "&Quitter", 20, 340 275 100 20, OK, CANCEL, FLAT
+}
+
+Alias conn dialog -m connect connect 
+dialog connect {
+  title "Connexion"
+  size -1 -1 603 299
+  option pixels
+  icon images\icones\serveurs.ico, 0
+  check "Forcer la connexion dans une nouvelle fenêtre", 8, 15 30 250 20, flat
+  box "Serveurs :", 11, 15 119 575 115
+  button "Fermer", 6, 140 257 300 20, flat ok
+  edit %Tg.idnick, 4, 65 62 220 20, autohs center
+  text "Pseudo :", 5, 15 65 50 20
+  text "Adresse :", 31, 30 144 50 20
+  edit %Tg.server1, 32, 80 142 130 20, autohs center
+  button "Connexion", 33, 220 142 65 20, flat
+  text "Adresse :", 34, 30 174 50 20
+  edit %Tg.server2, 35, 80 172 130 20, autohs center
+  button "Connexion", 36, 220 172 65 20, flat
+  text "Adresse :", 37, 30 204 50 20
+  edit %Tg.server3, 38, 80 202 130 20, autohs center
+  button "Connexion", 39, 220 202 65 20, flat
+  check "Activer SASL", 1, 300 141 90 20
+  check "Activer SASL", 2, 300 173 87 20
+  check "Activer SASL", 3, 300 203 89 20
+  text "Mot de passe :", 10, 393 143 76 16
+  edit "", 12, 472 139 100 21, pass center
+  edit "", 15, 472 169 100 21, pass center
+  text "Mot de passe :", 16, 393 173 76 16
+  edit "", 19, 472 200 100 21, pass center
+  text "Mot de passe :", 20, 393 204 76 16
+}
+
+on *:dialog:connect:init:*:{
+  mdx SetMircVersion $version
+  mdx  MarkDialog $dname
+  mdx  SetControlMDX 30 listview showsel rowselect infotip report extsel > $cc_views
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 11 text 16711680
+  mdx SetColor $dname 8,11,4,5,31,32,34,35,37,38,21,23,24 textbg 16772585
+  mdx SetColor $dname 8,11,5,31,34,37,21,24 background 16772585
+
+  if (%Tg.sasl1 == $true) {
+    did -c connect 1
+  }
+  if (%Tg.sasl2 == $true) {
+    did -c connect 2
+  }
+  if (%Tg.sasl3 == $true) {
+    did -c connect 3 
+  }
+  if ( %Tg.saslpass1 ) {
+    did -a connect 12 %Tg.saslpass1
+  }
+  if ( %Tg.saslpass2 ) {
+    did -a connect 15 %Tg.saslpass2
+  }
+  if ( %Tg.saslpass3 ) {
+    did -a connect 19 %Tg.saslpass3
+  }
+
+
+}
+on *:dialog:connect:edit:32:{ set %Tg.server1 $did(32) }
+on *:dialog:connect:edit:35:{ set %Tg.server2 $did(35) }
+on *:dialog:connect:edit:38:{ set %Tg.server3 $did(38) }
+on *:dialog:connect:edit:4:{ 
+  set %Tg.Idnick $did(4) 
+}
+on *:dialog:connect:edit:12:{ 
+  set %Tg.saslpass1 $did(12) 
+}
+on *:dialog:connect:edit:15:{ 
+  set %Tg.saslpass2 $did(15) 
+}
+on *:dialog:connect:edit:19:{ 
+  set %Tg.saslpass3 $did(19) 
+}
+
+on *:dialog:connect:sclick:22: { 
+  if ( $did(8).state == 1 ) { 
+    server -m irc.tgl0be.org 6667 -i %tg.idnick
+    %tgl0be.autoconnect = $true
+  }
+  else {
+    connect irc.tgl0be.org 6667 -i %tg.idnick
+    %tgl0be.autoconnect = $true
+  }
+}
+on *:dialog:connect:sclick:1: { 
+  if ( $did(1).state == 1 ) { 
+    set %Tg.sasl1 $true
+  }
+  else {
+    set %Tg.sasl1 $false
+  }
+}
+on *:dialog:connect:sclick:2: { 
+  if ( $did(2).state == 1 ) { 
+    set %Tg.sasl2 $true
+  }
+  else {
+    set %Tg.sasl2 $false
+  }
+}
+on *:dialog:connect:sclick:3: { 
+  if ( $did(3).state == 1 ) { 
+    set %Tg.sasl3 $true
+  }
+  else {
+    set %Tg.sasl3 $false
+  }
+}
+on *:dialog:connect:sclick:33: { 
+  set %Tg.currentserv server1
+  if ($did(8).state == 1 && %Tg.sasl1 == $true) {
+    server -m %Tg.server1 -i %tg.idnick -l sasl %tg.idnick $+ : $+ %Tg.saslpass1
+  }
+  else if ($did(8).state == 0 && %Tg.sasl1 == $true) {
+    server %Tg.server1 -i %tg.idnick -l sasl %tg.idnick $+ : $+ %Tg.saslpass1
+  }
+  else if ( $did(8).state == 1 ) { 
+    server -m %Tg.server1 -i %tg.idnick
+  }
+  else {
+    server %Tg.server1 -i %tg.idnick
+  }
+}
+on *:dialog:connect:sclick:36: { 
+  set %Tg.currentserv server2
+  if ($did(8).state == 1 && %Tg.sasl2 == $true) {
+    server -m %Tg.server2 -i %tg.idnick -l sasl %tg.idnick $+ : $+ %Tg.saslpass2
+  }
+  else if ($did(8).state == 0 && %Tg.sasl2 == $true) {
+    server %Tg.server2 -i %tg.idnick -l sasl %tg.idnick $+ : $+ %Tg.saslpass2
+  }
+  else if ( $did(8).state == 1 ) { 
+    server -m %Tg.server2 -i %tg.idnick
+  }
+  else {
+    server %Tg.server2 -i %tg.idnick
+  }
+}
+on *:dialog:connect:sclick:39: { 
+  set %Tg.currentserv server3
+  if ($did(8).state == 1 && %Tg.sasl3 == $true) {
+    server -m %Tg.server3 -i %tg.idnick -l sasl %tg.idnick $+ : $+ %Tg.saslpass3
+  }
+  else if ($did(8).state == 0 && %Tg.sasl3 == $true) {
+    server %Tg.server3 -i %tg.idnick -l sasl %tg.idnick $+ : $+ %Tg.saslpass3
+  }
+  else if ( $did(8).state == 1 ) { 
+    server -m %Tg.server3 -i %tg.idnick
+  }
+  else {
+    server %Tg.server3 -i %tg.idnick
+  }
+}
+
+On *:TEXT:!tglobe:#: {
+  if ( %tgl0be.version != 1 ) {
+    notice $nick 6J'utilise %logo
+    set -u30 %tgl0be.version 1
+  }
+}

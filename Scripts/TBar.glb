@@ -1,0 +1,65 @@
+;-----------------------------------------------------------
+;                Tgl0beSCRIPT Toolbar
+;                          Par Xor
+;-----------------------------------------------------------
+
+alias icoq return $+($chr(34),$mircdirImages\Icones\,$1,.ico,$chr(34))
+alias ico return $shortfn($+($mircdirImages\Icones\,$1,.ico))
+alias tb {
+  toolbar -r
+  var %i = 1
+  while ( %i <= 32 ) {
+    toolbar -d 3
+    inc %i
+  }
+  toolbar -p connect $icoq(Deconnecte)
+  toolbar -p connect2 $icoq(Connecte)
+  toolbar -a Connexion "Connexion" $icoq(Connexion) /conn
+  toolbar -as sep1
+  toolbar -a Tgl0be "Tgl0beSCRIPT" $icoq(tgl0be) /pop.tgl0be
+  toolbar -a HL "Highlights" $icoq(HL) /hl
+  toolbar -a Protections "Protections" $icoq(Antispam) /pop.protect
+  toolbar -a Journal "Voir le journal" $icoq(Journal) /journal
+  if (%sons.etat == ON) toolbar -a Son "Désactiver les sons" $icoq(SonON) /son_off
+  else toolbar -a Son "Activer les sons" $icoq(SonOFF) /son_on
+  toolbar -as sep2
+  toolbar -a Contacts "Mes contacts" $icoq(Notify) /contact
+  toolbar -a DCC "DCC" $icoq(DCC) /pop.dcc
+  toolbar -a Logs "Logs Viewer" $icoq(Logs) /logvw
+  toolbar -a Musique "Musique" $icoq(Musique) /pop.musique
+  toolbar -a Quotes "Quotes" $icoq(Quotes) /quo
+  toolbar -a Systeme "Informations Systeme" $icoq(Systeme) /pop.sys
+  toolbar -as sep3
+  toolbar -a Aide "Aide" $icoq(aide) /pop.aide
+}
+
+alias popup.menu var %result | if (!$2) set %result $dll($popDLL,$1,.) | else set %result $dll($popDLL,$1,$2-) |  if ( $gettok(%result,1,32) = OK ) return $gettok(%result,2-,32)
+alias popup.destroy return $dll($popDLL,Destroy,$1-)
+alias popup.New tokenize 32 $1- | if ($dll($popDLL,GetProperty, [ $1 ] imgsize) != $null) { var %tmp = $dll($popDll,Destroy,$1) } | return $dll($PopDLL,New,$1-)
+alias popup.icon popup.menu LoadImg $1 icon small $2-
+alias popup.icco var %g 1,%f $numtok($2-,44) | while (%g <= %f) { popup.icon $1 $gettok($2-,%g,44) | inc %g }
+alias popup.AddItem return $dll($popDLL,AddItem,$1-) 
+alias popup.popup var %click = $popup.menu(Popup,$1-) | if (%click) { $gettok(%click,3-,32) } | return
+alias pop.tgl0be popup.New tgl0be 16 16 | popup.icon tgl0be $ico(Config) | popup.additem tgl0be end + 1 Configuration (F1) $chr(9) /tgl0be $cr tgl0be | popup.icon tgl0be $ico(Panneau) | popup.additem tgl0be end + 2 Modules $chr(9) /tpann $cr tpann | popup.Popup tgl0be + $mouse.dx $mouse.dy
+alias pop.dcc popup.New dcc 16 16 | popup.icon dcc  $ico(DCC) | popup.additem dcc end + 1 Envoyer un fichier $chr(9) /send $cr send | popup.icon dcc $ico(DCC) | popup.additem dcc end + 2 Chat $chr(9) /chat $cr chat | popup.Popup dcc + $mouse.dx $mouse.dy
+alias pop.sys popup.New sys 16 16 | popup.icon sys $ico(Systeme) | popup.additem sys end + 1 Informations Systeme $chr(9) /systeminfo $cr systeminfo | popup.icon sys $ico(Systeme) | popup.additem sys end + 2 Configuration $chr(9) /syssetup $cr syssetup | popup.Popup sys + $mouse.dx $mouse.dy
+alias pop.protect popup.New protect 16 16 | popup.icon protect $ico(Antispam) | popup.additem protect end + 1 AntiSpam $chr(9) /antispam $cr antispam | popup.icon protect $ico(Antispam) | popup.additem protect end + 2 AntiPV $chr(9) /antipv $cr antipv | popup.icon protect $ico(Antispam) | popup.additem protect end + 2 AntiFlood $chr(9) /antiflood $cr antiflood | popup.Popup protect + $mouse.dx $mouse.dy
+alias pop.aide popup.New aide 16 16 | popup.icon aide $ico(aide) | popup.additem aide end + | popup.additem aide end + 2 A propos de... $cr apropos | popup.Popup aide + $mouse.dx $mouse.dy
+alias linepopup popup.additem $1 end + 0 0
+alias popdll return $mircdirdll\popups.dll
+
+alias son_on {
+  set %sons.etat ON
+  echo -at 2Sons activés
+  toolbar -p Son $icoq(SonON) 
+  toolbar -t Son "Désactiver les sons"
+  toolbar -l Son /son_off
+}
+
+alias son_off {
+  set %sons.etat OFF
+  echo -at 2Sons desactivés
+  toolbar -p Son $icoq(SonOFF) 
+  toolbar -t Son "Activer les sons"
+  toolbar -l Son /son_on
+}

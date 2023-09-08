@@ -1,0 +1,176 @@
+;-----------------------------------------------------------
+;                          LogViewer
+;                          Par Xor
+;-----------------------------------------------------------
+
+Alias Logvw {
+  IF $Window(@Logvw) == $null { Window -aemk0l12Sz @Logvw }
+  RafraichirLogs
+  If (%Log.AfficheInfoRepLog == $true) { InfoRepertoireLog }
+}
+Alias RafraichirLogs { 
+  Clear -l @Logvw
+  Titlebar @Logvw - $logdir - ( $findfile($shortfn($logdir), *.log, 0, .aline -l @Logvw $nopath($1)) logs )
+  NickListColorLog
+}
+menu @Logvw {
+  dclick: { 
+    If ($mouse.lb == $true) && ($sline(@Logvw,1) != $null) { $AfficheLog($sline(@Logvw,1)) }
+    Else { LogvwCfg }
+  }
+  $iif($sline(@Logvw,1) != $null,Afficher le contenu du log) : $AfficheLog($sline(@Logvw,1))
+  -
+  $iif($line(@Logvw,0,0) > 0,Nouvelle Recherche) : RechercheDansLog  
+  $iif(%Log.MemoLigne != $null,Continuer la recherche) : RechercheDansLog %Log.MemoLigne
+  -
+  $iif($sline(@Logvw,1) != $null,Supprimer) : $SupprimeLog($sline(@Logvw,1))
+  $iif($sline(@Logvw,1) != $null,Renommer) : $RenommeLog($sline(@Logvw,1))
+  $iif($sline(@Logvw,1) != $null,Copier dans ...) : $CopieLog($sline(@Logvw,1))
+  -
+  &Informations
+  .Sur le répertoire de log : InfoRepertoireLog
+  .Sur le fichier log : InfoFichierLog $sline(@Logvw,1)
+  -
+  &Effacer le contenu de la fenêtre : Clear @Logvw
+  -
+  &Rafraichir les logs : RafraichirLogs 
+  -
+  &Configurer Logviewer : LogvwCfg
+  &Fermer Logviewer : /Window -c @Logvw
+}
+Alias AfficheLog {
+  Var %NumLigne = 1, %MaxLigne = $lines($shortfn($logdir $+ $1)), %TextFichier
+  If (%Log.EffaceFenetre == $true) { /Clear @Logvw }
+  If (%Log.AfficheInfoFichier == $true) { InfoFichierLog $1 }
+  LOADBUF -p @Logvw $shortfn($logdir $+ $1)
+}
+Alias SupprimeLog {
+  Var %NbFichier = $sline(@Logvw,0), %MessConfirm = $iif(%NbFichier > 1,Désirez-vous vraiment supprimer les fichiers sélectionnés ?,Désirez-vous vraiment supprimer le fichier $1 ?)
+  If $input(%MessConfirm, 72, Logvw) == $true {
+    Var %Compt = 1
+    While (%Compt <= %NbFichier) {
+      If (%Log.SuppLogCorbeille == $true) { .Remove -b $shortfn( $logdir $+ $sline(@Logvw,%Compt) ) }
+      Else { .Remove $shortfn( $logdir $+ $sline(@Logvw,%Compt)) }
+      Echo $color(info text) -at $sline(@Logvw,%Compt) supprimé.
+      Inc %Compt
+    }
+    RafraichirLogs  
+  }
+}
+Alias RenommeLog {
+  Var %NouveauNom = $input(Indiquez le nouveau nom :, 73, Logvw, $1)
+  If %NouveauNom != $null {
+    If $right(%NouveauNom,4) != .log { %NouveauNom = %NouveauNom $+ .log }
+    .Rename $shortfn($logdir $+ $1) $shortfn($logdir $+ %NouveauNom )
+    RafraichirLogs
+  }
+}
+Alias CopieLog {
+  Var %NouveauRep = $sdir($logdir,Indiquez le répertoire ), %CopierLog == $true
+  If %NouveauRep != $null {
+    If $exists(%NouveauRep $+ $1) { %CopierLog = $input(Le fichier %NouveauRep $+ $1 existe déjà désirez-vous l'écraser ?, 72, Logvw) }
+    If (%CopierLog == $true) { 
+      .Copy -o $shortfn( $logdir $+ $1 ) $shortfn( %NouveauRep $+ $1 )
+      SupprimeLog $1
+      RafraichirLogs
+    }
+  }
+}
+Alias RechercheDansLog {
+  Var %CritereRech = $iif($1 == $null,$input(Indiquez votre critère de recherche :, 129, Logvw),%Log.MemoCritere)
+  If %CritereRech != $null {
+    Var %NumLigne = $iif($1 != $null,$calc($1 + 1),1), %MaxLigne = $line(@Logvw,0,0)
+    :LigneSuivante
+    If (%NumLigne > %MaxLigne) { Goto FinRecherche }
+    If %Log.RespecteCase == $true {
+      If $line(@Logvw,%NumLigne,0) isin %CritereRech { Goto Trouver }
+    }
+    Else {
+      If ($pos($upper($line(@Logvw,%NumLigne,0)),$upper(%CritereRech),1) != $null) { Goto Trouver }
+    }
+    Inc %NumLigne
+    Goto LigneSuivante
+    :Trouver
+    If %Log.MemoLigne != $null { Rline @Logvw %Log.MemoLigne %Log.MemoText }
+    %Log.MemoLigne   = %NumLigne
+    %Log.MemoText    = $line(@Logvw,%NumLigne,0)
+    %Log.MemoCritere = %CritereRech
+    Sline @Logvw %NumLigne
+    Rline @Logvw %NumLigne 4Trouvé --> $line(@Logvw,%NumLigne,0)
+    :FinRecherche
+    If (%NumLigne > %MaxLigne) { Var %Retour = $input(Le critère de recherche %CritereRech n'a pas été trouvé.,68) }
+  }
+}
+Alias InfoFichierLog {
+  Var %FichierLog = $shortfn($logdir $+ $1)
+  If ($exists(%FichierLog) == $true) && ($1 != $null) {
+    .Aline 4 @Logvw ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+    .Aline 4 @Logvw ¤¤¤¤ Nom du fichier ................... : $1
+    .Aline 4 @Logvw ¤¤¤¤ Taille / Nombre de lignes .... : $file(%FichierLog).size octets / $lines($shortfn($logdir $+ $1)) lignes.
+    .Aline 4 @Logvw ¤¤¤¤ Créé le .............................. : $asctime($file(%FichierLog).ctime,dd/mm/yyyy à hh:nn:ss)
+    .Aline 4 @Logvw ¤¤¤¤ Modifié le ........................... : $asctime($file(%FichierLog).mtime,dd/mm/yyyy à hh:nn:ss)
+    .Aline 4 @Logvw ¤¤¤¤ Accédé le ........................... : $asctime($file(%FichierLog).atime,dd/mm/yyyy à hh:nn:ss)
+    .Aline 4 @Logvw ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+  }
+}
+Alias InfoRepertoireLog {
+  Var %TailleRep = 0, %NumFichier = 1, %NbFichier = $findfile($shortfn($logdir), ¤.log, 0)
+  :FichierSuivant
+  %TailleRep = $calc( %TailleRep + $file($findfile($shortfn($logdir), ¤.log, %NumFichier)).size )
+  Inc %NumFichier
+  If (%NumFichier <= %NbFichier) { Goto FichierSuivant }
+  .Aline 4 @Logvw ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+  .Aline 4 @Logvw ¤¤¤¤ Nom du répertoire ............... : $logdir
+  .Aline 4 @Logvw ¤¤¤¤ Taille / Nombre de fichiers ... : %TailleRep octets / %NbFichier fichiers.
+  .Aline 4 @Logvw ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+}
+Alias NickListColorLog {
+  Var %NumLog = 1, %NbLogs = $line(@Logvw,0,1)
+  :LogSuivant 
+  If (%NumLog > %NbLogs) { Goto FinListeLog }  
+  If $left($line(@Logvw,%NumLog,1),1) == $chr(35) { Cline -l 4 @Logvw %NumLog }
+  Else { Cline -l 12 @Logvw %NumLog }
+  Inc %NumLog
+  Goto LogSuivant
+  :FinListeLog
+}
+Alias LogvwCfg {
+  If $dialog(LogvwCnfg).hwnd == $null { /Dialog -md LogvwCnfg LogvwCnfg }
+  Else { /Dialog -iev LogvwCnfg LogvwCnfg }
+}
+Dialog LogvwCnfg {
+  TITLE  "Configuration de Logviewer"
+  SIZE   -1 -1 310 155
+  CHECK "Afficher les informations sur le log avant son contenu ?", 100, 2 2 306 20, LEFT, FLAT
+  CHECK "Afficher les informations sur le répertoire des logs ?", 200, 2 22 306 20, LEFT, FLAT
+  CHECK "Afficher Logviewer au démarrage du script ?", 300, 2 42 306 20, LEFT, FLAT
+  CHECK "Mettre les logs supprimés dans la corbeille Windows ?", 400, 2 62 306 20, LEFT, FLAT
+  CHECK "Respecter les majuscules/minuscules lors d'une recherche ?", 500, 2 82 306 20, LEFT, FLAT
+  CHECK "Effacer la fenêtre avant d'afficher un nouveau log ?", 600, 2 102 306 20, LEFT, FLAT
+  BUTTON "&Valider", 10, 155 130 70 20, OK,  FLAT
+  BUTTON "&Annuler", 20, 235 130 70 20, CANCEL, FLAT
+}
+ON *:DIALOG:LogvwCnfg:init:0: {
+  mdx SetMircVersion $version
+  mdx  MarkDialog $dname
+  mdx  SetControlMDX 30 listview showsel rowselect infotip report extsel > $cc_views
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 2 text 255
+  mdx SetColor $dname 10 text 16711680
+  mdx SetColor $dname 100,200,300,400,500,600 textbg 16772585
+  mdx SetColor $dname 100,200,300,400,500,600 background 16772585
+  If %Log.AfficheInfoFichier == $true { Did -c LogvwCnfg 100 }
+  If %Log.AfficheInfoRepLog  == $true { Did -c LogvwCnfg 200 }
+  If %Log.AfficherLogvw    == $true { Did -c LogvwCnfg 300 }
+  If %Log.SuppLogCorbeille   == $true { Did -c LogvwCnfg 400 }
+  If %Log.RespecteCase       == $true { Did -c LogvwCnfg 500 }
+  If %Log.EffaceFenetre      == $true { Did -c LogvwCnfg 600 }
+}
+ON *:DIALOG:LogvwCnfg:sclick:10: {
+  %Log.AfficheInfoFichier = $iif($did(LogvwCnfg,100).state == 1, $true, $false)
+  %Log.AfficheInfoRepLog  = $iif($did(LogvwCnfg,200).state == 1, $true, $false)  
+  %Log.AfficherLogvw    = $iif($did(LogvwCnfg,300).state == 1, $true, $false)
+  %Log.SuppLogCorbeille   = $iif($did(LogvwCnfg,400).state == 1, $true, $false)
+  %Log.RespecteCase       = $iif($did(LogvwCnfg,500).state == 1, $true, $false)
+  %Log.EffaceFenetre      = $iif($did(LogvwCnfg,600).state == 1, $true, $false)
+}

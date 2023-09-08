@@ -1,0 +1,149 @@
+;-----------------------------------------------------------
+;               Gestion des contacts
+;                 Par Xor from NTF
+;-----------------------------------------------------------
+
+on ^*:NOTIFY: {
+  nt.onl $nick $network
+  if ( %ntf.tip == 1 ) var %tmp $tip(NTF,Tgl0beSCRIPT : Mes Contacts,2 $+ $nick est connecté ( $+ $network $+ ).,5,images/Icones/Tgl0be.ico,$null,query $1,$null)
+  PlaySkinSound Notify
+  halt
+}
+on ^*:UNOTIFY: {
+  nt.off $nick $network
+  if ( %ntf.tip == 1 ) var %tmp $tip(NTF,Tgl0beSCRIPT : Mes Contacts,2 $+ $nick est déconnecté ( $+ $network $+ ).,5,images/Icones/Tgl0be.ico,$null,$null,$null)
+  PlaySkinSound UNotify
+  halt
+}
+alias notify {
+  if $dialog(ntf) { dialog -x ntf }
+  if $1 != -r && $1 != $null { /.notify $1- |   set %ntf.off $addtok(%ntf.off,$1,9) | dialog -md ntf ntf | halt }
+  if $1 == -r { /.notify -r $2- | set %ntf.off $remtok(%ntf.off,$2,9) | set %ntf.onl $remtok(%ntf.onl,$2,9) | dialog -md ntf ntf  | halt }
+  if $1 == $null && $status == connected { /.notify | halt }
+  if $status != connected { /echo -st 2Mes contacts : Vous n'êtes pas connecté. | halt }
+}
+alias nt.onl {
+  nBalon 3 > Information sur le contact > $1 est connecté ( $+ $2 $+ ).
+  set %ntf.onl $addtok(%ntf.onl,$1,9)
+  set %ntf.off $remtok(%ntf.off,$1,9)
+}
+alias nt.off {
+  nBalon 3 > Information sur le contact > $1 est déconnecté ( $+ $2 $+ ).
+  set %ntf.off $addtok(%ntf.off,$1,9)
+  set %ntf.onl $remtok(%ntf.onl,$1,9)
+}
+alias nbalon {
+  if ( ( $dialog(ntf) == $null ) && ( %ntf.echo == 1 ) ) { Echo -at 2Mes contacts : $gettok($2-,2-,62) }
+  if $dialog(ntf) != $null { dialog -v ntf }
+}
+
+alias contact {
+  if $dialog(ntf) { dialog -v ntf }
+  if !$dialog(ntf) { dialog -md ntf ntf }
+}
+alias ntf {
+  if $dialog(ntf) { dialog -v ntf }
+  if !$dialog(ntf) { dialog -md ntf ntf }
+}
+alias sub.ntfonl {
+  var %x = $gettok(%ntf.onl,$1,9)
+  if $1 isnum && %x { return %x :/query %x }
+}
+dialog ntf {
+  title Gestion des contacts
+  icon Images\icones\Notify.ico
+  size -1 -1 169 150
+  option dbu
+  box "", 1, 2 -1 165 40
+  text "", 3, 3 3 163 35
+  text "", 4, 5 5 160 8
+  text "", 12, 5 20 160 14
+  list 13, 2 41 91 83, size
+  button "", 14, 97 42 70 12
+  button "", 16, 97 55 70 12
+  button "", 18, 97 112 70 12
+  check "Afficher l'alerte en fenêtre active", 20, 5 126 150 10
+  check "Afficher l'alerte en info-bulle", 21, 5 136 150 10
+}
+
+
+on *:dialog:ntf:init:*: {
+  dll dll\mdx.dll SetMircVersion $version
+  dll dll\mdx.dll MarkDialog $dname
+
+  did -a ntf 4 Gestion des contacts
+  did -a ntf 12 Vous pouvez gérer votre liste de contacts à partir de ce dialogue. Clic droit sur un pseudo pour plus d'options.
+  did -a ntf 14 &Ajouter
+  did -a ntf 16 &Rafraîchir
+  did -a ntf 18 OK
+  dll dll\mdx.dll SetControlMDX $dname 13 treeview haslines hasbuttons linesatroot > dll\views.mdx
+  dll dll\mdx.dll SetFont $dname 4 +a 16 600 Tahoma
+  dll dll\mdx.dll SetColor $dname 4 background $rgb(255,255,255)
+  dll dll\mdx.dll SetColor $dname 4 textbg $rgb(255,255,255)
+
+  dll dll\mdx.dll SetColor $dname 3 textbg $rgb(255,255,255)
+  dll dll\mdx.dll SetColor $dname 3 background $rgb(255,255,255)
+
+  dll dll\mdx.dll SetColor $dname 12 textbg $rgb(255,255,255)
+  dll dll\mdx.dll SetColor $dname 12 background $rgb(255,255,255)
+  did -a $dname 13 +eb En ligne $chr(9) $+ Liste des contacts connectés.
+  did -i $dname 13 1 cb root 2
+  var %ii = 1 
+  :loopon
+  if $gettok(%ntf.onl,%ii,9) != $null {   did -a $dname 13 $gettok(%ntf.onl,%ii,9) $chr(9) Contact en ligne. | inc %ii | unset %ntf.bold | goto loopon }
+  did -i $dname 13 1 cb root
+  did -a $dname 13 +eb Hors ligne $chr(9) Liste des contacts déconnectés
+  did -i $dname 13 1 cb root 3
+  var %ii = 1 
+  :loopof
+  if $gettok(%ntf.off,%ii,9) != $null {   did -a $dname 13 $gettok(%ntf.off,%ii,9) $chr(9) Ce contact est déconnecté. | inc %ii | unset %ntf.bold | goto loopof }
+  if (%ntf.echo == 1) { did -c $dname 20 }
+  if (%ntf.tip == 1) { did -c $dname 21 }
+}
+
+on 1:dialog:ntf:sclick:13: {
+  if $gettok($did(13,1),1,32) == rclick  {
+    var %n1 = $gettok($did(13,1),3,32)
+    var %n2 = $gettok($did(13,1),4,32)
+    if %n2 != $null {
+      if %n1 == 2 {
+        var %tn2 = $calc(%n2 -1) 
+        set %ntf.sel $gettok(%ntf.onl,%tn2,9)
+      }
+      if %n1 == 3 {
+        var %tn2 = $calc(%n2 -1) 
+        set %ntf.sel $gettok(%ntf.off,%tn2,9)
+      }
+      pop.ntf
+    }
+  }
+}
+
+on 1:dialog:ntf:sclick:16: { dialog -x ntf | ntf }
+on 1:dialog:ntf:sclick:18: { dialog -x ntf }
+on 1:dialog:ntf:sclick:20: set %ntf.echo $did(20).state
+on 1:dialog:ntf:sclick:21: set %ntf.tip $did(21).state
+on 1:dialog:ntf:sclick:14: {
+  var %himbik = $input(Ajouter un utilisateur,oegq,Ajout)
+  if %himbik != $null { notify %himbik | notify }
+}
+on 1:start:{
+  unset %ntf.off
+  unset %ntf.onl
+  var %i = $notify(0)
+  While ( %i > 0 ) {
+    set %ntf.off $addtok(%ntf.off,$notify(%i),9) 
+    dec %i
+  }
+}
+alias ntf.pv {
+  query  %ntf.sel
+}
+alias ntf.whois {
+  whois  %ntf.sel
+}
+alias ntf.del {
+  notify -r %ntf.sel
+  notify
+}
+alias pop.ntf popup.New ntf 16 16 | popup.additem ntf end + 1 PV $chr(9) $cr ntf.pv | popup.additem ntf end + 2 Whois $cr ntf.whois | popup.additem ntf end + 3 Supprimer $cr ntf.del | popup.Popup ntf + $mouse.dx $mouse.dy

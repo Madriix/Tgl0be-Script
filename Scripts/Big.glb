@@ -1,0 +1,388 @@
+;-----------------------------------------------------------
+;                               BiG
+;-----------------------------------------------------------
+
+
+alias big { gros 1 $1- }
+alias bignot { gros 4 $1- }
+
+alias gros {
+  if ( $1 > 1 ) { var %mt1 = $3- , %mt2 = $3- , %mt3 = $3- , %mt4 = $3- , %mt5 = $3- }
+  else { var %mt1 = $2- , %mt2 = $2- , %mt3 = $2- , %mt4 = $2- , %mt5 = $2- }
+
+  %mt1 = $replace(%mt1,a,       )
+  %mt2 = $replace(%mt2,a,       )  
+  %mt3 = $replace(%mt3,a,       )  
+  %mt4 = $replace(%mt4,a,       )  
+  %mt5 = $replace(%mt5,a,       )  
+
+  %mt1 = $replace(%mt1,b,       )
+  %mt2 = $replace(%mt2,b,       )
+  %mt3 = $replace(%mt3,b,       )
+  %mt4 = $replace(%mt4,b,       )
+  %mt5 = $replace(%mt5,b,       )
+
+  %mt1 = $replace(%mt1,c,       )  
+  %mt2 = $replace(%mt2,c,       )  
+  %mt3 = $replace(%mt3,c,       )
+  %mt4 = $replace(%mt4,c,       )
+  %mt5 = $replace(%mt5,c,       )
+
+  %mt1 = $replace(%mt1,d,       ) 
+  %mt2 = $replace(%mt2,d,       )  
+  %mt3 = $replace(%mt3,d,       )  
+  %mt4 = $replace(%mt4,d,       )
+  %mt5 = $replace(%mt5,d,       ) 
+
+  %mt1 = $replace(%mt1,e,      )
+  %mt2 = $replace(%mt2,e,      )
+  %mt3 = $replace(%mt3,e,      )
+  %mt4 = $replace(%mt4,e,      )
+  %mt5 = $replace(%mt5,e,      )
+
+  %mt1 = $replace(%mt1,f,      )  
+  %mt2 = $replace(%mt2,f,      )
+  %mt3 = $replace(%mt3,f,      )
+  %mt4 = $replace(%mt4,f,      )
+  %mt5 = $replace(%mt5,f,      )
+
+  %mt1 = $replace(%mt1,g,       )
+  %mt2 = $replace(%mt2,g,       )
+  %mt3 = $replace(%mt3,g,       )
+  %mt4 = $replace(%mt4,g,       )
+  %mt5 = $replace(%mt5,g,       )
+
+  %mt1 = $replace(%mt1,h,        )
+  %mt2 = $replace(%mt2,h,        )
+  %mt3 = $replace(%mt3,h,        )
+  %mt4 = $replace(%mt4,h,        )
+  %mt5 = $replace(%mt5,h,        )
+
+  %mt1 = $replace(%mt1,i,     )
+  %mt2 = $replace(%mt2,i,     )  
+  %mt3 = $replace(%mt3,i,     )
+  %mt4 = $replace(%mt4,i,     )
+  %mt5 = $replace(%mt5,i,     )
+
+  %mt1 = $replace(%mt1,j,       )
+  %mt2 = $replace(%mt2,j,       )
+  %mt3 = $replace(%mt3,j,       )
+  %mt4 = $replace(%mt4,j,       )
+  %mt5 = $replace(%mt5,j,       )
+
+  %mt1 = $replace(%mt1,k,       )
+  %mt2 = $replace(%mt2,k,       )
+  %mt3 = $replace(%mt3,k,       )
+  %mt4 = $replace(%mt4,k,       )
+  %mt5 = $replace(%mt5,k,       )
+
+  %mt1 = $replace(%mt1,l,        )
+  %mt2 = $replace(%mt2,l,        )
+  %mt3 = $replace(%mt3,l,        )
+  %mt4 = $replace(%mt4,l,       )
+  %mt5 = $replace(%mt5,l,        )
+
+  %mt1 = $replace(%mt1,m,        )
+  %mt2 = $replace(%mt2,m,        )
+  %mt3 = $replace(%mt3,m,        )
+  %mt4 = $replace(%mt4,m,        )
+  %mt5 = $replace(%mt5,m,        )
+
+  %mt1 = $replace(%mt1,n,       )
+  %mt2 = $replace(%mt2,n,       )
+  %mt3 = $replace(%mt3,n,       )
+  %mt4 = $replace(%mt4,n,       )
+  %mt5 = $replace(%mt5,n,       )
+
+  %mt1 = $replace(%mt1,o,       )
+  %mt2 = $replace(%mt2,o,       )
+  %mt3 = $replace(%mt3,o,       )
+  %mt4 = $replace(%mt4,o,       )
+  %mt5 = $replace(%mt5,o,       )
+
+  %mt1 = $replace(%mt1,p,       )
+  %mt2 = $replace(%mt2,p,       )
+  %mt3 = $replace(%mt3,p,       )
+  %mt4 = $replace(%mt4,p,       )
+  %mt5 = $replace(%mt5,p,       )  
+
+  %mt1 = $replace(%mt1,q,        )
+  %mt2 = $replace(%mt2,q,        )
+  %mt3 = $replace(%mt3,q,        )
+  %mt4 = $replace(%mt4,q,        )
+  %mt5 = $replace(%mt5,q,        )
+
+  %mt1 = $replace(%mt1,r,        )
+  %mt2 = $replace(%mt2,r,        )
+  %mt3 = $replace(%mt3,r,        )
+  %mt4 = $replace(%mt4,r,        )
+  %mt5 = $replace(%mt5,r,        )
+
+  %mt1 = $replace(%mt1,s,       )
+  %mt2 = $replace(%mt2,s,       )
+  %mt3 = $replace(%mt3,s,       )
+  %mt4 = $replace(%mt4,s,       )
+  %mt5 = $replace(%mt5,s,       )
+
+  %mt1 = $replace(%mt1,t,       )
+  %mt2 = $replace(%mt2,t,       )
+  %mt3 = $replace(%mt3,t,       )
+  %mt4 = $replace(%mt4,t,       )
+  %mt5 = $replace(%mt5,t,       )
+
+  %mt1 = $replace(%mt1,u,        )
+  %mt2 = $replace(%mt2,u,        )  
+  %mt3 = $replace(%mt3,u,        )
+  %mt4 = $replace(%mt4,u,        )
+  %mt5 = $replace(%mt5,u,        )
+
+  %mt1 = $replace(%mt1,v,           )
+  %mt2 = $replace(%mt2,v,           )  
+  %mt3 = $replace(%mt3,v,           )
+  %mt4 = $replace(%mt4,v,           )  
+  %mt5 = $replace(%mt5,v,           )
+
+  %mt1 = $replace(%mt1,w,        )
+  %mt2 = $replace(%mt2,w,        )  
+  %mt3 = $replace(%mt3,w,        )  
+  %mt4 = $replace(%mt4,w,        )  
+  %mt5 = $replace(%mt5,w,        )  
+
+  %mt1 = $replace(%mt1,x,         )
+  %mt2 = $replace(%mt2,x,         ) 
+  %mt3 = $replace(%mt3,x,         )  
+  %mt4 = $replace(%mt4,x,         ) 
+  %mt5 = $replace(%mt5,x,         )
+
+  %mt1 = $replace(%mt1,y,       )
+  %mt2 = $replace(%mt2,y,       )  
+  %mt3 = $replace(%mt3,y,       )  
+  %mt4 = $replace(%mt4,y,       )
+  %mt5 = $replace(%mt5,y,       )  
+
+  %mt1 = $replace(%mt1,z,       )
+  %mt2 = $replace(%mt2,z,       )  
+  %mt3 = $replace(%mt3,z,       )  
+  %mt4 = $replace(%mt4,z,       ) 
+  %mt5 = $replace(%mt5,z,       )  
+
+  %mt1 = $replace(%mt1,0,       )
+  %mt2 = $replace(%mt2,0,       )
+  %mt3 = $replace(%mt3,0,       )
+  %mt4 = $replace(%mt4,0,       )
+  %mt5 = $replace(%mt5,0,       )
+
+  %mt1 = $replace(%mt1,1,       )
+  %mt2 = $replace(%mt2,1,       )
+  %mt3 = $replace(%mt3,1,       )
+  %mt4 = $replace(%mt4,1,       )
+  %mt5 = $replace(%mt5,1,       )
+
+  %mt1 = $replace(%mt1,2,       )
+  %mt2 = $replace(%mt2,2,       )
+  %mt3 = $replace(%mt3,2,       )
+  %mt4 = $replace(%mt4,2,       )
+  %mt5 = $replace(%mt5,2,       )
+
+  %mt1 = $replace(%mt1,3,       )
+  %mt2 = $replace(%mt2,3,       )
+  %mt3 = $replace(%mt3,3,       )
+  %mt4 = $replace(%mt4,3,       )
+  %mt5 = $replace(%mt5,3,       )
+
+  %mt1 = $replace(%mt1,4,       )
+  %mt2 = $replace(%mt2,4,       )
+  %mt3 = $replace(%mt3,4,       )
+  %mt4 = $replace(%mt4,4,       )
+  %mt5 = $replace(%mt5,4,       )
+
+  %mt1 = $replace(%mt1,5,       )
+  %mt2 = $replace(%mt2,5,       )
+  %mt3 = $replace(%mt3,5,       )
+  %mt4 = $replace(%mt4,5,       )
+  %mt5 = $replace(%mt5,5,       )
+
+  %mt1 = $replace(%mt1,6,       )
+  %mt2 = $replace(%mt2,6,       )
+  %mt3 = $replace(%mt3,6,       )
+  %mt4 = $replace(%mt4,6,       )
+  %mt5 = $replace(%mt5,6,       )
+
+  %mt1 = $replace(%mt1,7,       )
+  %mt2 = $replace(%mt2,7,       )
+  %mt3 = $replace(%mt3,7,       )
+  %mt4 = $replace(%mt4,7,       )
+  %mt5 = $replace(%mt5,7,       )
+
+  %mt1 = $replace(%mt1,8,       )
+  %mt2 = $replace(%mt2,8,       )
+  %mt3 = $replace(%mt3,8,       )
+  %mt4 = $replace(%mt4,8,       )
+  %mt5 = $replace(%mt5,8,       )
+
+  %mt1 = $replace(%mt1,9,       )
+  %mt2 = $replace(%mt2,9,       )
+  %mt3 = $replace(%mt3,9,       )
+  %mt4 = $replace(%mt4,9,       )
+  %mt5 = $replace(%mt5,9,       )
+
+  %mt1 = $replace(%mt1,$chr(32),     )
+  %mt2 = $replace(%mt2,$chr(32),     )
+  %mt3 = $replace(%mt3,$chr(32),     )
+  %mt4 = $replace(%mt4,$chr(32),     )
+  %mt5 = $replace(%mt5,$chr(32),     )
+
+  %mt1 = $replace(%mt1,!,    )
+  %mt2 = $replace(%mt2,!,    )
+  %mt3 = $replace(%mt3,!,    )
+  %mt4 = $replace(%mt4,!,    )
+  %mt5 = $replace(%mt5,!,    )
+
+  %mt1 = $replace(%mt1,?,      )  
+  %mt2 = $replace(%mt2,?,      )
+  %mt3 = $replace(%mt3,?,      )
+  %mt4 = $replace(%mt4,?,      ) 
+  %mt5 = $replace(%mt5,?,      )
+
+  %mt1 = $replace(%mt1,$chr(35),                )  
+  %mt2 = $replace(%mt2,$chr(35),                )  
+  %mt3 = $replace(%mt3,$chr(35),                )  
+  %mt4 = $replace(%mt4,$chr(35),                )  
+  %mt5 = $replace(%mt5,$chr(35),                )  
+
+  %mt1 = $replace(%mt1,+,          )
+  %mt2 = $replace(%mt2,+,          )
+  %mt3 = $replace(%mt3,+,          )
+  %mt4 = $replace(%mt4,+,          )
+  %mt5 = $replace(%mt5,+,          )
+
+  %mt1 = $replace(%mt1,=,        )
+  %mt2 = $replace(%mt2,=,        )
+  %mt3 = $replace(%mt3,=,        )
+  %mt4 = $replace(%mt4,=,        )
+  %mt5 = $replace(%mt5,=,        )
+
+  %mt1 = $replace(%mt1,$chr(40),      ) 
+  %mt2 = $replace(%mt2,$chr(40),      ) 
+  %mt3 = $replace(%mt3,$chr(40),      ) 
+  %mt4 = $replace(%mt4,$chr(40),      ) 
+  %mt5 = $replace(%mt5,$chr(40),      ) 
+
+  %mt1 = $replace(%mt1,$chr(41),      ) 
+  %mt2 = $replace(%mt2,$chr(41),      ) 
+  %mt3 = $replace(%mt3,$chr(41),      ) 
+  %mt4 = $replace(%mt4,$chr(41),      ) 
+  %mt5 = $replace(%mt5,$chr(41),      ) 
+
+  %mt1 = $replace(%mt1,:,    )
+  %mt2 = $replace(%mt2,:,    )
+  %mt3 = $replace(%mt3,:,    )
+  %mt4 = $replace(%mt4,:,    )
+  %mt5 = $replace(%mt5,:,    )
+
+  %mt1 = $replace(%mt1,.,     )
+  %mt2 = $replace(%mt2,.,     )
+  %mt3 = $replace(%mt3,.,     )
+  %mt4 = $replace(%mt4,.,     )
+  %mt5 = $replace(%mt5,.,     )
+
+  %mt1 = $replace(%mt1,/,           )
+  %mt2 = $replace(%mt2,/,           )
+  %mt3 = $replace(%mt3,/,           )
+  %mt4 = $replace(%mt4,/,           )
+  %mt5 = $replace(%mt5,/,           )
+
+  %mt1 = $replace(%mt1,\,           )
+  %mt2 = $replace(%mt2,\,           )
+  %mt3 = $replace(%mt3,\,           )
+  %mt4 = $replace(%mt4,\,           )
+  %mt5 = $replace(%mt5,\,           )
+
+  %mt1 = $replace(%mt1,%,            )
+  %mt2 = $replace(%mt2,%,            )
+  %mt3 = $replace(%mt3,%,            )
+  %mt4 = $replace(%mt4,%,            )
+  %mt5 = $replace(%mt5,%,            )
+
+  %mt1 = $replace(%mt1,-,        )  
+  %mt2 = $replace(%mt2,-,        )  
+  %mt3 = $replace(%mt3,-,        )
+  %mt4 = $replace(%mt4,-,        )  
+  %mt5 = $replace(%mt5,-,        )  
+
+  %mt1 = $replace(%mt1,|,   )
+  %mt2 = $replace(%mt2,|,   )
+  %mt3 = $replace(%mt3,|,   )
+  %mt4 = $replace(%mt4,|,   )
+  %mt5 = $replace(%mt5,|,   )
+
+  %mt1 = $replace(%mt1,',       )
+  %mt2 = $replace(%mt2,',       )
+  %mt3 = $replace(%mt3,',       )  
+  %mt4 = $replace(%mt4,',       )  
+  %mt5 = $replace(%mt5,',       )
+
+  %mt1 = $replace(%mt1,`,     )
+  %mt2 = $replace(%mt2,`,    )
+  %mt3 = $replace(%mt3,`,    )
+  %mt4 = $replace(%mt4,`,    )
+  %mt5 = $replace(%mt5,`,    )
+
+  %mt1 = $replace(%mt1,^,       )
+  %mt2 = $replace(%mt2,^,       )
+  %mt3 = $replace(%mt3,^,       )
+  %mt4 = $replace(%mt4,^,        )
+  %mt5 = $replace(%mt5,^,        )
+
+  %mt1 = $replace(%mt1,_,          )
+  %mt2 = $replace(%mt2,_,          )
+  %mt3 = $replace(%mt3,_,          )
+  %mt4 = $replace(%mt4,_,          )
+  %mt5 = $replace(%mt5,_,          )
+
+  %mt1 = $replace(%mt1,[,        )
+  %mt2 = $replace(%mt2,[,        )
+  %mt3 = $replace(%mt3,[,        )
+  %mt4 = $replace(%mt4,[,       )
+  %mt5 = $replace(%mt5,[,        )
+
+  %mt1 = $replace(%mt1,],        )
+  %mt2 = $replace(%mt2,],       )
+  %mt3 = $replace(%mt3,],       )
+  %mt4 = $replace(%mt4,],       )
+  %mt5 = $replace(%mt5,],        )
+
+  %mt1 = $replace(%mt1,$chr(123),        )
+  %mt2 = $replace(%mt2,$chr(123),        )
+  %mt3 = $replace(%mt3,$chr(123),         )
+  %mt4 = $replace(%mt4,$chr(123),        )
+  %mt5 = $replace(%mt5,$chr(123),        )
+
+  %mt1 = $replace(%mt1,$chr(125),           )
+  %mt2 = $replace(%mt2,$chr(125),        )
+  %mt3 = $replace(%mt3,$chr(125),         )
+  %mt4 = $replace(%mt4,$chr(125),       )
+  %mt5 = $replace(%mt5,$chr(125),           )
+
+  if ( $1 == 1 ) { 
+    say %mt1
+    say %mt2
+    say %mt3
+    say %mt4
+    say %mt5  
+  }
+  else if ( $1 == 2 ) {
+    /notice $active %mt1
+    /notice $active %mt2
+    /notice $active %mt3
+    /notice $active %mt4
+    /notice $active %mt5
+  } 
+  else if ( $1 == 4 ) {
+    /notice $2 %mt1
+    /notice $2 %mt2
+    /notice $2 %mt3
+    /notice $2 %mt4
+    /notice $2 %mt5
+  }
+}

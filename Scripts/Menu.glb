@@ -1,0 +1,58 @@
+;-----------------------------------------------------------
+;                      Panneau de contrôle
+;                          Par Xor
+;-----------------------------------------------------------
+
+dialog tpann {
+  title "Tgl0beSCRIPT Light 10.6"
+  icon images\icones\tgl0be.ico
+  size -1 -1 190 150
+  option dbu
+  list 1, 2 3 186 144, size
+}
+
+Alias tpann { dialog -m tpann tpann }
+on *:dialog:tpann:init:*:{
+  mdx SetMircVersion $version 
+  mdx MarkDialog $dname
+  mdx SetControlMDX 1 listview icon single noheader nosortheader showsel sortascending > $mircdirdll/views.mdx
+  mdx SetDialog $dname bgcolor 16772585
+  did -i $dname 1 1 bmpsize 16 16
+  did -i $dname 1 1 settxt bgcolor 16772585
+  did -i $dname 1 1 setbkg color 16772585
+  var %a = 1
+  while (%a <= $lines($mircdirimages/icones/Panneau.nfo)) {
+    var %b = $read($mircdirimages/icones/Panneau.nfo,%a)
+    var %c = $read($mircdirimages/icones/Panneau_titre.nfo,%a)
+    did -i tpann 1 1 seticon list $mircdirimages/icones/ $+ %b $+ .ico
+    did -a tpann 1 0 %a %c
+    inc %a
+  }
+  did -i tpann 1 1 seticon list $mircdirimages/icones/Aide.ico
+  did -a tpann 1 0 %a Aide
+}
+
+on *:dialog:tpann:dclick:1:{
+  var %nom = $gettok($did(1,$did(1).sel),6-,32)
+  if (%nom == Configuration Générale) tgl0be
+  if (%nom == Connexion) conn
+  if (%nom == Highlights) hl
+  if (%nom == Antispam PV) antispam
+  if (%nom == AntiPV) antipv
+  if (%nom == AntiFlood) antiflood
+  if (%nom == Voir Journal) window -a @Journal
+  if (%nom == Mes contacts) contact
+  if (%nom == Logs Viewer) logvw
+  if (%nom == Lecteur intuitif) mp3intui
+  if (%nom == Quotes) quo
+  if (%nom == Votes) votebox
+  if (%nom == TleilaxBOT) tleilax
+  if (%nom == Informations Système) pop.sys
+  if (%nom == Table ASCII) ascii
+  if (%nom == Module !seen) mseen
+  if (%nom == A propos...) apropos
+  if (%nom == Aide) aide
+}
+Alias tleilax {
+  run TleilaxBOT\TleilaxBOT.exe
+}

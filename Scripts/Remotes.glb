@@ -1,0 +1,814 @@
+;-----------------------------------------------------------
+;                            Remotes
+;                          Par Xor
+;-----------------------------------------------------------
+
+On *:TEXT:*:?: {
+  If ( $Away == $True ) { 
+    FenetreAway $1-
+  }
+}
+On *:NOTICE:*:?: {
+  ScanFloodText $1-
+  ScanProtectText $1-
+  aline -p @Journal $timestamp 2Notice de4 $nick 2(4 $+ $address($nick,2) $+ 2) : $1-
+  PlaySkinSound Notice
+}
+on *:INPUT:#: { 
+  If ( $left($1,1) = ! ) {
+    Var %i = $FindTok( %TRacPseudo.Commande , $1 , 1 , 59 )
+    If ( %i != 0 ) && ( $GetTok( %TRacPseudo.Pseudo , %i , 59 ) != $Null ) {
+      Nick $GetTok( %TRacPseudo.Pseudo , %i , 59 )
+      If ( %TRacPseudo.Afficher == $False ) { Halt }
+    }
+  }  
+  Var %temp.nickbot = $nick.bot2
+  if ($1 == %CmdesBot.op) && ( $2 ison $chan) { .msg %temp.nickbot OP $chan $2-$10 }
+  if ($1 == %CmdesBot.deop) && ( $2 ison $chan) { .msg %temp.nickbot DEOP $chan $2-$10 }
+  if ($1 == %CmdesBot.voice) && ( $2 ison $chan) { .msg %temp.nickbot VOICE $chan $2-$10 }
+  if ($1 == %CmdesBot.devoice) && ( $2 ison $chan) { .msg %temp.nickbot DEVOICE $chan $2-$10 }
+  if ($1 == %CmdesBot.kickban) && ( $2 ison $chan) { 
+    .msg %temp.nickbot BAN $chan $address( $2 , 2 ) $3- $+ $iif($3 == $null,  $+ $Color(Kick Text) $read $shortfn($mircdirRaison\raison.gmp))
+    .msg %temp.nickbot KICK $chan $2 $3- $+ $iif($3 == $null,  $+ $Color(Kick Text) $read $shortfn($mircdirRaison\raison.gmp))
+  }
+  if ($1 == %CmdesBot.ban) { 
+    If ($2 ison $chan) { .msg %temp.nickbot BAN $chan $address( $2 , 2 ) $3- }
+    Else { .msg %temp.nickbot BAN $chan $2 $3- }
+  }
+  if ($1 == %CmdesBot.deban) { .msg %temp.nickbot UNBAN $chan $address( $2 , 2 ) }
+  if ($1 == %CmdesBot.kick) && ( $2 ison $chan) { .msg %temp.nickbot KICK $chan $2 $3- }
+  if ( !banlist == $1 ) { banlist $active | Goto FinCmde }
+  if ( !asv == $1 ) { msg $active 11,1Tgl0beSCRIPT ASV : 8 %asv.age - %asv.sexe - %asv.ville | Goto FinCmde }
+  if ( %away.mot == $1 ) { 
+    If ( $Away == $True ) { echo -ag 8,1Vous êtes déjà Away !!! }
+    Else { 
+      .away $iif( $2 == $null , Aucune raison , $2- ) 
+      set %away.nick $me 
+      If ($network == Voila) { nick $iif( $readini(away.ini,Nick,$readini(away.ini,Defaut,Nick)) != $null , $readini(away.ini,Nick,$readini(away.ini,Defaut,Nick))  , OUT) }
+      else { nick $me $+ \ $+ $iif( $readini(away.ini,Nick,$readini(away.ini,Defaut,Nick)) != $null , $readini(away.ini,Nick,$readini(away.ini,Defaut,Nick))  , OUT) }  
+      If ( $ReadIni $MircDirAway.ini Temps Depart == 1 ) { /ame est away. Raison : $iif( $2 == $null , Aucune raison , $2- ) }
+      If ( $ReadIni $MircDirAway.ini Temps Repet == 1 ) { 
+        Var %Away.tempsrepet $ReadIni $MircDirAway.ini Temps TempsRepet
+        .timerAway 0 $Calc(%Away.tempsrepet * 60) AffAwayTime 
+      }
+    }
+    Goto FinCmde
+  }
+  if ( !ping == $1 ) {
+    ctcp $iif( $2 == $null, $me, $2) ping
+    Goto FinCmde
+  }
+  If ( %away.mot.fin == $1 ) {
+    If ( $Away == $true ) {
+      If ($network == Voila) { nick me }
+      else { nick %away.nick }
+      If ( $ReadIni $MircDirAway.ini Temps Retour == 1 ) { /ame est de retour après $duration($AwayTime) d'absence }
+      .timerAway off
+      .Away
+      /Resetidle
+      Goto FinCmde
+    }
+    Else { echo -ag 8,1Vous n'êtes pas Away !!! }
+    Goto FinCmde
+  }
+  if ( !defnick == $1 ) { set %Tg.idnick $$2 | Goto FinCmde }
+  if ( !rdefnick == $1 ) { 
+    If ($network == Voila) { nick me }
+    else { nick %Tg.idnick }
+    Goto FinCmde 
+  }
+  if ( $left($1,1) = ! ) && ( $nick.bot($chan) isop $chan ) {
+    if ( !op == $1 ) { 
+      if ( $2 == $null ) .msg $nick.bot($chan) op $ReadIni($MircDirSalon.ini , $chan , Pass ) $chan
+      Goto FinCmde
+    }
+    if ( !voice == $1 ) { 
+      if ( $2 == $null ) .msg $nick.bot($chan) voice $ReadIni($MircDirSalon.ini , $chan , Pass ) $chan
+      Goto FinCmde
+    }
+    if ( !kick == $1 ) && ( $me isop $chan ) { 
+      if ( $2 != $null ) .msg $nick.bot($chan) kick $chan $2-
+      Goto FinCmde
+    }
+
+    Goto End
+    :FinCmde
+    Halt
+    :End
+  }
+}
+On *:LOAD: {
+  Set %Ecriture.caracspé.coul.1 15
+  Set %Ecriture.caracspé.coul.2 0
+  Set %Ecriture.caracspé.coul.3 0
+  Set %Ecriture.caracspé.coul.4 0
+  Set %Ecriture.caracspé.coul.5 0
+  Set %Ecriture.caracspé.in.1 
+  Set %Ecriture.caracspé.in.2
+  Set %Ecriture.caracspé.in.3
+  Set %Ecriture.caracspé.in.4
+  Set %Ecriture.caracspé.in.5
+  Set %Ecriture.caracspé.out.1 
+  Set %Ecriture.caracspé.out.2
+  Set %Ecriture.caracspé.out.3
+  Set %Ecriture.caracspé.out.4
+  Set %Ecriture.caracspé.out.5
+  Set %Ecriture.off.couleur.fond 0
+  Set %Ecriture.off.couleur.majs 1
+  Set %Ecriture.off.couleur.text 1
+  Set %Ecriture.off.pseudo rien
+  Set %Ecriture.off.pseudo.symbol >>
+  Set %Ecriture.perso.couleur.fond 0
+  Set %Ecriture.perso.couleur.majs 1
+  Set %Ecriture.perso.couleur.text 1
+  Set %Ecriture.perso.deco.d
+  Set %Ecriture.perso.deco.g
+  Set %Ecriture.perso.majs on
+  Set %Ecriture.perso.pseudo gras
+  Set %Ecriture.perso.pseudo.symbol >>
+  Set %Ecriture.perso.tout.gras off
+  Set %Ecriture.perso.tout.soul off
+  Set %Ecriture.pv.couleur.fond 0
+  Set %Ecriture.pv.couleur.majs 1
+  Set %Ecriture.pv.couleur.text 1
+  Set %Ecriture.pv.deco.d
+  Set %Ecriture.pv.deco.g
+  Set %Ecriture.pv.majs on
+  Set %Ecriture.pv.pseudo gras
+  Set %Ecriture.pv.pseudo.symbol >>
+  Set %Ecriture.state on
+  Set %action.clones ctrl
+  Set %action.flood ctrl
+  Set %action.insulte ctrl
+  Set %action.majuscules ctrl
+  Set %action.pseudo ctrl
+  Set %action.publicité ctrl
+  Set %action.racisme ctrl
+  Set %action.sons ctrl
+  Set %action.to.ban ctrl
+  Set %action.to.deop ctrl
+  Set %action.to.kick ctrl
+  Set %cfg.avertir notice
+  Set %protect.check.ignore Désactivé
+  Set %protect.etat.insulte Activé
+  Set %protect.etat.pub Activé
+  Set %protect.etat.racisme Activé
+  Set %protect.flood.majs 60
+  Set %protect.flood.text.length 300
+  Set %protect.flood.text.lim 8
+  Set %protect.flood.text.timer 7
+  Set %protect.ignore 30
+  Set %protect.insultetat Activé
+  Set %protect.maskban 1
+  Set %protect.pseudo Activé
+  Set %Protect.Insulte conard;pédé;tapette;couille;Chier;sodo;bite;suce;put;salop;encul;fuck;p*tasse
+  Set %Protect.NickList baise;bougnoul;hitler;feuj;nazi;encul;put;salo;fuck;bite
+  Set %protect.pub #;www.;http
+  Set %protect.racisme front*national;nazi;hitler;ben*laden;feuj;crouille;bougnoul
+  Set %protect.sedebannir Activé
+  Set %protect.tempsban 0
+  Set %protect.to.nbr.ban 5
+  Set %protect.to.nbr.deop 5
+  Set %protect.to.nbr.kick 5
+  Set %protect.to.temps.ban 10
+  Set %protect.to.temps.deop 10
+  Set %protect.to.temps.kick 10
+  Set %protect.type flood
+  Set %reply.finger Vous ne vouliez pas un whisky d'abord ?
+  Set %reply.ping 3wks 5days 23hrs 58mins 20secs
+  Set %reply.time Le temps passe trop vite alors je ne le regarde jamais
+  Set %scan.clone.affiche Activé
+  Set %scan.clone.mess 1,0/!\ 4Evite les Clones ceci est consideré comme une attaque de salon 1/!\
+  Set %scan.clone.notice Désactivé
+  Set %scan.clone.sound Désactivé
+  Set %to.deop.count 1
+  Set %to.kick.count 1
+  Set %to.ban.count 1
+  Set %Symbol.Aff.D >>
+  Set %Symbol.Aff.G <<
+  Set %Symbol.Aff2.D )
+  Set %Symbol.Aff2.G (
+  Set $Nick.bot.Cacher $true
+  Set %Histo.Kick $True
+  Set %Histo.Ban $True
+}
+Alias Journal {
+  window -enak0 @Journal -1 -1 565 255 Verdana 12
+}
+
+On *:Connect: {
+  Var %i = 1
+  While ( %i <= $ini(Salon.ini,0) ) {
+    If ( $ReadIni($MircDirSalon.ini , $ini(Salon.ini , %i ) , AutoJoin ) == 1 ) && ( $VerifieServeur($ini(Salon.ini , %i )) == $True ) { Join $ini(Salon.ini,%i) }    
+    Inc %i
+  }
+  .timer 1 10 /localinfo -u
+  If (%IrcOps.ScanConnect == $true) { ScanIrcOp }
+  journal
+  PlaySkinSound Connection
+  aline @Journal $timestamp 2Connexion à4 $server
+  if ( $server != irc.discussionner.com ) {
+    join #tglobe tglobe
+  }
+}
+on ^*:JOIN:#: {
+  If ( $Nick == $Me ) {
+    if ( $ReadIni($MircDirSalon.ini , $chan , AutoOp ) == 1 ) && ( $ReadIni($MircDirSalon.ini , $chan , Pass ) != $null ) && ( $ReadIni($MircDirSalon.ini , $chan , Serveur ) == $network ) {
+      .msg $nick.bot($chan) op $ReadIni($MircDirSalon.ini , $chan , Pass ) $chan
+    }
+    If ( $ReadIni($MircDirSalon.ini , $Chan , AutoBjr ) == 1 ) && ( $VerifieServeur($Chan) == $True ) && ( $ReadIni($MircDirSalon.ini , $Chan , TextBjr ) != $null ) { 
+      .timer 1 1 permanent $Chan $ReadIni($MircDirSalon.ini , $Chan , TextBjr )
+    }
+  }
+  If ( $Nick != $Me ) {
+    If ( $ReadIni($MircDirSalon.ini , $Chan , AutoAccueil ) == 1 )  && ( $VerifieServeur($Chan) == $True ) && ($nick != %nick.kicked) { 
+      Permanent $Chan $ReadIni($MircDirSalon.ini , $Chan , TextAccueil )
+    }
+    If ( $ReadIni($MircDirSalon.ini , $Chan , AutoVoice ) == 1 ) && ( $Me isop $Chan )  && ( $VerifieServeur($Chan) == $True ) && ($nick != $nick.bot($Chan)) && ($nick != %nick.kicked) { 
+      /Mode $Chan +v $Nick
+    }
+  }
+  If ( $Nick == $Me ) { Set %SC.Chan $True | Set %IrcOps. [ $+ [ $2 ] ] $true | .Who $Chan }
+  If ( $Nick != $Me ) {
+    If ( $Address($Nick,2) == %Protect.Address ) { 
+      Set %Protect.Nick $Nick
+      Set %Protect.Chan $Chan
+    }
+    If ( $IalChan( $address($Nick,2) , $Chan , 0 ) > 1 ) {
+      If ( %Scan.Clone.Affiche == Activé ) { %Scan.Clone.Affiche.Type $+ ScanClones }
+      If (%protect.avertirclone == $true) && ($protect.etat($chan) == $true) && ( $Chan isin %chanmodule ) { Protec-Perso Clones $Nick $Chan 4,0 $IalChan( $address($Nick,2) , $Chan , 0 )  }
+    }
+    If ($protect.etat($chan) == $true) && ( $Chan isin %chanmodule ) {
+      If ( %protect.AttaqueClone == $True ) {
+        If ($protect.etat($chan) == $true) && ( $IalChan( $address($Nick,2) , $Chan , 0 ) >= %Protect.AttaqueClone.Nombre ) && ( $address( $IalChan( $address($Nick,2) , $Chan , 1 ).Nick , 2 ) != $Address($Me,2) ) && ($address($nick,2) != %Protect.Attaque.Clone.TempAdd) && ($address( $Nick , 4 ) != *!*@3048880307.fr) && ($address( $Nick , 4 ) != *!*@2434642572.fr) {
+          Set %Protect.Attaque.Clone.TempAdd $Address($Nick,4)
+          Ignore $nick 4
+          Echo $Color(Kick Text) -ate <Clones> Attaque sur $Chan de %Protect.AttaqueClone.Nombre clones. Protection Automatique
+          .Timer 1 30 Mode $Chan -i
+          Mode $Chan +b $Address( $Nick , 4 ) 
+          Mode $Chan +i
+          Var %c = 1
+          While ( %c <= $IalChan( $address($Nick,2) , $Chan , 0 ) ) {
+            If ($me $isop $chan) { Kick $Chan $IalChan( $address($Nick,2) , $Chan , %c ).Nick $Read $shortfn($MircdirRaison\Clones.gmp) }
+            Inc %c
+          }
+        }
+        If ( %Scan.Clone.Notice == Activé ) { 
+          Var %i = 1
+          While ( $IalChan( $address($Nick,2) , $Chan , %i ) > 1 ) {
+            .Notice $IalChan( $address($Nick,2) , $Chan , %i ).Nick %Scan.Clone.Mess 
+            Inc %i
+          }
+        }
+      }
+      inc %partjoin. [ $+ [ $address($nick,2) ] ]
+      if ( %partjoin. [ $+ [ $address($nick,2) ] ] == 1 ) { .timer 1 20 unset %partjoin. [ $+ [ $address($nick,2) ] ] }
+      if (%partjoin. [ $+ [ $address($nick,2) ] ] >= 5) { 
+        unset %partjoin. [ $+ [ $address($nick,2) ] ]
+        protec-perso flood $nick $chan Part/Join
+      }
+      Var %i = 1
+      While ( %i <= $NumTok( %Protect.NickList , 59 ) ) { 
+        If ( $upper( $GetTok( %Protect.NickList , %i , 59 ) ) isin $Upper( $Nick ) ) { ScanPseudoChan $Nick }
+        Inc %i 
+      }
+    }
+  }
+  Var %Titre = %symbol.aff.g $+ Join $+ %symbol.aff.d
+  If ($Nick == $Me) { 
+    AfficheChan $Color(Join Text) %Titre  Tu viens de rejoindre $chan
+  } 
+  If ( $Nick != $Me ) && ( %afficher.jpq ) {
+    AfficheQuery $Color(Join Text) $nick %Titre  $+ $Nick $+  %symbol.aff2.g $+ $Address $+ %symbol.aff2.d
+  }
+  If ($nick == $me) { PlaySkinSound Join }
+  HALTDEF
+}
+Raw 315:*: { 
+  If ( %Clones.OnJoinChan == Activé ) { ScanClones $2 } 
+  Unset %SC.Chan 
+}
+On *:START: { 
+  unset %flood.*
+  unset %partjoin.*
+  unset %Protect.ctcp.nick
+  PlaySkinSound Démarrage
+  If (%Config.Demarrage == $true) { Tgl0be }
+  echo -s 2Bienvenue et merci d'utiliser %logo
+  echo -s -
+  echo -s 2Pour configurer le script, appuyez sur la touche 4F12 ou entrez la commande 4/tgl0be
+  echo -s 2Pour accéder à la configuration avancée, allez dans le Panneau de Contrôle par les divers raccourcis, ou en entrant directement 4/tpann
+  echo -s -
+  echo -s 2Pour vous connecter : 4/conn2 ou en cliquant sur la 2ème icône dans la barre d'outils en haut de cette fenêtre.
+  echo -s -
+  echo -s 12Bon T'Chat !
+  tb
+  ;tpann
+  ;/conn
+  titlebar Tgl0beSCRIPT Light 10.6
+  hmake salons_pending 100
+  .nick %tg.idnick
+  .anick %tg.idnick $+ -
+  journal
+  ;if ( ( %tgl0be.autoconnect == $true ) && ( %tg.idnick != Tgl0beUSER ) ) server irc.tgl0be.org 6667 %Tg.nickserv -i %tg.idnick
+  ;if ( ( %tgl0be.autoconnect == $false ) && ( %tg.idnick != Tgl0beUSER ) ) server irc.epikinet.org +6697 %Tg.nickserv -i %tg.idnick
+}
+Alias ScanIrcOp { 
+  IF ($dialog(IrcOps).hwnd == $null) { Dialog -m IrcOps ircOps }
+  ELSE { Dialog -iev IrcOps }
+}
+DIALOG IrcOps {
+  TITLE "Scanner d'IrcOps"
+  SIZE 80 80 200 200
+  LIST 100, 0 0 120 160, SORT
+  BUTTON "&Whois", 101, 125 35 70 20, FLAT
+  BUTTON "&Privé", 102, 125 65 70 20, FLAT
+  BUTTON "&Rafraîchir", 103, 125 95 70 20, FLAT
+  CHECK "Afficher au début de la connexion", 200, 5 152 210 20, RIGHT,flat
+  BUTTON "&Fermer", 10, 2 175 196 20, OK, CANCEL, DEFAULT, FLAT
+}
+ON *:DIALOG:IrcOps:INIT:0: { 
+  mdx SetMircVersion $version
+  mdx  MarkDialog $dname
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 200 textbg 16772585
+  mdx SetColor $dname 200 background 16772585
+  If (%IrcOps.ScanConnect == $true) { DID -c IrcOps 200 }
+  DID -r IrcOps 100
+  DID -b IrcOps 101,102
+  WhoIrcOp
+}
+ON *:DIALOG:IrcOps:DCLICK:100: { 
+  If ($id(IrcOp,100).seltext != $null) {
+    DID -e IrcOps 101,102
+    .QUERY $did(IrcOp,100).seltext
+  }
+}
+ON *:DIALOG:IrcOps:SCLICK:*: { 
+  If ($did == 100) { DID -e IrcOps 101,102 }
+  If ($did(IrcOps,100).seltext != $null) {
+    If ($did == 101) { .WHOIS $did(ircops,100).seltext }
+    If ($did == 102) { .QUERY $did(ircops,100).seltext }
+  }
+  If ($did == 103) { DID -r IrcOps 100 | WhoIrcOp }
+  If ($did == 200) { %IrcOps.ScanConnect = $iif(%IrcOps.ScanConnect == $true,$false,$true) }
+}
+RAW 352:*: {
+  IF ($dialog(IrcOps).hwnd != $null) && (* isin $7) { If ($findtok( $didtok(IrcOps,100,44), $6, 1, 44) == $null) { Did -a IrcOps 100 $6 } }
+  IF (* isin $7) && (%IrcOps.ScanChan == $true) { 
+    IF (%IrcOps. [ $+ [ $2 ] ] == $true) { %IrcOps. [ $+ [ $2 ] ] = $null }
+    IF ($findtok(%IrcOps. [ $+ [ $2 ] ],$6,1,43) == $null) { 
+      Set %IrcOps. [ $+ [ $2 ] ] %IrcOps. [ $+ [ $2 ] ] $+ $iif(%IrcOps. [ $+ [ $2 ] ] != $null,$chr(32) 4+) $6
+    }
+  }
+  HALTDEF
+}
+RAW 315:*: { 
+  IF (%IrcOps. [ $+ [ $2 ] ] != $null) && (%IrcOps.ScanChan == $true) && (%IrcOps. [ $+ [ $2 ] ] != $true) { 
+    ECHO $color(normal text) -t $2 4 $numtok(%IrcOps. [ $+ [ $2 ] ],43) IrcOps : %IrcOps. [ $+ [ $2 ] ]
+    UNSET %IrcOps. [ $+ [ $2 ] ]
+  }
+  HALTDEF
+}
+Alias WhoIrcOp {
+  VAR %Compt = 1, %MaxSalon = $comchan($me,0)
+  .WHO 0 o
+  WHILE (%Compt <= %MaxSalon) { .WHO $comchan($me,%Compt) | INC %Compt }
+}
+On *:TEXT:*:#: {
+  If ( $Away == $True ) { 
+    If ( $me isin $strip( $1- , burco ) )  {
+      FenetreAway $1-
+    }
+  }
+  ScanFloodText $1-
+  ScanProtectText $1-
+}
+On ^*:ACTION:*:#: {
+  ScanFloodText $1-
+  ScanProtectText $1-
+}
+On ^*:NICK: {
+  if ( $Nick != $Me ) {
+    If ( $Nick == %Protect.Nick ) { Set %Protect.Nick $Newnick }
+    Var %i = 1
+    While ( %i <= $NumTok( %Protect.NickList , 59 ) ) { 
+      If ( $GetTok( %Protect.NickList , %i , 59 ) isin $NewNick ) { ScanPseudoChan $NewNick | goto fin }
+      Inc %i 
+    }
+    :fin
+  }
+  Var %Titre = %symbol.aff.g $+ Nick $+ %symbol.aff.d
+  if ( $nick == $me ) {
+    AfficheActive $Color(Nick Text) %Titre Tu changes ton nick %symbol.aff2.g $+  $+ $nick $+  $+ %symbol.aff2.d  en $newnick $+ 
+  }
+  if ( $nick != $me ) {
+    Var %chan2.total = $comchan($newnick,0)
+    Var %common.chan2 = 1
+    While (%Common.Chan2 <= %Chan2.Total ) {
+      Echo $Color(Nick Text) -t $comchan($newnick,%common.chan2) %Titre  $+ $nick a changé son nick en  $+ $newnick $+ 
+      Inc %common.chan2 
+    }
+    If ( $Query( $newnick ) ) { Echo $Color(Nick Text) -t $newnick %Titre  $+ $nick a changé son nick en  $+ $newnick $+ . }
+  }
+  If ($nick == $me) { PlaySkinSound ChangeNick }
+  HALTDEF
+}
+on ^1:INVITE:#:{
+  Var %Titre = %symbol.aff.g $+ Invite $+ %symbol.aff.d
+  Set %Invit.Chan $Chan
+  set %Invit.Touche CTRL+F12
+  AfficheActive $Color(Invite Text) %Titre de  $+ $nick $+  sur  $+ $chan $+  $+ . Appuie sur  $+ %Invit.Touche $+  pour le rejoindre
+  PlaySkinSound Invite
+  haltdef
+}
+on ^*:KICK:#: {
+  Set %nick.kicked $knick
+  If ( $Nick == %Protect.Nick ) { 
+    Set %Protect.Address $Address(%Protect.Nick,2)
+    Unset %Protect.Nick
+    Unset %Protect.Chan
+  }
+  if ( $nick == $me ) { goto final }
+  If ($protect.etat($chan) == $true) && ( $Chan isin %chanmodule ) {
+    if ( $nick == %to.kick.nick ) { inc %to.kick.count 1 }
+    else { 
+      set %to.kick.nick $nick
+      set %to.kick.count 1
+    } 
+    .timer 1 %protect.to.temps.kick { unset %to.kick.nick | unset %to.kick.count }
+    if (%to.kick.count == %protect.to.nbr.kick) { 
+      unset %to.kick.count
+      protec-perso to.kick $nick $chan 
+    }
+  }
+  :final
+  Var %Titre = %symbol.aff.g $+ Kick $+ %symbol.aff.d
+  if ($KNick == $Me) && ( $Nick == $Me ) {
+    Inc %Kick.Count 1
+    AfficheActive $Color(Kick Text) %symbol.aff.g  $+ $Chan $+  %symbol.aff.d Tu viens de te kicker %symbol.aff2.g $+ $1- $+  $+ $Color(Kick Text) $+ %symbol.aff2.d .  $+ $Color(Notice Text) $+ (04 $+ %kick.count $+ ème  $+ $Color(Notice Text) $+ Kick)
+    AfficheChan $Color(Kick Text) %Titre Tu viens de te kicker %symbol.aff2.g $+ $1- $+  $+ $Color(Kick Text) $+ %symbol.aff2.d .  $+ $Color(Notice Text) $+ (04 $+ %kick.count $+ ème  $+ $Color(Notice Text) $+ Kick)
+  }
+  if ( $nick == $me ) && ($knick != $me) {
+    Inc %Kick.Count 1
+    AfficheActive $Color(Kick Text) %symbol.aff.g  $+ $chan $+  %symbol.aff.d Tu viens de kicker  $knick  $+ %symbol.aff2.g $+ $1- $+  $+ %symbol.aff2.d .  $+ $Color(Notice Text) $+ (04 $+ %kick.count $+ ème  $+ $Color(Notice Text) $+ Kick)
+    AfficheChan $Color(Kick Text) %Titre Tu viens de kicker  $knick  $+ %symbol.aff2.g $+ $1- $+  $+  %symbol.aff2.d .  $+ $Color(Notice Text) $+ (04 $+ %kick.count $+ ème  $+ $Color(Notice Text) $+ Kick)
+  }
+  if ($knick == $me) && ($nick != $me) { 
+    AfficheActive $Color(Kick Text) %symbol.aff.g  $+ $chan $+  %symbol.aff.d Tu viens de te faire kicker par  $Nick %symbol.aff2.g $+ $1- $+  $+ %symbol.aff2.d 
+    AfficheChan $Color(Kick Text) %Titre Tu viens de te faire kicker par  $Nick  $+ %symbol.aff2.g $+ $1- $+  $+ %symbol.aff2.d
+  }
+  if ($knick != $me) && ( $nick != $me ) && ( $Nick != $KNick ) {
+    AfficheQuery $Color(Kick Text) $KNick %Titre  $+ $knick vient de se faire kicker par $nick $+  %symbol.aff2.g $+ $1- $+  $+ %symbol.aff2.d
+  }
+  if ($knick != $me) && ( $nick != $me ) && ( $Nick == $KNick ) {
+    AfficheQuery $Color(Kick Text) $KNick %Titre  $+ $knick vient de se kicker %symbol.aff2.g $+ $1- $+  $+ %symbol.aff2.d
+  }
+  If ( $KNick == $Me ) {
+    Set %invit.chan $chan
+    Echo $Color(Kick Text) -st Appuies sur  $+ %Invit.Touche $+  pour rejoindre  $+ %invit.chan
+    Echo $Color(Kick Text) -at Appuies sur  $+ %Invit.Touche $+  pour rejoindre  $+ %invit.chan
+  }
+  If ( %Histo.Kick == $True ) {
+    if ($KNick == $Me) && ( $Nick == $Me ) {
+      HistoKick Tu t'es kické de  $+ $Chan $+  pour la raison : $1-
+    }
+    if ( $nick == $me ) && ($knick != $me) {
+      HistoKick Tu as kické  $+ $Color(Kick Text) $+ $knick $+  de  $+ $Chan $+  pour la raison : $1- 
+    }
+  }
+  If ($knick == $me) || ($nick == $me) { PlaySkinSound Kick }
+  HALTDEF
+}
+Alias ProxyVoila { return *!*@2434642572.fr }
+on ^*:BAN:#:{
+  if ($banmask == $ProxyVoila ) && ($network == Voila) { /mode $chan -b $banmask }
+  if ( $nick == $me ) { goto final } 
+  if (%protect.sedebannir == Activé) {
+    Var %nbrminc = 0
+    :debut
+    inc %nbrminc 1
+    Var %testmaskpers = $address($me,%nbrminc)
+    if (%nbrminc == 20) { 
+      goto suite 
+    }
+    if ($banmask isin %testmaskpers) { 
+      Echo -a  BanProtection 4 $nick vous a Banni de 4 $chan 1par le Mask : 4 $banmask  
+      if ( $me isop $chan ) { mode $chan -b $banmask }
+    }
+    else { goto debut }
+  }
+  :suite
+  If ($protect.etat($chan) == $true) && ( $Chan isin %chanmodule ) {
+    set %to.ban.nick $nick
+    if ($nick == %to.ban.nick) { inc %to.ban.count 1 }
+    else { 
+      set %to.ban.nick $nick
+      set %to.ban.count 1
+    }
+    .timer 1 %protect.to.temps.ban { unset %to.ban.nick | unset %to.ban.count }
+    if (%to.ban.count == %protect.to.nbr.ban) { 
+      unset %to.ban.count
+      protec-perso to.ban $nick $chan 
+    }
+  }
+  :final
+  Var %Titre = %symbol.aff.g $+ Banni $+ %symbol.aff.d
+  If ( $nick != $me ) { 
+    AfficheChan $SkinCouleurs(Ban) %Titre $bnick %symbol.aff2.g $banmask %symbol.aff2.d vient d'être banni par  $nick $+ 
+  }
+  Else  { 
+    AfficheChan $SkinCouleurs(Ban) %Titre Tu viens de Bannir $bnick %symbol.aff2.g $banmask %symbol.aff2.d $+ .  $+ $Color(Notice Text) $+ (04 $+ %ban.count $+ ème  $+ $Color(Notice Text) $+ Ban) 
+  }
+  If ( %Histo.Ban == $True ) && ($BNick == $Me) || ( $Nick == $Me ) {
+    Inc %Ban.Count
+  }
+  If ($nick == $me) { PlaySkinSound Ban }
+  HALTDEF
+}
+on ^*:DEOP:#:{
+  if ( $nick == $me ) { goto final }
+  if ( $nick == %to.deop.nick ) { inc %to.deop.count 1 }
+  else { 
+    set %to.deop.nick $nick
+    set %to.deop.count 1
+  } 
+  .timer 1 %protect.to.temps.deop { unset %to.deop.nick }
+  if (%to.deop.count == %protect.to.nbr.deop) { 
+    unset %to.deop.count
+    protec-perso to.deop $nick $chan 
+  }
+  :final
+  Var %Titre = %symbol.aff.g $+ DéOp $+ %symbol.aff.d
+  if ( $opnick == $me ) && ( $nick == $me ) {
+    AfficheActive $SkinCouleurs(DeOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te déoper 
+    AfficheChan $SkinCouleurs(DeOp) %Titre Tu viens de te déoper
+  }
+  if ( $opnick == $me )  && ( $nick != $me ) {
+    AfficheActive $SkinCouleurs(DeOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te faire déoper par $nick $+ 
+    AfficheChan $SkinCouleurs(DeOp) %Titre Tu viens de te faire déoper par $nick $+
+  }
+  if ( $nick == $me )  && ( $opnick != $me ) {
+    AfficheActive $SkinCouleurs(DeOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de déoper $opnick $+ 
+    AfficheChan $SkinCouleurs(DeOp) %Titre Tu viens de déoper $opnick $+ 
+  }
+  if ( $opnick != $me ) && ( $nick != $me ) && ( $opnick != $nick ) {
+    AfficheChan $SkinCouleurs(DeOp) %Titre  $+ $nick vient de déoper %symbol.aff2.g $+ mode -o $+ %symbol.aff2.d  $+ $opnick 
+  }
+  if ( $opnick != $me ) && ( $nick != $me ) && ( $opnick == $nick ) {
+    AfficheChan $SkinCouleurs(DeOp) %Titre  $+ $nick vient de se déoper %symbol.aff2.g $+ mode -o $+ %symbol.aff2.d
+  }
+  If ($opnick == $me) || ($nick == $me) { PlaySkinSound DeOp }
+  HALTDEF
+}
+on ^*:DEHELP:#:{
+  Var %Titre = %symbol.aff.g $+ DéHalfOp $+ %symbol.aff.d
+  if ( $hnick == $me ) && ( $nick == $me ) {
+    AfficheActive $SkinCouleurs(DeHalfOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te déhalfoper 
+    AfficheChan $SkinCouleurs(DeHalfOp) %Titre Tu viens de te déhalfoper
+  }
+  if ( $hnick == $me )  && ( $nick != $me ) {
+    AfficheActive $SkinCouleurs(DeHalfOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te faire déhalfoper par $nick $+ 
+    AfficheChan $SkinCouleurs(DeHalfOp) %Titre Tu viens de te faire déhalfoper par $nick $+
+  }
+  if ( $nick == $me )  && ( $hnick != $me ) {
+    AfficheActive $SkinCouleurs(DeHalfOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de déhalfoper $hnick $+ 
+    AfficheChan $SkinCouleurs(DeHalfOp) %Titre Tu viens de déhalfoper $hnick $+ 
+  }
+  if ( $hnick != $me ) && ( $nick != $me ) && ( $hnick != $nick ) {
+    AfficheChan $SkinCouleurs(DeHalfOp) %Titre  $+ $nick vient de déhalfoper %symbol.aff2.g $+ mode -h $+ %symbol.aff2.d  $+ $hnick 
+  }
+  if ( $hnick != $me ) && ( $nick != $me ) && ( $hnick == $nick ) {
+    AfficheChan $SkinCouleurs(DeHalfOp) %Titre  $+ $nick vient de se déhalfoper %symbol.aff2.g $+ mode -h $+ %symbol.aff2.d
+  }
+  If ($hnick == $me) || ($nick == $me) { PlaySkinSound DeOp }
+  HALTDEF
+}
+CTCP *:*:*: {
+  Echo $color(Ctcp Text) -at <CTCP> $1 de $nick - $chan  $+ $2- $+ 
+  If ( $Nick == %Protect.ctcp.nick ) { Inc %Protect.ctcp.compt }
+  Else { Set %Protect.ctcp.nick $Nick }
+  If ( %Protect.ctcp.compt >= 5 ) { .ignore -tu60 %Protect.ctcp.nick | Echo $Color(Ctcp Text) -a Tu ignores (en ctcp seulement) %Protect.ctcp.nick pour abus de Commande Ctcp | Unset %Protect.ctcp.* }
+  if ($1 == sound) && (%ctcp.sons != Désactivé) { 
+    If ($protect.etat($chan) == $true) {
+      protec-perso sons $nick $chan 
+    }
+  }
+  if (%ctcp. [ $+ [ $1 ] ] == Active) && (%reply. [ $+ [ $1 ] ] != $null) && ($1 != DCC) { 
+    ctcpreply $nick $1 %reply. [ $+ [ $1 ] ] 
+  }
+  if ($1 != DCC) { Halt }
+}
+on ^*:PART:#: {
+  If ( $Nick == %Protect.Nick ) { 
+    Set %Protect.Address $Address(%Protect.Nick,2)
+    Unset %Protect.Nick
+    Unset %Protect.Chan
+  } 
+  Var %Titre = %symbol.aff.g $+ Part $+ %symbol.aff.d
+  If ($Nick == $Me) { 
+    AfficheChan $Color(Part Text) %Titre  Tu viens de partir 
+  }
+  If ( $Nick != $Me ) {
+    if ( %afficher.jpq ) AfficheQuery $Color(Part Text) $nick %Titre  $+ $Nick $+  %symbol.aff2.g $+ $Address $+ %symbol.aff2.d $1-
+    If ( $Nick($chan ,0 ) == 2 ) && ( $me !isop $chan ) { .Timer 1 10 CycleChan $Chan } 
+  }
+  If ($nick == $me) { PlaySkinSound Part } 
+  HALTDEF
+}
+on ^*:QUIT: {
+  If ( $nick == %protect.nick ) {
+    Set %Protect.Address $Address(%Protect.Nick,1)
+    unset %protect.nick
+    unset %protect.chan
+  }
+  Var %Titre = %symbol.aff.g $+ Quit $+ %symbol.aff.d
+  Var %Chan.Total = $ComChan($Nick,0)
+  Var %Common.Chan = 1
+  While (%Common.Chan <= %Chan.Total ) {
+    If ( %Common.Chan == 30 ) { HALT }
+    if ( %afficher.jpq ) Echo $Color(Quit Text) -t $ComChan($Nick,%Common.Chan) %Titre  $+ $Nick $+  %symbol.aff2.g $+ $Address $+ %symbol.aff2.d vient de quitter %symbol.aff2.g $+ $1- $+  $+ %symbol.aff2.d
+    If ( $Nick($ComChan($Nick,%Common.Chan) ,0 ) == 2 ) && ( $me !isop $ComChan($Nick,%Common.Chan) ) { .Timer 1 10 CycleChan $ComChan($Nick,%Common.Chan) } 
+    Inc %Common.Chan
+  }
+  If ($Query($Nick)) { 
+    if ( %afficher.jpq ) Echo $Color(Quit Text) -t $Nick %Titre  $+ $Nick vient de quitter %symbol.aff2.g $+ $1- $+  $+ %symbol.aff2.d 
+    If ( %Pv.AutoClose == $true ) { .timer 1 %Pv.AutoCloseTimer close -m $nick }
+  }
+  HALTDEF
+}
+on ^*:MODE:#: {
+  Var %Titre = %symbol.aff.g $+ Mode $+ %symbol.aff.d
+  If ( $nick != $me ) { Echo $Color(Mode Text) -t $chan  %Titre : $nick vient de changer le mode en %symbol.aff2.g $+  $1-  $+ $color(Mode Text) $+ %symbol.aff2.d $+ . }
+  Else  { AfficheChan $Color(Mode Text) %Titre : Tu viens de changer le mode en %symbol.aff2.g $+  $1-  $+ $color(Mode Text) $+ %symbol.aff2.d }
+  Haltdef
+}
+on ^*:TOPIC:#: {
+  Var %Titre = %symbol.aff.g $+ Topic $+ %symbol.aff.d
+  If ( $nick != $me ) { 
+    If ( $1 != $null ) { Echo $Color(Topic Text) -t $chan %Titre : $nick vient de changer le topic en : %symbol.aff2.g $+ $1- $+ $+  $+ %symbol.aff2.d . }
+    Else { Echo $Color(Topic Text) -t $chan %Titre : $nick a retiré le topic. }
+  }
+  Else { AfficheChan $Color(Topic Text) %Titre : Tu viens de changer le topic en : %symbol.aff2.g $+ $1- $+  $+ %symbol.aff2.d }
+  HALTDEF
+}
+on ^*:UNBAN:*: {
+  Var %Titre = %symbol.aff.g $+ Débanni $+ %symbol.aff.d
+  If ( $nick != $me ) { AfficheChan $SkinCouleurs(Deban) %Titre  $bnick  $+ %symbol.aff2.g $banmask %symbol.aff2.d  vient d'être débanni  par $nick $+  }
+  Else  { 
+    AfficheChan $SkinCouleurs(DeBan) %Titre  Tu viens de Débannir $bnick $+  $+ %symbol.aff2.g $banmask %symbol.aff2.d
+  }
+  If ($nick == $me)   { PlaySkinSound DeBan }
+  HALTDEF
+}
+on ^*:OP:*: {
+  Var %Titre = %symbol.aff.g $+ Op $+ %symbol.aff.d
+  if ( $opnick == $me ) && ( $nick == $me ) {
+    AfficheActive $SkinCouleurs(Op) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te oper 
+    AfficheChan $SkinCouleurs(Op) %Titre Tu viens de te oper
+  }
+  if ( $opnick == $me ) && ( $nick != $me ) {
+    AfficheActive $SkinCouleurs(Op) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens d'être opé par $nick $+  
+    AfficheChan $SkinCouleurs(Op) %Titre Tu viens de te faire oper par $nick $+ 
+  }
+  if ( $nick == $me ) && ( $opnick != $me ) {
+    AfficheActive $SkinCouleurs(Op) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens d'oper $opnick
+    AfficheChan $SkinCouleurs(Op) %Titre Tu viens d'oper $opnick
+  }
+  if ( $opnick != $me ) && ( $nick != $me ) && ( $opnick != $nick ) {
+    AfficheChan $SkinCouleurs(Op) %Titre  $+ $nick vient d'oper %symbol.aff2.g $+ mode +o $+ %symbol.aff2.d  $+ $opnick $+ 
+  }
+  if ( $opnick != $me ) && ( $nick != $me ) && ( $opnick == $nick ) {
+    AfficheChan $SkinCouleurs(Op) %Titre  $+ $nick vient de s'oper %symbol.aff2.g $+ mode +o $+ %symbol.aff2.d
+  }
+  If ($opnick == $me) || ($nick == $me) { PlaySkinSound Op }
+  HALTDEF
+}
+on ^*:HELP:*: {
+  Var %Titre = %symbol.aff.g $+ HalfOp $+ %symbol.aff.d
+  if ( $hnick == $me ) && ( $nick == $me ) {
+    AfficheActive $SkinCouleurs(HalfOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te halfoper 
+    AfficheChan $SkinCouleurs(HalfOp) %Titre Tu viens de te halfoper
+  }
+  if ( $hnick == $me ) && ( $nick != $me ) {
+    AfficheActive $SkinCouleurs(HalfOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens d'être halfopé par $nick $+  
+    AfficheChan $SkinCouleurs(HalfOp) %Titre Tu viens de te faire halfoper par $nick $+ 
+  }
+  if ( $nick == $me ) && ( $hnick != $me ) {
+    AfficheActive $SkinCouleurs(HalfOp) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de halfoper $hnick
+    AfficheChan $SkinCouleurs(HalfOp) %Titre Tu viens de halfoper $hnick
+  }
+  if ( $hnick != $me ) && ( $nick != $me ) && ( $hnick != $nick ) {
+    AfficheChan $SkinCouleurs(HalfOp) %Titre  $+ $nick vient de halfoper %symbol.aff2.g $+ mode +h $+ %symbol.aff2.d  $+ $hnick $+ 
+  }
+  if ( $hnick != $me ) && ( $nick != $me ) && ( $hnick == $nick ) {
+    AfficheChan $SkinCouleurs(HalfOp) %Titre  $+ $nick vient de se halfoper %symbol.aff2.g $+ mode +h $+ %symbol.aff2.d
+  }
+  If ($hnick == $me) || ($nick == $me) { PlaySkinSound Op }
+  HALTDEF
+}
+on ^*:SERVEROP:*: {
+  AfficheChan $SkinCouleurs(Op) %symbol.aff.g $+ Op $+ %symbol.aff.d  $+ $nick vient d'oper %symbol.aff2.g $+ mode +o $+ %symbol.aff2.d  $+ $opnick $+ 
+  HALTDEF
+}
+on ^*:VOICE:*:{
+  Var %Titre = %symbol.aff.g $+ Voice $+ %symbol.aff.d
+  if ( $vnick == $me ) && ( $nick == $me ) {
+    AfficheActive $SkinCouleurs(Voice) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te voicer 
+    AfficheChan $SkinCouleurs(Voice) %Titre Tu viens de te voicer
+  }
+  if ( $vnick == $me ) && ( $nick != $me ) {
+    AfficheActive $SkinCouleurs(Voice) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te faire voicer par $nick $+ 
+    AfficheChan $SkinCouleurs(Voice) %Titre Tu viens de te faire voicer par $nick $+ 
+  }
+  if ( $nick == $me ) && ( $vnick != $me ) {
+    AfficheActive $SkinCouleurs(Voice) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de voicer $vnick 
+    AfficheChan $SkinCouleurs(Voice) %Titre Tu viens de voicer $vnick
+  }
+  if ( $vnick != $me ) && ( $nick != $me ) && ( $vnick != $nick) {
+    AfficheChan $SkinCouleurs(Voice) %Titre  $+ $nick $+  vient de voicer %symbol.aff2.g $+ mode +v $+ %symbol.aff2.d   $+ $vnick $+ 
+  }
+  if ( $vnick == $nick) && ( $nick != $me ) && ( $vnick != $me ) {
+    AfficheChan $SkinCouleurs(Voice) %Titre  $+ $nick $+  vient de se voicer %symbol.aff2.g $+ mode +v $+ %symbol.aff2.d
+  }
+  If ($vnick == $me) || ($nick == $me) { PlaySkinSound Voice }
+  HALTDEF
+}
+on ^*:DEVOICE:*:{
+  Var %Titre = %symbol.aff.g $+ Dévoice $+ %symbol.aff.d
+  if ( $vnick == $me ) && ( $nick == $me ) {
+    AfficheActive $SkinCouleurs(DeVoice) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te dévoicer sur $chan . 
+    AfficheChan $SkinCouleurs(DeVoice) %Titre Tu viens de te dévoicer
+  }
+  if ( $vnick == $me ) && ( $nick != $me ) {
+    AfficheActive $SkinCouleurs(DeVoice) %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de te faire dévoicer par $nick sur $chan . 
+    AfficheChan $SkinCouleurs(DeVoice) %Titre Tu viens de te faire dévoicer par $nick $+ 
+  }
+  if ( $nick == $me ) && ( $vnick != $me ) {
+    AfficheActive $SkinCouleurs(DeVoice)  %symbol.aff.g  $+ $chan $+  %symbol.aff.d  Tu viens de dévoicer $vnick sur $chan .
+    AfficheChan $SkinCouleurs(DeVoice) %Titre Tu viens de dévoicer $vnick  $+ 
+  }
+  if ( $vnick != $me ) && ( $nick != $me ) && ( $vnick != $nick ) {
+    AfficheChan $SkinCouleurs(DeVoice) %symbol.aff.g $+ Devoice $+ %symbol.aff.d  $+ $nick $+  vient de dévoicer %symbol.aff2.g $+ mode -v $+ %symbol.aff2.d $vnick
+  }
+  if ( $vnick != $me ) && ( $nick != $me ) && ( $vnick == $nick ) {
+    AfficheChan $SkinCouleurs(DeVoice) %Titre  $+ $nick vient de se dévoicer %symbol.aff2.g $+ mode -v $+ %symbol.aff2.d
+  }
+  If ($vnick == $me) || ($nick == $me) { PlaySkinSound DeVoice }
+  HALTDEF
+}
+on ^*:Notice:*:?: {
+  if ( $nick == $me ) { 
+    set %ex.notice  $+ $Color(HighLight Text) Notice 
+  }
+  else { set %ex.notice <Notice> de  $+ $nick $+  }
+  set %notice.texte $1-
+
+  Echo $Color(Notice Text) -at %ex.notice  $+ $Color(Notice Text) $+ %notice.texte
+  .unset %ex.notice
+  .unset %notice.texte
+  HALTDEF
+}
+On ^*:NOTICE:*:#: {
+  Var %Titre = %Symbol.aff.G $+ Notice $+ %Symbol.Aff.D
+  Echo $Color(Notice Text) -at %Titre de  $+ $nick $+  sur  $+ $chan $+  : $1-
+  .Unset %Ex.Notice
+  HALTDEF
+}
+On ^*:WALLOPS:*:{
+  AfficheActive $Color(Wallops Text) %Symbol.Aff.G $+ Wallops $+ %Symbol.Aff.D ! $+ $nick $+ ! $1-
+}
+On ^*:SNOTICE:*: {
+  if ( Maximum de connexions reçues isin $1- ) { Echo -s 5 Maximum de connexions reçues : $5 5Chatteurs, il est $time | Halt }
+  if (( Lost connection isin $1- ) || ( Net Break isin $1- )) { Echo -s 4 NetSplit entre $7 et $6  raison: $8- à $time le $date | halt  }  
+  if (( Net Junction isin $1- )  || ( Link With isin $1- )) { Echo -s 4 NetMerge entre $7 et $6  à $time le $date | halt }    
+  if ( adding GLINE isin $1- ) { Echo -s @Serveur Notices 4G-LINE 4 $4 - de  $8  expirant à  $asctime($11,hh:nn:ss) , Raison :  $12-  | halt }
+  if ( G:LINE added isin $1- ) { Echo -s @Serveur Notices 4G-LINE 4 $14 - de  $5  jusqu'à  $21 , Raison : ( $+ $24-  | halt }
+  if ( G-line active isin $1- ) { Echo -s @Serveur Notices 4G-LINE 4 $nick - Activé pour  $7  | halt }
+  if ( [G:Line error] isin $1- ) { Echo -s @Serveur Notices 4G-LINE Mauvais parametres : Mask incorrect | halt }
+  if ( Expiring G:Line isin $1- ) { Echo -s @Serveur Notices 4 $nick - Expiration du G-LINE de $4 émis par $7 , Raison : ( $+ $9- | halt }
+  if ( resetting expiration time isin $1- ) { Echo -s @Serveur Notices 4 $nick - Remise à zéro du temps de Gline pour $6 pour $asctime($10,hh:nn:ss) | halt }
+  if ( Received KILL message for isin $1- ) { Echo -a @Serveur Notices 4 %symbol.aff.g K I LL %symbol.aff.d 4 $10 - vient de déconnecter  $8  | halt }
+  if ( Client connecting on port isin $1- ) { Echo -s @Serveur Notices 4connexion de  $9  $10 sur le port $8 à $time le $date | halt }
+  if ( Client exiting: isin $1- ) { Echo -s @Serveur Notices 4Déconnexion de  $6  $7 du serveur. Raison :  $8- 4à $time le $date | halt }
+  if ( Looking up your hostname...  isin $1- ) { Echo -s @Serveur Notices 4 $nick - Regarde votre Nom de route (Host) à $time le $date | halt }
+  if ( Checking ident... isin $1- ) { Echo -s @Serveur Notices 4 $nick - Verifie votre identification (Ident) à $time le $date | halt }
+  if ( Checking for open socks server...  isin $1- ) { Echo -s @Serveur Notices 4 $nick - Verifie que les ports du serveur sont ouverts à $time le $date | halt }
+  if ( Received identd response isin $1- ) { Echo -s @Serveur Notices 4 $nick - Reception de votre identification (Ident) | halt }
+  if ( Couldn't resolve your hostname; using your IP address instead isin $1- ) { Echo -s @Serveur Notices 4 $nick - Le serveur utilise votre numero d'IP car il ne peut déterminer votre route (Host) à $time le $date | halt }
+  if ( Stats 'G' requested isin $1- )  { Echo -s @Serveur Notices 4 $nick - $5 $6 demande à voir la liste des G-Lines | halt }
+  if ( Stats 'K' requested isin $1- )  { Echo -s @Serveur Notices 4 $nick - $5 $6 demande à voir la liste des K-Lines | halt }
+  if (  has attempted to send you a file named isin $1- )  { Echo -ta @Serveur Notices 4 $1 - $2 tentes de vous envoyer un dcc. Taper /dccallow + $+ $1 pour l'autoriser à le faire et dites lui de le renvoyer | halt }
+  if (  is not accepting DCC sends of filetype isin $1- )  { 
+    Echo -ta @Serveur Notices 4 $3 - n'acceptes pas les dccs. Il faut lui demander de taper /dccallow + $+ $me pour que le serveur laisse passer le fichier 
+    .notice $3 Il faut que tu m'autorises à t'envoyer un DCC. Tape /dccallow + $+ $me
+    halt 
+  }
+  Else { Echo -s @Serveur Notices 4 $nick - $1- à $time le $date }
+  HALT
+}
+ON *:NOTIFY: { PlaySkinSound Notify }
+ON *:UNOTIFY: { PlaySkinSound UNotify }
+ON *:DISCONNECT: { PlaySkinSound DéConnection }
+alias undll { var %d = $dll(0) | while ( $dll(%d) != $null && $dll(%d) !isnum ) { .dll -u $dll(%d) | dec %d } } 
+on *:exit:{ undll }

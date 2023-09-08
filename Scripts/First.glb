@@ -1,0 +1,35 @@
+on 1:Start:{
+  if ( %tgfirstuse = $true ) {
+    if ( $input(Bienvenue ! $crlf $+ Ceci est votre première utilisation de Tgl0beSCRIPT. Veuillez configurer le script à partir du dialogue principal en appuyant sur F1. $crlf $crlf $+ Pour vous connecter cliquez sur Connexion ou tapez /conn.,oi,Tgl0beSCRIPT - Bienvenue) ) {
+      set %Tg.idnick $$?="Définir votre pseudo par défaut : "
+      .nick  %Tg.idnick
+      .anick %Tg.idnick $+ -
+      unset %tgfirstuse
+      conn
+    }
+  }
+  else {
+    conn
+  }
+}
+
+
+off 1:Start:{
+  if ( %tgfirstuse = $true ) {
+    chargeskin tgl0be
+    if ( $input(Bienvenue ! $crlf $+ Ceci est votre première utilisation de Tgl0beSCRIPT. Veuillez configurer le script à partir du dialogue principal en appuyant sur F1. $crlf $crlf $+ Pour vous connecter cliquez sur Connexion ou tapez /conn.,oi,Tgl0beSCRIPT - Bienvenue) ) {
+      set %Tg.idnick $$?="Définir votre pseudo par défaut : "
+      .nick  %Tg.idnick
+      .anick %Tg.idnick $+ -
+      unset %tgfirstuse
+      set %mctrans -1
+      set %files.html 0
+      set %bmethod none
+      set %dock.pos top
+      mctheme
+      SetupImportantStuff
+      .timeruptime -o 0 60 /updateuptime
+      set %sys.HelpViewed 1
+    }
+  }
+}

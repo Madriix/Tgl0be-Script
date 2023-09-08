@@ -1,0 +1,43 @@
+;-----------------------------------------------------------
+;                 Récupération du script
+;                          Par Xor
+;-----------------------------------------------------------
+
+Alias Recup {
+  load -rs Scripts\Version.glb
+  load -rs Scripts\TBar.glb
+  load -rs Scripts\Aliases.glb
+  load -rs Scripts\AntiFlood.glb
+  load -rs Scripts\AntiPV.glb
+  load -rs Scripts\AntiSpam.glb
+  load -rs Scripts\ASCII.glb
+  load -rs Scripts\Banlist.glb
+  load -rs Scripts\Big.glb
+  load -rs Scripts\BNC.glb
+  load -rs Scripts\Config-Aliases.glb
+  load -rs Scripts\Config-Dialog.glb
+  load -rs Scripts\Config-Remotes.glb
+  load -rs Scripts\Fun-popups.glb
+  load -rs Scripts\Jeux.glb
+  load -rs Scripts\Highlights.glb
+  load -rs Scripts\LogViewer.glb
+  ;load -rs Scripts\Navigateur\Nav.glb
+  load -rs Scripts\Menus.glb
+  load -rs Scripts\Menu.glb
+  load -rs Scripts\Moderation.glb
+  load -rs Scripts\Opoff.glb
+  load -rs Scripts\Poppies.glb
+  load -rs Scripts\Quote.glb
+  load -rs Scripts\Raws.glb
+  load -rs Scripts\Remotes.glb
+  load -rs Scripts\ScanHost.glb
+  load -rs Scripts\Seen.glb
+  load -rs Scripts\Tgl0beIRC.glb
+  load -rs Scripts\Voice-intell.glb
+  load -rs Scripts\Vote.glb
+  load -rs Scripts\First.glb
+  load -rs Scripts\Recup.glb
+  load -rs Scripts\Notify\Notify.glb
+  load -rs Scripts\SystemInfo\SystemInfo.mrc
+  echo -a 4Script rechargé !
+}

@@ -1,0 +1,89 @@
+;-----------------------------------------------------------
+;                         Module !seen
+;             Par Khaostyke (Script Archives)
+;             Khaostyke@hotmail.com 
+;   Système enregistrant les actions des users
+;           pour ensuite répondre au !seen
+;                   Modifié par Xor
+;-----------------------------------------------------------
+
+alias _dh did -h $dname $1-
+alias _dv did -v $dname $1-
+alias _db did -b $dname $1-
+alias _de did -e $dname $1-
+alias _dr did -r $dname $1-
+alias _da did -a $dname $1-
+alias _dc did -c $dname $1-
+alias _du did -u $dname $1-
+alias _dx dialog -x $dname
+alias _dra did -ra $dname $1-
+Alias mseen dialog -m seen seen
+dialog seen {
+  title "Tgl0beSCRIPT Module !Seen"
+  size -1 -1 300 232
+  icon images/icones/seen.ico, 0
+  option pixels
+  tab "Registre", 9, 5 5 290 225
+  button "RAZ", 4, 205 180 70 25, tab 9,flat
+  check "Répondre aux !seen", 1, 15 45 276 15, tab 9,flat
+  Text "Toutes les informations concernant les Join/Part/Quit/Nick/kick/... sont conservées. Sur un salon, lorsqu'un user tape !seen PSEUDO et si ce module est activé, il recoit une notice lui faisant part de la dernière entrée concernant PSEUDO dans votre base de données.",2, 25 85 250 80,tab 9
+  box "", 7, 15 60 271 155, tab 9
+  tab "Recherche", 10
+  box "", 12, 15 45 270 170, tab 10
+  edit "", 13, 25 60 180 21, tab 10
+  button "Rechercher", 11, 207 60 65 20, tab 10 default,flat
+  edit "", 14, 25 100 250 100, tab 10 read multi return vsbar
+  text "Résultat :", 15, 28 83 180 16, tab 10
+}
+on *:dialog:seen:*:*:{
+  if $devent == init {
+    mdx SetMircVersion $version
+    mdx  MarkDialog $dname
+    mdx SetDialog $dname bgcolor 16772585
+    mdx SetColor $dname 1,2,7,12,13,14,15 textbg 16772585
+    mdx SetColor $dname 1,2,7,12,13,14,15 background 16772585
+    if ($group(#seen) == on) _dc 1
+  }
+  if $devent == sclick {
+    if $did = 10 { did -f $dname 13 }
+    if $did = 11 {
+      if $did(13) {
+        if $hget(seen.table,$did(13)) {
+          _dra 14 $did(13) $gettok($hget(seen.table,$did(13)),2,44) sur le réseau $gettok($hget(seen.table,$did(13)),1,44) il y a de cela $duration($calc($ctime - $gettok($hget(seen.table,$did(13)),3,44)))
+        }
+        else _dra 14 $did(13) n'est pas dans la base de données.
+      }
+    }
+    if $did = 1 { 
+      if $did(1).state == 1 {
+        .enable #seen
+      }
+      else .disable #seen
+    }
+    if $did = 4 { 
+      hdel -w seen.table *
+      if ( $input(La base de données a été effacée...,68,Tgl0beSCRIPT - Add-On Module !seen) ) { }
+    }
+  }
+}
+on *:exit:hsave -o seen.table $shortfn(Scripts/seen.dat)
+on *:start:hmake seen.table | hload seen.table Scripts/seen.dat
+#seen off
+on *:text:!seen*:*:{
+  if $2 == $me { .notice $nick Cherche moi plus que ca =] }
+  elseif $2 == $nick { .notice $nick Cherche toi mieux que ca =] }
+  elseif $2 ison # { .notice $nick $2 est présentement sur $chan }
+  else {
+    if $hget(seen.table,$2) {
+      .notice $nick $2 $gettok($hget(seen.table,$2),2,44) sur le réseau $gettok($hget(seen.table,$2),1,44) il y a de cela $duration($calc($ctime - $gettok($hget(seen.table,$2),3,44)))
+    }
+    else .notice $nick $2 n'est pas dans ma base de données.
+  }
+}
+on *:join:#:hadd -m seen.table $nick $+($server,$chr(44),a join $chan,$chr(44),$ctime)
+on *:part:#:hadd -m seen.table $nick $+($server,$chr(44),a quitté $chan,$chr(44),$ctime)
+on *:quit:hadd -m seen.table $nick $+($server,$chr(44),a quitté IRC,$chr(44),$ctime)
+on *:nick:hadd -m seen.table $nick $+($server,$chr(44),a changé de nick pour $newnick,$chr(44),$ctime)
+on *:kick:#:hadd -m seen.table $knick $+($server,$chr(44),a été kické par $nick de $chan,$chr(44),$ctime)
+on *:ban:#:hadd -m seen.table $bnick $+($server,$chr(44),a été banni par $nick de $chan,$chr(44),$ctime)
+#seen end

@@ -1,0 +1,161 @@
+;-----------------------------------------------------------
+;                            AntiFlood
+;                             Par Xor
+;-----------------------------------------------------------
+
+alias antiflood dialog -m antiflood antiflood
+dialog antiflood {
+  size -1 -1 235 165
+  title "Tgl0beSCRIPT - AntiFlood"
+  icon Images\icones\antispam.ico
+  text "Activer les protections Flood :", 1, 4 4 297 20
+  button "Fermer", 8, 160 140 70 20, ok flat
+  check "en PV", 2 , 4 20 100 20, Flat
+  check "en Notice", 3 , 4 40 100 20, Flat
+  check "en CTCP", 4 , 4 60 100 20, Flat
+  check "en Invite", 5 , 4 80 100 20, Flat
+  check "Afficher sur le salon actif", 6 , 4 120 140 20, Flat
+  check "Afficher en info-bulle", 7 , 4 140 140 20, Flat
+}
+
+ON *:DIALOG:antiflood:init:*:{
+  mdx SetMircVersion $version
+  mdx MarkDialog $dname
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 1 text 16711680
+  mdx SetColor $dname 1,2,3,4,5,6,7 textbg 16772585
+  mdx SetColor $dname 1,2,3,4,5,6,7 background 16772585
+  if (%antiflood.pv) did -c antiflood 2
+  if (%antiflood.notice) did -c antiflood 3
+  if (%antiflood.ctcp) did -c antiflood 4
+  if (%antiflood.invite) did -c antiflood 5
+  if (%antiflood.echo) did -c antiflood 6
+  if (%antiflood.tip) did -c antiflood 7
+}
+
+ON *:DIALOG:antiflood:sclick:2:{
+  set %antiflood.pv $did($dname,2).state
+}
+ON *:DIALOG:antiflood:sclick:3:{
+  set %antiflood.notice $did($dname,3).state
+}
+ON *:DIALOG:antiflood:sclick:4:{
+  set %antiflood.ctcp $did($dname,4).state
+}
+ON *:DIALOG:antiflood:sclick:5:{
+  set %antiflood.invite $did($dname,5).state
+}
+ON *:DIALOG:antiflood:sclick:6:{
+  set %antiflood.echo $did($dname,6).state
+}
+ON *:DIALOG:antiflood:sclick:7:{
+  set %antiflood.tip $did($dname,7).state
+}
+
+Alias Antiflood.end {
+  if ( %antiflood.echo == 1 ) echo -at 2AntiFlood : 3Fin de la Protection : PVs/Notices/Invites/CTCPs réactivés.
+  if ( %antiflood.tip == 1 ) var %tmp $tip(AntiFlood,Tgl0beSCRIPT : AntiFlood,3Fin de la Protection : PVs/Notices/Invites/CTCPs réactivés.,10,images/Icones/Tgl0be.ico,$null,$null,$null)
+}
+
+on 1:CONNECT:{
+  unset %protect.act.*
+  set %protect.ctcp $false
+  set %protect.open $false
+  set %protect.not $false
+  set %protect.inv $false
+}
+
+on *:OPEN:?:{
+  inc -u5 %pvflood 
+  if (%pvflood >= 5) && (!%protect.open) && (%antiflood.pv == 1) {
+    aline @Journal $timestamp 4Flood PV : Silence +2*!guest@*
+    if ( %antiflood.echo == 1 ) echo -at 2AntiFlood PV : Protection activée pour 1 min par $nick : $1-
+    if ( %antiflood.tip == 1 ) var %tmp $tip(AntiFlood,Tgl0beSCRIPT : AntiFlood,4Protection PV2 $nick : $1-,10,images/Icones/Tgl0be.ico,$null,$null,$null)
+    ignore -pu60 *
+    raw silence +*!guest@*
+    set %protect.open $true
+    .timeropen 1 60 set %protect.open $false
+    .timerguest 1 60 raw silence -*!guest@*
+    .timerguest2 1 60  aline @Journal $timestamp 4Flood PV : Silence -2*!guest@*
+    .timerprotectend 1 60 Antiflood.end
+  }
+}
+
+on 1:invite:#:{
+  inc -u2 %invite.general 1
+  if ( %invite.general  >= 5 ) && (!%protect.inv) && ( %antiflood.invite == 1 ) {
+    raw silence +*!*@*
+    .timertout 1 60 raw silence -*!*@*
+    aline @Journal  $timestamp 4Flood Invite : +Silence total
+    if ( %antiflood.echo == 1 ) echo -at 2AntiFlood Invite : Protection activée pour 1 min par $nick : $chan
+    if ( %antiflood.tip == 1 ) var %tmp $tip(AntiFlood,Tgl0beSCRIPT : AntiFlood,4Protection Invite2 $nick : $chan,10,images/Icones/Tgl0be.ico,$null,$null,$null)
+    set %protect.inv $true
+    .timerinv 1 60 set %protect.inv $false
+    .timertout2 1 60     aline @Journal $timestamp 4Flood Invite : -Silence total
+    .timerprotectend 1 60 Antiflood.end
+    halt
+  }
+}
+
+on *:notice:*:*: {
+  if ($istok(Themis.NickServ,$nick,46)) {
+    if Si vous n'en changez pas d'ici == $1-6 {
+      echo $color(highlight text) -at Tentative d'auto-identification...
+      ;if %Tg.Idnick == $me && !!%Tg.nickserv { .msg nickserv identify %Tg.Idnick %Tg.nickserv }
+      if %Tg.Idnick == $me && %Tg.currentserv == server1 && !!%Tg.saslpass1 { .msg nickserv identify %Tg.Idnick %Tg.saslpass1 }
+      if %Tg.Idnick == $me && %Tg.currentserv == server2 && !!%Tg.saslpass2 { .msg nickserv identify %Tg.Idnick %Tg.saslpass2 }
+      if %Tg.Idnick == $me && %Tg.currentserv == server3 && !!%Tg.saslpass3 { .msg nickserv identify %Tg.Idnick %Tg.saslpass3 }
+    }
+    elseif mot de passe accepté isin $1- { echo $color(highlight text) -at Auto-identification réussie ! }
+    elseif Mot de passe incorrect. == $1-4 { echo $color(highlight text) -at Auto-identification échouée ! }
+  }
+}
+if ( $network == Tgl0beIRC ) && ( ( $nick == NickServ ) || ( $nick == ChanServ ) || ( $nick == OperServ ) || ( $nick == MemoServ ) || ( $nick == HostServ ) || ( $nick == HelpServ ) ) { halt } 
+inc -u2 %notice.general 1
+if ( %notice.general  >= 6 ) && (!%protect.not) && ( %antiflood.notice == 1 ) {
+  raw silence +*!*@*
+  .timertout 1 60 raw silence -*!*@*
+  aline @Journal $timestamp 4Flood Notice : +Silence total
+  if ( %antiflood.echo == 1 ) echo -at 2AntiFlood Notice : Protection activée pour 1 min par $nick : $1-
+  if ( %antiflood.tip == 1 ) var %tmp $tip(AntiFlood,Tgl0beSCRIPT : AntiFlood,4Protection Notice2 $nick : $1-,10,images/Icones/Tgl0be.ico,$null,$null,$null)
+  set %protect.not $true
+  .timernot 1 60 set %protect.not $false
+  .timertout2 1 60     aline @Journal $timestamp 4Flood Notice : -Silence total
+  .timerprotectend 1 60 Antiflood.end
+  halt
+}
+}
+
+
+ctcp *:*:{
+inc -u3 %ctcp.general 1
+if ( %ctcp.general > 3 ) && (!%protect.ctcp) && ( %antiflood.ctcp == 1 ) {
+  aline @Journal $timestamp 4Flood CTCP : +Silence *!guest@*
+  if ( %antiflood.echo == 1 ) echo -at 2AntiFlood CTCP : Protection activée pour 1 min par $nick : $1-
+  if ( %antiflood.tip == 1 ) var %tmp $tip(AntiFlood,Tgl0beSCRIPT : AntiFlood,4Protection CTCP2 $nick : $1-,10,images/Icones/Tgl0be.ico,$null,$null,$null)
+  raw silence +*!guest@*
+  set %protect.ctcp $true
+  .timerctcps 1 60  raw silence -*!guest@*
+  .timerctcps2 1 60  aline @Journal $timestamp 4Flood CTCP : -Silence *!guest@*
+  .timerprotectend 1 60 Antiflood.end
+  .timerctcp 1 60 set %protect.ctcp $false
+  halt
+}
+}
+
+
+on *:ctcpreply:*:{
+inc -u5 %ping.general 1
+if ( %ping.general > 3 )  && ( $nick != $me )  &&  ( $nick != $server )  && (!%protect.ctcp)  && ( %antiflood.ctcp == 1 ) {
+  raw silence +*!guest@*
+  set %protect.ctcp $true
+  .timersilencegeneral 1 60  raw silence -*!guest@*
+  .timerprotectend 1 60 Antiflood.end
+  .timersilencegeneral2 1 60  aline @Journal $timestamp 4Flood CTCP : -Silence +*!guest@*
+  if ( %antiflood.echo == 1 ) echo -at 2AntiFlood CTCP : Protection activée pour 1 min par $nick : $1-
+  if ( %antiflood.tip == 1 ) var %tmp $tip(AntiFlood,Tgl0beSCRIPT : AntiFlood,4Protection CTCP2 $nick : $1-,10,images/Icones/Tgl0be.ico,$null,$null,$null)
+  .timerctcp 1 60 set %protect.ctcp $false
+  aline @Journal $timestamp 4Flood CTCP : +Silence +*!guest@*
+  halt
+}
+}

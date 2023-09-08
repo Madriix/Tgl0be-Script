@@ -1,0 +1,351 @@
+;-----------------------------------------------------------
+;                             Aliases
+;                          Par Xor
+;-----------------------------------------------------------
+
+Alias ScanClones {
+  VAR %i = 1, %LA, %NClone, %Addr, %MonAddr = $address( $Me , 2 ), %MaxNick = $Nick($1 , 0)
+  WHILE ( %i <= %MaxNick ) {
+    %Addr = $address( $Nick( $1 , %i ) , 2 )
+    If (%Addr != %MonAddr) && ($ialchan(%Addr,$1,0) > 1) {
+      %LA =  $addtokcs( %LA , %Addr  , 59 )
+    }
+    Inc %i
+  }
+  %i = 1
+  WHILE ( $GetTok( %LA , %i , 59 ) != $Null ) {
+    IF ( $IalChan( $GetTok( %LA , %i , 59 ) , $1 , 0 ) > 1 ) { 
+      %j = 1
+      %Addr = $GetTok( %LA , %i , 59 )
+      While ( %j <=  $IalChan( %Addr , $1 , 0 ) ) { 
+        %NClone = %NClone $iif( %NClone == $Null , $IalChan( %Addr , $1 , %j ).Nick  , 4+ $IalChan( %Addr , $1 , %j ).Nick )
+        Inc %j 
+      } 
+      ECHO -t $1 4 $IalChan( %Addr , $1 , 0 ) Clônes détectés : %NClone
+      %NClone = $Null
+    }
+    Inc %i
+  }
+}
+Alias ScanClonesNick {
+  Var %NClone, %MaxChan = $comchan($1,0), %NumChan = 1, %NomChan, %AdrNick = $address($1,2)
+  IF %MaxChan > 0 {
+    WHILE (%NumChan <= %MaxChan) {
+      %NomChan = $comchan($1,%NumChan)
+      IF $IalChan(%AdrNick, %NomChan, 0) > 1 { 
+        %j = 1
+        WHILE %j <= $IalChan(%AdrNick, %NomChan, 0) { 
+          %NClone = %NClone $iif( %NClone == $Null , $IalChan( %AdrNick, %NomChan, %j ).Nick  , 4+ $IalChan( %AdrNick, %NomChan, %j ).Nick )
+          INC %j 
+        }  
+        ECHO $color(whois text) -at [ $+ %NomChan $+ ] 4 $IalChan( %AdrNick, %NomChan, 0 ) Clônes détectés : %NClone
+        %NClone = $Null
+      } 
+      INC %NumChan
+    }
+  }
+}
+Alias ScanClonesNickAllChan {
+  Var %NClone, %MaxChan = $comchan($1,0), %NumChan = 1, %NomChan, %AdrNick = $address($1,2), %NbClone = 0
+  IF %MaxChan > 0 {
+    WHILE (%NumChan <= %MaxChan) {
+      %NomChan = $comchan($1,%NumChan)
+      IF $IalChan(%AdrNick, %NomChan, 0) > 1 { 
+        %j = 1
+        WHILE %j <= $IalChan(%AdrNick, %NomChan, 0) { 
+          IF $pos(%NClone,$IalChan( %AdrNick, %NomChan, %j ).Nick,1) == $null {
+            %NClone = %NClone $iif( %NClone == $Null , $IalChan( %AdrNick, %NomChan, %j ).Nick  , 4+ $IalChan( %AdrNick, %NomChan, %j ).Nick )
+            INC %NbClone
+          }
+          INC %j 
+        }  
+      } 
+      INC %NumChan
+    }
+    IF %NbClone > 0 { ECHO $color(whois text) -at [ $+ Clônes $+ ] 4 %NbClone Clônes détectés : %NClone }
+  }
+}
+Alias ScanProtectText {
+  If ($protect.etat($chan) == $true) && ( $chan isin %chanmodule ) {
+    If ( %protect.couleur == Activé ) {
+      if ($chr(3) isin $1-) { protec-perso Couleur $nick $chan | Goto Suite }
+    }
+    If ( %protect.etat.Pub == Activé ) {
+      Var %i = 1
+      Var %t = $NumTok( %Protect.Pub , 59 )
+      While ( %i <= %t ) {
+        Var %txt = $GetTok( %Protect.Pub , %i , 59 )
+        If ( %txt isin $Strip($1-,burc) ) && ( $Chan !isin $strip($1-,burc) ) && ( $Chr(35) $+ $Chr(32) !isin $strip($1-,burc) ) { protec-perso Publicité $nick $chan $1- | Goto Suite }
+        Inc %i
+      }
+    }
+    If ( %protect.etat.Racisme == Activé ) {
+      Var %i = 1
+      Var %t = $NumTok( %Protect.Racisme , 59 ) 
+      While ( %i <= %t ) {
+        Var %txt = $GetTok( %Protect.Racisme , %i , 59 )
+        If ( %txt isin $Strip($1-,burc) ) { protec-perso Racisme $nick $chan $1- | Goto Suite }
+        Inc %i
+      }
+    }
+    If (%protect.etat.insulte == Activé) {
+      Var %i = 1
+      Var %t = $NumTok( %Protect.Insulte , 59 ) 
+      While ( %i <= %t ) {
+        Var %txt = $GetTok( %Protect.Insulte , %i , 59 )
+        If ( %txt isin $Strip($1-,burc) ) { protec-perso Insulte $nick $chan $1- | Goto Suite }
+        Inc %i
+      }
+    }
+    If (%protect.etat.sexe == Activé) {
+      Var %i = 1
+      Var %t = $NumTok( %Protect.sexe , 59 ) 
+      While ( %i <= %t ) {
+        Var %txt = $GetTok( %Protect.sexe , %i , 59 )
+        If ( %txt isin $Strip($1-,burc) ) { protec-perso Sexe $nick $chan $1- | Goto Suite }
+        Inc %i
+      }
+    }
+    If (%protect.etat.incit == Activé) {
+      Var %i = 1
+      Var %t = $NumTok( %Protect.incit , 59 ) 
+      While ( %i <= %t ) {
+        Var %txt = $GetTok( %Protect.Incit , %i , 59 )
+        If ( %txt isin $Strip($1-,burc) ) { protec-perso Incit $nick $chan $1- | Goto Suite }
+        Inc %i
+      }
+    }
+    :Suite
+  }
+}
+Alias ScanFloodText {
+  If ($protect.etat($chan) == $true) && ( $chan isin %chanmodule ) {
+    If (%protect.etat.flood == Activé) {
+      inc %flood. [ $+ [ $nick ] ]
+      if ( %flood. [ $+ [ $nick ] ] == 1 ) { .timer 1 %protect.flood.text.timer unset %flood. [ $+ [ $nick ] ] }
+      if (%flood. [ $+ [ $nick ] ] >= %protect.flood.text.lim) { 
+        unset %flood. [ $+ [ $nick ] ]
+        protec-perso flood $nick $chan 
+      }
+      if ( $len( $1- ) >= %protect.flood.text.length ) && ( %protect.flood.text.lim != $null ) { protec-perso flood $nick $chan }
+    }
+    If ( %protect.etat.majs == Activé ) {
+      Var %i = 1
+      Var %PseudoDit = Non
+      Var %Majs.Count = 0
+      Var %Majs.Len = 0
+      While ( %i <= $NumTok( $1- , 32 ) ) {
+        If ( $GetTok( $strip( $1- , burc )  , %i , 32 ) !ison $chan ) || ( %PseudoDit == Oui ) {
+          Var %Pos = 1
+          While ( %Pos <= $Len( $GetTok( $1- , %i , 32 ) ) ) {
+            If ( $Asc( $Mid( $GetTok( $1- , %i , 32 ) , %Pos , 1 ) ) isnum 65-90 ) { Inc %Majs.Count | Inc %Majs.Len }
+            Elseif ( $Asc( $Mid( $GetTok( $1- , %i , 32 ) , %Pos , 1 ) ) isnum 97-122 ) { Inc %Majs.Len }
+            Inc %Pos
+          }
+        }
+        Else { Var %PseudoDit = Oui }
+        Inc %i
+      }
+      Var %Majs.Calc = $Calc( %Majs.Count * 100 / %Majs.Len )
+      If ( %Majs.Calc >= %protect.flood.majs ) && (%Majs.Len >= 5) { Protec-Perso Majuscules $Nick $Chan  $+ $1-  $Int( %Majs.Calc ) % }
+    } 
+  }
+}
+Alias ScanPseudoChan {
+  Var %i = 1
+  While (%i <= $ComChan($$1,0) ) {
+    If ($protect.etat($ComChan($$1,%i)) == $true) && ( $ComChan($$1,%i) isin %chanmodule ) { Protec-Perso Pseudo $1 $ComChan( $1 ,%i) | Goto End }
+    Inc %i 
+  }
+  HaltDef
+  :End
+}
+Alias F9 /protectaverto
+Alias F10 /protectkick
+Alias F11 /protectkickban
+Alias protectaverto {
+  if (%cfg.avertir == notice) { notice %protect.nick $read($shortfn($mircdirRaison\ $+ %protect.type $+ .gmp)) | halt }
+  if (%cfg.avertir == chan) { permanent %protect.chan %protect.nick $read($shortfn($mircdirRaison\ $+ %protect.type $+ .gmp)) | halt }
+  if (%cfg.avertir == msg) { msg %protect.nick $read($shortfn($mircdirRaison\ $+ %protect.type $+ .gmp)) | halt }
+}
+Alias protectkick {
+  kick %protect.chan %protect.nick $read($shortfn($mircdirRaison\ $+ %protect.type $+ .gmp)) $+ 
+}
+Alias protectkickban {
+  If (%protect.type == Pseudo) { Var %protectbantemp = * $+ %protect.nick $+ *!*@* }
+  Else { Var %protectbantemp = $address( %protect.nick , %protect.maskban ) }
+  if ( %protect.tempsban == 0 ) { /mode %protect.chan +b %protectbantemp }
+  else { /ban -u $+ %protect.tempsban %protect.chan %protectbantemp ) }
+  /kick %protect.chan %protect.nick $read($shortfn($mircdirRaison\ $+ %protect.type $+ .gmp)) $+ 
+}
+Alias SalonScanClones {
+  Var %i = 1
+  While ( %i <= $IalChan( $address($Nick,2) , $Chan , 0 ) ) {
+    If ( %Clone.Pseudo == $Null ) { Var %Clone.Pseudo = $IalChan( $address($Nick,2) , $Chan , %i ).Nick  }
+    Else { Var %Clone.Pseudo = %Clone.Pseudo 4+ $IalChan( $address($Nick,2) , $Chan , %i ).Nick }
+    Inc %i
+  }
+  Echo -t $Chan 4 $IalChan( $address($Nick,2) , $Chan , 0 ) Clônes détectés : %Clone.Pseudo $Chr(91) $+ $Address($Nick,2) $+ $Chr(93)
+}
+Alias DialogScanClones {
+  If ( $Dialog(ScanClones).Hwnd == $Null ) { Dialog -mado ScanClones ScanClones }
+  Var %i = 1
+  Did -ra ScanClones 1 Clônes sur $Chan
+  While ( %i <= $IalChan( $address($Nick,2) , $Chan , 0 ) ) {
+    If ( %Clone.Pseudo == $Null ) { 
+      Did -a ScanClones 1 $IalChan( $address($Nick,2) , $Chan , %i ).Nick 
+      Inc %i
+    }
+  }
+}
+Alias WinCtrl {
+  If (%protect.win == $False) { Echo -a $1- }
+  Else {
+    If ( $Window(@Moderation) == $null ) {
+      If (%protect.win.x != $Null) && (%protect.win.y != $Null) && (%protect.win.h != $Null) && (%protect.win.w != $Null) { Window -dok0vz -t1 +dL @Moderation %protect.win.x %protect.win.y 700 30 }
+      Else { Window -dok0vz -t1 +dL @Moderation 10 15 700 30 }
+    }
+    Aline @Moderation $1-
+  }
+}
+Menu @Moderation {
+  dclick : Window -c @Moderation
+  Enregistrer Position : {
+    Set %protect.win.x $Window(@Moderation).dx 
+    Set %protect.win.y $Window(@Moderation).dy 
+    Set %protect.win.w $Window(@Moderation).w 
+    Set %protect.win.h $Window(@Moderation).h
+  }
+  Fermer : Window -c @Moderation
+}
+Alias Protect.etat {
+  If (%protect.etat == op) && ($me isop $1) { Return $true }
+  If (%protect.etat == vo) && ($me isvo $1) || ($me isop $1) { Return $true }
+  If (%protect.etat == us) { Return $true }
+}
+Alias protec-perso {
+  if ( $2 == $Nick.bot($3) ) || (($2 isop $3) || ($2 !ison $3) && (to !isin $1)) { goto fin }
+  if ( %protect.check.ignore != Désactivé ) { notice $2 4Protection $1 : 7tu es ignoré pour %protect.ignore secondes [ Auto-Protect ] | ignore -Iu $+ %protect.ignore $2 2 }
+  set %protect.chan $3
+  set %protect.nick $2
+  set %protect.type $1
+  PlaySkinSound Modération
+  If ($2 isop $3) { Var %Coul = $SkinsCouleursNickList(Op) }
+  If ($2 isvo $3) { Var %Coul = $SkinsCouleursNickList(Voice) }
+  If ($2 isreg $3) { Var %Coul = $SkinsCouleursNickList(User) }
+  winctrl 1,15 $timestamp 1[ $+  $+ %protect.type $+  $+ ]0 sur1 %protect.chan ( $+ $network $+ ) 0par $+ %coul %Protect.Nick 1 $4-
+  if (%action. [ $+ [ %protect.type ] ] == ctrl ) { 
+    winctrl 4,15 $timestamp F9 1Avertir 4F10 1Kick 4F11 1KickBan
+    goto fin
+  }
+  if (%action. [ $+ [ %protect.type ] ] == k ) {
+    winctrl 4,15 $timestamp 1Kick 4effectué !
+    protectkick
+    goto fin
+  }
+  if (%action. [ $+ [ %protect.type ] ] == kb ) { 
+    winctrl 4,15 $timestamp 1Kick/Ban 4effectué !
+    protectkickban
+  }
+  :fin
+}
+Alias ReponseInvite {
+  Join %Invit.Chan
+}
+Alias AfficheActive {
+  if ($Active != $Chan) Echo $1 -at  $2- $+ .
+}
+Alias AfficheChan {
+  Echo $1 -t $Chan $2- $+ .
+} 
+Alias AfficheQuery {
+  If ( $Query( $2 ) ) { Echo $1 -t $2 $3- sur $Chan $+ . }
+  Echo $1 -t $Chan $3- $+ .
+}
+Alias CycleChan { 
+  If ( $Me ison $1 ) && ( $Nick( $1 ,0 ) == 1 ) { 
+    hop -cn $1 
+    if ($Active != $1) { Echo $Color(Info Text) -at %symbol.aff.g $+ Cycle $+ %symbol.aff.d Tu étais seul sur  $+ $1 $+  }
+  } 
+}
+Alias RAZKickCompteur {
+  Set %Kick.Count 0 
+  Set %Ban.Count 0 
+  Set %Kick.DernierRAZ $Ctime
+}
+Alias AfficherHistoWin { Window -aCdk0 @HistoriqueKick }
+Alias VoirHistoKick {
+  if ( $Window(@HistoriqueKick) == $null ) { AfficherHistoWin }
+  Else { Window -c @HistoriqueKick | AfficherHistoWin }
+  Aline @HistoriqueKick Double-Clique pour fermer cette fenêtre
+  Aline $Color(Background) @HistoriqueKick -
+  Aline $Color(Info Text) @HistoriqueKick Historique de vos Kicks
+  Aline @HistoriqueKick ---------------------------
+  If ($Exists($LogDirKick.Log) == $True) {
+    Var %i = 1
+    While ( %i <= $lines( $LogDirKick.Log ) ) {
+      Aline @HistoriqueKick $Read( $LogDirKick.Log , %i )
+      Inc %i
+    }
+  }
+  Else { Aline $Color(Other Text) @HistoriqueKick Aucun historique sauvegardé ! }
+}
+Alias EffacerHistoKick {
+  .Remove $LogDirKick.log
+}
+Alias HistoKick {
+  Write $LogDirKick.Log Le  $+ $Date $+  à  $+ $Time $+  : $1- 
+  Write $LogDirKick.Log Compteur : $+ $Color(Kick Text) %Kick.Count Kick(s)
+  Write $LogDirKick.Log -
+}
+Alias SkinCouleurs { Return $calc($ReadIniInfoSkinEvents($1) - 1) } 
+Alias SkinsCouleursNicklist { Return $calc($ReadIniInfoSkinNicklist($1) - 1) } 
+Alias SkinDir { Return $shortfn( $mircdir $+ Skins ) }
+Alias SkinsConfig { $ShowDialog(SkinsConfig) }
+Alias SkinsMaj { $Showdialog(SkinsMaj) }
+Alias ShowDialog { If $dialog($1).hwnd == $null { /Dialog -amr $1 $1 } | Else { /Dialog -iev $1 $1 } }
+Alias ShowPicture {
+  If ($1 != $null) && ($exists(" $+ $1- $+ ") == $true) && ($pic(" $+ $1- $+ ").width != 0) {
+    If ($window(@ShowPicture).hwnd == $null) { Window -aCdop @ShowPicture -1 -1 $pic(" $+ $1- $+ ").width $pic(" $+ $1- $+ ").height }
+    Else                                     { Window @ShowPicture -1 -1 $pic(" $+ $1- $+ ").width $pic(" $+ $1- $+ ").height }
+    Titlebar @ShowPicture - $1-
+    Drawpic @ShowPicture 0 0 " $+ $1- $+ "
+  }
+}
+menu @ShowPicture {
+  &Fermer : Window -c @ShowPicture
+}
+Alias Nick.Bot { 
+  var %bot = $ReadIni( $MircDirSalon.ini , n , $$1 , Robot ) 
+  if ( %bot != $null ) return %bot
+  else return $false
+}
+Alias Nick.bot2 {
+  Var %Bot.Nbre = 1, %Bot
+  If ($1 != $null) { Var %salon = $1 }
+  Else { Var %salon = $active }
+  While ( $nick( %salon , %Bot.Nbre , o ) != $null ) { 
+    Var %i = 1
+    While ( %bot.pseudo [ $+ [ %i ] ] != $null ) { 
+      If ( $Nick( %salon , %Bot.Nbre,o) == %bot.pseudo [ $+ [ %i ] ]) {
+        Var %bot = $Nick(%salon, %Bot.Nbre,o) 
+      }
+      inc %i
+    } 
+    Inc %Bot.Nbre 1 
+  } 
+  If ( %bot == $null ) { 
+    return $Nick.Bot(%salon)
+  }
+  Else return  %bot
+}
+
+alias mdx {
+  var %dll = dll\mdx.dll
+  return $dll(%dll,$1,$2-)
+}
+
+alias pdll {
+  var %dll = dll\popups.dll
+  return $dll(%dll,$1,$2-)
+}

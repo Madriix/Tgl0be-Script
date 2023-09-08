@@ -1,0 +1,1079 @@
+;-----------------------------------------------------------
+;                  Remotes de Configuration
+;                          Par Xor
+;-----------------------------------------------------------
+
+on 1:dialog:tgl0be:menu:21: {
+  initcnfg
+  did -v Tgl0be 41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71
+}
+on 1:dialog:tgl0be:menu:26: {
+  initcnfg
+  did -v Tgl0be 42,72,74,75,76,77,78,79,80,81
+}
+on 1:dialog:tgl0be:menu:27: {
+  initcnfg
+  did -v Tgl0be 42,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203
+}
+on 1:dialog:tgl0be:menu:31: {
+  initcnfg
+  did -v Tgl0be 42,530,531,532,533
+}
+on 1:dialog:tgl0be:menu:5: { msnlogin }
+on 1:dialog:tgl0be:menu:35: { aide }
+on 1:dialog:tgl0be:menu:22: {
+  initcnfg
+  FenetreApercu
+  MontrerApercu
+  .TimerPowWin 0 1 PosFenetreApercu
+  did -v Tgl0be 42,82,83,84,85,86,87,88,89,90,91,92,94,95,96,97,98,99,104,105
+  did -v Tgl0be 106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,124,125,126,127,128,129,130
+  did -v Tgl0be 131,132,133,134,135,136,137,138,139,140,141,143,144,145,147,163,164,165,166,167,168
+
+}
+on 1:dialog:tgl0be:menu:25: {
+  initcnfg
+  did -v Tgl0be 42  
+  var %i = 204
+  while ( %i <= 280 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:14: {
+  initcnfg
+  did -v Tgl0be 42,600,601,602,603,604,605,606,607,608,609  
+  var %i = 281
+  while ( %i <= 328 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:15: {
+  initcnfg
+  did -v Tgl0be 42  
+  var %i = 343
+  while ( %i <= 390 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:16: {
+  initcnfg
+  did -v Tgl0be 42,540
+  var %i = 391
+  while ( %i <= 417 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:17: {
+  initcnfg
+  did -v Tgl0be 42  
+  var %i = 418
+  while ( %i <= 440 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:19: {
+  initcnfg
+  did -v Tgl0be 42  
+  var %i = 329
+  while ( %i <= 342 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:28: {
+  initcnfg
+  did -v Tgl0be 42  
+  var %i = 441
+  while ( %i <= 450 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:38: {
+  initcnfg
+  did -v Tgl0be 42,457  
+  var %i = 451
+  while ( %i <= 454 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+  var %i = 460
+  while ( %i <= 478 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:18: {
+  initcnfg
+  did -v Tgl0be 42  
+  var %i = 479
+  while ( %i <= 507 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:4: {
+  initcnfg
+  did -v Tgl0be 42  
+  var %i = 509
+  while ( %i <= 529 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+}
+on 1:dialog:tgl0be:menu:11: { presdiag }
+on 1:dialog:tgl0be:menu:13: { dialog -c Tgl0be }
+on 1:dialog:tgl0be:menu:33: { logvwcfg }
+on 1:dialog:tgl0be:menu:34: { logvw }
+on 1:dialog:tgl0be:menu:36: { ascii }
+;on 1:dialog:tgl0be:menu:37: { mcmp3 }
+On 1:Dialog:Tgl0be:Init:*: {
+  If ( $Away == $True ) { Did -ra Tgl0be 41 &Désactiver }
+  Var %i = 1
+  Did -r Tgl0be 44
+  While ( $ReadIni $MircDirAway.ini Nick %i != $Null ) {
+    Did -a Tgl0be 44 $ReadIni $MircDirAway.ini Nick %i
+    Inc %i
+  }
+  Var %i = 1
+  Did -r Tgl0be 46
+  While ( $ReadIni $MircDirAway.ini Raison %i != $Null ) {
+    Did -a Tgl0be 46 $ReadIni $MircDirAway.ini Raison %i
+    Inc %i
+  }
+  Did -c Tgl0be 44 $ReadIni $MircDirAway.ini Defaut Nick
+  Did -c Tgl0be 46 $ReadIni $MircDirAway.ini Defaut Raison
+  If ( $ReadIni $MircDirAway.ini Config ChangeNick == 1 ) { Did -c Tgl0be 43 }
+  Else { Did -u Tgl0be 43 }
+  If ( $ReadIni $MircDirAway.ini Auto Activer == 1 ) { Did -c Tgl0be 48 }
+  Else { Did -u Tgl0be 48 }
+  Var %i = $ReadIni $MircDirAway.ini Auto Idle
+  Did -ra Tgl0be 49 $Calc(%i / 60)
+  Did -ra Tgl0be 52 $ReadIni $MircDirAway.ini Auto Raison
+  If ( $ReadIni $MircDirAway.ini Temps Depart == 1 ) { Did -c Tgl0be 56 }
+  Else { Did -u Tgl0be 56 }
+  If ( $ReadIni $MircDirAway.ini Temps Repet == 1 ) { Did -c Tgl0be 57 }
+  Else { Did -u Tgl0be 57 }
+  Did -ra Tgl0be 58 $ReadIni $MircDirAway.ini Temps TempsRepet
+  If ( $ReadIni $MircDirAway.ini Temps Retour == 1 ) { Did -c Tgl0be 60 }
+  Else { Did -u Tgl0be 60 }
+  Did -ra Tgl0be 65 $ReadIni $MircDirAway.ini Raccourcis Départ
+  Did -ra Tgl0be 67 $ReadIni $MircDirAway.ini Raccourcis Retour
+  Did -r Tgl0be 77
+  Var %i = 1
+  While ( %i <= $findfile( $MircDirRaison , *.gmp ,  0 ) ) {
+    Did -a Tgl0be 76 $NoPath( $findfile( $MircDirRaison , *.gmp ,  %i ) )
+    Inc %i
+  }
+  If ( %ecriture.state == on ) { did -c Tgl0be 82 | Did -ra Tgl0be 82 Dés&activer votre écriture }
+  ChargeComboCouleur 85 %ecriture.off.couleur.text
+  ChargeComboCouleurFond 86 %ecriture.off.couleur.fond
+  did -ra Tgl0be 92 %ecriture.off.pseudo.symbol 
+  If ( %ecriture.off.tout.gras == on ) { did -c Tgl0be 94 }
+  If ( %ecriture.off.tout.soul == on ) { did -c Tgl0be 95 }
+  ChargeComboCouleur 98 %ecriture.perso.couleur.text 
+  ChargeComboCouleurFond 99 %ecriture.perso.couleur.fond 
+  If ( gras isin %ecriture.perso.pseudo ) { did -c Tgl0be 88 }
+  If ( soul isin %ecriture.perso.pseudo  ) { did -c Tgl0be 89 }
+  If ( inv isin %ecriture.perso.pseudo  ) { did -c Tgl0be 90 }
+  did -ra Tgl0be 105 %ecriture.perso.pseudo.symbol 
+  Did -ra Tgl0be 109 %ecriture.perso.deco.g
+  Did -ra Tgl0be 110 %ecriture.perso.deco.d
+  ChargeComboCouleur 111 %Ecriture.Perso.Deco.Coul.Text.G 
+  ChargeComboCouleur 112 %Ecriture.Perso.Deco.Coul.Text.D
+  ChargeComboCouleurFond 113 %Ecriture.Perso.Deco.Coul.Fond.G
+  ChargeComboCouleurFond 114 %Ecriture.Perso.Deco.Coul.Fond.D
+  If ( %ecriture.perso.decogras.g == on ) { Did -c Tgl0be 115 }
+  If ( %ecriture.perso.decogras.d == on ) { Did -c Tgl0be 117 }
+  If ( %ecriture.perso.decosoul.g == on ) { Did -c Tgl0be 116 }
+  If ( %ecriture.perso.decosoul.d == on ) { Did -c Tgl0be 118 }
+  If ( %ecriture.perso.tout.gras == on ) { did -c Tgl0be 120 }
+  If ( %ecriture.perso.tout.soul == on ) { did -c Tgl0be 121 }
+  If ( %ecriture.perso.majs == on ) { did -c Tgl0be 122 }
+  ChargeComboCouleur 124 %ecriture.perso.couleur.majs 
+  ChargeComboCouleur 127 %ecriture.pv.couleur.text 
+  ChargeComboCouleurFond 128 %ecriture.pv.couleur.fond 
+  Did -ra Tgl0be 132 %ecriture.pv.deco.g
+  Did -ra Tgl0be 133 %ecriture.pv.deco.d
+  ChargeComboCouleur 134 %Ecriture.Pv.Deco.Coul.Text.G 
+  ChargeComboCouleur 135 %Ecriture.Pv.Deco.Coul.Text.D 
+  ChargeComboCouleurFond 136 %Ecriture.Pv.Deco.Coul.Fond.G 
+  ChargeComboCouleurFond 137 %Ecriture.Pv.Deco.Coul.Fond.D 
+  If ( %ecriture.pv.decogras.g == on ) { Did -c Tgl0be 138 }
+  If ( %ecriture.pv.decogras.d == on ) { Did -c Tgl0be 140 }
+  If ( %ecriture.pv.decosoul.g == on ) { Did -c Tgl0be 139 }
+  If ( %ecriture.pv.decosoul.d == on ) { Did -c Tgl0be 141 }
+  If ( %ecriture.pv.tout.gras == on ) { did -c Tgl0be 143 }
+  If ( %ecriture.pv.tout.soul == on ) { did -c Tgl0be 144 }
+  If ( %ecriture.pv.majs == on ) { did -c Tgl0be 145 }
+  ChargeComboCouleur 147 %ecriture.pv.couleur.majs 
+  Did -r Tgl0be 149 
+  Var %i = 1
+  While ( %ecriture.caracspé.in. [ $+ [ %i ] ] != $Null ) {
+    Did -a Tgl0be 149 %ecriture.caracspé.in. [ $+ [ %i ] ]
+    Inc %i
+  }
+  Did -r Tgl0be 150
+  Var %i = 1
+  While ( %ecriture.caracspé.out. [ $+ [ %i ] ] != $Null ) {
+    Did -a Tgl0be 150 %ecriture.caracspé.out. [ $+ [ %i ] ]
+    Inc %i
+  }
+  ChargeComboCouleur 155
+  Did -r Tgl0be 156
+  Var %i = 1
+  While ( %i <= $findfile($MircDirProfil,*.txt,0) ) {
+    If ( $NoPath($findfile($MircDirProfil,*.txt, %i )) == $Read -l1 $findfile($MircDirProfil,*.txt, %i ) $+ .txt ) {
+      Did -a Tgl0be 156 $Left( $NoPath( $FindFile( $MircDirProfil,*.txt, %i ) ) , $Calc( $Pos( $NoPath( $FindFile( $MircDirProfil,*.txt, %i ) ) , . ) - 1) )
+    }
+    Inc %i
+  }
+  Did -ra Tgl0be 162 %Ecriture.Profil
+  .TimerPowWin 0 1 PosFenetreApercu
+  LireListeSalon
+  LireListeServeur
+  Did -b Tgl0be 196
+  If ( $Exists( $MircDirTRaccourcis.tgs ) == $False ) { TRaccCreation }
+  Var %i = 1,%r,%l
+  While ( %i <= 12 ) {
+    %r = $Calc( 1 + %i ) 
+    Did -b Tgl0be  225,226,227
+    Did -ra Tgl0be $Calc( 216 + %i ) $Read( $MircDirTRaccourcis.tgs ,n , %r )
+    Inc %i
+  }
+  Var %i = 13,%r,%l
+  While ( %i <= 24 ) {
+    %r = $Calc( 2 + %i ) 
+    did -b Tgl0be 244
+    Did -ra Tgl0be $Calc( 228 + %i ) $Read( $MircDirTRaccourcis.tgs ,n , %r )
+    Inc %i
+  }
+  Var %i = 25,%r,%l
+  While ( %i <= 36 ) {
+    %r = $Calc( 3 + %i ) 
+    Did -ra Tgl0be $Calc( 240 + %i ) $Read( $MircDirTRaccourcis.tgs ,n , %r )
+    Inc %i
+  }
+  if %protect.check.ignore == Activé { did -c Tgl0be 283 }
+  if %protect.etat.flood == Activé { did -c Tgl0be 286 }
+  if %action.flood == ctrl { did -c Tgl0be 293 }
+  if %action.flood == k { did -c Tgl0be 294 }
+  if %action.flood == kb { did -c Tgl0be 295 }
+  if %protect.etat.majs == Activé { did -c Tgl0be 296 }
+  did -ra Tgl0be 298 %protect.flood.majs
+  if %action.majuscules == ctrl { did -c Tgl0be 299 }
+  if %action.majuscules == k { did -c Tgl0be 300 }
+  if %action.majuscules == kb { did -c Tgl0be 301 }
+  if %protect.etat.pub == Activé { did -c Tgl0be 302 }
+  if %action.publicité == ctrl { did -c Tgl0be 303 }
+  if %action.publicité == k { did -c Tgl0be 304 }
+  if %action.publicité == kb { did -c Tgl0be 305 }
+  if %protect.etat.insulte == Activé { did -c Tgl0be 306 }
+  if %action.insulte == ctrl { did -c Tgl0be 307 }
+  if %action.insulte == k { did -c Tgl0be 308 }
+  if %action.insulte == kb { did -c Tgl0be 309 }
+  if %protect.etat.racisme == Activé { did -c Tgl0be 310 }
+  if %action.racisme == ctrl { did -c Tgl0be 311 }
+  if %action.racisme == k { did -c Tgl0be 312 }
+  if %action.racisme == kb { did -c Tgl0be 313 }
+  if %protect.pseudo == Activé { did -c Tgl0be 314 }
+  if %action.pseudo == ctrl { did -c Tgl0be 315 }
+  if %action.pseudo == k { did -c Tgl0be 316 }
+  if %action.pseudo == kb { did -c Tgl0be 317 }
+  if %protect.couleur == Activé { did -c Tgl0be 318 }
+  if %action.couleur == ctrl { did -c Tgl0be 319 }
+  if %action.couleur == k { did -c Tgl0be 320 }
+  if %action.couleur == kb { did -c Tgl0be 321 }
+  if %protect.etat.sexe == Activé { did -c Tgl0be 600 }
+  if %action.sexe == ctrl { did -c Tgl0be 601 }
+  if %action.sexe == k { did -c Tgl0be 602 }
+  if %action.sexe == kb { did -c Tgl0be 603 }
+  if %protect.etat.incit == Activé { did -c Tgl0be 604 }
+  if %action.incit == ctrl { did -c Tgl0be 605 }
+  if %action.incit == k { did -c Tgl0be 606 }
+  if %action.incit == kb { did -c Tgl0be 607 }
+  did -ra Tgl0be 292 %protect.flood.text.length
+  if %protect.sedebannir == Activé { did -c Tgl0be 368 }
+  did -ra Tgl0be 346 %protect.to.nbr.deop
+  did -ra Tgl0be 348 %protect.to.temps.deop
+  if %action.to.deop == ctrl { did -c Tgl0be 350 }
+  if %action.to.deop == k { did -c Tgl0be 351 }
+  if %action.to.deop == kb { did -c Tgl0be 352 }
+  did -ra Tgl0be 355 %protect.to.nbr.kick
+  did -ra Tgl0be 357 %protect.to.temps.kick
+  if %action.to.kick == ctrl { did -c Tgl0be 359 }
+  if %action.to.kick == k { did -c Tgl0be 360 }
+  if %action.to.kick == kb { did -c Tgl0be 361 }
+  did -ra Tgl0be 364 %protect.to.nbr.ban
+  did -ra Tgl0be 366 %protect.to.temps.ban
+  if %action.to.ban == ctrl { did -c Tgl0be 369 }
+  if %action.to.ban == k { did -c Tgl0be 370 }
+  if %action.to.ban == kb { did -c Tgl0be 371 }
+  did -ra Tgl0be 420 %reply.ping
+  did -ra Tgl0be 422 %reply.version
+  did -ra Tgl0be 424 %reply.script
+  did -ra Tgl0be 426 %reply.help
+  did -ra Tgl0be 428 %reply.time
+  did -ra Tgl0be 430 %reply.finger
+  if %ctcp.ping == Active { did -c Tgl0be 419 }
+  if %ctcp.version == Active { did -c Tgl0be 421 }
+  if %ctcp.script == Active { did -c Tgl0be 423 }
+  if %ctcp.help == Active { did -c Tgl0be 425 }
+  if %ctcp.time == Active { did -c Tgl0be 427 }
+  if %ctcp.finger == Active { did -c Tgl0be 429 }
+  if %ctcp.sons == Active { did -c Tgl0be 392 }
+  if %action.sons == ctrl { did -c Tgl0be 393 }
+  if %action.sons == k { did -c Tgl0be 394 }
+  if %action.sons == kb { did -c Tgl0be 395 }
+  if %scan.clone.affiche == Activé { did -c Tgl0be 372 }
+  if %scan.clone.notice == Activé { did -c Tgl0be 375 }
+  if %protect.avertirclone == $true { did -c Tgl0be 380 | did -e Tgl0be 377,378,379 }
+  else { did -b Tgl0be 377,378,379 }
+  if %scan.clone.affiche.type  == salon { did -c Tgl0be 373 }
+  if %scan.clone.affiche.type  == dialog { did -c Tgl0be 374 }
+  if %action.clones == ctrl { did -c Tgl0be 377 }
+  if %action.clones == k { did -c Tgl0be 378 }
+  if %action.clones == kb { did -c Tgl0be 379 }
+  did -ra Tgl0be 376 %scan.clone.mess
+  If ( %protect.AttaqueClone == $True ) { did -c Tgl0be 382 }
+  Did -ra Tgl0be 384 %Protect.AttaqueClone.Nombre
+  Var %i = 0
+  Var %o = 396
+  While (%i <= 14) {
+    did -ra Tgl0be %o $address( $me , %i )
+    Inc %i
+    Inc %o
+  }
+  Var %i = 0
+  Var %o = 396
+  :Retour
+  If ( %Protect.Maskban = %i  ) { did -c Tgl0be %o | Goto Fin }
+  Else {
+    if ( %i <= 14 ) { Inc %i | Inc %o | Goto retour }
+    else { Goto Fin }
+  }
+  :Fin
+  if ( %Protect.Maskban == 15 ) { did -c Tgl0be 540 }
+  did -ra Tgl0be 412 %protect.tempsban
+  If ( %protect.etat == op ) { Did -c Tgl0be 330 }
+  If ( %protect.etat == vo ) { Did -c Tgl0be 331 }
+  If ( %protect.etat == us ) { Did -c Tgl0be 332 }
+  If ( %protect.win == $True ) { did -c Tgl0be 282 }
+  did -b Tgl0be 334,335
+  if (%floodchan > 0) {
+    .set %flood.compteur 0
+    :loop
+    .inc %flood.compteur
+    .did -a Tgl0be 333 $gettok(%chanmodule,%flood.compteur,44)
+    .if (%flood.compteur < %floodchan) { goto loop }
+    .unset %flood.compteur
+  }
+  did -ra Tgl0be 435 %asv.age
+  did -ra Tgl0be 438 %asv.sexe
+  did -ra Tgl0be 440 %asv.ville
+  RefreshSkinList
+  Var %i = 1
+  Did -r Tgl0be 454
+  While ( %bot.pseudo [ $+ [ %i ] ] != $Null ) {
+    Did -a Tgl0be 454 %bot.pseudo [ $+ [ %i ] ]
+    Inc %i
+  }
+  Did -b Tgl0be 461
+  Did -ra Tgl0be 463 %CmdesBot.op
+  Did -ra Tgl0be 465 %CmdesBot.deop
+  Did -ra Tgl0be 467 %CmdesBot.voice
+  Did -ra Tgl0be 469 %CmdesBot.devoice
+  Did -ra Tgl0be 471 %CmdesBot.kick
+  Did -ra Tgl0be 473 %CmdesBot.ban
+  Did -ra Tgl0be 475 %CmdesBot.deban
+  Did -ra Tgl0be 477 %CmdesBot.kickban
+  If (%Config.Demarrage == $true) { Did -c Tgl0be 508 }
+  If (%Config.ModeI == i) { Did -c Tgl0be 480 }
+  If (%Config.ModeS == s) { Did -c Tgl0be 481 }
+  If (%Config.ModeW == w) { Did -c Tgl0be 482 }
+  If (%Raws.MotdAfficher == $true) { Did -c Tgl0be 484 }
+  Else { Did -b Tgl0be 485,486 }
+  If (%Raws.MotdOnWindows == $true) { Did -c Tgl0be 485 }
+  Else { Did -c Tgl0be 486 }
+  If (%Raws.WhoisOnQuery == $true) { Did -c Tgl0be 489 }
+  Else If (%Raws.WhoisOnWindow == $true) { Did -c Tgl0be 490 }
+  Else { Did -c Tgl0be 488 }
+  If (%IrcOps.ScanConnect == $true) || (%IrcOps.ScanChan == $true) { Did -c Tgl0be 492 | If (%IrcOps.ScanConnect == $true) { Did -c Tgl0be 493 } | If (%IrcOps.ScanChan == $true) { Did -c Tgl0be 494 } }
+  Else { Did -b Tgl0be 493,494 }
+  If (%Clones.OnJoinChan == Activé) || (%Scan.Clone.Affiche == Activé) { Did -c Tgl0be 496 | If (%Clones.OnJoinChan == Activé) { Did -c Tgl0be 497 } | If (%Scan.Clone.Affiche == Activé) { Did -c Tgl0be 498 } }
+  Else { Did -b Tgl0be 497,498 }
+  If (%Pv.Activer != $true) { Did -b Tgl0be 503 } | Else { Did -c Tgl0be 502 }
+  If (%Pv.AutoCloseTimer == $null) { %Pv.AutoCloseTimer = 30 }
+  If (%Pv.AutoClose != $true) { Did -b Tgl0be 505 } | Else { Did -c Tgl0be 504 }
+  Did -ra Tgl0be 505 %PV.AutoCloseTimer 
+  If %Kick.Count == $null { %Kick.Count = 0 }
+  If %Kick.Count == 0 {  Did -ra Tgl0be 510 Vous n'avez aucun Kick à votre actif. }
+  Else { Did -ra Tgl0be 510 Vous avez actuellement %Kick.Count Kick(s) à votre actif. }
+  If %Kick.Count == 0 { Did -b Tgl0be 511 }
+  If %Kick.RAZTime == $duration(1day) { Did -c Tgl0be 514 }
+  If %Kick.RAZTime == $duration(1wks) { Did -c Tgl0be 515 }
+  If %Kick.RAZTime == $duration(4wks) { Did -c Tgl0be 516 }
+  If %Kick.RAZTime == $duration(52wks) { Did -c Tgl0be 517 }
+  If %Kick.RAZTime == $null { Did -c Tgl0be 518 }
+  If (%TRacPseudo.Commande != $Null) { DidTok Tgl0be 523 59 %TRacPseudo.Commande }
+  Else { Did -a Tgl0be 523 !moi }
+  If (%TRacPseudo.Pseudo != $Null) { DidTok Tgl0be 524 59 %TRacPseudo.Pseudo }
+  Else { Did -a Tgl0be 524 $Me }
+  If ( %TRacPseudo.Afficher == $True ) { Did -c Tgl0be 527 }
+  Else { Did -u Tgl0be 527 }
+  presdiag
+}
+On *:Dialog:Tgl0be:Sclick:*: {
+  If ( $Did == 42 ) {
+    SauveAwayParam
+    Unset %ecriture.type
+    Window -c @Apercu
+    .timerpowwin off
+    Var %i = 1
+    Unset %bot.*
+    While (%i <= $Did(454).lines) {
+      Did -c Tgl0be 454 %i
+      Set %bot.pseudo [ $+ [ %i ] ] $did(454).seltext
+      Inc %i
+    }
+    Set %CmdesBot.op $did(463)
+    Set %CmdesBot.deop $did(465)
+    Set %CmdesBot.voice $did(467)
+    Set %CmdesBot.devoice $did(469)
+    Set %CmdesBot.kick $did(471)
+    Set %CmdesBot.ban $did(473)
+    Set %CmdesBot.deban $did(475)
+    Set %CmdesBot.kickban $did(477)
+    If ($did(283).state == 1) { Set %protect.check.ignore Activé }
+    Else { Set %protect.check.ignore Désactivé }
+    If ($did(286).state == 1) { Set %protect.etat.flood Activé }
+    Else { Set %protect.etat.flood Désactivé }
+    set %protect.flood.text.lim $did(288)
+    set %protect.flood.text.timer $did(290) 
+    If ($did(296).state == 1) { Set %protect.etat.majs Activé }
+    Else { Set %protect.etat.majs Désactivé }
+    set %protect.flood.majs $did(298)
+    If ($did(302).state == 1) { Set %protect.etat.pub Activé }
+    Else { Set %protect.etat.pub Désactivé }
+    If ($did(306).state == 1) { Set %protect.etat.insulte Activé }
+    Else { Set %protect.etat.insulte Désactivé }
+    If ($did(310).state == 1) { Set %protect.etat.racisme Activé }
+    Else { Set %protect.etat.racisme Désactivé }
+    set %protect.flood.text.length $did(292)
+    If ($did(314).state == 1) { Set %protect.pseudo Activé }
+    Else { Set %protect.pseudo Désactivé }
+    If ($did(318).state == 1) { Set %protect.couleur Activé }
+    Else { Set %protect.couleur Désactivé }
+    If ($did(600).state == 1) { Set %protect.etat.sexe Activé }
+    Else { Set %protect.sexe Désactivé }
+    If ($did(604).state == 1) { Set %protect.etat.incit Activé }
+    Else { Set %protect.incit Désactivé }
+    set %protect.to.nbr.deop $did(346)
+    set %protect.to.temps.deop $did(348)
+    set %protect.to.nbr.kick $did(355)
+    set %protect.to.temps.kick $did(357)
+    set %protect.to.nbr.ban $did(364)
+    set %protect.to.temps.ban $did(366)
+    If ($did(368).state == 1) { Set %protect.sedebannir Activé }
+    Else { Set %protect.sedebannir Désactivé }
+    If ($did(419).state == 1) { set %ctcp.ping Active } 
+    else { set %ctcp.ping Désactive }
+    If ($did(421).state == 1) { set %ctcp.version Active } 
+    else { set %ctcp.version Désactive }
+    If ($did(423).state == 1) { set %ctcp.script Active } 
+    else { set %ctcp.script Désactive } 
+    If ($did(425).state == 1) { set %ctcp.help Active } 
+    else { set %ctcp.help Désactive } 
+    If ($did(427).state == 1) { set %ctcp.time Active } 
+    else { set %ctcp.time Désactive } 
+    If ($did(429).state == 1) { set %ctcp.finger Active } 
+    else { set %ctcp.finger Désactive } 
+    If ($did(392).state == 1) { set %ctcp.sons Active } 
+    else { set %ctcp.sons Désactive } 
+    set %reply.ping $did(420)
+    set %reply.version $did(422)
+    set %reply.script $did(424)
+    set %reply.help $did(426)
+    set %reply.time $did(428)
+    set %reply.finger $did(430)
+    If ($did(375).state == 1) { set %scan.clone.notice Activé }
+    else { set %scan.clone.notice Désactivé }
+    set %scan.clone.mess $did(376)
+    If ( $Did(380).State == 1 ) { Set %protect.avertirclone $True }
+    Else { Set %protect.avertirclone $False }
+    If ( $Did(382).State == 1 ) { Set %protect.AttaqueClone $True }
+    Else { Set %protect.AttaqueClone $False }
+    Set %Protect.AttaqueClone.Nombre $Did(384)
+    set %protect.tempsban $did(412)
+    If ( $Did(330).State == 1 ) { Set %protect.etat op }
+    If ( $Did(331).State == 1 ) { Set %protect.etat vo }
+    If ( $Did(332).State == 1 ) { Set %protect.etat us }
+    If ( $Did(282).State == 1 ) { Set %protect.win $True }
+    Else { Set %protect.win $False }
+    %Message.Quit = $did(500)
+    If (%Pv.Activer == $true) && ($did(503) == $null) { Did -ra Tgl0be 503 11,1Tgl0beSCRIPT - Répondeur :8 Attends 2sec STP, ou télécharge le script : www.tgl0be.org. }
+    %Pv.Message = $did(503)
+    If ($did(505) == $null) || ($did(505) <= 0) { Did -ra Tgl0be 505 30 }
+    %Pv.AutoCloseTimer = $did(505)
+    Set %TRacPseudo.Commande $DidTok( Tgl0be , 523 , 59 ) 
+    Set %TRacPseudo.Pseudo $DidTok( Tgl0be , 524 , 59 ) 
+    If ( $Did(527).State == 1 ) { Set %TRacPseudo.Afficher $True }
+    Else { Set %TRacPseudo.Afficher $False }
+  }
+  If ( $Did == 53 ) {
+    Did -d Tgl0be 44 $Did(44).Sel
+    Did -c Tgl0be 44 1
+  }
+  If ( $Did == 54 ) {
+    Did -d Tgl0be 46 $Did(46).Sel
+    Did -c Tgl0be 46 1
+  }
+  If ($Did == 74) { 
+    If ($Did(79) != $Null) {
+      Did -a Tgl0be 77 $Did(79)
+      Did -r Tgl0be 79
+      SauverListeRaison
+    }
+  }
+  If ($Did == 75) { 
+    If ($Did(77).Sel != $Null) { 
+      Did -r Tgl0be 78,79
+      Did -d Tgl0be 77 $Did(77).Sel 
+      SauverListeRaison
+    }
+  }
+  If ($Did == 76) { 
+    Did -ra Tgl0be 78 $ExplicationFichierKick( $Did(76).SelText )
+    ChargerListeRaison
+  }
+  If ($Did == 77) { 
+    Did -r Tgl0be 78 
+    Did -ra Tgl0be 79 $Did(77).Seltext
+  }
+  If ($did == 168) {
+    initcnfg
+    fenetreapercu
+    .TimerPowWin 0 1 PosFenetreApercu
+    did -v Tgl0be 42,82,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,169,170,171,172,173,174,175,176,177,178,179
+  }
+  If ($did == 169) {
+    initcnfg
+    fenetreapercu
+    .TimerPowWin 0 1 PosFenetreApercu
+    did -v Tgl0be 42,82,83,84,85,86,87,88,89,90,91,92,94,95,96,97,98,99,104,105
+    did -v Tgl0be 106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,124,125,126,127,128,129,130
+    did -v Tgl0be 131,132,133,134,135,136,137,138,139,140,141,143,144,145,147,163,164,165,166,167,168
+  }
+  If ( ( ( $did > 81 ) || ( $did == 42 ) ) && ( $did < 180 )  ) {
+    SauverEcriture
+    .timer 1 0 MontrerApercu
+  }
+  If ( $did == 82 ) { 
+    If ( $did(82).state == 1 ) { active.coul | Did -ra Tgl0be 82 Désactiver votre écriture }
+    else { desactive.coul | Did -ra Tgl0be 82 Activer votre écriture }
+  }
+
+  If ( $did == 94 ) { 
+    If ( %ecriture.off.tout.gras == off ) { Set %ecriture.off.tout.gras on }
+    Else Set %ecriture.off.tout.gras off
+  }
+  If ( $did == 95 ) { 
+    If ( %ecriture.off.tout.soul == off ) { Set %ecriture.off.tout.soul on }
+    Else Set %ecriture.off.tout.soul off
+  }
+  If ( $did == 115 ) { 
+    If ( %ecriture.perso.decogras.g == off ) { Set %ecriture.perso.decogras.g on }
+    Else Set %ecriture.perso.decogras.g off
+  }
+  If ( $did == 117 ) { 
+    If ( %ecriture.perso.decogras.d == off ) { Set %ecriture.perso.decogras.d on }
+    Else { Set %ecriture.perso.decogras.d off }
+  }
+  If ( $did == 116 ) { 
+    If ( %ecriture.perso.decosoul.g == off ) { Set %ecriture.perso.decosoul.g on }
+    Else { Set %ecriture.perso.decosoul.g off }
+  }
+  If ( $did == 118 ) { 
+    If ( %ecriture.perso.decosoul.d == off ) { Set %ecriture.perso.decosoul.d on }
+    Else { Set %ecriture.perso.decosoul.d off }
+  }
+  If ( $did == 120 ) { 
+    If ( %ecriture.perso.tout.gras == off ) { Set %ecriture.perso.tout.gras on }
+    Else Set %ecriture.perso.tout.gras off
+  }
+  If ( $did == 121 ) { 
+    If ( %ecriture.perso.tout.soul == off ) { Set %ecriture.perso.tout.soul on }
+    Else Set %ecriture.perso.tout.soul off
+  }
+  If ( $did == 122 ) { 
+    If ( %ecriture.perso.majs == off ) { Set %ecriture.perso.majs on }
+    Else Set %ecriture.perso.majs off
+  }
+  If ( $did == 138 ) { 
+    If ( %ecriture.pv.decogras.g == off ) { Set %ecriture.pv.decogras.g on }
+    Else { Set %ecriture.pv.decogras.g off }
+  }
+  If ( $did == 140 ) { 
+    If ( %ecriture.pv.decogras.d == off ) { Set %ecriture.pv.decogras.d on }
+    Else { Set %ecriture.pv.decogras.d off }
+  }
+  If ( $did == 139 ) { 
+    If ( %ecriture.pv.decosoul.g == off ) { Set %ecriture.pv.decosoul.g on }
+    Else { Set %ecriture.pv.decosoul.g off }
+  }
+  If ( $did == 141 ) { 
+    If ( %ecriture.pv.decosoul.d == off ) { Set %ecriture.pv.decosoul.d on }
+    Else { Set %ecriture.pv.decosoul.d off }
+  }
+  If ( $did == 143 ) { 
+    If ( %ecriture.pv.tout.gras == off ) { Set %ecriture.pv.tout.gras on }
+    Else Set %ecriture.pv.tout.gras off
+  }
+  If ( $did == 144 ) { 
+    If ( %ecriture.pv.tout.soul == off ) { Set %ecriture.pv.tout.soul on }
+    Else Set %ecriture.pv.tout.soul off
+  }
+  If ( $did == 145 ) { 
+    If ( %ecriture.pv.majs == off ) { Set %ecriture.pv.majs on }
+    Else Set %ecriture.pv.majs off
+  }
+  If ( $did == 149 ) { 
+    Did -c Tgl0be 150 $Did(149).Sel
+    Did -ra Tgl0be 151 $Did(149).SelText
+    Did -ra Tgl0be 152 $Did(150).SelText
+    ChargeComboCouleur 155 %ecriture.caracspé.coul. [ $+ [ $Did(149).Sel ] ]
+  }
+  If ( $did == 150 ) { 
+    Did -c Tgl0be 149 $Did(150).Sel
+    Did -ra Tgl0be 151 $Did(149).SelText
+    Did -ra Tgl0be 152 $Did(150).SelText
+    ChargeComboCouleur 155 %ecriture.caracspé.coul. [ $+ [ $Did(149).Sel ] ]
+  }
+  If ( $did == 153 ) { 
+    If ( $Did(151) !isin $DidTok(Tgl0be,149,46) ) && ( $Did(151) != $Null ) && ( $Did(152) != $Null ) && ( $Did(155).Sel != $Null ) {
+      Did -a Tgl0be 149 $Did(151)
+      Set %ecriture.caracspé.in. [ $+ [ $Did(149).Lines ] ] $Did(151)
+      Did -a Tgl0be 150 $Did(152)
+      Set %ecriture.caracspé.out. [ $+ [ $Did(149).Lines ] ] $Did(152)
+      Set %ecriture.caracspé.coul. [ $+ [ $Did(149).Lines ] ] $Calc($Did(155).Sel - 1)
+    }
+  }
+  If ( $did == 154 ) { 
+    If ( $Did(149).Sel != $Null ) {
+      Did -d Tgl0be 149 $Did(150).Sel
+      Did -d Tgl0be 150 $Did(150).Sel
+      Unset %ecriture.caracspé.out.*
+      Unset %ecriture.caracspé.in.*
+      Var %i = 1
+      While ( %i <= $Did(149).Lines ) {
+        Set %ecriture.caracspé.in. [ $+ [ %i ] ] $Did(149 , %i )
+        Set %ecriture.caracspé.out. [ $+ [ %i ] ] $Did(150, %i )
+        ChargeComboCouleur 155 %ecriture.caracspé.coul. [ $+ [ %i ] ]
+        Set %ecriture.caracspé.coul. [ $+ [ %i ] ] $Calc($Did(155).Sel - 1)
+        Inc %i
+      }
+    }
+  }
+  If ( $Did == 155 ) { 
+    If ( $Did(149).Sel != $Null ) { Set %ecriture.caracspé.coul. [ $+ [ $Did(149).Sel ] ] $Calc($Did(155).Sel - 1) }
+  }
+  If ( $Did == 156 ) { 
+    Did -ra Tgl0be 157 $Did(156).SelText
+  }
+  If ( $Did == 158 ) { 
+    If ( $exists($MircDirProfil) == $False ) { .mkdir $MircDirProfil }
+    If ( $Did(157) == $Null ) { Did -ra Tgl0be 157 $Input( Vous devez choisir un nom de profil , 5 , Entrer un nom de profil , Profil d'écriture )  }
+    Set %ecriture.profil $Did(157)
+    Did -ra Tgl0be 162 %Ecriture.Profil
+    SauverEcriture
+    SauverProfil $MircDirProfil\ $+ $Did(157) $+ .txt
+    Did -r Tgl0be 157
+    Did -r Tgl0be 156
+    Var %i = 1
+    While ( %i <= $findfile($MircDirProfil,*.txt,0) ) {
+      If ( $NoPath($findfile($MircDirProfil,*.txt, %i )) == $Read -l1 $findfile($MircDirProfil,*.txt, %i ) $+ .txt ) {
+        Did -a Tgl0be 156 $Left( $NoPath( $FindFile( $MircDirProfil,*.txt, %i ) ) , $Calc( $Pos( $NoPath( $FindFile( $MircDirProfil,*.txt, %i ) ) , . ) - 1) )
+      }
+      Inc %i
+    }
+  }
+  If ( $Did == 159 ) { 
+    If ( $Did(156).SelText != $Null ) && ( $Exists($MircDirProfil\ $+ $Did(156).SelText $+ .txt ) ) { 
+      .Remove -b $MircDirProfil\ $+ $Did(156).SelText $+ .txt 
+      Did -d Tgl0be 156 $Did(156).Sel
+      UnSet %ecriture.profil
+      Did -ra Tgl0be 162 Aucun
+    }
+  }
+  If ( $Did == 160 ) { 
+    If ( $Did(156).SelText != $Null ) && ( $Exists($MircDirProfil\ $+ $Did(156).SelText $+ .txt ) ) { 
+      Set %ecriture.profil $Did(156).Seltext
+      Did -ra Tgl0be 162 $Did(156).Seltext
+      ChargerProfil $MircDirProfil\ $+ $Did(156).SelText $+ .txt
+    }
+  }
+  If ( $Did == 180 ) { 
+    Set %Salon.Nom $Did(180).SelText
+    Did -ra Tgl0be 182 %Salon.Nom
+    CocheCase AutoJoin 197
+    Did -ra Tgl0be 185 $ReadIni($MircDirSalon.ini , %Salon.Nom , Robot )
+    Did -ra Tgl0be 187 $ReadIni($MircDirSalon.ini , %Salon.Nom , Pass )
+    CocheCase AutoOp 188
+    CocheCase AutoBjr 190
+    Did -ra Tgl0be 191 $ReadIni($MircDirSalon.ini , n , %Salon.Nom , TextBjr )
+    CocheCase AutoAccueil 192
+    Did -ra Tgl0be 193 $ReadIni($MircDirSalon.ini , n , %Salon.Nom , TextAccueil )
+    CocheCase AutoVoice 194
+    Did -e Tgl0be 196
+    Did -rat Tgl0be 195 &Valider
+    Did -c Tgl0be 199 $TrouverNumeroServeur( $ReadIni($MircDirSalon.ini , n , %Salon.Nom , Serveur ) )
+  }
+  If ( $Did == 195 ) { 
+    If ( $Did(182) != $null ) { 
+      Set %Salon.Nom $Replace( $Did(182) , $Chr(32) , $Chr(0) )
+      If ( $Left( %Salon.Nom ,1) != $Chr(35) ) { Set %Salon.Nom $Chr(35) $+ %Salon.Nom }
+      Did -a Tgl0be 180 %Salon.Nom
+      /writeini $shortfn($MircDirSalon.ini) %Salon.Nom AutoJoin     $Did(197).state
+      EcrireTextIni Robot 185
+      EcrireTextIni Pass 187
+      /writeini $shortfn($MircDirSalon.ini) %Salon.Nom AutoOp       $Did(188).state
+      /writeini $shortfn($MircDirSalon.ini) %Salon.Nom AutoBjr       $Did(190).state
+      EcrireTextIni TextBjr 191
+      /writeini $shortfn($MircDirSalon.ini) %Salon.Nom AutoAccueil $Did(192).state
+      EcrireTextIni TextAccueil 193
+      /writeini $shortfn($MircDirSalon.ini) %Salon.Nom AutoVoice   $Did(194).state
+      If ( $Did(199) == $Null ) { /writeini $shortfn($MircDirSalon.ini) %Salon.Nom Serveur Tous }
+      Else  { /writeini $shortfn($MircDirSalon.ini) %Salon.Nom Serveur $Did(199) }
+      LireListeSalon
+    }
+  }
+  If ( $Did == 196 ) { 
+    /RemIni $shortfn($MircDirSalon.ini) $Did(182)
+    LireListeSalon
+  }
+  if ($did == 285) { dialog -m protect2 protect2 }
+  if ($did == 293) { %action.flood = ctrl }
+  if ($did == 294) { %action.flood = k }
+  if ($did == 295) { %action.flood = kb }
+  if ($did == 299) { %action.majuscules = ctrl }
+  if ($did == 300) { %action.majuscules = k }
+  if ($did == 301) { %action.majuscules = kb }
+  if ($did == 303) { %action.publicité = ctrl }
+  if ($did == 304) { %action.publicité = k }
+  if ($did == 305) { %action.publicité = kb }
+  if ($did == 307) { %action.insulte = ctrl }
+  if ($did == 308) { %action.insulte = k }
+  if ($did == 309) { %action.insulte = kb }
+  if ($did == 311) { %action.racisme = ctrl }
+  if ($did == 312) { %action.racisme = k }
+  if ($did == 313) { %action.racisme = kb }
+  if ($did == 315) { %action.pseudo = ctrl }
+  if ($did == 316) { %action.pseudo = k }
+  if ($did == 317) { %action.pseudo = kb }
+  if ($did == 319) { %action.couleur = ctrl }
+  if ($did == 320) { %action.couleur = k }
+  if ($did == 321) { %action.couleur = kb }
+  if ($did == 350) { %action.to.deop = ctrl }
+  if ($did == 351) { %action.to.deop = k }
+  if ($did == 352) { %action.to.deop = kb }
+  if ($did == 359) { %action.to.kick = ctrl }
+  if ($did == 360) { %action.to.kick = k }
+  if ($did == 361) { %action.to.kick = kb }
+  if ($did == 369) { %action.to.ban = ctrl }
+  if ($did == 370) { %action.to.ban = k }
+  if ($did == 371) { %action.to.ban = kb }
+  if ($did == 393) { %action.sons = ctrl }
+  if ($did == 394) { %action.sons = k }
+  if ($did == 395) { %action.sons = kb }
+  if ($did == 601) { %action.sexe = ctrl }
+  if ($did == 602) { %action.sexe = k }
+  if ($did == 603) { %action.sexe = kb }
+  if ($did == 605) { %action.incit = ctrl }
+  if ($did == 606) { %action.incit = k }
+  if ($did == 607) { %action.incit = kb }
+  if ($did == 372) {
+    if ( %scan.clone.affiche == Activé ) { set %scan.clone.affiche Désactivé | Did -b Tgl0be 373,374 }
+    else { set %scan.clone.affiche Activé | Did -e Tgl0be 373,374 }
+  }
+  if ($did == 377) { %action.clones = ctrl }
+  if ($did == 378) { %action.clones = k }
+  if ($did == 379) { %action.clones = kb }
+  if ($did == 380) { 
+    if ($did(380).state == 1) { did -e Tgl0be 378,379,377 }
+    else { did -b Tgl0be 377,378,379 }
+  }
+  if ($did == 373) { %scan.clone.affiche.type = salon }
+  if ($did == 374) { %scan.clone.affiche.type = dialog }
+  if ($did == 396) { set %protect.maskban 0 }
+  if ($did == 397) { set %protect.maskban 1 }
+  if ($did == 398) { set %protect.maskban 2 }
+  if ($did == 399) { set %protect.maskban 3 }
+  if ($did == 400) { set %protect.maskban 4 }
+  if ($did == 401) { set %protect.maskban 5 }
+  if ($did == 402) { set %protect.maskban 6 }
+  if ($did == 403) { set %protect.maskban 7 }
+  if ($did == 404) { set %protect.maskban 8 }
+  if ($did == 405) { set %protect.maskban 9 }
+  if ($did == 406) { set %protect.maskban 10 }
+  if ($did == 407) { set %protect.maskban 11 }
+  if ($did == 408) { set %protect.maskban 12 }
+  if ($did == 409) { set %protect.maskban 13 }
+  if ($did == 410) { set %protect.maskban 14 }
+  if ($did == 540) { set %protect.maskban 15 }
+  if ($did == 323)  {
+    did -r Tgl0be 322
+    DidTok Tgl0be 322 59 %Protect.Insulte
+  }
+  if ($did == 324)  {
+    did -r Tgl0be 322
+    DidTok Tgl0be 322 59 %Protect.Pub
+  }
+  if ($did == 325)  {
+    did -r Tgl0be 322
+    DidTok Tgl0be 322 59 %Protect.Racisme
+  }
+  if ($did == 326)  {
+    did -r Tgl0be 322
+    DidTok Tgl0be 322 59 %Protect.NickList
+  }
+  if ($did == 608)  {
+    did -r Tgl0be 322
+    DidTok Tgl0be 322 59 %Protect.Sexe
+  }
+  if ($did == 609)  {
+    did -r Tgl0be 322
+    DidTok Tgl0be 322 59 %Protect.Incit
+  }
+  if ($did == 327) {
+    did -a Tgl0be 322 $$?="Quel mot voulez-vous ajouter ?"
+    SauveListeProt
+  }
+  if ($did == 328)  {
+    If ( $Did(322).Sel != $Null ) {
+      did -d Tgl0be 322 $did(322).sel
+      SauveListeProt
+    }
+  }
+  if ($did == 333 ) { did -e Tgl0be 335 }
+  if ($did == 334 ) {
+    if ( $did(333).text !isin %chanmodule ) {
+      set %chanmodule %chanmodule $+ $did(333).text $+ , 
+      did -a Tgl0be 333 $did(333).text 
+    did -b Tgl0be 334 | inc %floodchan } 
+  }
+  if ($did == 335) {
+    set -u1 %eff.chanflood $did(333,$did(333).sel).text $+ , 
+    set %chanmodule $remove(%chanmodule,%eff.chanflood) 
+    did -d Tgl0be 333 $did(333).sel 
+    did -b Tgl0be 335 
+    dec %floodchan 
+  }
+  if ($did == 336) {
+    unset %chanmodule
+    did -r Tgl0be 333 
+    set %floodchan 0
+  }
+  if ($did == 444) && ($did(444).seltext != $null) { Did -e Tgl0be 446,447,448 }
+  If ($did == 445) { SkinChargeTemp | SkinsMaj }
+  If ($did == 446) && ($did(444).seltext != $null) { $SkinChargeTemp($did(444).seltext) | SkinsMaj }
+  If ($did == 447) && ($did(444).seltext != $null) { $SkinSupprime($did(444).seltext) | RefreshSkinList | Did -f Tgl0be 444 }
+  If ($did == 448) && ($did(444).seltext != $null) { ChargeSkin $did(444).seltext | Did -ra Tgl0be 443 $did(444).seltext | Dialog -x Tgl0be }
+  If ($did == 454) {
+    Did -e Tgl0be 461
+  }
+  If ($did == 460) {
+    Did -a Tgl0be 454 $$?="Quel pseudo ajouter ?"
+  }
+  If ($did == 461) {
+    Did -d Tgl0be 454 $did(454).sel
+    Var %i = 1
+    Unset %bot.*
+    While (%i <= $Did(454).lines) {
+      Did -c Tgl0be 454 %i
+      Set %bot.pseudo [ $+ [ %i ] ] $did(454).seltext
+      Inc %i
+    }
+  }
+  If ($did == 508) { %Config.Demarrage = $iif(%Config.Demarrage == $true,$false,$true) }
+  If ($did == 480) { %Config.ModeI = $iif(%Config.ModeI == i,$null,i) }
+  If ($did == 481) { %Config.ModeS = $iif(%Config.ModeS == s,$null,s) }
+  If ($did == 482) { %Config.ModeW = $iif(%Config.ModeW == w,$null,w) }
+  If ($did == 484) { 
+    %Raws.MotdAfficher = $iif(%Raws.MotdAfficher == $true,$false,$true)
+    If (%Raws.MotdAfficher == $true) { Did -e Tgl0be 485,486 | If (($did(485).state == 0) && ($did(485).state == 0)) { Did -c Tgl0be 485 } }
+    Else {  Did -u Tgl0be 485,486 | Did -b Tgl0be 485,486  }
+  }
+  If ($did == 485) { 
+    %Raws.MotdOnWindows = $iif($did(485).state == 1,$true,$false) 
+    If (%Raws.MotdOnWindows == $true) { Did -u Tgl0be 486 } | Else { Did -c Tgl0be 486 }
+  }
+  If ($did == 486) { 
+    %Raws.MotdOnWindows = $iif($did(486).state == 1,$false,$true) 
+    If (%Raws.MotdOnWindows == $true) { Did -c Tgl0be 485 } | Else { Did -u Tgl0be 485 }
+  }
+  If (($did >= 488) && ($did <= 490)) { If ($did($did).state == 0) { Did -c Tgl0be $did } }
+  If ($did == 488) { %Raws.WhoIsOnQuery = $false | %Raws.WhoIsOnWindow = $false | Did -u Tgl0be 489,490 }
+  If ($did == 489) { %Raws.WhoIsOnQuery = $true | %Raws.WhoIsOnWindow = $false | Did -u Tgl0be 488,490 }
+  If ($did == 490) { %Raws.WhoIsOnQuery = $false | %Raws.WhoIsOnWindow = $true | Did -u Tgl0be 488,489 }
+  If ($did == 492) { 
+    %IrcOps.ScanConnect = $iif($did(492).state == 1,$true,$false) 
+    %IrcOps.ScanChan = $iif($did(492).state == 1,$true,$false) 
+    If ($did(492).state == 1) { Did -c Tgl0be 493,494 | Did -e Tgl0be 493,494 } 
+    Else { Did -u Tgl0be 493,494 | Did -b Tgl0be 493,494 }
+  }
+  If ($did == 493) { %IrcOps.ScanConnect = $iif($did(493).state == 1,$true,$false) }
+  If ($did == 494) { %IrcOps.ScanChan = $iif($did(494).state == 1,$true,$false) }
+  If ($did == 496) { 
+    %Clones.OnJoinChan = $iif($did(496).state == 1,Activé,Désactivé) 
+    %Scan.Clone.Affiche = $iif($did(496).state == 1,Activé,Désactivé) 
+    If ($did(496).state == 1) { Did -c Tgl0be 497,498 | Did -e Tgl0be 497,498 } 
+    Else { Did -u Tgl0be 497,498 | Did -b Tgl0be 497,498 }
+  }
+  If ($did == 497) { %Clones.OnJoinChan = $iif($did(497).state == 1,Activé,Désactivé) }
+  If ($did == 498) { %Scan.Clone.Affiche = $iif($did(498).state == 1,Activé,Désactivé) }
+  If ($did == 502) { %Pv.Activer = $iif($did(502).state == 1,$true,$false) | If (%Pv.Activer == $true) { Did -e Tgl0be 503 | Did -f Tgl0be 503 } | Else { Did -b Tgl0be 503 } }
+  If ($did == 504) { %Pv.AutoClose = $iif($did(504).state == 1,$true,$false) | If (%Pv.AutoClose == $true) { Did -e Tgl0be 505 | Did -f Tgl0be 505 } | Else { Did -b Tgl0be 505 } }
+  IF ($did == 511) { RAZKickCompteur | Did -b Tgl0be 511 | Did -ra Tgl0be 511 Vous n'avez aucun Kick à votre actif. }
+  IF ($did == 512) { VoirHistoKick }
+  IF ($did == 514) { %Kick.RAZTime = $duration(1day) }
+  IF ($did == 515) { %Kick.RAZTime = $duration(1wks) }
+  IF ($did == 516) { %Kick.RAZTime = $duration(4wks) }
+  IF ($did == 517) { %Kick.RAZTime = $duration(52wks) }
+  IF ($did == 518) { Unset %Kick.RAZTime }
+  If ( $Did == 523 ) { Did -c Tgl0be 524 $Did(523).Sel }
+  If ( $Did == 524 ) { Did -c Tgl0be 523 $Did(524).Sel }
+  If ( $Did == 525 ) { 
+    Var %i = $Input( "Quelle commande (exemple : !re) :" , 69, "Mes Pseudos" )
+    If ( %i != $Null ) { Var %j = $Input( "Quel Pseudo (exemple : JeReviens) :" , 69, "Mes Pseudos" , $Me ) }
+    If ( %i != $Null ) && ( %j != $Null ) {
+      Did -a Tgl0be 523 %i
+      Did -a Tgl0be 524 %j
+    }
+  }
+  If ( $Did == 526 ) { 
+    Did -d Tgl0be 523 $Did(523).Sel
+    Did -d Tgl0be 524 $Did(524).Sel
+  }
+}
+on *:dialog:Tgl0be:dclick:156:{
+  If ( $Did(156).SelText != $Null ) && ( $Exists($MircDirProfil\ $+ $Did(156).SelText $+ .txt ) ) { 
+    Set %ecriture.profil $Did(156).SelText
+    Did -ra Tgl0be 162 %Ecriture.Profil
+    ChargerProfil $MircDirProfil\ $+ $Did(156).SelText $+ .txt
+  }
+}
+ON *:DIALOG:Tgl0be:dclick:444: { If ($did(444).seltext != $null) { $SkinChargeTemp($did(444).seltext) | SkinsMaj } }
+On *:Dialog:Tgl0be:DClick:*: { 
+  If ( $Did == 524 ) || ( $Did == 523 ) { TNick $Did(524).SelText }
+}
+on *:dialog:Tgl0be:edit:*:{
+  If ($did == 109) || ($did == 110) || ($did == 132) || ($did == 133) { 
+    SauverEcriture
+    .timer 1 0 MontrerApercu 
+  }
+  If ( $did > 205 ) && ( $did < 277 ) {
+    Write -l1 $shortfn($MircDirTRaccourcis.tgs) Aucune Touche
+    Write -l14 $shortfn($MircDirTRaccourcis.tgs) Control
+    Write -l27 $shortfn($MircDirTRaccourcis.tgs) Shift
+    Var %i = $Did
+
+    If ( %i < 229 ) { Var %r = $Calc( %i - 215 ) } 
+    If ( %i < 253 ) && ( %i > 240 ) {  Var %r = $Calc( %i - 226 ) }
+    If ( %i > 264 ) { Var %r = $Calc( %i - 237 )  }
+    If ($Did(%i) != $Null) { Write -l $+ %r $shortfn($MircDirTRaccourcis.tgs) $Did(%i) }
+    Else { Write -l $+ %r $shortfn($MircDirTRaccourcis.tgs) Echo -a Aucune action associée }
+    If ($Did(%i) == ReponseInvite) { TRacc Invite %r }
+  }
+  If ( $did == 333 ) {
+    did -e Tgl0be 334 
+    if ( $did(333) == $null ) { did -b Tgl0be 334 }
+  }
+  If ( $did == 182 ) {
+    Did -u Tgl0be 188
+    Did -u Tgl0be 190
+    Did -u Tgl0be 192
+    Did -u Tgl0be 194
+    Did -r Tgl0be 187
+    Did -rat Tgl0be 195 A&jouter
+  }
+  if ( $did == 435 ) { set %asv.age $did(435) }
+  if ( $did == 438 ) { set %asv.sexe $did(438) }
+  if ( $did == 440 ) { set %asv.ville $did(440) }
+}
+on *:dialog:protect2:INIT:*: {
+  if ( %cfg.avertir == notice ) { did -c protect2 2 }
+  if ( %cfg.avertir == chan ) { did -c protect2 3 }
+  if ( %cfg.avertir == msg ) { did -c protect2 4 }
+}
+on *:dialog:protect2:sclick:*: {
+  if ($did == 2) { set %cfg.avertir notice }
+  if ($did == 3) { set %cfg.avertir chan }
+  if ($did == 4) { set %cfg.avertir msg }
+}
+On *:Dialog:ScanClones:DClick:1: {
+  If ( $Did(1).Sel != 1 ) { Whois $Did(1).Seltext }
+}
+ON *:DIALOG:SkinsMaj:INIT:0: {
+  If %Skin.Nom == $null { 
+    Did -r SkinsMaj 101
+    Dialog -t SkinsMaj Création d'un skin
+  }
+  Else {
+    Did -a SkinsMaj 101 %Skin.Nom
+    Dialog -t SkinsMaj Modification d'un skin
+  }
+  Didtok SkinsMaj 201 44 Status,Toolbar,Switchbar,Fond_MIRC,Pv_Salon
+  Didtok SkinsMaj 301 44 Op,DeOp,Voice,DeVoice,Kick,Ban,DeBan,Invite,Privé,Join,Part,Modération,Away,ChangeNick,Démarrage,Connection,Déconnection,Notify,UNotify,Notice
+  Did -b SkinsMaj 203,204,205,206,303,304,305,306,503,603
+  Didtok SkinsMaj 412 44 Blanc,Noir,Bleu foncé,Vert foncé,Rouge,Marron,Violet,Orange,Jaune,Vert clair,Aqua,Cyan,Bleu,Rose,Gris foncé,Gris clair
+  Didtok SkinsMaj 414 44 $didtok(SkinsMaj,412,44)
+  Didtok SkinsMaj 424 44 $didtok(SkinsMaj,412,44)
+  Didtok SkinsMaj 434 44 $didtok(SkinsMaj,412,44)
+  Didtok SkinsMaj 434 44 $didtok(SkinsMaj,412,44)
+  Did -c SkinsMaj 412 %Skin.Fenetres.EditBox.Text
+  Did -c SkinsMaj 414 %Skin.Fenetres.EditBox.Fond
+  Did -c SkinsMaj 424 %Skin.Fenetres.Fenetre.Fond
+  Did -c SkinsMaj 434 %Skin.Fenetres.NickList.Fond
+  Didtok SkinsMaj 501 44 Op,DeOp,Voice,DeVoice,Ban,DeBan,Action,Ctcp,Highlight,Info,Info2,Invite,Join,Kick,Mode,Nick,Normal,Notice,Notify,Autre,Moi,Part,Quit,Topic,Wallops,Whois
+  Didtok SkinsMaj 503 44 $didtok(SkinsMaj,412,44)
+  Didtok SkinsMaj 601 44 Moi,Ignore,Op,HalfOp,Voice,User
+  Didtok SkinsMaj 603 44 $didtok(SkinsMaj,412,44)
+}
+ON *:DIALOG:SkinsMaj:dclick:*: {
+  If ($did == 201) { GestionControlTabImages $true }
+  If ($did == 301) { GestionControlTabSons $true }
+}
+ON *:DIALOG:SkinsMaj:sclick:*: {
+  If ($did >= 200) && ($did < 300) { GestionControlTabImages }
+  If ($did >= 300) && ($did < 400) { GestionControlTabSons }
+  If ($did >= 500) && ($did < 600) { GestionControlTabEvents }
+  IF ($did >= 600) && ($did < 700) { GestionControlTabNicklist } 
+  If ($did == 10) {
+    If $did(101) != $null {
+      Var %RepSkin = $skindir $+ \ $+ $did(101), %SkinIni = $shortfn( %RepSkin $+ \ $+ Skin.ini )
+      %Skin.Fenetres.EditBox.Text  = $did(412).sel
+      %Skin.Fenetres.EditBox.Fond  = $did(414).sel
+      %Skin.Fenetres.Fenetre.Fond  = $did(424).sel
+      %Skin.Fenetres.NickList.Fond = $did(434).sel
+      EnregistreSkin %RepSkin %SkinIni
+      RefreshSkinList
+    }
+    Else { 
+      Var %R = $input(Impossible d'enregistrer. Vous n'avez pas indiqué le nom du skin.,260)
+      Did -f SkinsMaj 101
+    }
+  }
+  If (($did == 10) || ($did == 20)) { 
+    If ($did == 10) && (%Skin.Nom == %Skin.Defaut) {
+      Var %Recharger = $input(Désirez-vous charger les modifications apportées au skin ?,136)
+      If (%Recharger == $true) { ChargeSkin %Skin.Defaut }
+    }
+    DechargeVarSkin
+    Dialog -x SkinsMaj
+  }
+}

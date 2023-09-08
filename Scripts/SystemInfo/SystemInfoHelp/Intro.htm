@@ -1,0 +1,252 @@
+<html>
+<head>
+<title>Introduction to SystemInfo by C}{$</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<p><b><font face="Arial, Helvetica, sans-serif" size="3">Introduction</font></b></p>
+<p><font face="Arial, Helvetica, sans-serif" size="2">Welcome and thankyou for 
+  using SystemInfo by C}{$</font></p>
+		<p><font face="Arial, Helvetica, sans-serif" size="2">The purpose of this mIRC addon is to show System Information to a channel/query window etc etc. bla bla :o</font></p>
+		<p><font size="2" face="Arial, Helvetica, sans-serif">Changes in Version 1.5-r4: (Please report bugs to <a href="http://bugs.phucknut.net">http://bugs.phucknut.net</a>) </font></p>
+		<ul>
+			<li><font size="2" face="Arial, Helvetica, sans-serif">Fixed a cosmetic bug in /periph (Bug <a href="http://bugs.phucknut.net/query.php?bug=22" target="_BUGS">22</a>)</font>
+			<li><font size="2" face="Arial, Helvetica, sans-serif">Fixed bug in channel color stripping code (Bug <a href="http://bugs.phucknut.net/query.php?bug=23" target="_BUGS">23</a>)</font>
+			<li><font size="2" face="Arial, Helvetica, sans-serif">Fixed a bug in the theme system (Bug <a href="http://bugs.phucknut.net/query.php?bug=20" target="_BUGS">20</a>)</font>
+			<li><font size="2" face="Arial, Helvetica, sans-serif">Prolly some other crap I can't remember.... :)</font>
+		</ul>
+		<p><font size="2" face="Arial, Helvetica, sans-serif">Changes in Version 1.5-r3: 
+  (Please report bugs to <a href="http://bugs.phucknut.net">http://bugs.phucknut.net</a>) 
+  </font></p>
+		<ul>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">New darkengine dll, just 
+    his changes</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Improved Intel CPU Detection</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Fixed uptime bug</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Fixed Adapter Selection 
+    bug</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Now Dial-up users can 
+    select their adapter.</font></li>
+</ul>
+<p><font size="2" face="Arial, Helvetica, sans-serif">Changes in Version 1.5-r2: 
+  (Please report bugs to <a href="http://bugs.phucknut.net">http://bugs.phucknut.net</a>) 
+  </font></p>
+<ul>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Fixed bug on line 1123, 
+    changed $length to $len (Yes I am a moron :))</font></li>
+</ul>
+<p><font size="2" face="Arial, Helvetica, sans-serif">Changes in Version 1.5-r1: 
+  (Please report bugs to <a href="http://bugs.phucknut.net">http://bugs.phucknut.net</a>) 
+  </font></p>
+<ul>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Adopted new naming scheme, 
+    1.5-r1 is the first release of 1.5, 1.5-r2 is the second and so-on and so-forth.... 
+    :D</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Fixed pesky volts problem 
+    for lots of people.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Added to the option to 
+    display temperature in BOTH Celcius and fahr.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Trimmed down code considerably.... 
+    systeminfo.mrc is now 138kb.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Added an API kind of, 
+    $SIHeader() $SIItemOutput() and $SIDelib can now be used in other remote scripts. 
+    (Yes it is used in the new WA2mIRC)</font></li>
+  <li><em>&quot;&lt;@Task&gt; your head&quot;</em> - <font size="2" face="Arial, Helvetica, sans-serif">Thanks 
+    Task :)</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Added option to change 
+    the Network interface used in the information in syssetup and the right click 
+    alias.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Fixed other crap....</font></li>
+</ul>
+<p><font size="2" face="Arial, Helvetica, sans-serif">Changes in Version 1.4a: 
+  (<strong><font color="#FF0000">IF YOU HAVE TROUBLE WITH THE FOLLOWING ERROR 
+  MESSAGE: * $dll: unable to open 'D:\mIRC\darkenginepro.dll on line ...* whilst 
+  loading the new version, 1.4a, Please make sure you update your DirectX to the 
+  latest version available.</font></strong>)</font></p>
+<ul>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Proper Windows 2003 support, 
+    sorry for monkey business.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">New CPU Detection, supports 
+    Pentium M</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">New Peripheral detection.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">New darkenginepro.dll</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">/space fixed (I hope)</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Changed the version number 
+    (Sad I know :))</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">XP Home is detected properly.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Fixed BSOD on /bw for 
+    98/Me users (Scary rare error)</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Prolly some other stuff 
+    fixed that I can't remember right now.</font></li>
+</ul>
+<p><font size="2" face="Arial, Helvetica, sans-serif">Changes in Version 1.4: 
+  (<strong><font color="#FF0000">IF YOU HAVE TROUBLE WITH THE FOLLOWING ERROR 
+  MESSAGE: * $dll: unable to open 'D:\mIRC\darkenginepro.dll on line ...* whilst 
+  loading the new version, 1.4, Please make sure you update your DirectX to the 
+  latest version available.</font></strong>)</font></p>
+<ul>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Detects the newer Operating 
+    Systems such as longhorn and windows 2003</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">/bw alias added which 
+    displays current local bandwidth usage.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Folder Information added, 
+    shows various stats about a folder (<strong>WARNING, DO NOT USE ON LARGE COMPLICATED 
+    DIRECTORY STRUCTURES, as it does hang the IRC client, if you feel that the 
+    process is taking too long, press CTRL+Pause Break to break the loop.</strong></font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Uses darkenginepro.dll 
+    for some features now, including record uptime which goes past 7 weeks now, 
+    but the record uptime is now reset with this release (sorry :))</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">prolly lot's of other 
+    stuff that I just can't remember right now.</font></li>
+</ul>
+<p><font size="2" face="Arial, Helvetica, sans-serif">Changes in Version 1.3</font></p>
+<ul>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Full Motherboard monitor 
+    support for new and old versions :) Includes a new dll called mbminfo.dll 
+    :) The authors site can be found @ <a href="http://www.planet-pmp.com">http://www.planet-pmp.com/</a> 
+    and mail @ <a href="mailto:anhilator@fastrun.at">anhilator@fastrun.at</a></font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">New alias called /netspace 
+    that shows just networked drives.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">I prolly did other stuff 
+    :) Little bugs squashed and code optimized usuall blahblah :)</font></li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif" size="2">Changes in Version 1.2a -
+<font color="#FF0000"><strong>Still no support for latest MBM, still no moo.dll, 
+searching for other sources of the information :/</strong></font></font></p>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Re-aligned dialog due 
+  to popular demand...</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Fixed issue where if OS 
+  was under anything in the /icust setup, everything above it would not display 
+  (I'm a retard, I do apologise :))</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Fixed an issue with 
+  loading addons from the setup dialog sometimes never functioned.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Updated support for 
+  addons, WindowsInfo should be released soon :)</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Add the ability to use 
+  /space FILE, this will display basic file information, and with /space -c, 
+  will display CRC (Cycle Redundancy Check) value.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Other stupid bugs fixed 
+  probably....</font></li>
+</ul>
+<p><font size="2" face="Arial, Helvetica, sans-serif">Changes in Version 1.2 - 
+  <strong><font color="#FF0000">Please note that this version still does not support 
+  Motherboard Monitor 5.1.9.1 and above...</font></strong> </font></p>
+<ul>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">New setup dialog that 
+    is not fugly :)</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Utilizes new dll called 
+    fsmem.dll so don't forgot to extract this file, this dll gives you access 
+    to Page File stats, Virtual Memory Stats, cluster size and file systems....</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">/icust allows you to 
+    change the order of output now :)</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">/osinfo doesn't cock 
+    up anymore, uses fsmem.dll to retrieve Windows Directory.</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">/space DRIVE_LETTER gives 
+    access to more detailed stats :)</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">All the hard disk aliases 
+    use a new byte unit system, which allows disks under 2GB to measure in MB 
+    and stuff like that :)</font></li>
+  <li><font size="2" face="Arial, Helvetica, sans-serif">Right click menu's changed 
+    slightly :)</font></li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif" size="2">Changes in Version 1.1a</font></p>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Fixed preview not displaying 
+    the results without ALL formatting removed when the &quot;Remove ALL formatting 
+    from ALL output&quot; option was checked.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Fixed the /space alias 
+    thinking you had a C:\ drive.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Fixed more spacing issues 
+    if not all spacing issues.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Fixed an issues with 
+    the MBM code when MBM was not loaded.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">I probrably done something 
+    else, but unable to remember due to &quot;higher&quot; state of consciousness.</font></li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif" size="2">Changes in Version 1.1</font></p>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">/systeminfo added, a 
+    new feature that allows you to view your systeminfo to a private dialog :)</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">/osinfo added, this shows 
+    the installation time of the OS and where it is installed too.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Uptime bug where the 
+    uptime just doesn't show in 2k or XP now has an option to retrieve it via 
+    alternative methods.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Option to use fahranhiet 
+    has been added when using MBM.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Update Checker introduced, 
+    this allows you to automatically check for updates too. For security/privacy 
+    conscious users, <a href="updatecheck.html">click here!</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">People who had issues 
+    with $scriptdir $+ moo.dll should not get these anymore.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">RoadRunner.ico removed 
+    from all dialogs due to incompatability with older mIRC's.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Supports mIRC v6.0 and 
+    above and most previous versions :)</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Bugs with spacing in 
+    directories and the likes of have been sorted.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Dialogs have been re-organised 
+    so they tab more easily, thanks Task for his help on that one :)</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Added MBM Version (if 
+    present) to /client</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Options to make The Intelligent 
+    Custom line a multiline affair stopping the set line too long business.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Other bugs that are too 
+    many to remember :)</font></li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif" size="2">Version 1c changes:</font></p>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">mIRC v6.0 now supported. 
+    </font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Updated help file :o</font></li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif" size="2">Changes in Version 1b:</font></p>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Themes hopefully working 
+    properly now.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Dialog does not reload 
+    when importing/saving/deleting themes.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Added a kiclist menu 
+    for easy RemoteStats from other users.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Other silly ass bugs 
+    fixed. </font></li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif" size="2">Changes in Version 1:</font></p>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Most stupid bugs squished.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Fixed bug in exporting/applying 
+    themes. All themes should export and apply correctly now.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Added Intelligent Custom 
+    Line</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Added RemoteStats.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Changed the dialog setup 
+    a little bit to what I think is easier and my testing team thinks is easier 
+    :) </font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Motherboard Monitor within 
+    the script comes deactivated by default. <b>USERS OF MOTHERBOARD MONITOR SHOULD 
+    <a href="mbm.html" target="mainFrame">READ THIS</a></b></font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Added the choice of having 
+    a delay between the lines on the /info command.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Plugins/Addons to the 
+    script will now function properly, expect a few coming out when my fingers 
+    are not sore :)</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Added the option to remove 
+    ALL formatting from all outputs (Due to user request :))</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Added the option to limit 
+    the amount of disks outputted in the /space command. (Due to user request 
+    :)) </font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Loads of other stuff 
+    I can't remember right now :)</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Added a very horny readme 
+    for you all to enjoy :)</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="2">Of course, a new moo.dll 
+    from <a href="http://www.influenced.net">marky</a> </font></li>
+</ul>
+<p><i><font face="Arial, Helvetica, sans-serif" size="1">Disclaimer for addon: 
+  C}{$ is not liable for any damage caused by the use of this addon. Hence, I 
+  am not responsible if you computer grows a third eye or if you chicken gives 
+  birth to a cat. By loading this addon, you fully understand the risks involved.</font></i></p>
+</body>
+</html>

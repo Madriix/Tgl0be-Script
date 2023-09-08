@@ -1,0 +1,170 @@
+;-----------------------------------------------------------
+;               Voice Automatique intelligent
+;                         Par Xor
+;-----------------------------------------------------------
+
+Alias initav1 {
+  unset %av1*
+  set %optavchan1 $1
+  inichan1
+  .timer11 0 10 verifvoice1
+}
+Alias initav2 {
+  unset %av2*
+  set %optavchan2 $2
+  inichan2
+  .timer12 0 10 verifvoice2
+}
+Alias av1off {
+  unset %av1*
+  .timer11 off
+  unset %optavchan1
+}
+Alias av2off {
+  unset %av2*
+  .timer12 off
+  unset %optavchan2
+}
+Alias pres1 { 
+  if ( %av1user [ $+ [ $1 ] ] == $null  )  { return Absent }
+  else { return Présent }
+}
+Alias pres2 { 
+  if ( %av2user [ $+ [ $1 ] ] == $null  )  { return Absent }
+  else { return Présent }
+}
+Alias prestmp1 { 
+  if ( %av1tmp [ $+ [ $1 ] ] == $null  )  { return Absent }
+  else { return Présent }
+}
+Alias prestmp2 { 
+  if ( %av2tmp [ $+ [ $1 ] ] == $null  )  { return Absent }
+  else { return Présent }
+}
+Alias verifvoice1 {
+  var %i = 1
+  while ( %i <= $nick(%optavchan1,0) ) {
+    if ( $nick(%optavchan1,%i) isvoice %optavchan1 ) {
+      if ( %av1user [ $+ [ $nick(%optavchan1,%i) ] ] == 0 ) {
+        unset %av1user [ $+ [ $nick(%optavchan1,%i) ] ]
+        mode %optavchan1 -v $nick(%optavchan1,%i)
+      }
+      else  { dec %av1user [ $+ [ $nick(%optavchan1,%i) ] ] }
+    }
+    inc %i
+  }
+}
+Alias verifvoice2 {
+  var %i = 1
+  while ( %i <= $nick(%optavchan2,0) ) {
+    if ( $nick(%optavchan2,%i) isvoice %optavchan2 ) {
+      if ( %av2user [ $+ [ $nick(%optavchan2,%i) ] ] == 0 ) {
+        unset %av2user [ $+ [ $nick(%optavchan2,%i) ] ]
+        mode %optavchan2 -v $nick(%optavchan2,%i)
+      }
+      else  { dec %av2user [ $+ [ $nick(%optavchan2,%i) ] ] }
+    }
+    inc %i
+  }
+}
+on 1:TEXT:*:%optavchan1,%optavchan2:{
+  if ( $chan == %optavchan1 ) {
+    if ( $pres1($nick) == Absent )  {
+      if ( $prestmp1($nick) == Absent ) { set -z %av1tmp [ $+ [ $nick ] ] 30 }
+      else {
+        if ( %av1tmp [ $+ [ $nick ] ] <= 14 ) { set -z %av1tmp [ $+ [ $nick ] ] 30 }
+        if ( %av1tmp [ $+ [ $nick ] ] > 15 ) { set -z %av1tmp [ $+ [ $nick ] ] 45 }
+        if ( %av1tmp [ $+ [ $nick ] ] > 30 ) { set -z %av1tmp [ $+ [ $nick ] ] 60 }
+        if ( %av1tmp [ $+ [ $nick ] ] > 45 ) { 
+          set %av1user [ $+ [ $nick ] ] 30
+          unset %av1tmp [ $+ [ $nick ] ]
+          mode %optavchan1 +v $nick
+        }
+      }
+      halt  
+    }
+    else { inc %av1user [ $+ [ $nick ] ] 12 }
+  }
+  else {
+    if ( $pres2($nick) == Absent )  {
+      if ( $prestmp2($nick) == Absent ) { set -z %av2tmp [ $+ [ $nick ] ] 30 }
+      else {
+        if ( %av2tmp [ $+ [ $nick ] ] <= 14 ) { set -z %av2tmp [ $+ [ $nick ] ] 30 }
+        if ( %av2tmp [ $+ [ $nick ] ] > 15 ) { set -z %av2tmp [ $+ [ $nick ] ] 45 }
+        if ( %av2tmp [ $+ [ $nick ] ] > 30 ) { set -z %av2tmp [ $+ [ $nick ] ] 60 }
+        if ( %av2tmp [ $+ [ $nick ] ] > 45 ) { 
+          set %av2user [ $+ [ $nick ] ] 30
+          unset %av2tmp [ $+ [ $nick ] ]
+          mode %optavchan2 +v $nick
+        }
+      }
+      halt  
+    }
+    else { inc %av2user [ $+ [ $nick ] ] 12 }
+  }
+}
+on 1:NICK:{
+  if ( $pres($nick) = Présent ) {
+    set %avuser [ $+ [ $newnick ] ] %avuser [ $+ [ $nick ] ]
+    unset %avuser [ $+ [ $nick ] ]
+  }
+}
+alias inichan1 {
+  var %i = 1
+  while ( %i <= $nick(%optavchan1,0) ) { 
+    if  ( $nick(%optavchan1,%i) isvoice %optavchan1 ) {
+      set %av1user [ $+ [ $nick(%optavchan1,%i) ] ] 30
+    }
+    inc %i
+  } 
+}
+alias inichan2 {
+  var %i = 1
+  while ( %i <= $nick(%optavchan2,0) ) { 
+    if  ( $nick(%optavchan2,%i) isvoice %optavchan2 ) {
+      set %av2user [ $+ [ $nick(%optavchan2,%i) ] ] 30
+    }
+    inc %i
+  } 
+}
+on 1:VOICE:%optavchan1,%optavchan2:{
+  if ( $chan == %optavchan1 )  {
+    if ( $nick != $me ) { set %av1user [ $+ [ $vnick ] ] 30 }
+  }
+  else {
+    if ( $nick != $me ) { set %av2user [ $+ [ $vnick ] ] 30 }
+  }
+}
+on 1:DEVOICE:%optavchan1,%optavchan2:{
+  if ( $chan == %optavchan1 )  {
+    if ( $pres1($vnick) == Présent ) && ( $nick != $me ) { unset %av1user [ $+ [ $vnick ] ] }
+  }
+  else {
+    if ( $pres2($vnick) == Présent ) && ( $nick != $me ) { unset %av2user [ $+ [ $vnick ] ] }
+  }
+}
+on 1:INPUT:#:{
+  if ( $1 == !av1 ) {
+    echo $active 11,1Tgl0beSCRIPT - 8AutoVoice Intelligent Activé - Salon 1
+    initav1 $chan
+  }
+  if ( $1 == !av2 ) {
+    echo $active 11,1Tgl0beSCRIPT - 8AutoVoice Intelligent Activé - Salon 2
+    initav2 $chan
+  }
+  if ( $1 == !av1off ) {
+    echo $active 11,1Tgl0beSCRIPT - 8AutoVoice Intelligent Désactivé - Salon 1
+    av1off
+  }
+  if ( $1 == !av2off ) {
+    echo $active 11,1Tgl0beSCRIPT - 8AutoVoice Intelligent Désactivé - Salon 2
+    av2off
+  }
+  if ( $1 == !avinfo ) {
+    echo $active 11,1Tgl0beSCRIPT - 8AutoVoice Intelligent  - Salon 1 : %optavchan1 - Salon 2 : %optavchan2
+  }
+}
+off 1:start:{
+  av2off
+  av1off
+}

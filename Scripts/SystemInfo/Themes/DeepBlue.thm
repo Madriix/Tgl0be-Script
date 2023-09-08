@@ -1,0 +1,18 @@
+[1]
+name=Deep Blue
+version=0.3
+encLeftVar=<o/
+encRightvar=\o>
+sepWith=º
+valBold=0
+valU=0
+headBold=1
+headU=0
+encBold=1
+encU=0
+sepBold=0
+sepU=0
+encCol=11
+sepCol=11
+valCol=12
+headCol=2

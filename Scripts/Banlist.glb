@@ -1,0 +1,78 @@
+;------------------------------------------------------------
+;                    Gestion des bans 
+;                        Par Xor
+;------------------------------------------------------------
+
+alias banlist {
+  If ($1 == $null) { Set %Ban.Chan $active }
+  Else { Set %Ban.Chan $1 } 
+  dialog -m banlist banlist
+}
+Dialog banlist {
+  SIZE -1 -1 340 240
+  TITLE "Liste des bans"
+  BUTTON "&Fermer"    , 1, 250 215    70   20, Flat, Ok
+  LIST                         10,   20   20  300  150
+  EDIT ""                    ,20,   20 170  300    20,read
+  EDIT ""                    ,21,   20 190  300    20,read
+  BUTTON "&Débannir" , 2, 170 215    70   20, Flat
+}
+On *:Dialog:banlist:INIT:*: {
+  mdx SetMircVersion $version
+  mdx  MarkDialog $dname
+  mdx  SetControlMDX 30 listview showsel rowselect infotip report extsel > $cc_views
+  mdx SetDialog $dname bgcolor 16772585
+  Did -r banlist 10
+  .Mode %Ban.Chan +b
+}
+On *:Dialog:banlist:SCLICK:*: {
+  If ($did == 2) && ( $left( $Did(10).Seltext , 1 ) != - ) { 
+    .mode %Ban.Chan -b $Did(20)
+    Did -d banlist 10 $Did(10).Sel
+    Did -c banlist 10 1
+    did -ra banlist 20 $Gettok( $did(10).seltext , 1 , 32 )
+    did -ra banlist 21 Par $Gettok( $did(10).seltext , 3 , 32 ) le $Gettok( $did(10).seltext , 4- , 32 )
+  }
+  If ($did == 10) { 
+    if ($left($did(10).seltext, 1 ) != -) {
+      did -ra banlist 20 $Gettok( $did(10).seltext , 1 , 32 )
+      did -ra banlist 21 Par $Gettok( $did(10).seltext , 3 , 32 ) le $Gettok( $did(10).seltext , 4- , 32 )
+    }
+  }
+}
+RAW 367:*: { if ($dialog(banlist).hwnd != $null) { Did -a banlist 10 $3 par $4 $TraduireDate( $5 ) | Halt } }
+RAW 368:*: { 
+  If  ( $dialog(banlist).hwnd != $null ) {
+    if ( $did(banlist,10).lines == 0 ) {
+      Did -a banlist 10 Aucun ban n'est défini sur %Ban.Chan 
+      Did -b banlist 2 
+    }
+  }
+  Halt
+}
+
+Alias TraduireDate {
+  Var %Chan.Date
+  %chan.date = $asctime($1,dddd dd mmmm _ HH:nn)
+  %chan.date = $replace(%chan.date,Monday,Lundi)
+  %chan.date = $replace(%chan.date,_,à)
+  %chan.date = $replace(%chan.date,Tuesday,Mardi)
+  %chan.date = $replace(%chan.date,Wednesday,Mercredi)
+  %chan.date = $replace(%chan.date,Thursday,Jeudi)
+  %chan.date = $replace(%chan.date,Friday,Vendredi)
+  %chan.date = $replace(%chan.date,Saturday,Samedi)
+  %chan.date = $replace(%chan.date,Sunday,Dimanche)
+  %chan.date = $replace(%chan.date,January,Janvier)
+  %chan.date = $replace(%chan.date,February,Février)
+  %chan.date = $replace(%chan.date,March,Mars)
+  %chan.date = $replace(%chan.date,April,Avril)
+  %chan.date = $replace(%chan.date,May,Mai)
+  %chan.date = $replace(%chan.date,June,Juin)
+  %chan.date = $replace(%chan.date,July,Juillet)
+  %chan.date = $replace(%chan.date,August,Août)
+  %chan.date = $replace(%chan.date,September,Septembre)
+  %chan.date = $replace(%chan.date,October,Octobre)
+  %chan.date = $replace(%chan.date,November,Novembre)
+  %chan.date = $replace(%chan.date,December,Decembre)
+  return %chan.date
+}

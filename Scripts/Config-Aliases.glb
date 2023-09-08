@@ -1,0 +1,1072 @@
+;-----------------------------------------------------------
+;                  Aliases de Configuration
+;                          Par Xor
+;-----------------------------------------------------------
+
+Alias Tgl0be dialog -m Tgl0be Tgl0be
+Alias image return $shortfn($+($mircdirScripts\Images\,$1-))
+Alias initcnfg { 
+  window -c @Apercu
+  .timerpowwin off
+  did -h Tgl0be 40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69
+  did -h Tgl0be 70,71,72,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,94,95,96,97,98,99,104,105
+  did -h Tgl0be 106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,124,125,126,127,128,129,130
+  did -h Tgl0be 131,132,133,134,135,136,137,138,139,140,141,143,144,145,147,163,164,165,166,167,168
+  did -h Tgl0be 148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,545,457,600,601,602,603,604,605,606,607,608,609
+  var %i = 169
+  while ( %i <= 454 ) {
+    did -h Tgl0be %i
+    inc %i
+  }
+  var %i = 460
+  while ( %i <= 540 ) {
+    did -h Tgl0be %i
+    inc %i
+  }
+  did -v Tgl0be 508
+}
+Alias presdiag {
+  initcnfg
+  did -v Tgl0be 40,545 
+  var %i = 534
+  while ( %i <= 539 ) {
+    did -v Tgl0be %i
+    inc %i
+  }
+  did -v Tgl0be 508
+}
+Alias ConfigAway {
+  If ( $dialog(Tgl0be).Hwnd == $Null ) { /Dialog -m Tgl0be Tgl0be }
+  Else { /Dialog -iev Tgl0be }
+}
+Alias AffAway {
+  /ame est away. Raison : $AwayMsg .
+}
+Alias AffAwayTime {
+  /ame est away. Raison : $AwayMsg .Depuis : $duration( $AwayTime ) $+ .
+}
+Alias SauveAwayParam {
+  If ( $did(Tgl0be,44) !isin $Didtok(Tgl0be,44,46) ) && ( $did(Tgl0be,44) != $Null ) { 
+    Did -a Tgl0be 44 $did(Tgl0be,44) 
+    Did -c Tgl0be 44 $did(Tgl0be,44).Lines
+  }
+  RemIni $shortfn($MircDirAway.ini) Nick
+  Var %i = 1
+  While ( %i <= $did(Tgl0be,44).Lines ) {
+    WriteIni $shortfn($MircDirAway.ini) Nick %i " $+ $did(Tgl0be,44, %i ) $+ "
+    Inc %i
+  }
+  If ( $did(Tgl0be,46) !isin $Didtok(Tgl0be,46,46) ) && ( $did(Tgl0be,46) != $Null ) { 
+    Did -a Tgl0be 46 $did(Tgl0be,46)
+    Did -c Tgl0be 46 $Calc($did(Tgl0be,46).Lines)
+  }
+  RemIni $shortfn($MircDirAway.ini) Raison
+  Var %i = 1
+  While ( %i <= $did(Tgl0be,46).Lines ) {
+    WriteIni $shortfn($MircDirAway.ini) Raison %i " $+ $did(Tgl0be,46, %i ) $+ "
+    Inc %i
+  }
+  WriteIni $shortfn($MircDirAway.ini) Defaut Nick " $+ $did(Tgl0be,44).Sel $+ "
+  WriteIni $shortfn($MircDirAway.ini) Defaut Raison " $+ $did(Tgl0be,46).Sel $+ "
+  WriteIni $shortfn($MircDirAway.ini) Config ChangeNick $did(Tgl0be,43).State
+  WriteIni $shortfn($MircDirAway.ini) Auto Activer $did(Tgl0be,48).State
+  WriteIni $shortfn($MircDirAway.ini) Auto Idle " $+ $Calc($did(Tgl0be,49)*60) $+ "
+  If ( $did(Tgl0be,52) != $Null ) { WriteIni $shortfn($MircDirAway.ini) Auto Raison " $+ $did(Tgl0be,52) $+ " }
+  Else { WriteIni $shortfn($MircDirAway.ini) Auto Raison "12Auto-Away : Absence automatique - 10Tgl0beSCRIPT" }
+  If ( $did(Tgl0be,65) != $Null ) { 
+    WriteIni $shortfn($MircDirAway.ini) Raccourcis Départ " $+ $did(Tgl0be,65) $+ "
+  /set %away.mot $did(Tgl0be,65) }
+  Else { WriteIni $shortfn($MircDirAway.ini) Raccourcis Départ "!away" 
+  /set %away.mot !away }
+  If ( $did(Tgl0be,67) != $Null ) { WriteIni $shortfn($MircDirAway.ini) Raccourcis Retour " $+ $did(Tgl0be,67) $+ " 
+  /set %away.mot.fin $did(Tgl0be,67) }
+  Else { WriteIni $shortfn($MircDirAway.ini) Raccourcis Retour "!retour" 
+  /set %away.mot.fin !retour }
+  If ( $did(Tgl0be,48).State == 1 ) { .TimerAutoAway 0 5 TAutoAway }
+  Else { .TimerAutoAway Off }
+  WriteIni $shortfn($MircDirAway.ini) Temps Depart $did(Tgl0be,56).State
+  WriteIni $shortfn($MircDirAway.ini) Temps Repet $did(Tgl0be,57).State
+  If ($did(Tgl0be,58) != $null) { WriteIni $shortfn($MircDirAway.ini) Temps TempsRepet $did(Tgl0be,58) }
+  Else { WriteIni $shortfn($MircDirAway.ini) Temps TempsRepet 60 }
+  WriteIni $shortfn($MircDirAway.ini) Temps Retour $did(Tgl0be,60).State
+}
+Alias TAutoAway { 
+  If ( $Idle >= $readini($shortfn($MircDirAway.ini),Auto,Idle) ) && ( $Away == $False ) && ( $server != $null) { 
+    set %away.nick $me
+    If ($network == Voila) { nick $ReadIni($shortfn($MircDirAway.ini),Nick,$ReadIni($shortfn($MircDirAway.ini),Defaut,Nick)) }
+    else { nick $me $+ \ $+ $ReadIni($shortfn($MircDirAway.ini),Nick,$ReadIni($shortfn($MircDirAway.ini),Defaut,Nick)) }  
+    .Away 12Auto-Away : Absence automatique - 10Tgl0beSCRIPT 
+  }
+}
+Alias FenetreAway {
+  if ( $Window(@Away) == $null ) { 
+    window -ag2k0xz @Away
+    Aline 7 @Away Double-Cliquer revenir de Away et fermer la fenêtre
+    Aline 7 @Away -
+  }
+  Aline 7 @Away $TimeStamp 4 $+ $Nick 7dit : $1-
+  PlaySkinSound Away
+}
+Menu @Away {
+  dclick: { 
+    If ( $away == $false ) { 
+      Window -c @Away
+    }
+    If ( $away == $true ) { 
+      Aline 12 @Away -
+      Aline 12 @Away Vous êtes resté away (ailleurs)4 $Duration($AwayTime) $+ 12, pour la raison4 $AwayMsg $+ 12.
+      If ($network == Voila) { nick me }
+      else { nick %away.nick }
+      If ( $ReadIni($shortfn($MircDirAway.ini),Temps,Retour) == 1 ) { /ame est de retour après $duration($AwayTime) d'absence }
+      .timerAway off
+      .Away
+      /Resetidle
+    }
+  }
+  Configurer : /tgl0be
+  $Iif( $Away == $True , &Revenir ) { 
+    Aline 12 @Away -
+    Aline 12 @Away Vous êtes resté away (ailleurs)4 $Duration($AwayTime) $+ 12, pour la raison4 $AwayMsg $+ 12.
+    .away 
+  }
+  &Fermer cette fenêtre : Window -c @Away
+}
+Alias SauverListeRaison {
+  Var %i = 1
+  Write -c $shortfn( $MircDirRaison $+ \ $+ $Did(76).Seltext )
+  While (%i <= $Did(77).Lines) {
+    Did -c Tgl0be 77 %i
+    Write -l $+ %i $shortfn( $MircDirRaison $+ \ $+ $Did(76).Seltext ) $Did(77).SelText
+    Inc %i
+  }
+}
+Alias ChargerListeRaison {
+  Var %i = 1
+  Did -r Tgl0be 77
+  While (%i <= $Lines($MircDirRaison $+ \ $+ $Did(76).Seltext) ) {
+    Did -a Tgl0be 77 $Read( $MircDirRaison $+ \ $+ $Did(76).Seltext , %i )
+    Inc %i
+  }
+}
+Alias ExplicationFichierKick {
+  If (Clones isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour clones. }
+  If (Flood isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour flood (répétition de phrases ou lettres). }
+  If (TO isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour TakeOver, vol de salon. }
+  If (Pub isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour publicité pour un salon, un site ... }
+  If (Majuscule isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour "cri" (majuscules sur Irc). }
+  If (Pseudo isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban si le pseudo est incorrect. }
+  If (Insulte isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban si le langage n'est pas approprié à la discussion. }
+  If (Sons isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban si un son est joué sur le salon. }
+  If (Raison isin $1) { Return Fichier contenant vos raisons de kick/ban par défaut, si vous n'en mettez pas en tapant la commande. }
+  If (Racisme isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour racisme }
+  If (Script isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour script, slaps, poppies (autorisé en pv) }
+  If (Incit isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour incitation au flood }
+  If (Sexe isin $1) { Return Fichier contenant les avertissements et raisons de kick/ban pour propos sexuels déplacés }
+}
+Alias PosFenetreApercu {
+  If ($dialog(Tgl0be).hwnd == $null) {
+    .TimerPosWin off
+    window -c @Apercu
+  }
+  Else {
+    if ($window(@Apercu)) window $iif($dialog(Tgl0be).active,-o,-u) @Apercu $calc($dialog(Tgl0be).x + 147) $calc($dialog(Tgl0be).y + 450) 300 47
+  }
+}
+Alias FenetreApercu {
+  window -hkdo +dL @Apercu $calc($dialog(Tgl0be).x + 147) $calc($dialog(Tgl0be).y + 450) 300 47
+  window -a @Apercu
+}
+
+Alias MontrerApercu {
+  If (%ecriture.state == on) && ($dialog(Tgl0be).hwnd != $null) {
+    Set %ecriture.type off 
+    Permanent @Apercu voici votre écriture en salon officiel. 
+    Set %ecriture.type perso 
+    Permanent @Apercu voici votre écriture en salon personnel. 
+    Set %ecriture.type pv 
+    Permanent @Apercu voici votre écriture en privé. 
+  }
+  Else {
+    If ($window(@Apercu).hwnd == $true) {
+      Aline $color(own text) @Apercu voici votre écriture en salon officiel. 
+      Aline $color(own text) @Apercu voici votre écriture en salon personnel. 
+      Aline $color(own text) @Apercu voici votre écriture en privé. 
+    }
+  }
+}
+Alias Active.coul { set %ecriture.state on }
+Alias Desactive.coul { set %ecriture.state off }
+Alias Amsg { 
+  If ($1 == $null) { echo $color(info text) -a *ERREUR* /amsg : Vous devez taper un texte }
+  Else {
+    if (($left($1-,1) != /) && ($left($1-,1) != !)) && (($left($1-,1) != .)) {
+      Var %i = 1
+      While (%i <= $ComChan($me,0) ) {
+        If ( %i == 20 ) { HALT }
+        If ( ! isin $ComChan($me , %i ) ) { Set %Ecriture.Type off }
+        Else  { Set %Ecriture.Type perso }
+        Permanent $ComChan($me , %i ) $1- 
+        Inc %i
+      }
+    }
+    else { amsg $1- }
+  }
+}
+Alias permanent {
+  If (%Ecriture.Type == $Null) {
+    If ( # isin $Active ) { 
+      If ( ! isin $Active ) { Set %Ecriture.Type off }
+      Else  { Set %Ecriture.Type perso }
+    }
+    Else { Set %Ecriture.Type pv }
+  }
+  set %ecriture.text $2-
+  if (%ecriture.state == off) { Goto pseudostyle }
+  :majs
+  If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .majs == on ) {
+    Var %ecriture.tmp = %ecriture. [ $+ [ %ecriture.type ] $+ ] .couleur.majs 
+    Var %ecriture.tmp2 = %ecriture. [ $+ [ %ecriture.type ] $+ ] .couleur.text 
+    %ecriture.text = $Chr(3) $+ %ecriture.tmp $+ $upper($left(%ecriture.text ,1)) $+ $Chr(3) $+ %ecriture.tmp2 $+ $right(%ecriture.text , $calc($len(%ecriture.text )-1))
+  }
+  :pseudostyle
+  If ( $2 ison $chan ) && ( %ecriture.tmp != rien ) && ($3 != $null) { 
+    %ecriture.text =  $2 %ecriture. [ $+ [ %ecriture.type ] $+ ] .pseudo.symbol $3-
+  }
+  var %i 1
+  while $gettok(  %ecriture.text ,%i,32) {
+    Var %ecriture.tmp = %ecriture. [ $+ [ %ecriture.type ] $+ ] .pseudo
+    var %ptmp $ifmatch
+    if ((%ptmp ison $active) || ($active == $query(%m))) && ( %ecriture.tmp != rien ) {
+      if ( gras isin %ecriture.tmp ) { %ptmp = $+($chr(2),%ptmp,$chr(2)) }
+      if  ( soul isin %ecriture.tmp ) { %ptmp = $+($chr(31),%ptmp,$chr(31))   }
+      if  ( inv isin %ecriture.tmp  ) { %ptmp = $+($chr(22),%ptmp,$chr(22))  }
+      %ecriture.text = $puttok(  %ecriture.text ,%ptmp,%i,32)
+    }
+    inc %i
+  }
+  if (%ecriture.state == off) { Goto end }
+  :couleur
+  Var %ecriture.tmp = %ecriture. [ $+ [ %ecriture.type ] $+ ] .couleur.text 
+  if ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .couleur.fond != 17 )  Var %ecriture.tmp2 = , $+ %ecriture. [ $+ [ %ecriture.type ] $+ ] .couleur.fond 
+  else Var %ecriture.tmp2 = $null
+  %ecriture.text = $chr(3) $+ %ecriture.tmp $+ %ecriture.tmp2 $+ %ecriture.text
+  :textstyle
+  If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .tout.gras == on ) { Set %ecriture.text $chr(2) $+ %ecriture.text $+ $chr(2) }
+  If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .tout.soul == on ) { Set %ecriture.text $chr(31) $+ %ecriture.text $+ $chr(31) }
+  :caracspe
+  If ( %ecriture.type == off ) { goto end }
+  Var %i = 1
+  If ($2 ison $active) {
+    While ( %ecriture.caracspé.in. [ $+ [ %i ] ] != $null ) && ( %ecriture.caracspé.out. [ $+ [ %i ] ] != $null ) {
+      %ecriture.text = $gettok( %ecriture.text , 1 , 32 ) $replace( $gettok( %ecriture.text , 2- , 32 ) , %ecriture.caracspé.in. [ $+ [ %i ] ] ,  $+ %ecriture.caracspé.coul. [ $+ [ %i ] ]  $+ %ecriture.caracspé.out. [ $+ [ %i ] ] $+  $+ %ecriture. [ $+ [ %ecriture.type ] $+ ] .couleur.text )
+      Inc %i
+    }
+  }
+  Else {
+    While ( %ecriture.caracspé.in. [ $+ [ %i ] ] != $null ) && ( %ecriture.caracspé.out. [ $+ [ %i ] ] != $null ) {
+      %ecriture.text = $replace(%ecriture.text, %ecriture.caracspé.in. [ $+ [ %i ] ] ,  $+ %ecriture.caracspé.coul. [ $+ [ %i ] ]  $+ %ecriture.caracspé.out. [ $+ [ %i ] ] $+  $+ %ecriture. [ $+ [ %ecriture.type ] $+ ] .couleur.text )
+      Inc %i
+    }
+  }
+  :Deco
+  If ( %ecriture.type == off ) { goto end }
+  Else { 
+    If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .deco.g != $null ) {
+      Var %ecriture.tmp = %ecriture. [ $+ [ %ecriture.type ] $+ ] .deco.g
+      If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .decogras.g == on ) {
+        Var %ecriture.tmp = $chr(2) $+ %ecriture.tmp $+ $chr(2)
+      }
+      If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .decosoul.g == on ) {
+        Var %ecriture.tmp = $chr(31) $+ %ecriture.tmp $+ $chr(31)
+      }
+      Var %DecoCoulTextG = %Ecriture. [ $+ [ %ecriture.type ] $+ ] .Deco.Coul.Text.G
+      Var %DecoCoulFondG = %Ecriture. [ $+ [ %ecriture.type ] $+ ] .Deco.Coul.Fond.G
+      if ( %DecoCoulFondG != 17 ) Var %DecoG = $Chr(3) $+ %DecoCoulTextG $+ , $+ %DecoCoulFondG $+ %ecriture.tmp
+      else Var %DecoG = $Chr(3) $+ %DecoCoulTextG $+ %ecriture.tmp
+    }
+    If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .deco.d != $null ) {
+      Var %ecriture.tmp2 = %ecriture. [ $+ [ %ecriture.type ] $+ ] .deco.d
+      If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .decogras.d == on ) {
+        Var %ecriture.tmp2 = $chr(2) $+ %ecriture.tmp2 $+ $chr(2)
+      }
+      If ( %ecriture. [ $+ [ %ecriture.type ] $+ ] .decosoul.d == on ) {
+        Var %ecriture.tmp2 = $chr(31) $+ %ecriture.tmp2 $+ $chr(31)
+      }
+      Var %DecoCoulTextD = %Ecriture. [ $+ [ %ecriture.type ] $+ ] .Deco.Coul.Text.D
+      Var %DecoCoulFondD = %Ecriture. [ $+ [ %ecriture.type ] $+ ] .Deco.Coul.Fond.D
+      if ( %DecoCoulFondD != 17 ) Var %DecoD = $Chr(3) $+ %DecoCoulTextD $+ , $+ %DecoCoulFondD $+ %ecriture.tmp2
+      else  Var %DecoD = $Chr(3) $+ %DecoCoulTextD $+ %ecriture.tmp2
+    }
+    %ecriture.text = %DecoG %ecriture.text %DecoD
+    :CouleurRandom
+    %ecriture.text = $Replace(%ecriture.text, 16 ,  $+ $Rand(1,15) )
+    %ecriture.text = $Replace(%ecriture.text, $Chr(44) $+ 16 , $Chr(44) $+ $Rand(1,15) )
+  }
+  :end
+  if ($1 == input) { msg $active %ecriture.text | goto end2 }
+  if ($1 == all)  { amsg %ecriture.text | goto end2 }
+  if ( $Left($1,1) == $Chr(35) ) { msg $1 %ecriture.text | goto end2 }
+  else { echo -a %ecriture.text }
+  :end2
+  unset %ecriture.type
+  haltdef
+}
+alias urlencode {
+  var %x = $regsubex($1,/([^ a-zA-Z0-9._-])/g,$chr(37) $+ $base($asc(\t),10,16,2))
+  %x = $replace(%x,$chr(32),+)
+  return %x
+}
+alias shorten { 
+  set %short.urlenc $urlencode($1-)
+  sockclose tgl0beurl
+  sockopen tgl0beurl tgl0.be 80 
+}
+alias tgl0beurl.timeout {
+  sockclose tgl0beurl
+  permanent input %short.input 
+}
+on *:sockopen:tgl0beurl:{
+  if (!$sockerr) {
+    sockwrite -n $sockname GET /api.php?action=shorturl&format=simple&url= $+ %short.urlenc HTTP/1.1
+    sockwrite -n $sockname Host: tgl0.be
+    sockwrite -n $sockname $crlf
+  }
+  else  {
+    permanent input %short.input 
+  }
+}
+on *:sockread:tgl0beurl:{
+  if (!$sock($sockname).mark) {
+    var %read | sockread %read
+    if (%read == $null) { sockmark $sockname 1 }
+  }
+  else { 
+    bunset &shorturl
+    sockread &shorturl 
+    set %short.shorturl $bvar(&shorturl,1-).text 
+    if ($regex(%short.shorturl,/^http:\/\/([^ ]*)?/)) {
+      .timertgl0beurl off
+      permanent input $replace(%short.input, %short.url, %short.shorturl)
+    }
+    else {
+      permanent input %short.input 
+    }
+  } 
+}
+on 1:input:*: {
+  if (($left($1-,1) != /) && ($left($1-,1) != !)) && (($left($1-,1) != .)) && (c !isincs $chan($active).mode) {
+    if ( $active == Status Window ) { 
+      Echo 4 -at Impossible d'écrire dans cette fenêtre
+      Halt
+    }
+    if ((%activer.shorturl) && ($regex($1-,/http:\/\/([^ ]*)?/))) {
+      unset %short.*
+      set %short.input $1-
+      set %short.url http:// $+ $regml(1)
+      if ($len(%short.url) > 30) {
+        .timertgl0beurl 1 2 tgl0beurl.timeout
+        shorten %short.url
+        haltdef
+      }
+      else {
+        permanent input $1- 
+      }
+    }
+    else {
+      permanent input $1- 
+    }
+  }
+}
+Alias ChargeComboCouleur {
+  did -r Tgl0be $1 
+  didtok Tgl0be $1 59 Blanc;Noir;Bleu Foncé;Vert Foncé;Rouge;Marron;Violet;Orange;Jaune;Vert;Aqua;Bleu Clair;Bleu;Rose;Gris;Gris Clair;Random
+  Did -c Tgl0be $1 $Calc( $2 + 1)
+}
+Alias ChargeComboCouleurFond {
+  did -r Tgl0be $1 
+  didtok Tgl0be $1 59 Blanc;Noir;Bleu Foncé;Vert Foncé;Rouge;Marron;Violet;Orange;Jaune;Vert;Aqua;Bleu Clair;Bleu;Rose;Gris;Gris Clair;Random;Aucun
+  Did -c Tgl0be $1 $Calc( $2 + 1)
+}
+Alias SauverEcriture {
+  set %ecriture.off.couleur.text $calc( $did(85).sel - 1 )
+  if ( $len(%ecriture.off.couleur.text) == 1 ) set %ecriture.off.couleur.text 0 $+ %ecriture.off.couleur.text
+  set %ecriture.off.couleur.fond $calc( $did(86).sel - 1)
+  if ( $len(%ecriture.off.couleur.fond) == 1 ) set %ecriture.off.couleur.fond 0 $+ %ecriture.off.couleur.fond
+  Set %ecriture.off.pseudo.symbol $did(92)
+  set %ecriture.perso.couleur.text $calc( $did(98).sel - 1)
+  if ( $len(%ecriture.perso.couleur.text) == 1 ) set %ecriture.perso.couleur.text 0 $+ %ecriture.perso.couleur.text
+  set %ecriture.perso.couleur.fond $calc( $did(99).sel - 1)
+  if ( $len(%ecriture.perso.couleur.fond) == 1 ) set %ecriture.perso.couleur.fond 0 $+ %ecriture.perso.couleur.fond
+  set %ecriture.perso.pseudo $null
+  If ( $did(88).state == 1 ) { set %ecriture.perso.pseudo %ecriture.perso.pseudo $+ gras } 
+  If ( $did(89).state == 1 ) { set %ecriture.perso.pseudo %ecriture.perso.pseudo $+ soul } 
+  If ( $did(90).state == 1 ) { set %ecriture.perso.pseudo %ecriture.perso.pseudo $+ inv  } 
+  Set %ecriture.perso.pseudo.symbol $did(105)
+  Set %ecriture.perso.deco.g $did(109)
+  Set %Ecriture.Perso.Deco.Coul.Text.G $Calc($Did(111).Sel - 1)
+  if ( $len(%Ecriture.Perso.Deco.Coul.Text.G) == 1 ) set %Ecriture.Perso.Deco.Coul.Text.G 0 $+ %Ecriture.Perso.Deco.Coul.Text.G
+  Set %Ecriture.Perso.Deco.Coul.Fond.G $Calc($Did(113).Sel - 1)
+  if ( $len(%Ecriture.Perso.Deco.Coul.Fond.G) == 1 ) set %Ecriture.Perso.Deco.Coul.Fond.G 0 $+ %Ecriture.Perso.Deco.Coul.Fond.G
+  Set %ecriture.perso.deco.d $did(110)
+  Set %Ecriture.Perso.Deco.Coul.Text.D $Calc($Did(112).Sel - 1)
+  if ( $len(%Ecriture.Perso.Deco.Coul.Text.D) == 1 ) set %Ecriture.Perso.Deco.Coul.Text.D 0 $+ %Ecriture.Perso.Deco.Coul.Text.D
+  Set %Ecriture.Perso.Deco.Coul.Fond.D $Calc($Did(114).Sel - 1)
+  if ( $len(%Ecriture.Perso.Deco.Coul.Fond.D) == 1 ) set %Ecriture.Perso.Deco.Coul.Fond.D 0 $+ %Ecriture.Perso.Deco.Coul.Fond.D
+  Set %ecriture.perso.couleur.majs $calc( $did(124).sel - 1)
+  if ( $len(%ecriture.perso.couleur.majs) == 1 ) set %ecriture.perso.couleur.majs 0 $+ %ecriture.perso.couleur.majs
+  Set %ecriture.pv.couleur.text $calc( $did(127).sel - 1)
+  if ( $len(%ecriture.pv.couleur.text) == 1 ) set %ecriture.pv.couleur.text 0 $+ %ecriture.pv.couleur.text
+  Set %ecriture.pv.couleur.fond $calc( $did(128).sel - 1)
+  if ( $len(%ecriture.pv.couleur.fond) == 1 ) set %ecriture.pv.couleur.fond 0 $+ %ecriture.pv.couleur.fond
+  Set %ecriture.pv.deco.g $did(132)
+  Set %Ecriture.Pv.Deco.Coul.Text.G $Calc($Did(134).Sel - 1)
+  if ( $len(%Ecriture.Pv.Deco.Coul.Text.G) == 1 ) set %Ecriture.Pv.Deco.Coul.Text.G 0 $+ %Ecriture.Pv.Deco.Coul.Text.G
+  Set %Ecriture.Pv.Deco.Coul.Fond.G $Calc($Did(136).Sel - 1)
+  if ( $len(%Ecriture.Pv.Deco.Coul.Fond.G) == 1 ) set %Ecriture.Pv.Deco.Coul.Fond.G 0 $+ %Ecriture.Pv.Deco.Coul.Fond.G
+  Set %ecriture.pv.deco.d $did(133)
+  Set %Ecriture.Pv.Deco.Coul.Text.D $Calc($Did(135).Sel - 1)
+  if ( $len(%Ecriture.Pv.Deco.Coul.Text.D) == 1 ) set %Ecriture.Pv.Deco.Coul.Text.D 0 $+ %Ecriture.Pv.Deco.Coul.Text.D
+  Set %Ecriture.Pv.Deco.Coul.Fond.D $Calc($Did(137).Sel - 1)
+  if ( $len(%Ecriture.Pv.Deco.Coul.Fond.D) == 1 ) set %Ecriture.Pv.Deco.Coul.Fond.D 0 $+ %Ecriture.Pv.Deco.Coul.Fond.D
+  Set %ecriture.pv.couleur.majs $calc( $did(147).sel - 1)
+  if ( $len(%ecriture.pv.couleur.majs) == 1 ) set %ecriture.pv.couleur.majs 0 $+ %ecriture.pv.couleur.majs
+}
+
+
+Alias SauverProfil {
+  write -c $1
+  Write -l1 $1 $Did(157)
+  Write -l2 $1 ---------------------
+  Write -l3 $1 %ecriture.off.tout.gras 
+  Write -l4 $1 %ecriture.off.tout.soul
+  Write -l5 $1 *** Libre 
+  Write -l6 $1 %Ecriture.off.couleur.fond 
+  Write -l7 $1 *** Libre
+  Write -l8 $1 %Ecriture.off.couleur.text 
+  Write -l9 $1 %Ecriture.off.pseudo 
+  Write -l10 $1 %Ecriture.off.pseudo.symbol 
+  Write -l11 $1 %Ecriture.perso.couleur.fond 
+  Write -l12 $1 %Ecriture.perso.couleur.majs 
+  Write -l13 $1 %Ecriture.perso.couleur.text 
+  Write -l14 $1 %Ecriture.Perso.Deco.Coul.Fond.D 
+  Write -l15 $1 %Ecriture.Perso.Deco.Coul.Fond.G
+  Write -l16 $1 %Ecriture.Perso.Deco.Coul.Text.D 
+  Write -l17 $1 %Ecriture.Perso.Deco.Coul.Text.G 
+  Write -l18 $1 %Ecriture.perso.deco.d
+  Write -l19 $1 %Ecriture.perso.deco.g
+  Write -l20 $1 %Ecriture.perso.decogras.d 
+  Write -l21 $1 %Ecriture.perso.decogras.g 
+  Write -l22 $1 %Ecriture.perso.majs 
+  Write -l23 $1 %Ecriture.perso.pseudo 
+  Write -l24 $1 %Ecriture.perso.pseudo.symbol 
+  Write -l25 $1 %Ecriture.perso.tout.gras 
+  Write -l26 $1 %Ecriture.perso.tout.soul 
+  Write -l27 $1 %Ecriture.pv.couleur.fond 
+  Write -l28 $1 %Ecriture.pv.couleur.majs 
+  Write -l29 $1 %Ecriture.pv.couleur.text 
+  Write -l30 $1 %Ecriture.Pv.Deco.Coul.Fond.D 
+  Write -l31 $1 %Ecriture.Pv.Deco.Coul.Fond.G 
+  Write -l32 $1 %Ecriture.Pv.Deco.Coul.Text.D 
+  Write -l33 $1 %Ecriture.Pv.Deco.Coul.Text.G 
+  Write -l34 $1 %Ecriture.pv.deco.d
+  Write -l35 $1 %Ecriture.pv.deco.g
+  Write -l36 $1 %Ecriture.pv.decogras.d 
+  Write -l37 $1 %Ecriture.pv.decogras.g 
+  Write -l38 $1 %Ecriture.pv.majs 
+  Write -l39 $1 %Ecriture.pv.pseudo 
+  Write -l40 $1 %Ecriture.pv.pseudo.symbol 
+  Write -l41 $1 %Ecriture.pv.tout.gras 
+  Write -l42 $1 %Ecriture.pv.tout.soul 
+  Write -l43 $1 %Ecriture.state 
+  Var %Symbol = 1
+  Var %Ligne = 44
+  While ( %Ecriture.caracspé.coul. [ $+ [ %Symbol ] ] != $Null ) && ( %Ecriture.caracspé.in. [ $+ [ %Symbol ] ] != $Null ) && ( %Ecriture.caracspé.out. [ $+ [ %Symbol ] ] != $Null ) {
+    Write -l $+ %Ligne $1 %Ecriture.caracspé.coul. [ $+ [ %Symbol ] ] 
+    Write -l $+ %Ligne $1 %Ecriture.caracspé.in. [ $+ [ %Symbol ] ] 
+    Write -l $+ %Ligne $1 %Ecriture.caracspé.out. [ $+ [ %Symbol ] ] 
+    Inc %Symbol
+    Inc %Ligne 3
+  }
+}
+Alias ChargerProfil {
+  Set %ecriture.off.tout.gras $Read( $1 , 3 )
+  Set %ecriture.off.tout.soul $Read( $1 , 4 )
+  Set %Ecriture.off.couleur.fond $Read( $1 , 6 )
+  Set %Ecriture.off.couleur.text $Read( $1 , 8 )
+  Set %Ecriture.off.pseudo $Read( $1 , 9 )
+  Set %Ecriture.off.pseudo.symbol $Read( $1 , 10 )
+  Set %Ecriture.perso.couleur.fond $Read( $1 , 11 )
+  Set %Ecriture.perso.couleur.majs $Read( $1 , 12 )
+  Set %Ecriture.perso.couleur.text $Read( $1 , 13 )
+  Set %Ecriture.Perso.Deco.Coul.Fond.D $Read( $1 , 14 )
+  Set %Ecriture.Perso.Deco.Coul.Fond.G $Read( $1 , 15 )
+  Set %Ecriture.Perso.Deco.Coul.Text.D $Read( $1 , 16 )
+  Set %Ecriture.Perso.Deco.Coul.Text.G $Read( $1 , 17 )
+  Set %Ecriture.perso.deco.d $Read( $1 , 18 )
+  Set %Ecriture.perso.deco.g $Read( $1 , 19 )
+  Set %Ecriture.perso.decogras.d $Read( $1 , 20 )
+  Set %Ecriture.perso.decogras.g $Read( $1 , 21 )
+  Set %Ecriture.perso.majs $Read( $1 , 22 )
+  Set %Ecriture.perso.pseudo $Read( $1 , 23 )
+  Set %Ecriture.perso.pseudo.symbol $Read( $1 , 24 )
+  Set %Ecriture.perso.tout.gras $Read( $1 , 25 )
+  Set %Ecriture.perso.tout.soul $Read( $1 , 26 )
+  Set %Ecriture.pv.couleur.fond $Read( $1 , 27 )
+  Set %Ecriture.pv.couleur.majs $Read( $1 , 28 )
+  Set %Ecriture.pv.couleur.text $Read( $1 , 29 )
+  Set %Ecriture.Pv.Deco.Coul.Fond.D $Read( $1 , 30 )
+  Set %Ecriture.Pv.Deco.Coul.Fond.G $Read( $1 , 31 )
+  Set %Ecriture.Pv.Deco.Coul.Text.D $Read( $1 , 32 )
+  Set %Ecriture.Pv.Deco.Coul.Text.G $Read( $1 , 33 )
+  Set %Ecriture.pv.deco.d $Read( $1 , 34 )
+  Set %Ecriture.pv.deco.g $Read( $1 , 35 )
+  Set %Ecriture.pv.decogras.d $Read( $1 , 36 )
+  Set %Ecriture.pv.decogras.g $Read( $1 , 37 )
+  Set %Ecriture.pv.majs $Read( $1 , 38 )
+  Set %Ecriture.pv.pseudo $Read( $1 , 39 )
+  Set %Ecriture.pv.pseudo.symbol $Read( $1 , 40 )
+  Set %Ecriture.pv.tout.gras $Read( $1 , 41 )
+  Set %Ecriture.pv.tout.soul $Read( $1 , 42 )
+  Set %Ecriture.state $Read( $1 , 43 )
+  Var %Symbol = 1
+  Var %Ligne = 44
+  While ( $Read( $1 , %Ligne ) != $Null ) {
+    Set %Ecriture.caracspé.coul. [ $+ [ %Symbol ] ] $Read( $1 , %Ligne )
+    Inc %Symbol
+    Inc %Ligne 3
+  }
+  Var %Symbol = 1
+  Var %Ligne = 45
+  While ( $Read( $1 , %Ligne ) != $Null ) {
+    Set %Ecriture.caracspé.in. [ $+ [ %Symbol ] ] $Read( $1 , %Ligne )
+    Inc %Symbol
+    Inc %Ligne 3
+  }
+  Var %Symbol = 1
+  Var %Ligne = 46
+  While ( $Read( $1 , %Ligne ) != $Null ) {
+    Set %Ecriture.caracspé.out. [ $+ [ %Symbol ] ] $Read( $1 , %Ligne )
+    Inc %Symbol
+    Inc %Ligne 3
+  }
+  If ($dialog(Tgl0be).hwnd != $Null) {
+    Dialog -x Tgl0be
+    Dialog -m Tgl0be Tgl0be
+  }
+}
+Alias Joinall RejoindreTousChan
+Alias LireListeSalon {  
+  Var %i = 1
+  Did -r Tgl0be 180
+  While ( %i <= $ini(Salon.ini,0) ) {
+    Did -a Tgl0be 180 $ini(Salon.ini,%i)
+    Inc %i
+  }
+}
+Alias LireListeServeur {
+  Var %i = 0
+  Did -r Tgl0be 199
+  Did -a Tgl0be 199 Tous
+  While ( $Readini(servers.ini, servers, n $+ %i ) != $Null ) {
+    Did -a Tgl0be 199 $LireNomServeur( $Readini(Servers.ini, servers , n $+ %i ) )
+    Inc %i
+  }
+}
+Alias LireNomServeur {  
+  Return $Right( $1 , $Calc( $Len($1) - $Pos( $1 , GROUP: , 1 ) - 5 ) )
+}
+Alias TrouverNumeroServeur {
+  If ( $1 == $Null ) { Return $didwm( Tgl0be , 199 , Tous ) }
+  Else { Return $didwm( Tgl0be , 199 , $1 ) }
+}
+Alias CocheCase {
+  If ( $ReadIni($MircDirSalon.ini , %Salon.Nom , $1 ) == 1 ) { Did -c Tgl0be $2 }
+  Else { Did -u Tgl0be $2 }
+}
+Alias EcrireTextIni {
+  If ( $Did( $2 ) != $Null ) { /WriteIni $shortfn($MircDirSalon.ini) %Salon.Nom $1 " $+ $Did( $2 ) $+ " }
+  Else { /RemIni $shortfn($MircDirSalon.ini) %Salon.Nom $1 }
+}
+Alias ExisteChanIni {
+  Var %i = 1
+  While ( %i <= $ini(Salon.ini,0) ) {
+    If ( $Chan == $ini(Salon.ini,%i) ) { Return $True }
+    Inc %i
+  }
+}
+Alias MenuAutovoice {
+  Var %i = 1
+  While ( %i <= $ini(Salon.ini,0) ) {
+    If ( $ini(Salon.ini,%i) == $Chan ) && ( $ReadIni($MircDirSalon.ini , $ini(Salon.ini , %i ) , AutoVoice ) == 1 ) { Return $True }
+    If ( $ini(Salon.ini,%i) == $Chan ) && ( $ReadIni($MircDirSalon.ini , $ini(Salon.ini , %i ) , AutoVoice ) == 0 ) { Return $False }
+    Inc %i
+  }
+}
+Alias MenuListeChan {
+  if ($1 == begin) return -
+  Var %i = 1
+  While ( %i <= $ini(Salon.ini,0) ) {
+    If ( $me !ison $Ini(Salon.ini, %i ) ) && ( $VerifieServeur($ini(Salon.ini, %i )) == $true ) { Var %List = %List $+ ; $+ $ini(Salon.ini,%i) }
+    Inc %i
+  }
+  Var %i = 1
+  While ( %i <= $numtok( %list , 59 ) ) {
+    Var %Salon = $Gettok( %List , %i , 59 )
+    If ( %i == $1 ) { Return %Salon : Join %Salon }
+    Inc %i
+  }
+  if ($1 == end) return -
+}
+Alias MenuListeChan2 {
+  if ($1 == begin) return -
+  Var %i = 1
+  While ( %i <= $ini(Salon.ini,0) ) {
+    If ( $me !ison $Ini(Salon.ini, %i ) ) && ( $VerifieServeur($ini(Salon.ini, %i )) == $true ) { Var %List = %List $+ ; $+ $ini(Salon.ini,%i) }
+    Inc %i
+  }
+  Var %i = 1
+  While ( %i <= $numtok( %list , 59 ) ) {
+    Var %Salon = $Gettok( %List , %i , 59 )
+    If ( %i == $1 ) { Return %Salon : invite $$1 %Salon }
+    Inc %i
+  }
+  if ($1 == end) return -
+}
+Alias RejoindreTousChan {
+  Echo $Color(Info Text) -se *** Connexion aux salons...
+  Var %i = 1
+  While ( %i <= $ini(Salon.ini,0) ) {
+    If ( $VerifieServeur($ini(Salon.ini, %i )) == $true ) { /.Join $ini(Salon.ini , %i ) }
+    Inc %i
+  }
+}
+Alias VerifieServeur {
+  If ( $ReadIni($MircDirSalon.ini , $1 , Serveur ) == $NetWork ) || ( $ReadIni($MircDirSalon.ini , $1 , Serveur ) == Tous ) { Return $true }
+  Else Return $false
+}
+Alias OpAll {
+  Var %i = 1
+  Var %salon
+  While ( %i <= $comchan( $me , 0 ) ) {
+    %salon = $comchan( $me , %i )
+    if ( $nick.bot(%salon) isop %salon ) && ( $ReadIni($MircDirSalon.ini , %salon , Pass ) != $null ) { .Msg $nick.bot(%salon) op $ReadIni($MircDirSalon.ini , %salon , Pass ) %Salon }
+    inc %i
+  }
+}
+Alias F1 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 2 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 2 ) } }
+Alias F2 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 3 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 3 ) } }
+Alias F3 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 4 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 4 ) } }
+Alias F4 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 5 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 5 ) } }
+Alias F5 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 6 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 6 ) } }
+Alias F6 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 7 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 7 ) } }
+Alias F7 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 8 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 8 ) } }
+Alias F8 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 9 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 9 ) } }
+Alias F12 { 
+  If ( $Read( $MircDirTRaccourcis.tgs ,n , 13 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 13 ) } 
+  Else { ConfigTRacc }
+}
+Alias cF1 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 15 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 15 ) } }
+Alias cF2 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 16 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 16 ) } }
+Alias cF3 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 17 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 17 ) } }
+Alias cF5 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 19 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 19 ) } }
+Alias cF6 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 20 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 20 ) } }
+Alias cF7 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 21 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 21 ) } }
+Alias cF8 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 22 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 22 ) } }
+Alias cF9 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 23 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 23 ) } }
+Alias cF10 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 24 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 24 ) } }
+Alias cF11 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 25 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 25 ) } }
+Alias cF12 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 26 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 26 ) } }
+Alias sF1 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 28 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 28 ) } }
+Alias sF2 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 29 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 29 ) } }
+Alias sF3 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 30 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 30 ) } }
+Alias sF4 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 31 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 31 ) } }
+Alias sF5 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 32 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 32 ) } }
+Alias sF6 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 33 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 33 ) } }
+Alias sF7 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 34 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 34 ) } }
+Alias sF8 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 35 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 35 ) } }
+Alias sF9 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 36 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 36 ) } }
+Alias sF10 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 37 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 37 ) } }
+Alias sF11 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 38 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 38 ) } }
+Alias sF12 { If ( $Read( $MircDirTRaccourcis.tgs ,n , 39 ) != $Null ) { $Read( $MircDirTRaccourcis.tgs ,n , 39 ) } }
+Alias TRacc {
+  If ($1 == Invite) {
+    If ($2 < 14 ) { Var %i = 1 | Var %t = $Null }
+    If ($2 > 14 ) && ($2 < 27 ) { Var %i = 14 | Var %t = Control $+ $Chr(43) }
+    If ($2 > 27 ) { Var %i = 14 | Var %t = Shift $Asc(43) }
+    Set %Invit.Touche %t $+ F $+ $Calc( $2 - %i )
+  }
+  If ($1 == Ecrire) {
+    If ( n isin $2 ) {
+      Var %s = 1
+      Var %r = $Calc( %s + $3 )
+      Write -l $+ %r $shortfn($MircDirTRaccourcis.tgs) $4-
+    }
+    If ( c isin $2 ) {
+      Var %s = 14
+      Var %r = $Calc( %s + $3 )
+      Write -l $+ %r $shortfn($MircDirTRaccourcis.tgs) $4-
+    }
+    If ( s isin $2 ) {
+      Var %s = 27
+      Var %r = $Calc( %s + $3 )
+      Write -l $+ %r $shortfn($MircDirTRaccourcis.tgs) $4-
+    }
+  }
+}
+Alias TRaccCreation {
+  Write -l1 $MircDirTRaccourcis.tgs Normal
+  Write -l2 $MircDirTRaccourcis.tgs Tgl0be
+  Write -l3 $MircDirTRaccourcis.tgs join #tglobe tglobe
+  Write -l4 $MircDirTRaccourcis.tgs nick Tgl0beUSER
+  Write -l5 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l6 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l7 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l8 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l9 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l10 $MircDirTRaccourcis.tgs ProtectAverto 
+  Write -l11 $MircDirTRaccourcis.tgs ProtectKick
+  Write -l12 $MircDirTRaccourcis.tgs ProtectKickBan
+  Write -l13 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l14 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l15 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l16 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l17 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l18 $MircDirTRaccourcis.tgs Reservé
+  Write -l19 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l20 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l21 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l22 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l23 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l24 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l25 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l26 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l27 $MircDirTRaccourcis.tgs Shift
+  Write -l28 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l29 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l30 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l31 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l32 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l33 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l34 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l35 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l37 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l38 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l39 $MircDirTRaccourcis.tgs Echo -a Aucune Action associée
+  Write -l40 $MircDirTRaccourcis.tgs Echo -a spampv
+}
+Alias SauveListeProt {
+  If ( $did(324).state = 1 ) {   
+    unset %protect.pub
+    Set %Protect.Pub $DidTok(Tgl0be,322,59)
+  }
+  If ( $did(323).state = 1 ) { 
+    unset %protect.insulte
+    Set %Protect.Insulte $DidTok(Tgl0be,322,59)
+  }
+  If ( $did(325).state = 1 ) { 
+    unset %protect.racisme
+    Set %Protect.Racisme $DidTok(Tgl0be,322,59)
+  }
+  If ( $did(326).state = 1 ) { 
+    unset %protect.NickList
+    Set %Protect.NickList $DidTok(Tgl0be,322,59)
+  }
+  If ( $did(608).state = 1 ) { 
+    unset %protect.Sexe
+    Set %Protect.Sexe $DidTok(Tgl0be,322,59)
+  }
+  If ( $did(609).state = 1 ) { 
+    unset %protect.Incit
+    Set %Protect.Incit $DidTok(Tgl0be,322,59)
+  }
+}
+Alias RefreshSkinList {
+  Var %NumSkin = 1, %MaxSkins = $finddir($SkinDir,*.*,0), %SkinSelection = $did(Tgl0be,444).sel
+  Did -r Tgl0be 444
+  :SkinSuivant
+  If (%NumSkin > %MaxSkins) { Goto FinLectureSkin }
+  Did -a Tgl0be 444 $nopath($finddir($SkinDir,*.*,%NumSkin))
+  Inc %NumSkin
+  Goto SkinSuivant
+  :FinLectureSkin
+  If (%SkinSelection != $null) { Did -c Tgl0be 444 %SkinSelection }
+  Else {  Did -b Tgl0be 446,447,448 }
+}
+
+Alias GestionControlTabImages {
+  If ($did == 201) && ($did(201).seltext != $null) {
+    Var %ImageSkin = $GetVarSkin($did(201).seltext,Détails)
+    Did -e SkinsMaj 204,205,206
+    If %ImageSkin == $null { Did -r SkinsMaj 203 | Did -b SkinsMaj 204,206 }
+    Else                   { Did -ra SkinsMaj 203 $nopath(%ImageSkin) }
+  }
+  If ($did == 204) && ($did(203) != $null) {
+    $ShowPicture($GetVarSkin($did(201).seltext,Détails))
+  }
+  If (($did == 205) && ($did(201).seltext != $null)) || ($1 == $true) {
+    Var %NouvelleImage = $sfile($iif(%Skin.Repertoire == $null,C:\,%Skin.Repertoire),Sélection d'une image)
+    If (%NouvelleImage != $null) {
+      $PutVarSkin($did(201).seltext,%NouvelleImage)
+      Did -ra SkinsMaj 203 $nopath(%NouvelleImage)
+      Did -e SkinsMaj 204,206
+      %Skin.Repertoire = $nofile(%NouvelleImage)
+    }
+  }
+  If ($did == 206) && ($did(201).seltext != $null) {
+    $PutVarSkin($did(201).seltext,$null)
+    Did -r SkinsMaj 203
+    Did -b SkinsMaj 204,206
+  }
+}
+Alias GestionControlTabSons {
+  If ($did == 301) && ($did(301).seltext != $null) {
+    Var %SonSkin = $GetVarSkin($did(301).seltext,Détails)
+    Did -e SkinsMaj 304,305,306
+    If %SonSkin == $null { Did -r SkinsMaj 303 | Did -b SkinsMaj 304,306 }
+    Else                 { Did -ra SkinsMaj 303 $nopath(%SonSkin) }
+  }
+  If ($did == 304) && ($did(303) != $null) {
+    If ($inwave == $false) && ($inmidi == $false) && ($insong == $false) { Splay $GetVarSkin($did(301).seltext,Détails) }
+  }
+  If (($did == 305) && ($did(301).seltext != $null)) || ($1 == $true) {
+    Var %NouveauSon = $sfile($iif(%Skin.Repertoire == $null,C:\,%Skin.Repertoire),Sélection d'un son)
+    If (%NouveauSon != $null) {
+      $PutVarSkin($did(301).seltext,%NouveauSon)
+      Did -ra SkinsMaj 303 $nopath(%NouveauSon)
+      Did -e SkinsMaj 304,306
+      %Skin.Repertoire = $nofile(%NouveauSon)
+    }
+  }
+  If ($did == 306) && ($did(301).seltext != $null) {
+    $PutVarSkin($did(301).seltext,$null)
+    Did -r SkinsMaj 303
+    Did -b SkinsMaj 304,306
+  }
+}
+Alias GestionControlTabEvents {
+  If ($did == 501) && ($did(501).seltext != $null) {
+    Var %CoulSkin = $GetVarSkin($did(501).seltext,Events)
+    Did -c SkinsMaj 503 %CoulSkin
+    Did -e SkinsMaj 503
+  }
+  If ($did == 503) && ($did(501).seltext != $null) {
+    $PutVarSkin($did(501).seltext,$did(503).sel)
+  }
+}
+Alias GestionControlTabNicklist {
+  IF ($did == 601) && ($did(601).seltext != $null) {
+    Var %CoulSkin = $GetVarSkin($did(601).seltext,Nicklist)
+    Did -c SkinsMaj 603 %CoulSkin
+    Did -e SkinsMaj 603
+  }
+  If ($did == 603) && ($did(601).seltext != $null) {
+    $PutVarSkin($did(601).seltext,$did(603).sel)
+  }
+}
+Alias EnregistreSkin {
+  If ($isdir($1) == $false) { Mkdir " $+ $1 $+ " }
+  If ($exists($2) == $true) { .Remove " $+ $2 $+ " }
+  .Writeini $shortfn($2) Description Nom $did(101)
+  Var %NumVar = 1 
+  :ItemSuivant
+  If ($var(%Skin.Details.*,%NumVar).value != $null) {
+    If (" $+ $var(%Skin.Details.*,%NumVar).value $+ " != " $+ $1 $+ \ $+ $nopath($var(%Skin.Details.*,%NumVar).value) $+ ") {
+      .Remove " $+ $1 $+ \ $+ $nopath($var(%Skin.Details.*,%NumVar).value) $+ "
+      .Copy -o " $+ $var(%Skin.Details.*,%NumVar).value $+ "    " $+ $1 $+ \ $+ $nopath($var(%Skin.Details.*,%NumVar).value) $+ "
+    }
+    .Writeini $2 Détails $gettok($var(%Skin.Details.*,%NumVar),3-,46) $nopath($var(%Skin.Details.*,%NumVar).value)
+  }
+  Inc %NumVar
+  If (%NumVar <= $var(%Skin.Details.*,0)) { Goto ItemSuivant }
+  .WriteIni $2 Fenetres EditBox.Text  %Skin.Fenetres.EditBox.Text
+  .WriteIni $2 Fenetres EditBox.Fond  %Skin.Fenetres.EditBox.Fond
+  .WriteIni $2 Fenetres Fenetre.Fond  %Skin.Fenetres.Fenetre.Fond
+  .WriteIni $2 Fenetres NickList.Fond %Skin.Fenetres.NickList.Fond
+  %NumVar = 1
+  :ItemSuivant2
+  If ($var(%Skin.Events.*,%NumVar).value != $null) {
+    .Writeini $2 Events $gettok($var(%Skin.Events.*,%NumVar),3,46) $var(%Skin.Events.*,%NumVar).value
+  }
+  Inc %NumVar
+  If (%NumVar <= $var(%Skin.Events.*,0)) { Goto ItemSuivant2 }
+  %NumVar = 1
+  :ItemSuivant3
+  If ($var(%Skin.Nicklist.*,%NumVar).value != $null) {
+    .Writeini $2 Nicklist $gettok($var(%Skin.Nicklist.*,%NumVar),3,46) $var(%Skin.Nicklist.*,%NumVar).value
+  }
+  Inc %NumVar
+  If (%NumVar <= $var(%Skin.Nicklist.*,0)) { Goto ItemSuivant3 }
+}
+Alias SkinChargeTemp {
+  Var %RepSkin = $Skindir $+ \ $+ $1- $+ \, %SkinIni = $iif($1 != $null,$shortfn( %RepSkin $+ Skin.ini ),$null)
+  %Skin.Nom = $iif($1 != $null,$readini(%SkinIni, Description, Nom))
+  Var %NumItem = 1, %NomItem
+  :ItemSuivant
+  %NomItem = $ini(%SkinIni,Détails,%NumItem)
+  If (%NomItem != 0) && (%NomItem != $null) { Set %Skin.Details. $+ %NomItem %RepSkin $+ $readini(%SkinIni,Détails,%NomItem) }
+  Inc %NumItem
+  If (%NumItem <= $ini(%SkinIni,Détails,0)) { Goto ItemSuivant }
+  %Skin.Fenetres.EditBox.Text = $readini(%SkinIni,Fenetres,EditBox.Text)
+  %Skin.Fenetres.EditBox.Fond = $readini(%SkinIni,Fenetres,EditBox.Fond)
+  %Skin.Fenetres.Fenetre.Fond = $readini(%SkinIni,Fenetres,Fenetre.Fond)
+  %Skin.Fenetres.NickList.Fond = $readini(%SkinIni,Fenetres,NickList.Fond)
+  If %Skin.Fenetres.EditBox.Text  == $null { %Skin.Fenetres.EditBox.Text  = $calc($color(editbox text) + 1) }
+  If %Skin.Fenetres.EditBox.Fond  == $null { %Skin.Fenetres.EditBox.Fond  = $calc($color(editbox) + 1) }
+  If %Skin.Fenetres.Fenetre.Fond  == $null { %Skin.Fenetres.Fenetre.Fond  = $calc($color(background) + 1) }
+  If %Skin.Fenetres.NickList.Fond == $null { %Skin.Fenetres.NickList.Fond = $calc($color(listbox) + 1) }
+  %NumItem = 1
+  :EventSuivant
+  %NomItem = $ini(%SkinIni,Events,%NumItem)
+  If (%NomItem != 0) && (%NomItem != $null) { Set %Skin.Events. $+ %NomItem $readini(%SkinIni,Events,%NomItem) }
+  Inc %NumItem
+  If (%NumItem <= $ini(%SkinIni,Events,0)) { Goto EventSuivant }
+  If (%Skin.Events.Op == $null)    { %Skin.Events.Op = 5 }
+  If (%Skin.Events.DeOp == $null)    { %Skin.Events.DeOp = 5 }
+  If (%Skin.Events.Voice == $null)    { %Skin.Events.Voice = 4 }
+  If (%Skin.Events.DeVoice == $null)    { %Skin.Events.DeVoice = 4 }
+  If (%Skin.Events.Ban == $null)    { %Skin.Events.Ban = 5 }
+  If (%Skin.Events.DeBan == $null)    { %Skin.Events.DeBan = 5 }
+  If (%Skin.Events.Action == $null)    { %Skin.Events.Action    = $calc($color(action text) + 1) }
+  If (%Skin.Events.Ctcp == $null)      { %Skin.Events.Ctcp      = $calc($color(ctcp text) + 1) }
+  If (%Skin.Events.Highlight == $null) { %Skin.Events.Highlight = $calc($color(highlight text) + 1) }
+  If (%Skin.Events.Info == $null)      { %Skin.Events.Info      = $calc($color(info text) + 1) }
+  If (%Skin.Events.Info2 == $null)     { %Skin.Events.Info2     = $calc($color(info2 text) + 1) }
+  If (%Skin.Events.Invite == $null)    { %Skin.Events.Invite    = $calc($color(invite text) + 1) }
+  If (%Skin.Events.Join == $null)      { %Skin.Events.Join      = $calc($color(join text) + 1) }
+  If (%Skin.Events.Kick == $null)      { %Skin.Events.Kick      = $calc($color(kick text) + 1) }
+  If (%Skin.Events.Mode == $null)      { %Skin.Events.Mode      = $calc($color(mode text) + 1) }
+  If (%Skin.Events.Nick == $null)      { %Skin.Events.Nick      = $calc($color(nick text) + 1) }
+  If (%Skin.Events.Normal == $null)    { %Skin.Events.Normal    = $calc($color(normal text) + 1) }
+  If (%Skin.Events.Notice == $null)    { %Skin.Events.Notice    = $calc($color(notice text) + 1) }
+  If (%Skin.Events.Notify == $null)    { %Skin.Events.Notify    = $calc($color(notify text) + 1) }
+  If (%Skin.Events.Autre == $null)     { %Skin.Events.Autre     = $calc($color(other text) + 1) }
+  If (%Skin.Events.Moi == $null)       { %Skin.Events.Moi       = $calc($color(own text) + 1) }
+  If (%Skin.Events.Part == $null)      { %Skin.Events.Part      = $calc($color(part text) + 1) }
+  If (%Skin.Events.Quit == $null)      { %Skin.Events.Quit      = $calc($color(quit text) + 1) }
+  If (%Skin.Events.Topic == $null)     { %Skin.Events.Topic     = $calc($color(topic text) + 1) }
+  If (%Skin.Events.Wallops == $null)   { %Skin.Events.Wallops   = $calc($color(wallops text) + 1) }
+  If (%Skin.Events.Whois == $null)     { %Skin.Events.Whois     = $calc($color(whois text) + 1) }
+  %NumItem = 1
+  :NicklistSuivant
+  %NomItem = $ini(%SkinIni,Nicklist,%NumItem)
+  If (%NomItem != 0) && (%NomItem != $null) { Set %Skin.Nicklist. $+ %NomItem $readini(%SkinIni,Nicklist,%NomItem) }
+  Inc %NumItem
+  If (%NumItem <= $ini(%SkinIni,Nicklist,0)) { Goto NicklistSuivant }
+  IF (%Skin.Nicklist.Moi == $null) { %Skin.Nicklist.moi = 13 }
+  IF (%Skin.Nicklist.Ignore == $null) { %Skin.Nicklist.Ignore = 7 }
+  IF (%Skin.Nicklist.Op == $null) { %Skin.Nicklist.Op = 5 }
+  IF (%Skin.Nicklist.HalfOp == $null) { %Skin.Nicklist.HalfOp = 8 }
+  IF (%Skin.Nicklist.Voice == $null) { %Skin.Nicklist.Voice = 4 }
+  IF (%Skin.Nicklist.User == $null) { %Skin.Nicklist.User = 1 }
+}
+Alias GetVarSkin { 
+  Var %NumVar = 1, %Res = $null
+  If ($2 == Détails) {
+    :ItemSuivant
+    If ($gettok($var(%Skin.Details.*,%NumVar),3,46) == $1) { %Res = $var(%Skin.Details.*,%NumVar).value | Goto FinRech }
+    Inc %NumVar
+    If (%NumVar <= $var(%Skin.Details.*,0)) { Goto ItemSuivant }
+  }
+  If ($2 == Events) {
+    %NumVar = 1
+    :ItemSuivant2
+    If ($gettok($var(%Skin.Events.*,%NumVar),3,46) == $1) { %Res = $var(%Skin.Events.*,%NumVar).value | Goto FinRech }
+    Inc %NumVar
+    If (%NumVar <= $var(%Skin.Events.*,0)) { Goto ItemSuivant2 }
+  }
+  If ($2 == Nicklist) {
+    %NumVar = 1
+    :ItemSuivant3
+    If ($gettok($var(%Skin.Nicklist.*,%NumVar),3,46) == $1) { %Res = $var(%Skin.Nicklist.*,%NumVar).value | Goto FinRech }
+    Inc %NumVar
+    If (%NumVar <= $var(%Skin.Nicklist.*,0)) { Goto ItemSuivant3 }
+  }
+  :FinRech
+  Return %Res
+}
+Alias PutVarSkin { 
+  If ($did < 400) { Set %Skin.Details. $+ $$1 $2 }
+  Else {
+    If ($did < 600) { Set %Skin.Events. $+ $$1 $2 }
+    Else { Set %Skin.Nicklist. $+ $$1 $2 }
+  }
+}
+Alias ReadIniInfoSkinDefaut { Return $readini($Skindir $+ \ $+ %Skin.Defaut $+ \ $+ skin.ini,Détails,$1) }
+Alias ReadIniInfoSkinEvents { Return $readini($Skindir $+ \ $+ %Skin.Defaut $+ \ $+ skin.ini,Events,$1) }
+Alias ReadIniInfoSkinNicklist { Return $readini($Skindir $+ \ $+ %Skin.Defaut $+ \ $+ skin.ini,Nicklist,$1) }
+Alias DechargeVarSkin {
+  Unset %Skin.Details.*
+  Unset %Skin.Fenetres.*
+  Unset %Skin.Events.*
+  Unset %Skin.Nicklist.*
+}
+Alias SkinSupprime {
+  If $1 != $null {
+    Var %Confirm = $input(Désirez-vous vraiment supprimer le skin $1- ?,136)
+    If %Confirm == $true {
+      Var %RepSkin = $Skindir $+ \ $+ $1- $+ \, %MaxFichier = $findfile(%RepSkin,*.*,0,.Remove $1-)
+      Rmdir %RepSkin
+    }
+  }
+}
+Alias ChargeSkin {
+  If ($1 != $null) {
+    $SkinChargeTemp($1)
+    If (%Skin.Details.Status == $null)    { Background -sx }
+    Else                                  { Background -sf " $+ %Skin.Details.Status $+ " }
+    If (%Skin.Details.Fond_MIRC == $null) { Background -mx }
+    Else                                  { Background -mf " $+ %Skin.Details.Fond_MIRC $+ " }
+    If (%Skin.Details.Toolbar == $null)   { Background -lx }
+    Else                                  { Background -lf " $+ %Skin.Details.Toolbar $+ " }
+    If (%Skin.Details.Switchbar == $null) { Background -hx }
+    Else                                  { Background -hf " $+ %Skin.Details.Switchbar $+ " }
+    If (%Skin.Details.Pv_Salon == $null) { 
+      remini mirc.ini Background Wquery
+    }
+    Else                                  { 
+      writeini mirc.ini Background Wquery %Skin.Details.Pv_Salon $+ ,1
+    }
+    .Color editbox text    $calc(%Skin.Fenetres.EditBox.Text  - 1)
+    .Color editbox         $calc(%Skin.Fenetres.EditBox.Fond  - 1)
+    .Color background      $calc(%Skin.Fenetres.Fenetre.Fond  - 1)
+    .Color listbox         $calc(%Skin.Fenetres.NickList.Fond - 1)
+    Var %NumEv = 1, %NomEv
+    :EvSuivant
+    %NomEv = $gettok($lower($var(%Skin.Events.*,%NumEv)),3,46) 
+    If (%NomEv == Moi) { %NomEv = Own }
+    If (%NomEv == Autre) { %NomEv = Other } 
+    If (%NomEv != Op) && (%NomEv != DeOp) && (%NomEv != HalfOp) && (%NomEv != DeHalfOp) && (%NomEv != Voice) && (%NomEv != DeVoice) && (%NomEv != Ban) && (%NomEv != DeBan) {
+      .Color %NomEv text $calc($var(%Skin.Events.*,%NumEv).value - 1)
+    }
+    Inc %NumEv
+    If (%NumEv <= $var(%Skin.Events.*,0)) { Goto EvSuivant }
+    .cnick -ri *
+    .cnick -r * @
+    .cnick -r * %
+    .cnick -r * +
+    .cnick -rn *
+    .cnick -an $chr(36) $+ $chr(109) $+ $chr(101) $calc(%Skin.Nicklist.Moi - 1)
+    .cnick -i * $calc(%Skin.Nicklist.Ignore - 1)
+    .cnick * $calc(%Skin.Nicklist.Op - 1) @ 
+    .cnick * $calc(%Skin.Nicklist.HalfOp - 1) %
+    .cnick * $calc(%Skin.Nicklist.Voice - 1) +
+    .cnick -n * $calc(%Skin.Nicklist.User - 1)
+    %Skin.Defaut = $1
+    DechargeVarSkin
+  }
+}
+Alias PlaySkinSound {
+  If ($inwave == $false) && ($inmidi == $false) && ($insong == $false) && ($inmp3 == $false) && ($1 != $null) && (%Skin.Defaut != $null) {
+    Var %Son = $ReadIniInfoSkinDefaut($1)
+    If ( ( %Son != $null ) && ( %sons.etat == ON ) ) { Splay $Skindir $+ \ $+ %Skin.Defaut $+ \ $+ %Son }
+  }
+}
+Alias MenuListePseudo {
+  if ($1 == begin) return -
+  Var %i = 1
+  While ( %i <= $NumTok( %TRacPseudo.Pseudo , 59 ) ) {
+    If ( $1 == %i ) { Return $GetTok( %TRacPseudo.Pseudo , %i , 59 ) : Nick $GetTok( %TRacPseudo.Pseudo , %i , 59 ) }
+    Inc %i
+  }
+  if ($1 == end) return -
+}

@@ -1,0 +1,231 @@
+;------------------------------------------------------------
+;                       Aliases Divers
+;                           Par Xor
+;------------------------------------------------------------
+
+; MAJUSCULES
+/maj { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Majuscules
+  protectaverto $read($shortfn($mircdirRaison\majuscules.gmp)) 
+  halt
+}
+/kmaj { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Majuscules
+  protectkick
+}
+/kbmaj {
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Majuscules
+  protectkickban
+}
+; FLOOD
+/fl { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Flood
+  protectaverto $read($shortfn($mircdirRaison\Flood.gmp)) 
+  halt
+}
+/kfl { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Flood
+  protectkick
+}
+/kbfl {
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Flood
+  protectkickban
+}
+; SCRIPT
+/sc { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Script
+  protectaverto $read($shortfn($mircdirRaison\Script.gmp)) 
+  halt
+}
+/ksc { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Script
+  protectkick
+}
+/kbsc {
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Script
+  protectkickban
+}
+; PUBLICITE
+/pub { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type publicité
+  protectaverto $read($shortfn($mircdirRaison\publicité.gmp)) 
+  halt
+}
+/kpub { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type publicité
+  protectkick
+}
+/kbpub {
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Publicité
+  protectkickban
+}
+; INSULTE
+/ins { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Insulte
+  protectaverto $read($shortfn($mircdirRaison\Insulte.gmp))
+  halt
+}
+/kins { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Insulte
+  protectkick
+}
+/kbins {
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Insulte
+  protectkickban
+}
+; SON
+/son { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Sons
+  protectaverto $read($shortfn($mircdirRaison\Sons.gmp))
+  halt
+}
+/kson { 
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Sons
+  protectkick
+}
+/kbson {
+  set %protect.chan $active
+  set %protect.nick $$1
+  set %protect.type Sons
+  protectkickban
+}
+
+/w whois $1
+
+/op {
+  if ( $1 == $null ) { /mode # +o $me }
+  else /mode # +oooooooooo $$1-10
+}
+/deop {
+  if ( $1 == $null ) { /mode # -o $me }
+  else /mode # -oooooooooo $$1-10
+}
+/v {
+  if ( $1 == $null ) { /mode # +v $me }
+  else /mode # +vvvvvvvvvv $$1-10
+}
+/dev {
+  if ( $1 == $null ) { /mode # -v $me }
+  else /mode # -vvvvvvvvvv $$1-10
+}
+/invite {
+  if ( $1 == $null ) { Echo %couleur.moi -a /INVITE nickname #channel | Halt }
+  if ( $2 == $null ) { INVITE $1 # }
+  Else { Invite $1 $2 }
+}
+/j /join #$$1 $2-
+/p { /part # $$1- }
+
+/vn /notice + $+ $active  [+ Notice > $active $+ ] $1-
+/on /notice @ $+ $active  [@ Notice > $active $+ ] $1-
+/ovn /notice @+ $+ $active  [@+ Notice > $active $+ ] $1-
+/n /notice $1 [Notice > $$1 $+ ] $2-
+
+/q /query $$1
+/send /dcc send $1 $2
+/chat /dcc chat $1
+/ping /ctcp $$1 ping
+/s /server $$1-
+
+; *** KICK Et BAN
+/k kick # $1 $2- $+ $iif($2 == $null,  $+ $Color(Kick Text) $read $mircdirRaison\raison.gmp)
+/b {
+  if ($1 != $null) { 
+    If ($1 ison #) { 
+      if ( %protect.maskban <= 14 ) { mode # +b $address($1, %protect.maskban ) }
+      Else { mode # +b * $+ $1 $+ *!*@* }
+    }
+    Else { mode # +b $1 }
+  }
+}
+/db { mode # -bbbbbbbbbb $$1 $2 $3 $4 $5 $6 $7 $8 $9 $10 }
+/kb {
+  if ($1 == $null) || ( $1 !ison # ) { echo -at Erreur - Vous devez taper /kb Pseudo Raison (facultatif) | halt }
+  mode # +b $address($1, %protect.maskban ) 
+  kick # $1 $2- $+ $iif($2 == $null,  $+ $Color(Kick Text) $read $mircdirRaison\raison.gmp)
+}
+
+masschan {
+  if ( $me isop $3 ) {
+    var %except = Niubot*;Robot* $+ $iif(($1-2 == + b) || ($1-2 == - o),; $+ $me)
+    var %m = $3 $1 $+ $str($2,5),%i 0,%j = 1-5 
+    var %i 1,%t 0
+    while $iif($1 == +,$nick($3,%i),$nick($3,%i,$2)) {
+      var %j 0,%nicks
+      while (%j < 5) { %nicks = %nicks $iif($1 == +,$nick($3,$calc(%i + %j)),$nick($3,$calc(%i + %j),$2)) | inc %j }
+      var %k 1
+      while $gettok(%except,%k,59) {
+        var %c $ifmatch, %l 1
+        while $gettok(%nicks,%l,32) { if (%c iswm $ifmatch) { %nicks = $deltok(%nicks,%l,32) } | inc %l }
+        inc %k
+      }
+      if (%nicks) { .timer -m 1 %t mode %m %nicks }
+      inc %i 5
+      inc %t 400
+    }
+  }
+}
+
+apropos  if ( $input(Tgl0beSCRIPT 9.9 $crlf $crlf $+ Pour tout renseignement :  $crlf $+ - script@tgl0be.org  $crlf $+ - Xor sur #tglobe@irc.tgl0be.org,68,Tgl0beSCRIPT - A propos...) ) { }
+mp3intui  if ( $input(Lecture intuitive de MP3 $crlf $crlf $+ Il suffit de taper :  $crlf $+ .mp3dir : choisir un répertoire $crlf $+ .mp3 : lire un MP3 au hasard $crlf $+ .mp3 titre/morceau de titre : lire un MP3 correspondant au(x) mot(s) indiqués $crlf $+ .stop : stopper la lecture,68,Tgl0beSCRIPT - Lecteur MP3 intuituf) ) { }
+afficher.jpq set %afficher.jpq $iif(%afficher.jpq,$false,$true)
+activer.shorturl set %activer.shorturl $iif(%activer.shorturl,$false,$true)
+tgl0be.autoconnect set %tgl0be.autoconnect $iif(%tgl0be.autoconnect,$false,$true)
+activer.sons {
+  if ( %activer.sons ) {
+    set %activer.sons $false
+    son_off
+  }
+  else {
+    set %activer.sons $true
+    son_on
+  }
+}
+connect {
+  if ( $status == connected ) server -m $$1-
+  else server $$1-
+}
+iconf set %invite.robot $$?="Pseudo du Robot :"
+icheck if (%invite.robot == $null) iconf
+isoho icheck | .msg %invite.robot invite $$?="Mot de passe :" #soho
+idjeunz icheck | .msg %invite.robot invite $$?="Mot de passe :" #djeunz
+ithemaz icheck | .msg %invite.robot invite $$?="Mot de passe :" #themaz
+iinter icheck | .msg %invite.robot invite $$?="Mot de passe :" #internationaux
+imetroz icheck | .msg %invite.robot invite $$?="Mot de passe :" #metroz
+icm icheck | .msg %invite.robot invite $$?="Mot de passe :" #cm
+
+whois /whois $$1 $$1

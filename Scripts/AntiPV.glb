@@ -1,0 +1,97 @@
+;-----------------------------------------------------------
+;                              AntiPV
+;                             Par Xor
+;-----------------------------------------------------------
+
+alias antipv dialog -m antipv antipv
+dialog antipv {
+  size -1 -1 270 280
+  title "Tgl0beSCRIPT - AntiPV"
+  icon Images\icones\antispam.ico
+  text "Toujours autoriser les PVs des personnes présentes ", 1, 4 43 297 20
+  text "   sur les salons ci-dessous :", 9, 4 58 297 20
+  list 2, 4 81 170 98, size
+  button "Ajouter", 3, 180 81 80 20, flat
+  button "Supprimer", 4, 180 106 80 20, flat
+  button "Fermer", 5, 180 255 80 20, ok flat
+  check "Activer l'Anti-PV", 6 , 4 5 100 20, Flat
+  check "Afficher sur le salon actif", 7 , 4 235 140 20, Flat
+  check "Afficher en info-bulle", 8 , 4 255 140 20, Flat
+  check "Annoncer le message ci-dessous :", 10, 4 185 200 20, flat
+  edit "", 11, 4 207 260 20, autohs
+}
+
+ON *:DIALOG:antipv:init:*:{
+  mdx SetMircVersion $version
+  mdx MarkDialog $dname
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 1,9 text 16711680
+  mdx SetColor $dname 1,6,7,8,9,10 textbg 16772585
+  mdx SetColor $dname 1,6,7,8,9,10 background 16772585
+  var %j 1
+  var %ini2 Scripts\antipv.txt
+  while (%j <= $lines(%ini2)) {
+    did -a antipv 2 $read(%ini2,%j)
+    inc %j
+  }
+  if (%antipv.etat) did -c antipv 6
+  if (%antipv.echo) did -c antipv 7
+  if (%antipv.tip) did -c antipv 8
+  if (%antipv.talk) did -c antipv 10
+  did -a antipv 11 %antipv.text
+}
+
+ON *:DIALOG:antipv:sclick:3:{
+  var %salon $$?="Salon en exception (#salon) :"
+  did -a antipv 2 %salon
+  write Scripts\antipv.txt %salon
+}
+
+ON *:DIALOG:antipv:sclick:4:{
+  write -dl $+ $did(antipv,2).sel Scripts\antipv.txt
+  did -d antipv 2 $did(antipv,2).sel
+}
+ON *:DIALOG:antipv:sclick:6:{
+  set %antipv.etat $did($dname,6).state
+}
+ON *:DIALOG:antipv:sclick:7:{
+  set %antipv.echo $did($dname,7).state
+}
+ON *:DIALOG:antipv:sclick:8:{
+  set %antipv.tip $did($dname,8).state
+}
+ON *:DIALOG:antipv:sclick:10:{
+  set %antipv.talk $did($dname,10).state
+}
+ON *:DIALOG:antipv:edit:11:{
+  set %antipv.text $did($dname,11).text
+}
+
+on *:OPEN:?:{
+  if ( %antipv.etat == 1 ) {
+    var %i 1
+    var %ini Scripts\antipv.txt
+    var %antipv.ok $false
+    while ( (%i <= $lines(%ini)) && ( %antipv.ok == $false ) ) {
+      if ( $nick ison $read(%ini,%i) ) {
+        set %antipv.ok $true
+      }
+      inc %i
+    }
+    if ( %antipv.ok == $false ) {
+      if ( %antipv.tip == 1 ) var %tmp $tip(AntiPV,Tgl0beSCRIPT : AntiPV,4PV bloqué2 $nick : $1-,10,images/Icones/Tgl0be.ico,$null,query $nick,$null)
+      if (%antipv.echo) echo -at 2AntiPV : $nick / $1-
+      if ( %antipv.talk ) .msg $nick %antipv.text
+      close -m $nick
+    }
+    else ActionsPV
+  }
+  else ActionsPV
+}
+
+Alias -l ActionsPV {
+  If ( %Pv.Activer == $True ) { Msg $Nick %Pv.Message }
+  AfficheActive $Color(Invite Text) %Symbol.Aff.G $+  $+ $nick $+  $+ %Symbol.Aff.D souhaiterait te parler en privé
+  PlaySkinSound Privé
+  aline -p @Journal $timestamp 2PV de4 $nick 2(4 $+ $address($nick,2) $+ 2) : $1-
+}

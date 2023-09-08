@@ -1,0 +1,270 @@
+;-----------------------------------------------------------
+;                        Pop-Ups
+;                       Par Xor
+;-----------------------------------------------------------
+
+#Poppies on
+menu Channel,Query {
+  Pikachu :  /me 1,8(\1,0__1,8/) | /me 1,8(4o1' '4o1) | /me 1,8(")_(") Pikaaaa Pika Pika chuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+  Blagues
+  .Homme
+  ..Femme célibataire : .SAY 6Pourquoi y-a-t-il beaucoup de femmes célibataires au Québec ? 10Parce qu'elles préfèrent garder du bacon dans le frigo qu'un gros porc écrasé dans le salon.
+  ..La femme sans l'homme ? : .SAY 6Que ferait la femme sans l'homme ? 10Elle dresserait un autre animal.
+  ..Vêtements de cuir : .SAY 6Pourquoi les hommes aiment les femmes qui portent des vêtements en cuir ? 10Parce qu'elles ont la même odeur que les voitures neuves.
+  ..Perdu son intelligence : .SAY 6Comment appelle-t'on un homme qui a perdu son intelligence ? 10Un veuf.
+  ..L'homme sert à rien : .SAY 6Quelle est la différence entre un homme, une cravate et une ceinture ? 10La cravate serre le cou ; La ceinture serre la taille ; L'homme sert à rien !!! 
+  ..Moitié d'un cerveau : .SAY 6Comment appelle-t-on un homme avec la moitié d'un cerveau ? 10Un homme surdoué.
+  ..Dieu créa l'homme : .SAY 6Qu'a dit Dieu après avoir créé l'homme ? 10Je peux faire mieux.
+  ..Homme intelligent au Canada : .SAY 6Comment appelle-t-on un homme intelligent au Canada ? 10Un touriste.
+  ..Un prénom à leur pénis : .SAY 6Pourquoi certains hommes donnent-ils un prénom à leur pénis ? 10Ils veulent être plus intime avec celui qui prend toutes les décisions pour eux.
+  ..Laxatif : .SAY 6Quelle est la différence entre un homme et un laxatif ? 10Aucune, les deux te font chier.
+  ..Dieu créa l'homme : .SAY 6Pourquoi Dieu a-t-il créé l'homme ? 10Un vibrateur ne tond pas le gazon.
+  ..Vidéo : .SAY 6Un homme, c'est comme un vidéo. 10Avance, recule, avance, recule, stop, eject. 
+  ..Grenouille : .SAY 6Quelle est la différence entre un homme et une grenouille ? 10Le «gre».
+  ..Orgasme : .SAY 6Comment savoir si un homme a eu un orgasme ? 10Il roule sur le côté et commence à ronfler. 
+  ..Beaux seins : .SAY 6Pourquoi les hommes n'ont-ils pas de beaux seins ? 10Parce que ça vient en «kit» avec l'intelligence.
+  ..Pruneau : .SAY 6Quelle est la différence entre un homme et un pruneau ? 10Il n'y en a pas, on les mange tous les deux le soir et le lendemain, ils nous font tous les deux chier !
+  ..Guenon : .SAY 6Pourquoi la guenon est avec le singe et la femme avec l'homme ? 10Parce que la guenon a eu le premier choix.
+  ..Cravate : .SAY 6Pourquoi les hommes portent-ils la cravate ? 10 Parce que ça fait moins con qu'une laisse ! 
+  ..Immatures : .SAY 6Pourquoi les femmes choisissent toujours des mecs grossiers et immatures qui passent leur temps à boire de la bière devant des matchs de foot ? 10 Elles ne choisissent pas, il n'y en a pas d'autres. 
+  ..Chat : .SAT 6Quelle différence il y a t-il entre un homme et un chat ? 10Aucune, tous les deux ont peur de l'aspirateur !
+  ..Avion : .SAY 6Qu'ont en commun un homme et un avion ? 10Pour les deux, c'est la queue qui dirige.
+  ..Casquette : .SAY 6Pourquoi plusieurs hommes portent une casquette ? 10Avez-vous déjà vu une poubelle sans couvercle ? 
+  ..Chien : .SAY 6Quelle est la différence entre un homme et un chien ? 10Il n'y en a pas, les deux quand on les flatte ils lèvent la queue.
+  ..Pomme : .SAY 6Quelle est la différence entre un homme et une pomme ? 10La pomme a un coeur.
+  ..Cuvette de WC : .SAY 6Qu'est-ce que les hommes ont en commun avec la cuvette de WC, les anniversaires et les clitoris ?  10Ils les ratent tous les trois !
+  ..Cravates : .SAY 6Pourquoi les hommes portent des cravates ? 10Parce que c'est  trop gênant de se promener avec une laisse.
+  ..En faisant l'amour : .SAY 6Quels sont les cinq mots qu'un homme craint le plus d'entendre en faisant l'amour ? 10 Chéri, je suis de retour !
+  ..Grenouille : .SAY 6Qu'ont-en commun un homme et une grenouille ? 10Les deux pensent juste à sauter.
+  ..Calories : .SAY 6Pourquoi les hommes ont plus de calories que les femmes ? 10Parce qu'ils ont une saucisse, deux boulettes, deux oreilles de christ et une tête de cochon.
+  ..OVNI : .SAY 6Savez vous la différence entre un OVNI et un homme intelligent ? 10Il y en a pas, tout le monde en parle mais personne en vu.
+  ..Calvitie : .SAY 6Savez-vous pourquoi les hommes ont peur de la calvitie ? 10Parce qu'ils ont peur qu'on voit «Nul si découvert».
+  .Femme
+  ..Mariage : .SAY 6Une femme s'inquiète de son avenir jusqu'au jour où elle se marie.10Un homme s'inquiète de son avenir à partir du jour où il se marie.
+  ..Ampoule : .SAY 6Combien de femmes faut-il pour visser une ampoule ? 10ÇA PRENDRA LE TEMPS QU'ÇA PRENDRA !
+  ..Féminin de "Assis devant la télé" : .SAY 6Quelle est le féminin de: "Assis devant la télé" ? 10"Debout dans la cuisine".
+  ..Permis de conduire : .SAY 6Pourquoi les femmes passent-elles leur permis de conduire ? 10C'est un mystère : il n'y a pas de route qui mène de la chambre à la cuisine !
+  ..Espérance de vie : .SAY 6Pourquoi l'espérance de vie des femmes est plus longue que celle des hommes ? 10Pour avoir le temps de finir la vaisselle et le ménage.
+  ..NASA : .SAY 6Pourquoi la NASA a-t-elle envoyée une femme dans l'espace ? 10Un lave-vaiselle aurait été trop lourd.
+  ..Accidents de voiture : .SAY 6Saviez-vous que 90% des accidents de voiture sont causés par des hommes saouls ? 10Oui, c'est parce que c'était leurs femmes qui conduisaient.
+  ..Femme de volant : .SAY 6Quelle est la différence entre une femme au volant et une fraise ? 10Il n'y en a pas, les deux se retrouvent dans un champ.
+  ..Statue de la liberté : .SAY 6Pourquoi la Statue de la Liberté est-elle une femme ? 10Parce que y'avait une tête vide pour faire un restaurant.
+  ..Change de sexe : .SAY 6Quelle est la chose la plus dure pour un homme qui change de sexe ? 10Accepter de se faire enlever son cerveau.
+  ..Définition d'un pénis : .SAY 6Quelle est la définition d'un pénis ? 10«Appareil servant à mesurer la profondeur d'une cruche.»
+  ..Maladie de la vache folle : .SAY 6Pourquoi les femmes ne peuvent-elles pas attraper la maladie de la vache folle ? 10Parce que ca touche le cerveau.
+  ..Travail de femme : .SAY 6Combien faut-il d'hommes pour frotter un plancher de 200m carrés ? 10Aucun, c'est un travail de femme.
+  ..Fellation : .SAY 6Quelle est la meilleure chose dans la fellation ? 10Les dix minutes de silence...
+  ..95% des femmes : .SAY 6Pourquoi 95% des femmes prennent-elles la pilule et seulement 5% l'aspirine ? 10Parce que les femmes se servent plus souvent de leur cul que de leur tête.
+  ..Rapport sexuel : .SAY 6Pourquoi lors d'un rapport sexuel la femme est toujours en dessous ? 10T'as déjà essayé d'remplir une cruche à l'envers ?
+  ..Se gratte la tête : .SAY 6Pourquoi les femmes se grattent-elles le crâne la tête en se réveillant ? 10Parce qu'elles n'ont pas de couilles.
+  ..99% de son intelligence : .SAY 6Qu'est-ce qu'une femme qui a perdu 99% de son intelligence ? 10Une veuve.
+  ..Tampax : .SAY 6Quelle est la différence entre un tampax et le téléphone rose ? 10Avec le tampax, on connaît la salope qui est au bout du fil.
+  ..Clôture : .SAY 6Quelle est la différence entre une femme et une clôture ? 10La clôture, on n'a pas besoin de lui dire «je t'aime» avant de la sauter.
+  ..Mario Bros : .SAY 6Une femme, c'est comme Mario Bros 10Ca saute pour avoir des pièces ! 
+  ..Quelque chose d'intelligent : .SAY 6Quand sait-on quand une femme va dire quelque chose d'intelligent ? 10Quand elle commence sa phrase par : "Mon mari a dit...".
+  ..Dieu créa la femme : .SAY 6Pourquoi dieu a-t-il crée l'homme avant la femme ? 10Pour lui donner juste le temps de savoir ce que pouvait être le paradis...
+  ..Douze femmes : .SAY 6Comment appelle-t-on douze femmes qui se prennent par la main ? 10Une clôture à vaches.
+  ..600 vaches : .SAY 6Comment fait-on pour faire lever 600 vaches en même temps ? 10On ferme les lumières dans une soirée de bingo.
+  ..Coup de main à la maison : .SAY 6Que fait un homme pour donner un coup de main à la maison ? 10Il soulève ses pieds pour que la femme puisse passer l'aspirateur dessous.
+  ..Moustiques : .SAY 6Quelle est la différence entre les moustiques et les femmes ? 10Les moustiques c'est chiant uniquement la nuit.
+  ..Mauvais conseils : .SAY 6Les femmes ne suivent pas les mauvais conseils... Elles les précèdent.
+  ..Cerveau d'une femme : .SAY 6Pourquoi le cerveau des femme est divisé en 4 ? 10Pour chaque boutton du lave-linge.
+  ..Femme intelligente : .SAY 6Quelle différence y a-t-il entre une femme intelligente, le Père Noel, et une soucoupe volante ? 10Y'en a pas. Tout le monde en parle, mais on n'en a jamais vu.
+  ..La graisse autours du vagin ? : .SAY 6Comment s'appelle la graisse autour du vagin ? 10Une femme.
+  .Informatique
+  ..Déballage : .SAY Tout ordinateur est obsolète au plus tard à son déballage.
+  ..Nouveau logiciel : .SAY Tout nouveau logiciel coûte plus cher que l'ancien, et tourne plus lentement.
+  ..Mise à jour buggé : .SAY Une application pleinement satisfaisante est toujours complétée par une mise à jour buggée.
+  ..Sans ordinateur : .SAY Grâce à l'ordinateur, on peut faire plus rapidement des choses qu'on n'aurait pas eu besoin de faire sans ordinateur.
+  ..Economiseur d'écran : .SAY L'économiseur d'écran se déclenche toujours lorsque l'on veut écrire quelque chose.
+  ..Légitimilité : .SAY La légitimité d'une copie est inversement proportionnelle à son intérêt.
+  ..Graver un CD : .SAY Ca prend toujours plus de temps de graver un CD pour les autres que pour soi-même.
+  ..Icône : .SAY C'est 3 secondes après avoir cliqué au hasard sur l'icône tc69.gif que votre copine surgira à l'improviste, et tombera sur Tabata Cash en pleine action sur votre 21 pouces.
+  ..Se ruiner : .SAY Il y a trois manières de se ruiner : les femmes, le jeu et l'informatique. Les deux premières sont les plus agréables, la troisième est la plus sûre.
+  ..Confiance : .SAY Ne faites jamais confiance à un ordinateur que vous ne pouvez pas balancer par la fenêtre.
+  ..Erreurs humaines : .SAY A la source de toute erreur dont on accuse l'ordinateur, on trouvera au moins deux erreurs humaines, dont celle de rejeter la faute sur l'ordinateur.
+  ..Grands mensonges : .SAY Il y a trois grands mensonges en informatique : - Ca marche. - C'est compatible. - Ca sort bientôt.
+  ..30 novices : .SAY Si vous mettez 30 novices devant un ordinateur équipé de Window$, vous aurez 30 manières différentes de planter Windows.
+  ..Rien à faire : .SAY C'est lorsque vous n'avez rien à de faire de particulier sur votre PC qu'il fonctionne le mieux.
+  ..Faire ce que vous voulez : .SAY Un logiciel fait ce que vous lui avez dit de faire, pas ce que vous voulez qu'il fasse.
+  ..Unformat : .SAY Un UNFORMAT aboutit toujours à la récupération des données les plus inutiles.
+  ..Mauvais smiley : .SAY Quand on a le choix entre "/" et "\", on choisit toujours le mauvais.
+  ..IA : .SAY "Intelligence Artificielle" signifie que la machine est capable de prévoir à quel moment elle doit tomber en panne pour optimiser votre stress.
+  ..Jamais fini : .SAY Un programme n'est jamais fini, on arrête juste d'y travailler.
+  ..Bugs dans les logiciels Microsoft : .SAY Il n'y a jamais de bug dans les logiciels Micro$oft : juste des caractéristiques non documentées.
+  .. Autant d'erreurs : .SAY Un ordinateur fait autant d'erreur en 2 secondes que 20 humains en 20 ans.
+  ..Espace libre : .SAY L'espace disque libre est inversement proportionnel au nombre d'octets à télécharger.
+  ..Téléchargement : .SAY Tout téléchargement commencé fièrement à 4.5 ko/s se terminera lamentablement à 0.1 ko/s et prendra au moins le triple de la durée initiale annoncée... si ça ne plante pas avant...
+  .Sur les belges
+  ..Automobile : .SAY 6Pourquoi les automobiles des Belges sont pleines de trous ? 10Parce qu'ils les peignent au fusil.
+  ..Sous marin : .SAY 6Comment on fait pour couler un sous-marin de Belges ? 10On cogne à la porte.
+  ..Couchent avec .. :  SAY 6Pourquoi les Belges couchent-ils avec leur fusil ? 10Pour tirer la couverture quand ils ont froid.
+  ..Bouchon de liège : SAY 6Pourquoi est-ce que les Belges s'endorment avec un bouchon de liège dans le derrière ? 10Ils ont peur que ça cicatrise.
+  ..Lac gélé : .SAY 6Combien faut-il de Belges pour pêcher sur un lac gelé en hiver ? 10Cinq : un pour faire le trou dans la glace et quatre autres pour enfoncer la chaloupe.
+  ..Bouteille belge : .SAY 6Qu'est ce qui est écrit sur le fond des bouteilles Belges ? 10«Ouvrir de l'autre côté».
+  ..Tombe de son lit : .SAY 6C'est un Belge qui, pendant la nuit, tombe de son lit, se lève, et retombe en se recouchant. Il se dit : 10Une chance que je me suis lever la première fois, parce que sinon, je me serais tombé dessus !
+  ..Déménagement : .SAY 6Pourquoi un Belge va au dépanneur pour acheter une boîte de 1 pouce x 1 pouce x 125 pieds de long ? 10Il voulait déménager sa corde à linge.
+  ..Chasse aux canards : .SAY 6Un Belge revient de la chasse aux canards et rencontre un gars. Il lui dit : 10Si tu devine combien de canards il y a dans mon sac, je te les donne tous les cinq.
+  ..Partouze : .SAY 6Comment reconnait-on un Belge dans une partouze ? 10Il est le seul a baiser sa femme.
+  ..Cochons : .SAY 6Pourquoi les Belges courent-ils après les cochons avec des tronçonneuses ? 10Pour faire des tirelires.
+  ..Bouchon dans le cul : .SAY 6Pourquoi les Belges s'endorment-ils avec un bouchon dans le cul ? 10- Ils ont peur que ça cicatrise.
+  .People
+  ..OM : .SAY 6Il paraît qu'ils ont fini par trouver du pétrole a l'OM.... 10Normal à force de descendre !!!!
+  ..Roch voisine et Patrick Bruel : .SAY 6Roch Voisin et Patrick Bruel sont dans un bateau. Le bateau coule, qui est sauvé ? 10La chanson française.
+  ..Gilbert montagné : .SAY 6Comment les parents de Gilbert Montagné le punissaient-ils quand il n'était pas sage à la maison ? 10Ils changeaient les meubles de place.
+  ..Jésus : .SAY 6Pourquoi Jésus s'est il fait crucifier et non pas noyé ? 10Parce qu'on n'aurait pas l'air con avec un aquarium autour du cou !
+  ..Internet explorer : .SAY 6A quoi sert Internet Explorer de Microsoft ? 10A télécharger Communicator de Netscape.
+  ..Windows 95 : .SAY 6Quelle est la différence entre Windows 95 et un virus ? 10Le virus , il fonctionne sans aide !
+  ..Fonctionnaires : .SAY 6Pourquoi les fonctionnaires ne regardent pas par la fenêtre le matin ? 10Pour se garder du boulot pour l'après-midi !
+  ..Bill Gates : .SAY 6Quelle est la différence entre Bill Gates et Dieu ? 10Dieu ne se prend pas pour Bill Gates.
+  ..Fonctionnaires (2) : .SAY 6Les fonctionnaires sont les meilleurs maris : 10quand ils rentrent à la maison, ils ne sont pas fatigués et ont déjà lu le journal.
+  ..Bill Gates (2) : .SAY 6Quelle est la différence entre Bill Gates et un hacker ? Le hacker prends 6 mois de prison pour avoir détruit gratuitement en 10ans autant d'ordinateurs que Bill Gates en un week-end pour 10.000 balles par machine !
+  ..Bébé Gates : .SAY 6Il paraîtrait que le bébé "Gates" est buggé : il a 6 doigts à chaque main et les pieds palmés ! 10Rectificatif : ce n'est pas un bug, c'est une caractéristique du produit.
+  ..Fonctionnaire (3) : .SAY 6Qu'est-ce qu'il est impossible de voler dans un bureau de fonctionnaire ? 10L'horloge ! Parce que tout l'monde la regarde !
+  .Diverses
+  ..Boomerang : .SAY 6Comment appelle-t-on un boomerang qui ne revient pas ? 10Un bout de bois.
+  ..Petit pois : .SAY 6Qu'est-ce qui est petit, vert, qui monte et descend ? 10Un petit pois dans un ascenseur.
+  ..Tampax : .SAY 6Quelle est la différence entre un prof à la retraite et un Tampax ? 10Il n'y en a pas, les deux sortent du corps enseignant.
+  ..Banane : .SAY 6Qu'est ce qui est jaune et qui traverse les murs ? 10Une banane magique.
+  ..Tomate : .SAY 6Qu'est-ce qui est plus gros qu'un éléphant ? 10Deux éléphants.
+  ..Steack haché : .SAY 6Qu'est-ce qu'une tomate avec une cape ? 10«Super Tomate».
+  ..Grains de sable : .SAY 6C'est deux grains de sables dans le désert. Un dit à l'autre :10- Hey, je pense qu'on est suivi.
+  ..Clown : .SAY 6C'est l'histoire du clown qui va chez le docteur et qui lui dit : 10- Docteur, j'me sens drôle.
+  .Equations
+  ..Histoire d'amour : .SAY Homme intelligent + femme intelligente = histoire d'amour
+  ..Grossesse : .SAY Homme intelligent + femme idiote = grossesse
+  ..Aventure sans lendemain : .SAY Homme idiot + femme intelligente = aventure sans lendemain
+  ..Mariage : .SAY Homme idiot + femme idiote = mariage
+  ..Profit : .SAY Patron intelligent + employé intelligent = profit
+  ..Production : .SAY Patron intelligent + employé idiot = production
+  ..Promotion : .SAY Patron idiot + employé intelligent = promotion
+  ..Heures supp. : .SAY Patron idiot + employé idiot = heures supplémentaires
+  .. Dialogue : .SAY Vendeur intelligent + consommateur intelligent = dialogue
+  .. Arnaque : .SAY Vendeur intelligent + consommateur idiot = arnaque
+  ..Ristourne : .SAY Vendeur idiot + consommateur intelligent = ristourne
+  ..Produits Microsoft : .SAY Vendeur idiot + consommateur idiot = produits Microsoft
+  ..Câlins : .SAY Maître intelligent + chat intelligent = câlins
+  ..Shampouinnage : .SAY Maître intelligent + chat idiot = shampouinage
+  .. Griffures : .SAY Maître idiot + chat intelligent = griffures
+  ..Partage de la litière : .SAY Maître idiot + chat idiot = partage de la litière
+  ..Sexe : .SAY Homme beau + femme belle = sexe
+  ..Idiot : .SAY Homme beau + femme moche = idiot
+  ..Argent : .SAY Homme moche + femme belle = argent
+  ..Désespoir : .SAY Homme moche + femme moche = désespoir
+  ..Amour : .SAY Homme jeune + femme jeune = amour
+  ..Maman : .SAY Homme jeune + femme vieille = maman
+  ..Argent : .SAY Homme vieux + femme jeune = argent
+  ..Amitié : .SAY Homme vieux + femme vieille = amitié
+  ..Frustation : .SAY Homme fatigué + femme motivée = frustration
+  ..Viol : SAY Homme motivé + femme fatiguée = viol
+  ..Insomnie : .SAY Homme fatigué + femme fatiguée = insomnie de la femme en raison des ronflements de l'homme
+  ..Insomnie : .SAY Homme motivé + femme motivée = insomnie des voisins
+  ..Intelligent : SAY Philippe intelligent + Cécile intelligente = greffe de neurone
+  ..Dialogue habituel : .SAY Philippe intelligent + Cécile idiote = dialogue habituel
+  ..Utopie : .SAY Philippe idiot + Cécile intelligente = utopie
+  ..Don de neurones : .SAY Philippe idiot + Cécile idiote = don de neurones pour greffe ratée
+  ..Grosses fatugues : .SAY Job passionnant + Vie familiale passionnante = Difficultés de planning et grosses fatigues
+  ..Heures supp. : .SAY Job passionnant + Vie familiale chiante = Heures supplémentaires
+  ..Arrêts maladie : .SAY Job chiant + Vie familiale passionnante = Arrêts maladie fréquents et congés sans solde
+  ..Adultère : .SAY Job chiant + Vie familiale chiante = Adultère ou Internet (voire les 2)
+  ..Futur célibataire : .SAY Femme intelligente + Maîtresse intelligente = futur célibataire
+  ..Maîtresse canon : .SAY Femme intelligente + Maîtresse idiote = maîtresse canon
+  ..Futur divorce : .SAY Femme idiote + Maîtresse intelligente = futur divorce
+  ..Rêve masculin : .SAY Femme idiote + Maîtresse idiote = rêve masculin
+  ..Pure théorie : .SAY Elève intelligent + Professeur intelligent = pure théorie
+  ..Education physique : .SAY Elève intelligent + Professeur idiot = cours d'éducation physique
+  ..Cours de maths : .SAY Elève idiot + Professeur intelligent = cours de Maths
+  ..Dure rélaité : .SAY Elève idiot + Professeur idiot = dure réalité
+  .Sur les blondes
+  ..3ème mariage : .SAY 6Une blonde dit à une autre : "J'en suis a mon 3ème mariage". L'autre : "Des enfants ?". 10La blonde : "Non, des adultes".
+  ..Fax : .SAY 6Comment reconnait on le fax d'une blonde ? 10C'est le seul qui a un timbre.
+  ..Bananes : .SAY 6Pourquoi les blondes ne mangent-elles pas de bananes ? 10Parce qu'elles ne trouvent pas la fermeture éclair !
+  ..QI : .SAY 6Quelle est la différence entre une blonde et un Q.I de 150 ? 10150.
+  ..Teinte en brune : .SAY 6Comment appelle-t-on une blonde teinte en brune ? 10L'intelligence artificielle.
+  ..Neurone : .SAY 6Comment meurt un neurone de blonde ? 10Seul.
+  ..Orage : .SAY 6Comment sait-on qu'une blonde est passée sur un PC ? 10Il y a du Tipex sur l'écran.
+  ..Parachustiste : .SAY 6Pourquoi, lors d'un orage, les blondes vont toujours devant la fenêtre ? 10Pour être sur la photo.
+  ..Faire rire une blonde : .SAY 6Comment faire rire une blonde le lundi matin ? 10On lui raconte une blague le vendredi soir !
+  ..Occuper une blonde : .SAY 6Comment occuper une blonde pendant des heures ? 10En écrivant "Retournez S.V.P." de chaque côté d'une feuille.
+  ..Toute la journée : .SAY 6Comment garder une blonde occupée toute la journée ? 10On la place dans une pièce ronde, et on lui dit de s'asseoir dans un coin !
+  ..Glaçons : .SAY 6Pourquoi les blondes ne font-elles jamais de glaçons ? 10Eles ont oublié la recette !
+  ..Escalator : .SAY 6Vous avez entendu parler de la blonde qui est restée coincée 3h dans un escalator ? 10Il y avait une panne d'électricité !
+  ..M&M's : .SAY 6Pourquoi les blondes sont-elles sont virées des usines de fabrication de M&M's ? 10Elles jettent toujours les "W" !
+  ..Deux neurones ? : .SAY 6Comment appelle-t-on une blonde avec 2 neurones ? 10Une femme enceinte.
+  ..Gateau au chocolat : .SAY 6Combien de blondes sont nécessaires pour faire un gâteau au chocolat ? 1010 : une pour faire la pâte, et 9 pour éplucher les Smarties.
+  ..Squelette : .SAY 6Qu'est-ce que c'est qu'un squelette de blonde dans une armoire ? 10La gagnante du championnat de cache-cache de l'année dernière.
+  ..Ordinateur : .SAY 6Comment savoir si une blonde s'est servi de votre ordinateur ? 10Il y a du fromage à côté de la souris.
+  ..Grenade : .SAY 6Que faire quand une blonde vous lance une grenade ? 10Vous enlevez la goupille et vous lui relancez !
+  ..Université : .SAY 6Qu'est-ce qu'une blonde dans une université ? 10Ça peut être qu'un visiteur !
+  ..Servi de votre PC ? : .SAY 6Comment on fait pour savoir si une blonde s'est servi de notre PC ? 10Elle a collé des p'tits timbres sur l'écran pour envoyer ses emails !
+  ..Noyer une blonde : .SAY 6Comment on fait pour noyer une blonde? 10Tu la laisses parler.
+  ..En voiture : .SAY 6Qu'est-ce qui fait "Vroom, Screech, Vroom, Screech, Vroom, Screech" ? 10Une blonde en voiture devant une lumière rouge clignotante !
+  ..BMW : .SAY 6Comment appelle-t-on une blonde qui dans une BMW, et qui n'est pas mariée ? 10Une femme divorcée !
+  ..Vibromasseurs : .SAY 6Pourquoi les blondes n'utilisent-elles pas de vibromasseurs ? 10Ca leur fait mal aux dents !
+  ..Journal : .SAY 6Pourquoi les blondes mettent-elles leur journal dans le frigidaire ? 10Pour avoir des nouvelles fraîches le matin.
+  ..Porsche : .SAY 6Quelle est la différence entre une blonde et une porsche ? 10La porsche, on la prête pas à son meilleur ami !
+  ..Banane : .SAY 6Que dit une blonde quand elle voit une peau de banane par terre ? 10Ah...non ! Je vais encore tomber !
+  ..Allumer la lumière : .SAY 6Comment fait une blonde pour allumer la lumière après avoir fait l'amour ? 10Elle ouvre la portière.
+  ..Se lève le matin ? : .SAY 6Que fait une blonde quand elle se lève le matin ? 10Elle se rhabille et elle retourne chez elle !
+  ..Noyer une blonde : .SAY 6Comment noyer une blonde dans une piscine ? 10Tu mets un miroir au fond de l'eau !
+  ..Intelligente ? : .SAY 6Comment appelle-t-on une blonde intelligente ? 10Un Golden Retriver !
+  ..Escalade : .SAY 6Pourquoi la blonde a-t-elle escaladé le mur de verre ? 10Pour voir ce qu'il y derrière.
+  ..Moitié d'un cerveau : .SAY 6Que dit-on d'une blonde avec la moitié d'un cerveau?  10Qu'elle est douée.
+  ..2 jambes : .SAY 6Que se disent 2 jambes de blonde? 10Rien. Elles se rencontrent jamais.
+  ..Pause-café : .SAY 6Pourquoi ne donne-t-on jamais de pause-café à une blonde ? 10Ça prend trop longtemps de lui réapprendre le boulot.
+  ..Vert aux lèvres ? : .SAY 6Pourquoi les blondes se mettent-elles du vert aux lèvres ? 10Parce que le rouge, ça veut dire stop.
+  ..Frigidaire : .SAY 6Comment savoir si une blonde a ouvert votre frigo ? 10Il y a du rouge à lèvres sur les concombres.
+  ..LODA : .SAY 6Pourquoi les blondes ont "LODA" marqué sur le dessus de leurs chaussures ? 10Les Orteils D'Abord.
+  .Lada
+  ..Pièces détachées : .SAY 6Comment trouver des pièces détachées pour sa Lada ? 10En en suivant une autre.
+  ..Doubler la valeur d'une Lada : .SAY 6Comment doubler la valeur d'une Lada ? 10On fait le plein.
+  ..Dégivrage : .SAY 6A quoi sert le dégivrage sur une Lada ? 10A pas se geler les mains quand on la pousse en hiver.
+  ..Refiler une lada : .SAY 6Quelle est la différence entre une Lada et le Sida ? 10Essaie de refiler une Lada.
+  ..Doc d'une Lada : .SAY 6Qu'est-ce qui est marqué de la page 40 à la page 70 du mode d'emploi d'une Lada ? 10L'horaire des bus et des trains.
+  ..Colline : .SAY 6Qu'est-ce qu'une Lada au sommet d'une colline ? 10Un miracle.
+  ..150 milles bornes : .SAY 6Comment une Lada arrive-t-elle à faire 150 milles bornes avec les mêmes pneus avants ? 10Logique, ils sont toujours à 1 mètre au dessus de la route, derrière la dépanneuse.
+  ..La parole du jour : .SAY 6La parole du jour !!! 10Une Lada c'est bien, une voiture c'est mieux.
+  ..Chien aveugle : .SAY 6Quelle différence y a-t-il entre une Lada et un chien d'aveugle? 10Aucune, il faut être aveugle pour en acheter.
+  ..Antivol : .SAY 6Quel est le dispositif d'antivol sur une Lada ? 10Le logo de la marque sur la calandre.
+  ..Série spécial "Rolland GArros" : .SAY 6Tu sais que maintenant ils font une Lada série spéciale 'Roland Garros'? 10C'est celle avec une balle tennis sur l'attache-remorque.
+  ..Lada Sport : .SAY 6Comment reconnaît-on une Lada sport ? 10Le chauffeur porte un training.
+  ..Contrôle technique : .SAY 6Combien de temps passe une Lada au contrôle technique ? 10Le temps de calmer le fou-rire du garagiste !
+  ..Fabriquer une lada : .SAY 6Combien faut-il de personnes pour fabriquer une Lada ? 102 : un qui plit, un qui colle.
+  .PD
+  ..Deux dinosaures : .SAY 6Comment appelle-t-on deux dinausores PD ? 10Des tripotanus.
+  ..Dinosaure préféré : .SAY 6Quel est le dinosaure préféré de tout les PD ? 10Le déchiranus.
+  ..Quatres PD : .SAY 6Comment faire pour asseoir quatre PD sur une chaise ? 10En la retournant.
+  ..Homosexuel en vietnamien ? : .SAY 6Comment dit-on homosexuel en Vietnamien ? 10Yem la mienne.
+  ..Le comble : .SAY 6Quel est le comble de l'homosexualité pour un homme ? 10Se filmer en train de chier, puis passer le film a l'envers.
+  ..Orgasme : .SAY 6Comment les PD simulent-ils l'orgasme ? 10Ils crachent dans le dos de leur partenaire.
+  ..L'amour avec une femme : .SAY 6Qu'est ce qu'un PD dit apres avoir fait l'amour avec une femme ? 10«Ça ne vaut pas de la merde.»
+  ..Enlever une capote : .SAY 6Comment un PD fait-il pour enlever une capote ? 10En pétant.
+  ..Camp de nudiste : .SAY 6Comment reconnaître un PD dans un camp de nudistes ? 10Il a des mouches autour de la poche.
+  ..Malheureux : .SAY 6Pourquoi les PD sont malheureux ? 10Parce qu'ils sont toujours dans la merde.
+  ..Six policiers qui s'enculent : .SAY 6Comment appelle-t-on six policiers qui s'enculent ? 10Une brochette de poulet.
+  ..Intellectuel : .SAY 6Quelle est la différence entre un PD et un intellectuel ? 10L'intellectuel a le petit Larousse dans la tête et le PD a le gros Robert dans le cul.
+  ..Virer d'une banque de sperme : .SAY 6Savez-vous pourquoi un PD s'est fait virer d'une banque de sperme ? 10Il buvait pendant le travail.
+  .Ta mére
+  ..CD : .say Ta mère est tellement conne qu'elle rembobine les CD.
+  ..Téléphone sans fil : .say Ta mère est tellement conne qu'elle s'étrangle avec un téléphone sans fil.
+  ..Cacahuètes : .say Ta mère est tellement laide que ton père y baise ta soeur.
+  ..Carlos : .say Ta mère est tellement grosse qu´elle pourrait prendre Carlos comme nain de jardin.
+  ..Nichons : .say Ta mère a des nichons tellement gros¸ que pour faire du footing elle met un casque intégral.
+  ..Reboot : .say Ta mère est tellement nulle qu´elle croit que Reboot c´est une marque de chaussures!
+  ..Sourit : .say Ta mère a les dents tellement jaunes que quand elle sourit il y a du soleil.
+  ..Artichaux : .say Ta mère¸ elle mange tellement d´artichaux que quand elle pète¸ ça sent la Bretagne.
+  ..Vieille : .say Ta mère est tellement vieille que son numéro de secu est en chiffres romains.
+  ..Louche : .say Ta mère est tellement grosse que quand Dieu a créé le Monde¸ il a dit: « Pousse toi la grosse » et la lumière fut.
+  ..Mouille : .say Ta mère mouille tellement que ses morpions font du rafting!!!
+  ..Vieille2 : .say Ta mère est tellement vieille que ses seins donnent du lait en poudre.
+  ..Ménopause : .say Ta mère elle est tellement conne kelle crois que la menopause, c'est une touche de magnétoscope.
+  ..Gremlins : .say Ta mère en gremlins dans le micro-onde.
+  ..Gremlins : .say Ta mère elle est tellement grosse que lorsqu'elle est sur la plage , y a greenpeace qui vient pour la remettre à la mer.
+  ..Hélicoptére : .say Ta mère elle est tellement grosse que quand elle met un T-shirt 'Malcom-X', les hélicoptères se posent dessus.
+  ..MegaDrive : .say C'est pas parce que ta mère a 16 bites dans le cul que c'est une megadrive.
+  ..Black et Decker : .say Ta mère elle se rase chez Black & Decker.
+  ..Jpeg : .say Ta mère en jpeg sur un ftp anonymous.
+  ..Prisunic : .say Ta mère en short jaune et en tongues vertes devant le prisunic.
+}
+
+#Poppies End

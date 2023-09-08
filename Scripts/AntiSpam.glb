@@ -1,0 +1,83 @@
+;-----------------------------------------------------------
+;                            Antispam
+;                             Par Xor
+;-----------------------------------------------------------
+
+alias antispam dialog -m antispam antispam
+dialog antispam {
+  size -1 -1 270 190
+  title "Tgl0beSCRIPT - AntiSpam"
+  icon Images\icones\antispam.ico
+  text "Réagir aux PVs contenant les mots suivants :", 1, 4 3 297 20
+  list 2, 4 21 170 98, size
+  button "Ajouter", 3, 180 21 80 20, flat
+  button "Supprimer", 4, 180 46 80 20, flat
+  button "Fermer", 5, 180 145 80 20, ok flat
+  check "Activer", 6 , 4 125 80 20, Flat
+  check "Je suis opérateur Officiel", 7 , 4 145 140 20, Flat
+  check "Afficher en info-bulle", 8 , 4 165 140 20, Flat
+}
+
+ON *:DIALOG:antispam:init:*:{
+  mdx SetMircVersion $version
+  mdx MarkDialog $dname
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 1 text 16711680
+  mdx SetColor $dname 1,2,6,7,8 textbg 16772585
+  mdx SetColor $dname 1,2,6,7,8 background 16772585
+  var %j 1
+  var %ini2 Scripts\Antispam.txt
+  while (%j <= $lines(%ini2)) {
+    did -a antispam 2 $read(%ini2,%j)
+    inc %j
+  }
+  if (%antispam.etat) did -c antispam 6
+  if (%antispam.opoff) did -c antispam 7
+  if (%antispam.tip) did -c antispam 8
+}
+
+ON *:DIALOG:antispam:sclick:3:{
+  var %texte $$?="Texte à détecter"
+  did -a antispam 2 %texte
+  write Scripts\antispam.txt %texte
+}
+
+ON *:DIALOG:antispam:sclick:4:{
+  write -dl $+ $did(antispam,2).sel Scripts\antispam.txt
+  did -d antispam 2 $did(antispam,2).sel
+}
+ON *:DIALOG:antispam:sclick:6:{
+  set %antispam.etat $did($dname,6).state
+}
+ON *:DIALOG:antispam:sclick:7:{
+  set %antispam.opoff $did($dname,7).state
+}
+ON *:DIALOG:antispam:sclick:8:{
+  set %antispam.tip $did($dname,8).state
+}
+
+Alias spampv {
+  if ( $me ison #soho ) && (%spam.pseudo != $null) {
+    msg #soho .geo SPAM %spam.pseudo $strip( %spam.texte ) • Merci
+    unset %spam.*
+  }
+}
+
+on *:OPEN:?:{
+  if (%antispam.etat) {
+    var %i 1
+    var %ini Scripts\antispam.txt
+    while (%i <= $lines(%ini)) {
+      if ($read(%ini,%i) isin $strip($1-)) {
+        set %spam.texte $strip($1-)
+        set %spam.pseudo $nick
+        if ( %antispam.tip == 1 ) var %tmp $tip(AntiSPAM,Tgl0beSCRIPT : AntiSpam,4SPAM2 %spam.pseudo : %spam.texte,10,images/Icones/Tgl0be.ico,$null,query %spam.pseudo,$null)
+        if (%antispam.opoff) { echo -at 4Spam en PV (Shift+F12 pour signaler sur #soho) :2 %spam.pseudo >  %spam.texte  }
+        else { echo -at 4Spam en PV  :2 %spam.pseudo >  %spam.texte  }
+        close -m $nick
+        halt
+      }
+      inc %i
+    }
+  }
+}

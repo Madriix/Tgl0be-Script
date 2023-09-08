@@ -1,0 +1,98 @@
+;-----------------------------------------------------------
+;                    Table de caractères
+;                          Par Xor
+;-----------------------------------------------------------
+
+dialog ASCII {
+  title "Tgl0beSCRIPT - Table ASCII"
+  size -1 -1 200 193
+  icon images/icones/ascii.ico
+  option dbu
+  button "Fermer" 1000, 150 64 45 12, flat, cancel
+  radio "Table ASCII" 20, 73 64 71 12, push, flat
+  box "[ ASCII - Conversion rapide ]" 1, 5 5 190 55
+  text "Tapez le symbole/code ASCII dans les champs ci-dessous." 2, 10 15 185 7
+  edit "" 3, 27 35 73 10, autohs
+  edit "" 4, 103 35 72 10, autohs
+  radio "<-" 5, 10 36 15 8, push
+  radio "->" 6, 177 36 15 8, push
+  text "Symbole ASCII :" 7, 10 25 50 7
+  text "Code ASCII :" 8, 103 25 50 7
+  button "Clipboard" 9, 10 46 30 9, flat
+  button "Clipboard" 10, 103 46 30 9, flat
+  box "[ ASCII - Table Complete ]" 11, 5 77 190 110
+  button "Clipboard" 12, 160 90 33 10, flat
+  edit "" 13, 160 100 33 10, center
+  button "Clipboard" 14, 160 115 33 10, flat
+  edit "" 15, 160 125 33 10, center
+  button "Clipboard" 16, 160 140 33 10, flat
+  edit "" 17, 160 150 33 10, center
+  button "Clipboard" 18, 160 165 33 10, flat
+  edit "" 19, 160 175 33 10, center
+}
+alias ASCII {
+  if $dialog(ASCII) { dialog -v ASCII | return }
+  dialog -m ASCII ASCII
+}
+on *:dialog:ASCII:init:0: {
+  mdx SetMircVersion $version
+  mdx  MarkDialog $dname
+  mdx  SetControlMDX 30 listview showsel rowselect infotip report extsel > $cc_views
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 1,11 text 16711680
+  mdx SetColor $dname 1,2,7,8,11 textbg 16772585
+  mdx SetColor $dname 1,2,7,8,11 background 16772585
+  set %ASCII.A 1
+  did -c ASCII 5
+  did -b ASCII 4,13,15,17,19
+  did -a ASCII 4 -> Conversion CODE
+  did -f ASCII 3
+  if %ASCII.B == 1 { dialog -s ASCII -1 -1 400 390 | ASCIIwin | did -c ASCII 20 | dialog -v ASCII } | else { window -c @ASCII | dialog -s ASCII -1 -1 400 156 }
+  .timerASCII 0 0 ASCIIupdate
+}
+on *:dialog:ASCII:sclick:9,10: clipboard $did(ASCII,$calc($did - 6))
+on *:dialog:ASCII:sclick:5: set %ASCII.A 1 | ASCIIdid | did -rb ASCII 4 | did -re ASCII 3 | did -a ASCII 4 -> Conversion CODE | did -f ASCII 3
+on *:dialog:ASCII:sclick:6: set %ASCII.A 2 | ASCIIdid | did -rb ASCII 3 | did -re ASCII 4 | did -a ASCII 3 Conversion SYMBOLE <- | did -f ASCII 4
+on *:dialog:ASCII:edit:3: did -r ASCII 4 | var %1 = 0 | while %1 < $len($did(ASCII,3)) { inc %1 | var %2 = $right($left($did(ASCII,3),%1),1) | did -a ASCII 4 $replace(%2,%2,$asc(%2)) $+ $chr(160) } | did -ra ASCII 4 $replace($did(ASCII,4),$chr(160),$chr(32))
+on *:dialog:ASCII:edit:4: did -ra ASCII 3 $chr($did(ASCII,4))
+on *:dialog:ASCII:sclick:1000: window -c @ASCII | .timerASCII off | unset %ASCIIdid %ASCII.A
+on *:dialog:ASCII:sclick:12,14,16,18: clipboard $did(ASCII,$calc($did +1)) | did -ra ASCII $calc($did +1) Clipped ! | .timer -m 1 200 ASCIImaj
+on *:dialog:ASCII:sclick:20: set %ASCII.B $iif(%ASCII.B == 1,2,1) | ASCIIdid | if %ASCII.B == 1 { dialog -s ASCII -1 -1 400 390 | ASCIIwin | dialog -v ASCII } | else { window -c @ASCII | dialog -s ASCII -1 -1 400 156 }
+alias ASCIIdid {
+  did -u ASCII 5,6
+  if (%ASCII.A == 1) did -c ASCII 5
+  if (%ASCII.A == 2) did -c ASCII 6
+  if (%ASCII.B == 1) did -c ASCII 20
+  if (%ASCII.B == 2) did -u ASCII 20
+}
+alias ASCIIupdate {
+  if ($window(@ASCII)) window $iif($dialog(ASCII).active,-o,-u) @ASCII $calc($dialog(ASCII).x + 20) $calc($dialog(ASCII).y + 195) 300 200
+  if (Clipped !isin $did(ASCII,13)) && (Clipped !isin $did(ASCII,15)) && (Clipped !isin $did(ASCII,17)) && (Clipped !isin $did(ASCII,19)) ASCIImaj
+}
+alias ASCIImaj {
+  if $dialog(ASCII) {
+    var %1 = $sline(@ASCII,1)
+    did -ra ASCII 13 $gettok(%1,1,9)
+    did -ra ASCII 15 $gettok(%1,2,9)
+    did -ra ASCII 17 $gettok(%1,3,9)
+    did -ra ASCII 19 $gettok(%1,4,9)
+  }
+}
+alias ASCIIwin {
+  window -c @ASCII
+  window -hodl +Lb @ASCII $calc($dialog(ASCII).x + 20) $calc($dialog(ASCII).y + 195) 300 200
+  window -a @ASCII
+  var %1 = 0
+  while (%1 < 255) {
+    if (%3 == $null) var %3 = 0
+    if %3 == 2 { var %3 = 0 | unset %2 }
+    inc %3
+    inc %1
+    var %2 = %2 %1 $chr(9) $iif(%1 == 9,TAB,$iif(%1 != 22,$chr(%1))) $chr(9)
+    if (%3 == 2) aline @ASCII $replace(%2,,CTRL + K,,CTRL + O,,CTRL + U,,CTRL + B)
+  }
+  aline @ASCII 255 $chr(9) $chr(255)
+  sline @ASCII 1
+  window -b @ASCII
+  ASCIImaj
+}

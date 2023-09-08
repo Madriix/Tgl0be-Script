@@ -1,0 +1,91 @@
+;-----------------------------------------------------------
+;                   Gestion de quotes
+;                          Par Xor
+;-----------------------------------------------------------
+
+
+alias quo dialog -m quote quote
+dialog quote {
+  title "Tgl0beSCRIPT - Quotes [/quo]"
+  size -1 -1 600 490
+  icon images\icones\quotes.ico
+  button "&Fermer",1,525 460 70 22,ok,flat
+  box "Liste des quotes",2,5 3 592 370
+  list 3,12 18 578 327,size,hsbar
+  edit "",4,12 345 578 20,autohs
+  button "Ajouter",5,5 380 70 22,flat
+  button "Effacer",6,100 380 70 22,flat
+  button "Tout Effacer",7,195 380 70 22,flat
+  button "Dire",8,525 380 70 22,flat
+  text "Raccourcis : Enregistrer une quote : !quote CITATION",9,5 407 410 20
+  text "                    Dire une quote au hasard : !quote",10,5 422 410 20
+  text "                    Rechercher une quote : !search MOT",12,5 437 410 20
+  text "                    Lire la quote n°N : !nquote N",13,5 452 410 20
+  check "Réagir aux !quotes des autres personnes",11,5 467 300 20,flat
+}
+on *:dialog:quote:*:*:{
+  if ($devent == init) {
+    mdx SetMircVersion $version
+    mdx  MarkDialog $dname
+    mdx  SetControlMDX 30 listview showsel rowselect infotip report extsel > $cc_views
+    mdx SetDialog $dname bgcolor 16772585
+    mdx SetColor $dname 2 text 255
+    mdx SetColor $dname 2,3,4,9,10,11,12,13 textbg 16772585
+    mdx SetColor $dname 2,3,4,9,10,11,12,13 background 16772585
+    loadbuf -o quote 3 Scripts\quotes.txt 
+    did -z quote 3 | did -b quote 5,6,8
+    if (%quotes.etat == 1) { did -c quote 11 }
+  }
+  if ($devent == sclick) {
+    if ($did == 3) did -e quote 6,8
+    if ($did == 5) { write Scripts\quotes.txt $did(4).text | did -a quote 3 $did(4) | did -r quote 4 }
+    if ($did == 6) && ($did(3).seltext) { write -dl $+ $did(3).sel Scripts\quotes.txt | did -d quote 3 $did(3).sel }
+    if ($did == 7) && ($$input(Voulez-vous vraiment effacer toutes les citations?,qy,Effacer toutes les citations)) { write -c Scripts\quotes.txt | did -r quote 3 }
+    if ($did == 8) && ($did(3).seltext) { msg $active 2Quote :1 $did(3).seltext }
+    if ($did == 11) { set %quotes.etat $did(11).state }
+  }
+  if ($devent == edit) && ($did == 4) { if ($did(4).text) did -e quote 5 | else did -b quote 5 }
+}
+On *:INPUT:*:{
+  If ( $1 == !quote ) {
+    if ( $2 != $null ) { write Scripts\quotes.txt $2- }
+    else { 
+      var %i $rand(0,$calc($lines(Scripts\quotes.txt)-1))
+      msg $active 2Quote n° $+ $calc( %i +1) :1 $read(Scripts\quotes.txt,%i)
+      halt
+    }
+  }
+  If ( $1 == !nquote ) {
+    if ( $2 == $null ) { 
+      echo -at 2Quotes Syntaxe : !nquote N (où N numéro de la quote à dire) 
+      halt 
+    }
+    else { 
+      msg $active 2Quote n° $+ $2 :1 $read(Scripts\quotes.txt, $calc($2 - 1))
+      halt
+    }
+  }
+  If ( $1 == !search ) {
+    if ( $2 == $null ) {  msg $active 2Quote :1 $read(Scripts\quotes.txt,$rand(1,$lines(Scripts\quotes.txt)))  | halt  }
+    else {
+      .remove -b Scripts\chquotes.txt
+      var %i = 1
+      set %mot $$2-
+      while (%i <= $lines(Scripts\quotes.txt)) {
+        if (%mot isin $strip($read(Scripts\quotes.txt,%i))) { write Scripts\chquotes.txt $read(Scripts\quotes.txt,%i) }
+        inc %i
+      }
+      if ($lines(Scripts\chquotes.txt) > 0) msg $active 2Quote :1 $read(Scripts\chquotes.txt,$rand(1,$lines(Scripts\chquotes.txt)))
+      else echo -at Aucune quote trouvée contenant4 %mot $+ .
+      halt
+    }
+  }
+}
+on *:text:*:*:{
+  If ( $1 == !quotes ) {
+    if ( $2 != $null ) { halt }
+    else { 
+      if ( $chr(33) !isin $chan ) && ( %quotes.etat == 1 ) { msg $chan 2Quote :1 $read(Scripts\quotes.txt,$rand(1,$lines(Scripts\quotes.txt))) }
+    }
+  }
+}

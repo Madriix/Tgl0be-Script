@@ -1,0 +1,665 @@
+;-----------------------------------------------------------
+;                         Fun - Pop-ups
+;                            Par Xor
+;-----------------------------------------------------------
+
+menu nicklist,query {
+  -
+  Actions Funs
+  .Message
+  ..Bienvenue:/say 0,1°2°3°4°7°8°9°10°11°12°13°14°15° 12,1B10,1i0,1envenue 11s10u12r7 $chan 15°14°13°12°11°10°9°8°7°6°5°4°3°2°0°
+  ..Bye a+: /say 1,8ß8,1¥1,8Ë4,12 $$1 1,8Å8,1+1,8+ 
+  ..Bye*~®:/say 2*~14®2~*»º14®2º»*~14®2~*14 Bye Bye $$1 2*~14®2~*»º14®2º»*~14®2~*
+  ..Bye °oºo°: /say 7,1°12o7º12o7° 12,1°7,1o12º7o12,1° 4,1«6,1®4» 8,1!¡!9Bye Bye $$1 8,1!¡! 7,1°12o7º12o7° 12°7o12º7o12° 4«6®4»
+  ..Heureux de te voir:  /say 13 (º¿º) 12(º¿º)13 (º¿º)12 (º¿º) 12,8 $$1  13 (º¿º)12 (º¿º)13 (º¿º)12 (º¿º)13 je suis très heureux de te voir!
+  ..Content de te voir: /me 4,1 dit:1,1. 10,1{  12,1S10,1a13,1L15,1u11,1T1,1..4,1 $$1 4,1 13,1b4,1E13,1n 7,1C11,1o10,1N12,1t13,1E10,1n11,1t 4,1d7,1E 12,1T10,1e 13,1v10,1O12,1i10,1R10,1!  }1,1.
+  ..Bonne nuit à toi:/me te souhaite une bonne nuit13 $$1
+  ..Fait de beaux rêves!: /me te dis fait de beaux rêves 13 $$1
+  ..Salut tout monde :/me  1,1 2,2 3,3 4,4 5,5 6,6 7,7 8,8 9,9 10,10 11,11 12,12 13,13 14,14 15,15 12,15 Salut tout le monde ! 15,15 14,14 13,13 12,12 11,11 10,10 9,9 8,8 7,7 6,6 5,5 4,4 3,3 2,2 1,1_
+  ..Salut à tous:/me 1,1 2,2 3,3 4,4 5,5 6,6 7,7 8,8 9,9 10,10 11,11 12,12 13,13 14,14 15,15 12,15 Salut à tous ! 15,15 14,14 13,13 12,12 11,11 10,10 9,9 8,8 7,7 6,6 5,5 4,4 3,3 2,2 1,1_
+  ..À la prochaine..:/me 6vous dit 12**6 à la prochaine et faites attention à vous 12x6x12x6**
+  ..Bonne nuit :/me 4,154B7o8n9n11e11 13n4u7i8t8 9t11o13u4t4 7l8e8 9m11o13n4d7e7 8!9!11!13!4!7!
+  ..Bye le monde:/me > 12,15B6Y12E 6L12E 6M12O6N12D6E  
+  ..nuit:say 6ø¤°`°¤ø,¸¸,ø¤ 12Bonne Nuit6 $$1 12xox 6¸,ø¤°`°¤ø,¸¸,ø¤
+  ..bye2:say 6ø¤°`°¤ø,¸¸,ø¤ 12Bye6 $$1  6¸,ø¤°`°¤ø,¸¸,ø¤.
+  ..Bravo !! : /me Standing Ovation For 4 $$1 !!!
+  .Offrir
+  ..Cigarette:/me offre une cigarette à 4 $$1  7()¯¯¯¯)¯¯¯¯¯¯¯¯¯¯¯)14 ~~
+  ..Coca:/me 12offre un 4,1C1,4o4,1C1,4a0,0.4,1C1,4o4,1L1,4a12 à  $$1 
+  ..Pepsi:/me 7jette à $$1 un 12P0,12E12,0P0,12S12,0I 4MAX 7bien frais 4,9:) 
+  ..Coke:/me offre à $$1 un 14|16,4Coke14
+  ..Coke/Sprite:/me offre à $$1 un bon 1,15 15,4COKE1,15  ou aimerais-tu mieux un bon 1,15 15,3SPRITE1,15 ??
+  ..Hershey Bar:/me donne à $$1 une barre de chocolat 15,15.15,5HERSHEY'S15,15. 
+  ..Lifesavers:/me donne à $$1 quelques 15,15.0,2L1,9I0,3F0,4E1,8S0,10A0,4V0,3E1,9R0,5S15,15. 
+  ..Skittles:/me donne à $$1 pleins de 1,5S1,4K1,7I1,8T1,9T1,6L1,5E1,4S!!
+  ..Tootsie Roll:/me donne à $$1 un 1>(16.4,4.5,5.16,5Tootsie Roll5,5.4,4.1 )<  
+  .You Hou
+  ..Tu me réponds svp?: /notice $$1 ...tu me réponds svp  ???
+  ..Youhou, ya qqn ici?:/say 4YOU-HOU!!... 13Ya qqn ici???
+  ..Toc toc toc, ya tu qqn ici?:/say 4TOC TOC TOC!!... 13Ya tu qqn ici???
+  ..Notice:/notice $$1 $?="Entrez le message" | /.notice $$2 $! | /.notice $$3 $! | /.notice $$4 $! | /.notice $$5 $! | /.notice $$6 $! | /.notice $$7 $! | /.notice $$8 $!
+  ..You-hou!1: /me 4,1OºO.oo.o.OºOo.0  You hou  $$1 !!!!  4,1.oOºO.oo.o.OºOo | /me 4,1OºO.oo.o.OºOo.0  You hou  $$1 !!!!  4,1.oOºO.oo.o.OºOo | /me 4,1OºO.oo.o.OºOo.0  You hou  $$1 !!!!  4,1.oOºO.oo.o.OºOo
+  ..You-hou!2: /say1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 4,1 HEY! $$1 1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 1,19 | /say1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 4,1 HEY! $$1 1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 1,19 | /say1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 4,1 HEY! $$1 1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,
+  ..You-hou!3:/me 3 $$1 6 $$1 7 $$1 You-hou  7 $$1 6 $$1 3 $$1
+  ..Je te parles!: /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | 
+  ..Non et étoile:/me 3{4*3{4*3{4*3{4*3{4*3{4*3{4*15 $$1 4*3}4*3}4*3}4*3}4*3}4*3}4*3}
+  ..Roses:/me 3---}--}-4@ 13 $$1 4@3-}--}---4 YoUhOu!! 3---}--}-4@ 13 $$1 4@3-}--}--- | /me 3---}--}-4@ 13 $$1 4@3-}--}---4 YoUhOu!! 3---}--}-4@ 13 $$1 4@3-}--}--- | /me 3---}--}-4@ 13 $$1 4@3-}--}---4 YoUhOu!! 3---}--}-4@ 13 $$1 4@3-}--}---
+  ..Lapin!: /me 10Lapin  4. (Y)     13(Y)  4 $$1   13(Y)     4(Y)  10 Caresse | /me 10Lapin 4. (°.°)   13(°.°) 4 $$1  13(°.°)   4(°.°) 10 Caresse | /me 10Lapin 12.()¯°¯() 13()¯°¯()12 $$1 13()¯°¯() 12()¯°¯()10 Caresse | /me 10Lapin 12.(_)-(_) 13(_)-(_)4 $$1 13(_)-(_) 12(_)-(_)10 Caresse | /halt 
+  ..Sourire:/me 1(:)) $$1 2(:)) $$1 3(:)) $$1 4(:)) $$1 5(:)) $$1 6(:)) $$1 7(:)) $$1 4(:)) $$1 10(:)) $$1 10(:)) $$1 11(:)) $$1 12(:)) $$1 13(:)) $$1 14(:)) $$1 15(:))
+  ..Flèches de couleurs:/me 13-------------> $$1 <-------  | /me 12----------> $$1 <---------- |  /me 11-------> $$1 <------------- |  /me 10----------> $$1 <---------- |  /me 10-------------> $$1 <------- | /me 4----------> $$1 <----------  | /me 7-------> $$1 <-------------  | /me 6----------> $$1 <---------- |  /me 5-------------> $$1 <-------  | /me 4----------> $$1 <---------- |  /me 3-------> $$1 <-------------  | /me 2----------> $$1 <---------- |  /me 1-------------> $$1 <-------0
+  ..Flèches de couleurs2:/me 13-------------> $1 | /me 12------------> $1  | /me 11-----------> $1  | /me 10----------> $1  | /me 10---------> $1  | /me 4--------> $1  | /me 7-------> $1  | /me 6------> $1  | /me 5-----> $1  | /me 4----> $1  | /me 3---> $1  | /me 2--> $1  | /me 4-> $1
+  ..Question!:/me  3*4¿3*4?3*4¿3*4?3*4¿3*4?3*4{{{15 $$1 4}}}3*4¿3*4?3*4¿3*4?3*4¿3*4?3* 12:) 
+  ..Lumière:/me 2 !3¡4!6¡7!4¡10!10¡11!12¡13!14¡2!3¡46!7¡4!10¡10!11¡ 4*  * $$1 * *2 !3¡4!6¡7!4¡10!10¡11!12¡13!14¡2!3¡46!7¡4!10¡10!11¡11
+  ..Pseudo: /me 10 {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{ 10 12 $$1 11 10 }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} 10
+  ..Pseudo2: /me 5§§ $$1 §§§7§§ $$1 §§3§ $$1 §§4 {{{{{{{{{3 $$1 }}}}}}}}14 §§ $$1 §12§§ $$1 §§5§§§ $$1 §§
+  ..Parenthèse1!:/me 4(¯`'·.¸(¯`'·.¸ *3 $$1 4* ¸.·'´¯)¸.·'´¯) | /me 4(_¸.·'´(_¸.·'´ *3 $$1 4* `'·.¸_)`'·.¸_)
+  ..Parenthèse2!:/me 13(¯`'·.¸(¯`'·.¸|12 $$1 13|¸.·'´¯)¸.·'´¯) | /me 13(_¸.·'´(_¸.·'´|12 $$1 13|'·..¸_)`'·.¸_)
+  ..Parenthèse3!:/me 15(¯`'·.¸(¯`'·.¸       ¸.·'´¯)¸.·'´¯) | /me   4***********12 $$1 4***********  | /me  15(_¸.·'´(_¸.·'´       `'·.¸_)`'·.¸_)
+  ..Parenthèse4!: /me 1(2¯3`4·5.6,7¸4¸10.10·11´12¯1`2·3.4¸5¸6.7-4>10 10[11[12[4,1 $$1 12]11]10]10 4<7-6.5¸4¸3.2·1´12¯11`10·10.4¸7¸6.5·4´3¯2)1
+  ..Parenthèse5!:/me 1(2¯3`4·5.6,7¸4¸10.10·11´12¯1`2·3.4¸5¸6.7-4>10 10[11[12[4,1 $$1 12]11]10]10 4<7-6.5¸4¸3.2·1´12¯11`10·10.4¸7¸6.5·4´3¯2)1
+  .Cool Pseudo 
+  ..Rose (pseudo):/say4,1@10,1}-`-,-- 4,1@10,1}-`-,--12,8 $$1 4,1@10,1}-`-,-- 4,1@10,1}-`-,--');
+  ..Roses1 (pseudo): /me  4@10}->6--·´¯`·.¸¸.·´¯`·10 $$1 6 .¸.·´¯`·.¸.10--<-{4@ 
+  ..2 Roses (pseudo): /say 12,1.¸.·´¯`·.¸.11--3<12-09{04@ $$1 @09}12-3>11--12.·´¯`·.¸12¸.·´¯`·.¸11--3<12-09{04@ $$1 @09}12-3>11--12¸.·´¯`·.¸. , 
+  ..-
+  ..Multicolore:/me 1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 4,1 $$1 1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 1
+  ..Crayola:/me 3¡4!33¡4!33¡4!33¡4!33¡4!3 ~ $$1 ~ 3¡4!33¡4!33¡4!33¡4!33¡4!3 ~ $$1 ~ 3¡4!33¡4!33¡4!33¡4!33¡4!3~ $$1 ~ 3¡4!33¡4!33¡4!33¡4!33¡4!3
+  ..Mandela:/me 329(16¯3`1'31·25.20¸27(21¯19`21'2·13.20¸14(3¯1`10'2·17.20¸21(24¯2`18'29·4.13¸24¸13.12·10'4´2¯5)30¸15.10·12'2´14¯18)17¸15.27·13'17´27¯5)28¸17.30·1'26´7¯4)29  | /me  1021(7¯4`22'3·10.11¸28(25¯2`1'13·23.23¸15 660431202531202930272232019 15¸22.27·11'15´5¯18)29¸15.26·2'20´7¯28)13  | /me   14----==>>-----> 13 $$1 14 <----<<==----  | /me  53(3_28¸13.21·6'1´28(7_14¸19.27·30'26´15 302302119267171729155151561326 19`30'21·21.12¸3_5)3`21'
+  .Amour
+  ..Roses
+  ...Douzaine Roses:/me 00,00---------- 04 {@} {@} | /me  00,00----- 06{@}3 * 6{@}3 * 6{@} | /me  00,00--13{@}3 *13 {@}3 * 13{@}3 * 13{@} | /me  00,00--- \ 6{@}3 * 6{@}3 * 6{@} / | /me 00,00----------- 09\ \ \ l / / / | /me  00,00----------- 09\\ \ O / // | /me  00,00------------- 09\\ V // | /me  00,00-------------- 09\\E// | /me 00,00-------------- 09>=< | /me  00,00-------------- 09/|\/|\ | /me 13Donne 04A07 $$1 12Une 03Douzaines 05De 13Roses
+  ...Douche: /me douche avec des roses  s 04,01@09}12->--·´¯`·.¸¸.·´¯`·10 $$1 12.¸.·´¯`·.¸.--<-09{04@ @09}12->--.·´¯`·.¸¸.·´¯`·.¸--<-09{04@ @09}12->--¸.·´¯`·.¸. ,10 $$1  12.,,.·´¯`·.--<-09{04@ @09}12->--`·.¸¸.·´¯`·.¸ .·´¯`·.¸--<-09{04@ @09}12->-- .¸¸.·´¯`·.¸.·´¯`·.¸.10 $$1 12¸.·´¯`·.¸¸.·´¯`·.¸--<-09{04@ @09}12->--.·´¯`·.¸¸.·´ ¯`·.¸.·´¯`·.¸¸.·´¯`·.--<-09{04@ @09}12->--¸.·´¯`·.¸ 10  07:)
+  ...Donné 1 Rose: /me 04,01@09}3}12-11>12-11-12¸11.12·11´12¯11`12·11.12¸ 07D0o7n0n7e 06Une 13R6o13s6e 12A04 $$1
+  ...Bouquet: /me             3:*4{@}3*.; | /me          3:*4{@}3*4{@}3*.; | /me         4{@}3*4{@}3*4{@} | /me          3:*4{@}3*4{@}3*.; | /me      4{@}3*4{@}3*4{@}3*4{@}   | /me          3*\;\*;4{@}3*/;*/: | /me             3 ;\\ \ \ / / /; | /me            3   \ \ Y/ / | /me               3 `_\ //_'     4 Une douzaine de roses | /me            13 ( ,->=<-, )   4 Juste pour $$1 | /me             13 \_/))13((\_/      4  | /me                13\(( 13))/
+  ...Pseudo et roses:/me 4,8 3,1 '10-<<--7<4@ 0 $$1 1,1 4@7>10-->>-3,1' 4,8i
+  ...Superbe rose rouge à:/me donne à  $$1 une superbe rose 4,1@3--}--}-------
+  ...Super belle rose rouge à:/me offre à 12 $$1 une super de belle rose rouge  4@3-}--}---
+  ...Te donne une rose: /me 0,1 donne une  4©10}---`,--`,-------- 0à 4 $$1 1
+  ...Rose gentille : /me offre une rose 13@3}--»»--»»-- 4 a   $$1     pour sa gentilesse
+  ...Rose beauté:/me donne à $$1 une rose....... @}>-`--,--`--- car elle est d'une beaute radieuse
+  ...Rose envie:/me donne à $$1 une rose....... @}>-`--,--`--- parce que ca y tente :o)
+  ...Rose unique:/me 1offre a 12 $$1 1 une unique Rose rouge ! 4@3-}--}--- pour une personne unique
+  ...12 Roses jaunes:/me donne à $$1 une douzaine de Roses jaunes! 8@3-}--}--- 8@3-}--}--- 8@3-}--}---8@3-}--}--- 8@3-}--}--- 8@3-}--}--- 8@3-}--}--- 8@3-}--}--- 8@3-}--}--- 8@3-}--}--- 8@3-}--}--- 8@3-}--}---
+  ...Rose:/me donne  une rose à $$1 ... 4@>19}--,-`----
+  ...Douzaine1:/me 2donne à12 $$1 2une douzaine de roses | /me  16 .... 4@.@.@ | /me 16 ...4@ @3\4@3/4@ @ | /me 16... 3\4@3|4@3|4@3|4@3/ | /me 16 ....3\\\|/// | /me 16 .... 3\\|// | /me 16 ..... 3\|/ | /me 16 ..... 13=3&13= | /me 16 .....  3/|\
+  ...Douzaine2:/me 12 une douzaine de roses | /me 0... | /me 0........ 4{@} 3* 6{@} | /me 0......8{@} 3* 4{@} 3* 5{@} | /me 0.....3; 3* 13{@} 3* 8{@} 3* .; | /me 0....6{@} 3* 4{@} 3* 13{@} 3* 4{@} | /me 0.....3* ; * ; 5{@} 3* ; * : | /me 0......3;\ \ \ \| / / /; | /me 0...... 3 \\ \ Y/ / /   12de moi | /me 0.........3`_\ |/ _' | /me 0.........4/ \3\Y/4/ \ 12pour toi | /me 0........4( ,->=<-, ) | /me 0.........4\_/3/((4\_/      12avec amour | /me 0...........3/))(\ | /me 0...........3(( ))             13 $$1
+  ...à genoux:/me se pose à genoux et présente une rose à $$1 ......     4@>19}--,-`----
+  ...Semer:/me 12sème 4 $$1 12avec les roses!·.¸¸.·´¯`· 4 $$1 12.¸.·´¯`·.¸.3--<-{13@ 13@3}->--12.·´¯`·.¸¸.·´¯`·.¸3--<-{13@ 13@3}->--12¸.·´¯`·.¸. , 4 $$1  12.,,.·´¯`·.3--<-{13@ 13@3}->--12`·.¸¸.·´¯`·.¸ .·´¯`·.¸3--<-{13@ 13@3}->--12 .¸¸.·´¯`·.¸.·´¯`·.¸. 4 $$1 12¸.·´¯`·.¸¸.·´¯`·.¸3--<-{13@ 13@3}->--12.·´¯`·.¸¸.·´ ¯`·.¸.·´¯`·.¸¸.·´¯`·.3--<-{13@ 13@3}->--12¸.·´¯`·.¸ 4 $$1  
+  ..Embrasser
+  ...Tendrement!:  /me 13embrasse4 $$1 13tendrement 4xxx hmmmmm
+  ...Passionément!: /me 13embrasse4 $$1 13passionnément 4xxx hmmmm
+  ...Amicalement!:   /me 13embrasse4 $$1 13amicalement :o)
+  ...Bisous partout: /me 12te donne des 4bisous partout 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»4 $$1 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»
+  ...Baiser Chocolat:/me 12t'envoie  4des baisers chocolatés 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»4 4 $$1 
+  ...Baisers partout:/me 12te donne des 4baisers partout 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»4 $$1 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»
+  ... -
+  ...Embrasse Où?
+  ....Sur la joue: /me 13embrasse4 $$1 13sur la joue 4xxx
+  ....Sur la bouche:/me 13embrasse4 $$1 13sur la bouche 4xxx
+  ....Sur les lèvres:/me 13embrasse4 $$1 13sur les lèvres 4xxx
+  ....Sur le ventre/me 13embrasse4 $$1 13sur le ventre 4xxx
+  ....Dans le cou:/me 13embrasse4 $$1 13 dans le cou 4xxx
+  ....Dans la bouche: /me 13embrasse4 $$1 13dans la bouche 4xxx
+  ....Dans le front:/me 13embrasse4 $$1 13 dans l'front! 4xxx
+  ....Partout!: /me 13embrasse4 $$1 13partout....hummmm 4xXxXxXx
+  .... -
+  ....Kiss:me 4vas vers12 $1 4et lui donne un 12baiser4 très passionné!12,15 ¤4smaack12¤
+  ....Kiss2:me 4touche aux 12cheveux 4à12 $1, 4passe son doigt lentement sur ses 12lèvres4, regarde12 $$1 4dans les 12yeux4.... |  me 4sens ses 12jambes 4ramollir un peu....mais prend son 12courage4 à deux main et lui donne un doux 12baiser4.
+  ....Kiss3:me 4prend doucement la12 tête4 à12 $1 4entre ses mains. Regarde12 $$1 4dans les 12yeux4 .... |  me 4se sens drôle à l'intérieur... les 12battements de son coeur 4accélèrent de plus en plus!!!! |  me 4dépose doucement et lentement un 12baiser4 sur les 12lèvres4 de12 $$14....
+  ....Kiss4:me 4va en direction de12 $1 4et lui prend la 12main4.....Glisse son 12doigt4 sur sa figure...ferme ses 12yeux4 et embrasse passionnément12 $1 4sur les 12lèvres4.
+  ....baiser hésitant:me 4passe sa 12main 4dans les12 cheveux4 de12 $1 4, touche ses12 lèvres 4tout en faisant le contour , regarde droit dans ses 12yeux 4et .....viens le 12baiser4.
+  ....baiser mouillé:me 4donne à12 $$1 4un bec tres juteux et savoureux!! 12 =8Þ~~
+  ....millier:me 12donne à 4 $1 12des milliers de 4bise 12tout partout!!
+  ....bout de nez:me 12prend 4 $$1 12dans ses bras, 4le(la) 12penche a l'arrièr et 4l'innonde de bises 12sur le bout du nez!!
+  ....blowkisses!:me 12souffle quelques  4baisers 12vers »»--4(¯`°´¯)12=4(¯`°´¯)12---»»4 $$1 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»» 
+  ....kiss:me  12,15Ki§§4 Ki§§12 Ki§§e§4 $$1  12Ki§§4 Ki§§12 Ki§§e§ 
+  ....The Kiss: /me donnes a $$1 un tres chaud... Tres long et tres Erotic... qui fait trembler la terre, mieux que le paradis, Plus chaud que l'enfer, Bouillir le sang, Faire des reves merveilleux, pas loin du rayon X, Fait trembler les mains, entrechoquer les genoux, arreter le batement du coeur, transpirer tout le corps, Exploser la passion, humide, Profond, Long, , Bisous parce que je t aime tres fortttttttttt !!! 
+  ..Autre  
+  ...Graffiti:/me écris $$1 Partout sur les murs de sa chambre ! 1,13 1,8      1>- $$1 $$1 $$1 $$1 $$1 ....  
+  ...Moi aime: /me aimes 4 $$1
+  ...Sexy:/me  Dit4 WOW..4 ¡!§êxÿ¡4!*¡!§êxÿ¡!13==> $$1 <==4¡!§êxÿ¡4!*¡!§êxÿ¡!
+  ...Manqué:/me : 12 Tu NoUs A TeLlEmEnt MaNqUé  $$1  QuE j'Ai CoMpTé Le NoMbRe De PeRsOnNeS sUr I.R.C eN t'AtTeNdAnt, Y eN a 12058 ExAcTeMeNt 4,9;)
+  ...Parfum:/me : 15 MFFFFFF MFFFFFFFFFFFF ... 12t'ain mais je reconnais ce parfum moa !! C'est celui de $$1 !!
+  ...Rejoindre:/me 12essaie De Se FaIrE lE + PeTiT PoSsIbLe pOuR EnTrEr DaNs SoN MoDeM eT rEjOinDrE  $$1  !! :)
+  ...Comme un poisson:/me se sent comme un poisson dans l'eau quand  $$1  est là 13·´¯`·.¸¸..><((((º>.·´¯`·.¸¸.·´¯`·.¸><((((º>5¸.·´¯`·.¸. , . .·´¯`·.. ><((((º>`·.¸¸.·´¯`·.¸.·´¯`·...¸><((((º>7¸.·´¯`·.¸. , . .·´¯`·.. ><((((º>`·.¸¸.·´¯`·.¸.·´¯`·...¸><((((º>
+  ...Coeurs:/me 4<---(¯`°´¯)12 $$10,0..4(¯`°´¯)--<<< | /me 4<----\ - /- 12 $$1 4-\ - /---<<< | /me 4<-----\./-- 12 $$1 4--\./----<<<
+  ..Caresses
+  ...Cool Carèsse:/me 12(¯`'·.¸(¯`'·.¸ _______________ ¸.·'´¯)¸.·'´¯) | /me 11 (¯`'·.¸(¯`'·.¸  ¸.·'´¯)¸.·'´¯) |  /me 1 -----==>>>>------>4 $$1 1<------<<<<==----- | /me 11 (_¸.·'´(_¸.·'´  `'·.¸_)`'·.¸_) | /me 12 (_¸.·'´(_¸.·'´ ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯ `'·.¸_)`'·.¸_) 
+  ...Carèsse vague:/me 12 (¯`'·.¸(¯`'·.¸ 4,12 $$1  12 ¸.·'´¯)¸.·'´¯) | /me 4 (¯`'·.¸(¯`'·.¸ 4,12 $$1  4 ¸.·'´¯)¸.·'´¯) | /me  12 (¯`'·.¸(¯`'·.¸ 4,12 $$1  12 ¸.·'´¯)¸.·'´¯) | /me 4 (¯`'·.¸(¯`'·.¸ 4,12 $$1  4 ¸.·'´¯)¸.·'´¯) 
+  ...Vague-carèsses:/me Caresseø,¸¸,ø¤°`° $$1 `°¤ø,¸¸,øCaresseø,¸¸,ø¤° `° $$1 `°¤ø,¸¸,ø¤°`°Caresseø,¸¸,ø¤°`° $$1 `°¤ø,¸¸,øCaresseø,¸¸,ø¤° `° $$1 `°¤ø,¸¸,ø¤°`° 
+  ...Caresse #1:/me 15donne à11«¡»¥«¡»(®)12«¡»¥«¡»(®)13 $$1 12(®)«¡»¥«¡»11(®)«¡»¥«¡» 4une caresse serrée!! 
+  ...Caresse #2:/me 3donne  4""¨¨°º©o.,.o©º°¨¨°º©[3 $$1 4]©º°¨¨°º©o.,.o©º°¨¨"" 15une 12grosse 4caresse... !  13 $$1
+  ..Spéciale
+  ...Souris: /me   7 .--,         7.--,     10 12 $$1 | /me  7 ( ( \.-----./ )  7)      10 ma p'tite  | /me  7 '.__/6o o7\__.'       4souris d'amour!!!!!!  | /me       7{= 4^ 7=}                    10  | /me        7 > - <               4
+  ...Bulles: /me Lance des bulles ....autour de $$1 o°·°.o··3°.o·o4.o°.°·.o10°o.o°.°13·.o°·.o6·°.o·o12.o°.°·.o7°°.o°.·°.10o·.o°.°·4.·°o·o.o°15.°·.o°o°·3°.o·o.o4°.°·.o°°11·.o°·°.o·o.o13°.°·.o°·°.6o·°.o·o.°.12°·.o°·o.o7°.°·.o°·°.o10·o.o°.°·.o°·2°.o·.o1
+  ...Confettie:/me 12 lance des confetties tout autour de4~`;.2~`;.3*`;. 12 $$1 4`~;6;.~`11;.*` 12 $$1 7;.`~12`~`13*~14`; 12 $$1 15.~`1;.*3`;4.~; 12 $$1 5*`7;.13`~;4~`10*~` 12 $$1 2`~6`*11`;.13`;.4*`; 12 $$1 14.`~15;`4~`*5~`;7.~` 12 $$1 4;.11*`;13.`~2;`5`*~ 12 $$1 15`;.10``~`12*~`7`~`11*; 12 $$1 13.`1;.*2`;.3`~;14`~`6*~` 12 $$1 13;.~4`;.11*`15;. 12 $$1 4`~ 12..... 13wheeeeeeeeeeeee
+  ...Confettie et ballons:/me 14lance des 6CONFETTI & 11BALLOONS 10dans les airs pour $$1 `;~12'O~~~*`;.'13O~~~~*`; ^ $$1 .'`~;`~`10O~~~~*`;.'``2O~~~~*`;.'`~;`~`3 O~~~*`; $$1 .~~``4'O~~~~*`;.'`~;`~`5O~~~~*`;.'12O~~~~*` $$1 ;.'`~;`~`13O~~~*`;.'10O~~~~*`; $$1 .'`~;`~`4O~~~~*`;.2O````~~~~``*1310~~O``````~~~*''"'
+  ...Étoile!: /me 13lance de la poussière d'étoile tout autour de  $$1 7 ';`*^"',*;~`;.,*`.`*~;*~`;,.'*`.;*``;.^.*`~..;`*.^;.,*`;~..*;`~*.,:*`**13parce-que TU es vraiement SPÉCIAL.
+  ...Poudre Magique:  /me 13 lance de la poudre magique sur  4,13 $$1  13 `;~'~~~*`;4.'~~~~*`;  4,13 $$1  13` .'`~;`~`~~~~*`;4.'~~~~*`;.'`~13;`~`~~~*`; 4,13 $$1  13.'~~~~*`;.4'`~;`~`~~~~*`13;.'~~~~*`;  4,13 $$1  13` ;.'`~;`~`~~~*`;4.'~~~~*`; 4,13 $$1  13.'`~;`~`~~~4~*`;.'~~~*`; 4,13 $$1  13;.'`~;`~...12ps, c pas pour sniffer!!!
+  ...Poussières: /me soupoudre de la poussière d'étoile et des pétales de roses tout autour de  son ami(e) spécial4*13 ,*11`.`*12~7;*4*13 ~11`;,12.'* `4*13;.11^.12*`* 4*13~.11^.;`12*.7^;.4*13 ,*11`;12~..12 $$1 13 *;11`~7*.12,:* 4*13 ;11.,*12`.`4*13 *11~7;*12~`* 4*13 ;,.11'*`12.;*4*13*;`7~*12~`* 4*13 ;,.11'*`12.;*4*13*;`7~*.11'*`12.;*4*13*;`7~*
+  ...Anges:/me 13t'envoie de petits anges gardiens pour te surveiller 4 $$1 2~Å~ 4~Å~ 2~Å~ 12~Å~ 3~Å~ 4 $$1 10~Å~ 13~Å~ 4 $$1 11~Å~ 6~Å~ 14~Å~ 4 $$1 4~Å~ 13~Å~ 15~Å~
+  ...Anges!: /me 13place de petits anges souriants tout autour du cou de  4 $$1 13 ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ en espérant que ça lui apporte  de la joie et de l'amour!!!!!
+  ...Ailles d'ange:/me 4 ¯`13°²º4¤æ=«4.,¸_13 $$1 ! 4_¸,.4»=æ¤13º²°4`¯12 les ailes d'un 13Ange!!
+  ..Séduction
+  ...FréMiT La NuiT:me 12Ne rêve que du jour où il poura goûter le nectar exquis apposé sur les lèvres si charmantes de6 $$1 12dont la seule pensée trouble mes nuits et me fait frémir de tout mon être...
+  ...clin d'oeil2:me 4fait un clin d'oeil à 12 $1
+  ...Beau nick:me 4dit à12 $1 4qu'il as un beau nick! ;o)
+  ...Surveille toi!:me 13*1^2¿1^13*12 $$1 13*1^2¿1^13* 4je te surveille toi :*) 
+  ...Chocolat:me 12dit en voyant6 $$1 12sur le canal,  j aimerais être un morceau de chocolat pour pouvoir fondre dans votre bouche et non dans vos mains...
+  ...25 sous (envoyer a f):me 12demande à4 $$1 12s'il pourrait lui emprunter 25 sous pour appeller sa mère et lui dire que je viens enfin de voir la femme de mes rêves!
+  ...25 sous (envoyer a g):me 12demande à4 $$1 12s'il pourrait lui emprunter 25 sous pour appeller sa mère et lui dire que je viens enfin de voir l'homme de mes rêves!
+  ...Beau sur vous:me # 4 $$1 12sais-tu ce qui serait vraiment beau sur toi? MOI   :)))
+  ...Hot in here!!:me 12demande à tlm : "Est-ce vraiment chaud ici ou est-ce seulement4 $$1 12qui est vraiment trop "hot" et qui me donne cette impression? :))"
+  ...Ours:me # 12Mon ours en peluche me manque. Voudriez vous coucher avec moi 4 $$1 12pour le remplacer?
+  ...Robe est bele:me # 12Votre robe est vraiment belle; puis-je vous l'enlever 4 $$1 12pour la regarder de plus près? :))
+  ...Telephone:me # 12Oups, j'ai perdu mon numéro de téléphone. Pourrais-je avoir le vôtre à la place6 $$1 12?
+  ...Resp Artificielle:me 12 espère que4 $$1 12connait la respiration artificielle, car tu me couple le souffle!
+  ...Bomb d'oxy (pour f):me 12a le souffle coupé juste à voir4 $$1 12, puis-je me servir de vos deux bombonnes d'Oxygene pour me remettre sur pieds?? :o)
+  ...Bomb d'oxy (pour g):me 12a le souffle coupé juste à voir4 $$1 12, puis-je me servir de votre bombonne d'oxygene pour me remettre sur pieds? :o) 
+  ...Bain de minuit: me 12est sûr que 4 $$1 12 est d'acc pour un ti bain de minuit... zuuut scuse-moi c'est parce que y'é juste $time  !!!
+  ...Belle soirée:me 12se dit que pour passer une soirée romantique, il suffit d avoir un feu, une coupe de champagne, mais surtout, il faut etre avec6 $$1
+  ...Male viril rencontré? (F): me 12PeNSe Que 4 $$1 12 eST VRaiMeNT Le PLuS Beau MâLe ViRiL Qu'eLLe N'a JaMaiS ReNCoNTRé! (eN eFFeT, eLLe Ne L'a JaMaiS ReNCoNTRé!!)
+  ...Vrai mâle (F): me 12Dit "AAAAAAH! Mais que vois-je? 4 $$1 12 un vrai mâle viril vient de s'introduire sur $chan!! WAHO!!   
+  .Actions mechantes
+  ..Chien: /say 15,1T'est si laid(e)7 $$1 15Que si j'aurai un chien avec ta face je lui couperai les poil du cul pis je le ferai marcher de reculon
+  ..Enculeur:/say 15,1Attention7 $$1 15est la4!!!15Coller vous tous le cul sur le mur4!!!
+  ..Enculeur2:/say 15,1Attention voila 7 $$1 $+ 4!!!15Serrez vous les fesses
+  ..Croque:/me  15,1Dit que7 $$1 15Suce avale croque4!!!15Alors faite attention a se que vous mettez dans la bouche de4 $$1..gay:/me  15,1Dit qu'il n'y a rien a faire avec7 $$1 15c'est un gay4!!
+  ..Connaissance:/me  15,1Est aller dans la tete de7 $$1 15et a decouvert que7 $$1 15sait juste6 3 15mots4: 10Caca pipi lolo
+  ..Nature:/me  : 3pour préserver la nature, tapons /ignore $$1 c'est un petit geste pour préserver un si grand environnement. Merci pour lui. 
+  ..Clouer:/me  : $$1  : Dit papa, pourquoi je tourne en rond quand je marche ? . Son Pere : Tais toi ou je te cloue l'autre jambe.
+  ..Hacker:/me  : 12,1 $$1 4est un si grand hacker qu'un jour Il a ReUsSiT a 9FlOoDeR 12qUeLqU'uN !
+  ..Lire:/me  est content !! 12Maintenant que $$1 a appris a lire.. peut etre qu'un jour il saura aussi écrire !
+  ..Cul:/me  : 14(12__14|12__14) 4<=== OUAIS C EST CA $$1 ... Et MoN CuL C eSt Du PoUlEt ! ! !
+  ..Ta mere est si pauvre:/me  : 4,1ta mere est si pauvre9  $$1 que dans votre 4famille,4 vous bouffez vos 8CornFlakes4 avec une fourchette pour 8economiser 12le lait 
+  ..Magazine Picsou:/me  demande a $$1 9s il peut rendre 3le picsou magazine 4qu il a vole a 2sa petite soeur de 2 ans 
+  ..Coup de boule:/me  14FoUt Un 4coup de boule14 DaNs La TrOnChE De  $$1 .14 PuIs $me EnChAîNe SuR Un AuTrE CoUp De BoUlE, PuIs Un AuTrE, eT uN AuTrE... 6 *** $$1 has quit IRC (excess coup d'boule) 4,9;o)
+  ..RIP:/me  : 4+ R.I.P 4+  $$1
+  ..Pédophile:/me  : 12 $$1 est sur #sexpics $chan #preteens #-14sex
+  ..Nazi:/me  : 12 $$1 est sur #nazi #Xor88 $chan #hitler #whitepower
+  ..Homosexuel:/me  12 $$1 est sur #gays $chan #gay-fr #sodomie-on-line
+  ..Faux kick:/msg $chan 19 $$1 was kicked by $me ( $chan est interdit aux lamers )
+  ..BioMan:/me  : 4Force Rouge ! | /me  : 12Force Bleue | /me  : 9Force Jaune ! | /me  : 14Force Grise ! | /me  appel ses potes les 4B9i12o14m4a9n12s et ils lazérisent la gueule de  $$1  !!!! =--=-=-=-=->>>> 
+  ..Pisser sur qqn:/me  ouvre sa braguette 8 et il pisse sur la tronche de   $$1  ... 7 alors $$1 , ca te plaît d'être douché pour une fois ?! 
+  ..Grenade:/me  3 balance une grenade sur  $$1  .. et B2OOOOOO3OOO7M3 dans la tronche de  $$1  !! yeaaaaaaaaaaaaah
+  ..Chier:/me  5,1chie 12sur son 9disque dur12 et il envoie tout ca à  $$1 4par dcc send ! 12beuhaaaaaaa
+  ..Poisson:/me  : 14><((((º> 12°° 4BuRp ... $$1  SeNt Le PoIsSoN ! 
+  ..Téléphone cellulaire:/me  dégaine son 12téléphone cellulaire6, étire la 10petite antenne qui casse tout le temps6, se prépare affronter $$1, et, tout d'un coup, alors qu'il vient pour donner un coup de 10petite antenne qui casse tout le temps6 à $$1 | me entend 4sönner6 le téléphone et répond....3 $$1 l'a échappé belle!!!!6 MAIS ON SE RETROUVERA...
+  ..Coup de téléphone!:/me  donne 5 ou 6 coups de téléphone à $$1 ... 3Allo? 12Tu es là? 4Réponds!!!!
+  ..Piano à queue:/me  prend un piano à queue et le lance en plein dans la figure de $$1 6B4L2i3n12G4! 6B10o4i12n6G1! 13B3o6N2G4!
+  ..Chien de garde:/me  constate que $$1 commence a être menacant envers lui, alors il fait venir son chien de garde appelé Mangetoute. 1C'est une espèce de bibite a poils en voie d'extinction (il en reste 2 (l'autre c'est sa femme)) qui mange tout ce qui existe.6 Le chien saute sur $$1 pis le mange au grand complet d'un seul coup.4 Enfin! un de moins!
+  ..donner la main:/me  donne la main à  $$1 ... | me serre6 la main à $$1  ....8,1C9,1R3,1A12,1C6,1K13,1!4,1!8,1!1,16           oupss...les doigts!
+  ..Teletubies: /me appelle ses potes les  8T4E9L12E8T4U9B12B8I4E9S !!! | /me 8LALA !! | /me 4PO !! | /me 9 DEPSEE !! | /me 12 TINCKY WINKY !! | /me :ils obligent $$1 a mater des cassettes pendant 2 Heures !!! | /me $$1 Est telelobotomiser !!!
+  ..Planquer vous: /me  8,1>>1_4,0 ALERTE!!! 6 Planquez vous v'la $$1 1,1_8,1<<
+  ..44 Magnum: /me prends deux 44 Magnum et les accotent sur la tempe de $$1 !!!! 4 POW !!!!
+  ..Ennemie: /me 4 ATTENTION !!!  Voila un ennemi : 12 $$1 | 
+  .Amour
+  ..Roses
+  ...Simple rose:/me offre une rose à $$1 4@19}--,-`----
+  ...Rose comme toi:/me offre une rose 4@3}>--'--,--'---6 à la rose que tu es, $$1 :}
+  ...A genoux:/me se pose à genoux et présente une rose à $$* ......     4@19}--,-`----
+  ...Couleur
+  ....Rouge:/me 4,1 donne à $$1 une jolie rose rouge: 3--,`--'--4@
+  ....Blanche:/me 0,1 donne à $$1 une jolie rose blanche: 3--,`--'--0@
+  ....Bleue:/me 12,1 donne à $$1 une jolie rose bleue: 3--,`--'--12@
+  ....Violette:/me 6,1 donne à $$1 une jolie rose violette: 3--,`--'--6@
+  ...Plein de roses:/me t'envoie plein de roses 4@3}-12>--·´¯`·.¸¸.·´¯`·  $1 .¸.·´¯`·.¸.--12<-3{4@ 4@3}-12>--.·´¯`·.¸¸.·´¯`·.¸--12<-3{4@ 4@3}-12>--¸.·´¯`·.¸. , $1.,,.·´¯`·.--12<-3{4@ 4@3}-12>--`·.¸¸.·´¯`·.¸ .·´¯`·.¸--12<-3{4@ 4@
+  ...Dozen roses:/me 0 ---------4 {@}  {@} | /me 0  -----4 {@} * {@} * {@} | /me 0 --4{@} * {@} * {@} * {@} | /me 0 ---9 \4 {@} * {@} * {@} 9/ | /me 0------- 9\ \ \ l / / / | /me 0 ------- 9\\ \ O / // | /me 0---------- 9\\ V // | /me 0----------- 9\\E// | /me 0------------ 9>1=9< | /me 0----------- 9//(\\ | /me 10 donne à $$1 $2 $3 $4 $5 $6 Une 12zaine de roses
+  ..Gestes
+  ...Prosterner:/me se prosterne devant $$1, c'est une Déesse.
+  ...Bise:/me fait une grosse BiSe à $$1 ! ;o)
+  ...Bisous:/me fait de gros BiSouS à $$1 ! :o)
+  ..Autres
+  ...Coeur:/me 4(¯`·._7(¯`·._10(¯`·._(12 $$1 10)_.·´¯)7_.·´¯)4_.·´¯) | /me 4(_.·´¯7(_.·´¯10(_.·´¯(12 $$1 10)¯`·._)7¯`·._)4¯`·._)
+  ...Coeurs Fleurs:/me 1(¯`·.4@}_10(¯`·.4@}_1(¯`·._( $$1 )_.·´¯)_4{@10.·´¯)_4{@1.·´¯) |  /me 10(_.· 4@}1¯(_.·´4@}10¯(_.·´¯1( $$1 )10¯`·._)¯4{@1`·._)¯4{@10`·._)
+  ...Ours:/me <-- 13{~._.~} - 11 $$1 - 13{~._.~}--- | /me <---13 ( Y ) -- 12 $$1 --13 ( Y )---- | /me <-- 13()~*~() - 11 $$1 -13 ()~*~()--- | /me <--13 (_)-(_) - 12 $$1 -13 (_)- (_)---
+  .Cool
+  ..RainBow:/me dit de regarder les couleurs!!!  1,1  2,2  3,3  4,4  5,5  6,6  7,7 8,8  9,9  10,10  11,11  12,12  13,13  14,14  15,15
+  ..Ma protection:/me est protégé par 1^Å^2^Å^3^Å^4^Å^5^Å^6^Å^7^Å^8^Å^9^Å^10^Å^11^Å^12^Å^13^Å^14^Å^15^Å^
+  ..-
+  ..Fireworks:/me feu d'artifice pour $1 13*~~~~~|#####>14`';:*,.,*:;'` $1 6*~~~~~|#####> 9`';:*,.,*:;'` $1 4*~~~~~|#####> 12`';:*,.,*:;'1 6*~~~~~|#####> 1`';:*,.,*:;'`
+  ..Ballons:/me jète 4des confettis et des ballons dans les air pour 4  $$1 `;~'O~~~*`;.'O~~~~*`; 12 $$1 .'`~;`~`O~~~~*`;.'O~~~~*`;.'`~;`~`O~~~*`;3  $$1 .'O~~~~*`;.'`~;`~`O~~~~*`;.'O~~~~*`7  $$1 ;.'`~;`~`O~~~*`;.'O~~~~*`;2  $$1    .'`~;`~`O~~
+  ..Poisson:/me 12aime nager comme un poisson avec4  $$1 13·´¯`·.¸¸..><((((º>.·´¯`·.¸¸.·´¯`·.¸><((((º>5¸.·´¯`·.¸. , . .·´¯`·.. ><((((º>`·.¸¸.·´¯`·.¸.·´¯`·...¸><((((º>7¸.·´¯`·.¸. , . .·´¯`·.. ><((((º>`·.¸¸.·´¯`·.¸.·´¯`·...¸><((((º>
+  ..Confettis:/me envoie des confettis à $$1 4~;``*~`;.~``~`* $$1 3~`;. ~`;.*`;.`~`~`*~` ;.~ $$1 12`;.*`;.`~;.*`;.`~;`~ $$1 4`*~` ;.~` $$1 ;.*`;.``~`*~`;. $$1 3~``~` *~`;.~`;.*`;. $$1`~`~`*~` ;.~`;.*`~``;.~`;.*```* 12 $$1 ~`; ~``~`*~`;
+  ..Cool:/me 12 ¯`°²º¤æ=¬«.,¸_- $$1 -_¸,.»¬=椺²°`¯`°²º¤æ=¬¤æ=¬«.,¸_-4 $$1 - _¸,.»¬=椺²°`¯`°²º¤æ=¬«æ=¬«.,¸_-3 $$1 -_¸,.»¬=椺²°`¯`°²º¤æ=¬¤æ=¬«.,¸_-7 $$1 - _¸,.»¬=椺²°`¯`°²º¤æ=¬¤æ=¬«.,¸_-12 $$1 -_¸,.»¬=椺²°`¯`°²º¤æ=¬¤æ=¬«.,¸_- $$1
+  ..Anges:/me envoie des anges gardiens pour veiller sur  12^Å^1 $1 4^Å^ 9^Å^1 $1 11^Å^
+  .Modes
+  ..Mode Plus:/me met le mode: + $+ $$?="kel mode" $$1
+  ..Mode Moins:/me met le mode: - $+ $$?="kel mode" $$1
+  ..-
+  ..Cool
+  ...Intelligent: /me met le mode: +intelligence $$1
+  ...Sympas: /me met le mode: +sympas $$1
+  ...Orgasm: /me met le mode: +orgasm $$1
+  ...Oups: /me met le mode: +oups $$1
+  ...Yep: /me met le mode: +yep $$1
+  ...YeahBaby: /me met le mode: +YeahBaby $$1
+  ..Fille
+  ...Amour: /me met le mode: +amour $$1
+  ...Beauté: /me met le mode: +beauté $$1
+  ...Déesse: /me met le mode: +déesse $$1
+  ...Gentillesse: /me met le mode: +gentillesse $$1
+  ..Garçon
+  ...Ami: /me met le mode: +ami $$1
+  ...Cool: /me met le mode: +cool $$1
+  ...Pote: /me met le mode: +pote $$1
+  ..-
+  .Rigolo
+  ..IrcOP:/say Notre Père Qui Êtes IrcOP, Que Votre Nick Soit Notifié, Que Les Users Soient À Votre Merci, Que Votre Volontée Soit Faite Sur IRC Comme Au Ciel. Donnez Nous Aujourd'hui La Permission De Tchater, Pardonnez Nous Nos Majuscules Ou Nos Scripts Comme Nous Pardonnerons À Ceux Qui Les Utiliseront, Mais Surtout Ne Nous Soumettez Pas Aux Kicks Mais Délivrez-Nous Du Ban. AMEN !
+  ..Foufounes: /me : Hey ! Regardez13 $1 12se fait balancer les foufounes 13"(_/_)"(_|_)"(_\_)"(_|_)"(_/_)" 12 4WOW !!
+  ..Chewing-Gomme:/me 2,14Sent (c le cas de la dire..) que $$1 a mauvaise haleine.. tiens des 15,150,01,9Clorets0,015,15 4,14pour t'aider un peu!!
+  .Mechant
+  ..Suceux:/say Regarder $$1 si ya lair dun suceux(se) :    (:-()
+  ..Pisser sur qqn:/me ouvre sa braguette 8 et il pisse sur la tronche de   $$1  ... 7 alors $$1 , ca te plaît d'être douché pour une fois ?!
+  ..Hacker:/me : 12,1 $$1 4est un si grand hacker qu'un jour Il a reussi a 9Flooder 12quelqu'un !
+  ..Bar de savon:/me a vu que $$1 a fait exprès de faire tomber sa barre de savon d'un douche public...
+  ..Boy->Girl:/me dit à $$1 que ca lui fait bien déguisé en fille on pourrait presque croire que c'en est une...
+  ..Homosexuel: /me donne la déf de 5Homosexuel 6 Définition: 7Personne qui est attiré par les personnes du même sexe. 6Exemple: 12    $$1       est un homosexuel!
+  ..Baton: /me enfonce un baton de base-ball bien profonds dans le c.l à $$1, apres, il enfonce le meme baton dans la bouche à $$1, BON APPÉTIT !!!
+  ..Pendre: /me prends $$1 par les co..ll.., lui enroule un fil de barbellé autour de ses coui..es et serre tres fort. Apres, il attache le fil de barbelé à la plus haute branche d'un arbre et pend $$1 par les c..illes!!!
+  ..Camion: /me décide de prendre son camion-citerne et s'en va sur la 13 en direction NORD et voie $$1 sur la 13 roulant en direction SUD conduire sa lada rose, | /me accélere à 250 km/h, prends le terre-plein et fonce directemnt sur $$1 4BOUM
+  ..coup au derriere:/me donne un GROS coup au derrière de $$1  4«««8«««9PØW8»»»4»»»
+  ..lamer:/me 2--14*2==5 $$1 J'ai été heureux(se) de te connaitre a partir de maintenant je sais kesk'un vrai vrai lamer!2==14*2--
+  ..taux de stupidité:/me 15,10Selon les dernieres Statistiques  $$1  ayant ce nick aurait un taux de stupidité (crétinisme) plus élevé
+  ..batte de baseball:/me 4Prend 5un 7Batte 4de 5baseball 7Faisse  $$1  4ki 5lui 7cris 13"non non svp arrete je me soumets!" 2Ah 12c 9juste 2ke 12je 9voulais 2un 12autre 9LAMER 20 12mes 9pieds 2:o)
+  ..épais:/me Épais déf: 4,2Nom applikable pour une personne sans cerveau comme 11[4 $$1 11]4 une personne stupide comme 11[4 $$1 11]4 une personne comme 11[4 $$1 11]4 kelle chance nous avons d'avoir une tel exemple!
+  ..afreux/sans amis:/me 10Des fois je me dit que l'internet rapproche les gens, 7les affreux comme  $$1  , 3les stupides comme  $$1 14 ceux qui non pas d'amis comme  $$1 2 et les inadaptés socials comme  $$1  5N'est ce pas merveilleux!!!
+  ..danger:/me 5-8-5--8-4-8-4-8-4-8-4-7 Attention Danger4 -8-4-8-4-8-4-8-4-8-4-8-4-8-4-8-4-8-4-8-4-7  $$1  8-4-8-4-8-4-8-4-8-4-8-4-8-4-8-4-8-4-8-4-8-7Est là  4-8-4-8-4-8-4-8-4-8-4-
+  ..embrasse mon derriere:/me 8,2° * Les étoiles embrasse le ciel ¤ *,6,14 La rosée embrasse les fleurs3 --~--5{4@ 12,15 Et toi  $$1  Embrasse mon derrière!!
+  ..chiente:/me 15,5Dit moi  $$1 , Es ce que tu me permet de te dire le fin fond de ma pensée ?! Tu es une personne tres.. tres... hum.. chiente 5,14( désolé de l'emploi de cette expression mais... y'avais pas d'autre mot pour te décrire..chiente)
+  ..malade:/me 4,48,84,48,80,1ATTENTION   $$1  arrive, selon nos informations, il(elle) est un(e) méchant(e) malade mental(e)!!0,1ATTENTION4,48,84,48,80,1
+  ..Tres Mechant
+  ...Pédo:/say Un jour $$1 a demandé a son pere : "Papa c koi un Pédo?" et son pere lui a répondu : "Ta Yeule pi suce!" :)
+  ...Whois de gay
+  ....Lesbi:/say /say /WhOiS InFo De:» » » $1 | /say AdDrEsS» » » Homo@ $+ $ip | /say NoM» » » Je Baisse Ma Mère... | /say SeRvEuR» » » Lesbi.Homo.NJ.US.Undernet.Org | /say ChAnNeLs» » » @#Lesbi+ #Homo #LoveTheGirls #LicheLesChattes | /say AwAy» » » [Je Liche La Blonde De Mon Frere...Hummm!] [ $time ] [ The Lesby §©®îþT V뮧îðñ 69.69 Fais Par $1 ] | /say /WhOiS FiN De:» » » $1
+  ....Gay:/say /WhOiS InFo De:» » » $1 | /say AdDrEsS» » » Gai@ $+ $ip | /say NoM» » » Je Baisse Mon Père... | /say SeRvEuR» » » Tapette.Homo.NJ.US.Undernet.Org | /say ChAnNeLs» » » @#Gai+ #Homo #LoveTheBoys #SucesLesBites | /say AwAy» » » [J'Encule Le Chum A Ma Soeur...Hummm!] [ $time ] [ The Gai §©®îþT V뮧îðñ 69.69 Fais Par $1 ] | /say /WhOiS FiN De:» » » $1
+  ...Baton: /me enfonce un baton de base-ball bien profonds dans le cul à $$1, apres, il enfonce le meme baton dans la bouche à $$1, BON APPÉTIT !!!
+  ...Pendre: /me prends $$1 par les couilles, lui enroule un fil de barbellé autour de ses couilles et serre tres fort. Apres, il attache le fil de barbelé à la plus haute branche d'un arbre et pend $$1 par les couilles !!!
+  ...Insultes: /me trouve que $$1 sent la crasse de poule sèque, que cé un licheur de babines de babouins enragé, que cé un criss de licheux de bédaines froides de pingouins de l'antartique, vieux Uddy Truchluc le Guidou, couillon, moron, blond, sec, pouilleux, couilleux, flueux, sèqueux, mangeux, chiasseux, licheux, senteux, affermisseux, pouillon, bouillon, dindon sec enfermé dans un réfrigérateur à haute tension, flux de mouche à marde, petit po
+  .Offrir
+  ..Boire
+  ...Coca:/me offre à $$1 un 0,4~COCA~
+  ...Pepsi:/me offre à $$1 un 0,1~4,1PEPSI 12,1MAX~0,1
+  ...Orangina:/me offre à $$1 un 8,12~ORANGINA~
+  ...7up:/me offre à $$1 un 0,3~74o0,3uP~
+  ...Oasis:/me offre à $$1 un 4,8~OaSiS~
+  ...Nestea:/me offre à $$1 un 0,12~NESTEA~
+  ...Sprite:/me offre à $$1 un 0,12~Spr0,3ite~
+  ...Un café:/me offre une bonne tasse de café à $$1 :4[1,5__4]D
+  ...Du café:/me offre à $$1 un 1,1_0C1_1,0] 4,4_0a4_4,0]2,2_0f2_2,0] 3,3_0é3_3,0]
+  ..Autres
+  ...Cigarette:/me offre une cigarette à 4 $$1  7()¯¯¯¯)¯¯¯¯¯¯¯¯¯¯¯)14 ~~
+  ...Clope:/me offre une bonne 1(1,8)¯¯¯¯)1¯12)¯¯¯¯¯¯¯))4)15~~ 10à4 $$1
+  .Poéme
+  ..poeme 1:/me 1dit que son coeur s'12embrase1 pour4 $1 1et que meme toute l'eau de 13l'océan1 le plus 4profond1 ne pourais éteindre la 12flamme de l'amour1 qui brule en moi pour4 $1 
+  ..poéme 2:/me 1La 4mort 1est une 4prison1! L'4Amour 1est une 4chanson1! mais de toute façon rien que le 12fait 1d'étre en 13compagnie1 de toi4 $1 1est un 4bonheur1 régulier!!!
+  ..poéme description:/me 1 Ho ! ya un 4ange1 qui 12passe1! cet 4ange1 qui ne peut étre qu'un 4étre parfait1,le plus 13beau1,le plus 13gentil1,le plus 13sympa1,le plus 13inteligent1... Ha! ben m'en doutais c'étais4 $1 1qui passe sur4 $chan 1!!  
+  .Amour Copain etc... 
+  ..Amour-fou!:/say  13-------------> Je t'aime à la folie $1 | /say 12------------> Je t'aime à la folie $1  | /say 11-----------> Je t'aime à la folie $1  | /say 10----------> Je t'aime à la folie $1  | /say 10---------> Je t'aime à la folie $1  | /say 4--------> Je t'aime à la folie $1  | /say 7-------> Je t'aime à la folie $1  | /say 6------> Je t'aime à la folie $1  | /say 1(%ver)
+  ..Toi mon pote:/me 1vient de te 4declaré1 un de ces 4potes1 officiel $1 !!!
+  ..il est sympa:/me 1dit que $1 est trop 4sympa1 et qu'il faut le connaitre parcqu'il est un étre 4d'exception1!!!
+  ..va mettre ambiance:/me 1dit que maintenant que 4 $1 1 est sur 4 $chan 1!! il va y avoir plus d'4Ambiance1!!!!
+  ..meilleur ami:/me 1dit que son 4meilleur ami1 est dans $chan !!!! C'est $1!!!!! 
+  ..meilleure amie:/me 1dit que sa 4meilleure amie1 est dans $chan !!!! C'est $1!!!!!
+  ..prince du chan:/me 1dit que $1 est le 4Prince1 de $chan !!! 
+  ..reine du chan:/me 1dit que $1 est la 4Reine1 de $chan !!! 
+  ..Gros poutous:/me 1Mais que vois-je là!!! c'est4 $1 1!!!!!vient ici me faire un gros poutous!!!! 
+  ..coucou c'est $me:/say 1 \\\\//// | /say 1I  ¤  ¤ I | /say 1    I    v      I     | /say 1    \   u     /   | /say 12coucou! $1 cest 4 $me
+  ..Si tu es un garçon
+  ...Belle:/say  $$1  0,1e8,1s3,1t 4,1l15,1a 14,1p8,1l9,1u10,1s 4belle 9,1d7,1e 8,1c9,1e 11,1r13,1e14,1s15,1e0,1a3,1u4,1 :o))
+  ...Gentille:/me 1sets mode:3 +gentille 4 $$1
+  ...Calin:/me 1sets mode:3 +calin 4 $$1 1:)
+  ...Kiss:/me 8,1Fais 15,1un 4,1gros 7,1bisou 11,1à  $$1 :)
+  ...Amour:/say Je t'aime  $$1  4,1car 7,1tu 8,1est 9,1la 11,1plus 13,1belle,14,1la 15,1plus 0,1gentille,3,1et 4,1la 7,1fille 8,1qui 9,1me 10,1fais 11,1le 13,1plus 14,1chaud 15,1au 0,1coeur 4,1c'est 7,1pour 8,1ça 9,1que 10,1je 11,1veux 13,1rester 14,1avec 15,1toi 0,1jusqu'a 4,1la 7,1fin 8,1des 9,1temps 10,1:o)).4Signer:  $me .
+  ..Si tu es une fille
+  ...Beau:/say  $$1  0,1e8,1s3,1t 4,1l15,1e 14,1p8,1l9,1u10,1s 4beau 9,1d7,1e 8,1c9,1e 11,1r13,1e14,1s15,1e0,1a3,1u4,1 :o))
+  ...Sympa:/me 1sets mode:3 +sympa 4 $$1 1 :))
+  ...Cool:/say 0,1T'3,1e4,1s 7,1t8,1r9,1o10,1p 11,1c13,1o14,1o15,1l: $$1 :).
+  ...Calin:/me 1fait un gros calin à 4 $$1
+  ...Amour:/say Je t'aime  $$1  4,1car 7,1tu 8,1est 9,1le 11,1plus 13,1beau,14,1le 15,1plus 0,1gentil,3,1et 4,1le 7,1mec 8,1a 9,1qui 10,1je 11,1pense 13,1le 14,1plus 15,1au 0,1monde 4,1c'est 7,1pour 8,1ça 9,1que 10,1je 11,1veux 13,1rester 14,1avec 15,1toi 0,1jusqu'a 4,1la 7,1fin 8,1des 9,1temps 10,1:o)).4Signer:  $$?="Met ton nick" .
+  ..Définitions
+  ...Cool:/me 1cool:adj.qual: se dit d'une personne telle 4 $$1 1, c'est a dire toujours disponible et prête à rendre service.
+  ...Sympa:/me 1sympa:adj.qual : se dit d'une personne tranquille telle 4 $$1 1qui ne l'ouvre jamais et qui sais se montrer agréable quand il le faut
+  ..Offrande
+  ...Une smoke à: /me 1offre une bonne 1(1,8)¯¯¯¯)1¯12)¯¯¯¯¯¯¯))4)15~~ 10à 4 $$1 
+  ...MnMs:/me 4D3O4N3N4E3 $$1  M&M'1s1 4(4m4)4 3(3m3)3 4(4m4)4 12(12m12)1 14(14m14)1 4m4m4m4m4 4c4 44v4r4a4i4m4e4n4t4 4b4o4n4!4 
+  ...Coke:/me 1offre a $$1 un 15,15I0,4 Coke 15,15I 1avec de la glace
+  ...7 Up:/me 1offre a $$1 un 15,15!1,140,3 74,3°0,3UP 15,15! 1avec de la glace 
+  .Mode Guerre (mec et fille)
+  ..con:/me 1dit que l'on trouve pas plus 4con1 que4 $1 1sur cette pauvre terre!!!!
+  ..chiant faudrai kicker:/me 1dit que4 $1 1est vraiment chiant et qu'il faudrais le 4kicker1!!!!
+  ..Hackeur:/me 1dit que $1 est un si grand 4Hackeur1 que un jour il a reussi a se faire kické pour 4Flood1!!!!!!
+  ..fini a la connerie:/me 1dit que4 $1 1a surement été fini a la 4connerie1 parcque la il est vraiment 4grave1!!!
+  .Mode Guerre (contre Mec)
+  ..Définitions
+  ...Lamer:/me 1Un 4lamer1 est un mec ayant un comportement tel que celui de 4 $$1 1, c'est a dire ayant comme seul but de faire chier le monde.
+  ...Neu²:/me 1Un 4neu²1 est une personne ne sachant ni lire ni écrire , un peu comme 4 $$1 1 mais en moins pire.
+  ...Salupio:/say 1Un salupio est un petit fourbe et traitre tel :  4 $$1
+  ...Connard:/me 1Un connard est un mec con,logique nan lol,et le connard ici c'est bien toi : 4 $$1
+  ...Bouffon:/me 1Un bouffon c'est un mec qui comprend rien a la vie comme toi: 4 $$1
+  .Mode Guerre (contre fille)
+  ..Définitions
+  ...Lamouze:/me 1Une 4lamouze1 est une fille ayant un comportement telle que celui de 4 $$1 1, c'est a dire ayant comme seul but de faire chier le monde.
+  ...Neu²:/me 1Une neu² est une fille ne sachant ni lire ni écrire , un peu comme 4 $$1 1 mais en moins pire.
+  ...Salope:/me 1Une salope est un fille qui aime bien se faire bai... comme toi: 4 $$1 1
+  ...Connasse:/say Une connasse est un fille conne,logique nan lol,et la connasse ici c'est bien toi : $$1
+  ...Bouffone:/say 1Une bouffone c'est une fille qui comprend rien a la vie comme toi: $$1
+  .Texte couleurs
+  ..Comment ?:/say CoMmEnT 1?2?3?4?5?6?7?8?9?10?11?12?13?14?15?
+  ..lol:/say 13L12o13L1!!  13L12o13L1!!  13L12o13L1!!  13L12o13L1!! 
+  ..c trop delire:/say 12,4c4,2 6,9t11,1r12,6o9,5p1,0 3,5d4,5é10,6l2,7i11,10r5,9e
+  ..arf:/say 12,9A6,4r6,3F2,7e4,14U3,11h4,1!2!3!4!5!6!7!8!9!10!11!12!13!14!15!
+  ..;o))  ((o;:/say 13,5;6,3o11,1))4 $1 11,1((6,3o13,5;    
+  ..coucou c'est $me:/say 1 \\\\//// | /say 1I  ¤  ¤ I | /say 1    I    v      I     | /say 1    \   u     /   | /say 12coucou! $1 cest 4 $me 
+  .Faux scripts
+  ..Nul script:/me 1utilise 3N12u7l   1ScRiPt pour mirc 45.20 (ce script a été réalisé par l'ecole maternel de coutartenbidasse!)   
+  ..Schtroumf script:/me 12utilise ScHtRoUmF ScRiPt pour mirc tout bleu (ici on vois pas la vie en rose mais en bleu s'est pas mal non plus!)
+  ..Prof de Français script:/me 7,1Utilise 3Prof de 12Français ScRiPt 7,1 pour mirc sans fautes (avec ceux scripte tu fera plu auqune fauteux d'ortaugraffe!!)
+  .Ta mère
+  ..A poil://say << 12 $1  >>Ta mère a poil dans un champ de 13,6bites! 
+  ..Cul://say << 12 $1  >>Ta mère a un si gros cul que pour s'ssuier le cul elle a besoin d'un balais 
+  ..Grosse://say << 12 $1  >>Ta mère est tellement grosse que quand elle tomb du lit elle tombe des 2 côtés 
+  ..Petite://say << 12 $1  >>Ta mère est tellement petit que quand pour se suicider elle doit sauter du trottoir 
+  ..Dans ton cul://say $$1> << 12 $1  >>4www.dans-ton.cul 13(_|_) %vers   
+  ..Cd://say << 12 $1  >>Ta mère est tellement conne qu'elle rembobine les CD.  
+  ..Telephone://say << 12 $1  >>Ta mère est tellement conne qu'elle s'étrangle avec un téléphone sans fil. 
+  ..Baiser://say << 12 $1  >>Ta mère est tellement laide que ton père y baise ta soeur. 
+  ..Snikers://say << 12 $1  >>Ta mère elle mange tellement de cacahuètes...Quand elle chie ça fait des snikers.
+  ..Carlo://say << 12 $1  >>Ta mère est tellement grosse qu´elle pourrait prendre Carlos comme nain de jardin.
+  ..Reboot://say << 12 $1  >>Ta mère est tellement nulle qu´elle croit que Reboot c´est une marque de chaussures!
+  ..Nichon://say << 12 $1  >>Ta mère a des nichons tellement gros¸ que pour faire du footing elle met un casque intégral.
+  ..Dent://say << 12 $1  >>Ta mère a les dents tellement jaunes que quand elle sourit il y a du soleil.
+  ..Artichaux://say << 12 $1  >>Ta mère¸ elle mange tellement d´artichaux que quand elle pète¸ ça sent la Bretagne.
+  ..Vieille://say << 12 $1  >>Ta mère est tellement vieille que son numéro de secu est en chiffres romains.
+  ..Dieu://say << 12 $1  >>Ta mère est tellement grosse que quand Dieu a créé le Monde¸ il a dit: « Pousse toi la grosse » et la lumière fut.
+  ..Loucher://say << 12 $1  >>Ta mère elle louche tellement que quand elle pleure ça coule dans le dos.
+  ..Morpion://say << 12 $1  >>Ta mère mouille tellement que ses morpions font du rafting!!!
+  ..Saint://say << 12 $1  >>Ta mère est tellement vieille que ses seins donnent du lait en poudre.
+  ..Pauvre://say << 12 $1  >>Ta mère est tellement pauvre qu´elle s´est mariée juste pour le riz.
+  ..Poil://say << 12 $1  >>Ta mère est tellement sale que quand elle écarte les jambes¸ t´as les yeux qui piquent.
+  ..Pages://say << 12 $1  >>Ta mère est tellement conne qu´en lisant cette page elle n´a pas compris que c´était d´elle qu´on parlait.
+  ..Casser La VoIx://say << 12 $1  >>Ta mère elle épluche les pommes-de-terre en chantant "casser la voix".
+  ..L'eglisE://say << 12 $1  >>Ta mère elle pète à l'église.
+  ..Backround://say << 12 $1  >>Ta mère en background pattern dans Windows 95.
+  ..Myope://say << 12 $1  >>Ta mère est tellement myope que les taupes l'appellent maman.
+  ..Annif``://say << 12 $1  >>Ta mère elle fête son anniversaire chez Mac'Do.
+  ..Pitite://say << 12 $1  >>Ta mère elle est tellement petite que même près elle a l'air loin .
+  ..Menopause://say << 12 $1  >>Ta mère elle est tellement conne kelle crois que la menopause, c'est une touche de magnétoscope.
+  ..Levres://say << 12 $1  >>Ta mère elle a tellement des grosses lèvres que quand elle rit, elle a les cheveux mouilllés.
+  ..T.k://say << 12 $1  >>Ta mère elle est tellement conne kelle gratte les tickets de métro.
+  ..Sourd://say << 12 $1  >>Ta mere elle est tellement conne kelle croit que les téléphones sans fil, c'est pour appeler les sourds.
+  ..Timbres://say << 12 $1  >>Ta mère elle met des timbres sur ses E-mails.
+  ..Ridée://say << 12 $1  >>Ta mère elle est si ridée qu'elle visse son chapeau.
+  ..Plein://say << 12 $1  >>Ta mère elle est tellement grosse que pour faire le tour il faut un plein.
+  ..Formatte://say << 12 $1  >>Ta mère elle formatte un CD-ROM.
+  ..Portes://say << 12 $1  >>Ta mère elle mange des portes.
+  ..Suce://say << 12 $1  >>Ta mère, elle suce des ours.
+  ..Plag://say << 12 $1  >>Ta mère elle est tellement grosse que lorsqu'elle est sur la plage , y a greenpeace qui vient pour la remettre à la mer.
+  ..Autre
+  ...Caisse://say << 12 $1  >>Ta mère elle va a la caisse d'épargne pour ouvrir des noisettes.
+  ...Snob://say << 12 $1  >>Ta mère elle est tellement snob qu'elle pipe avec une paille.
+  ...Bronze://say << 12 $1  >>Ta mère, elle bronze sur station Sun.
+  ...Ministre://say << 12 $1  >>Ta mère elle est ministre du rapprochement social entre génération.
+  ...Roller://say << 12 $1  >>Ta mère en roller sur l'autoroute.
+  ...Malcom-x://say << 12 $1  >>Ta mère elle est tellement grosse que quand elle met un T-shirt 'Malcom-X', les hélicoptères se posent dessus.
+  ...McCain://say << 12 $1  >>Ta mère elle épluche les pommes de terre chez McCain en buvant de la Stella Artois.
+  ...Rebobine://say << 12 $1  >>Ta mère est tellement conne qu'elle rembobine les CD.
+  ...Couscous://say << 12 $1  >>Ta mère elle met du SlimFast dans le couscous.
+  ...16Bytes://say << 12 $1  >>C'est pas parce que ta mère a 16 bites dans le cul que c'est une megadrive.
+  ...Carrefour://say << 12 $1  >>Ta mère elle est tellement conne qu'elle croit que séropositive c'est une pub pour Carrefour.
+  ...Bites://say << 12 $1  >>Ta mère nue dans un champ de bites, elle est assise.
+  ...Root://say << 12 $1  >>Ta mère elle est root sur zx81.
+  ...XxXxX://say << 12 $1  >>Ta mère dans un film X avec Charlie Oleg.
+  ...Crusifié://say << 12 $1  >>Ta mère crucifiée à l'envers.
+  ...Bigoudi://say << 12 $1  >>Ta mère avec des bigoudis à DanceMachine5.
+  ...Compterserve://say << 12 $1  >>Ton père en survet' sur Compuserve.
+  ...Rase://say << 12 $1  >>Ta mère elle se rase chez Black  Decker.
+  ...Auchan://say << 12 $1  >>Ta mère elle est responsable du rayon charcuterie pas fine à Auchan, et ca se voit.
+  ...Patin://say << 12 $1  >>Ta mère, elle fait du patin à roulettes dans les rayons de Carrefour.
+  ...Jaune://say << 12 $1  >>Ta mère elle est tellement jaune qu'à New York tout le monde l'appelle taxi.
+  ...Laide://say << 12 $1  >>Ta mère elle est tellement laide que ton père y baise ta soeur.
+  ...Ipeg://say << 12 $1  >>Ta mère en jpeg sur un ftp anonymous.
+  ...MacadaM://say << 12 $1  >>Ta mère elle vend Macadam journal sur internet.
+  ...Gratin://say << 12 $1  >>Ta mère elle est dans les gradins au Heysel.
+  ...Pue://say << 12 $1  >>Ta mère, elle est tellement petite, que sa gueule pue des pieds.
+  ...Magneto://say << 12 $1  >>Ta mère elle est tellement conne, lorsque qu'on lui demande ce qu'est la ménopose elle croit que c'est une touche de magnétoscope.
+  ...Rodeo://say << 12 $1  >>Ta mère elle fait du rodéo sur les cafards.
+  ...A Poil !://say << 12 $1  >>Ta mère à poil dans un CD Rom.
+  ...Snikers://say << 12 $1  >>ta mère elle mange tellement de cacahuètes.. quand elle chie ça fait des snickers.
+  ...Gif://say << 12 $1  >>Ta mère en gif sur alt.b.pictures.
+  ...Irc://say << 12 $1  >>Ta mère en away sur irc.
+  ...Icmp://say << 12 $1  >>Ta mère en icmp sur l'interface.
+  ...Prisunic://say << 12 $1  >>Ta mère en short jaune et en tongues vertes devant le prisunic.
+  ...Repasse://say << 12 $1  >>Ta mère elle est tellement grosse qu'elle repasse son linge sur l'autoroute.
+  ...Nain://say << 12 $1  >>Ta mère est tellement grosse, qu'elle pourrait prendre Carlos comme nain de jardin.
+  ...Safari://say << 12 $1  >>Ta mère elle fait un safari à touari.
+  ...Gazon://say << 12 $1  >>Ta mère le gazon apres Attila.
+  .Méchant
+  ..SLap BaNaNe:/me 6,0slaps7,0 $$1 6,0around a bit with a large8,15 BANANE JAUNE! 
+  ..LaiD:/say 7,0 $$1 6,0 serait vraiment plus cute s'il portait un bas de nylon avec une tuque sur la tête
+  ..PaTiNe:/say 7,0 $$1 6,0 patine tellement mal qu'ils ont même pas voulu de lui comme politicien ..BBQ:/me 6,0ouvre son BBQ, prend un vieux manche a balai, le rendtre profondément dans le derrière de7,0 $$1 6,0jusqu'à ce que ca lui ressorte par la bouche, met ça sur son BBQ et le fait cuire a intensité maximale. Qui veut manger du cochon? 
+  ..BullDoZeR:/me 6,0voit7,0 $$1 6,0dans son champ de vison! Alors $me prend un rouleau-compresseur pour faire l'asphalte, passe sur7,0 $$1 6,0qui arrête pas de crier, ensuite $me repasse deux autres fois dessus pour être sur qu'il soit bien applati. "Kein, ça va faire un beau tapis pour que mes invités s'essuit les pieds en rentrant chez nous"
+  ..CuL PoiLu:/me 6,0trouve ça bizarre que7,0 $$1 6,0ait plus de poils sur le cul que sur la tête
+  ..Anti-Cruiseur:/me 6,0trouve ça drôle que7,0 $$1 6,0cruise sur le net. Ça doit être parce que yé trop laid pour cruiser dans la vraie vie!
+  ..GoRiLLe:/me 6,0enferme7,0 $$1 6,0avec un gorille en rut de plus de de 150 kilos, et le pire là-dedans, c'est que7,0 $$1 6,0aime ça!!!
+  ..BouToN:/say 6,0Heille7,0 $$1 6,0c'est quoi c'te bouton là? Oups, c'est ta face!
+  ..BeDaiNE:/say 6,0Avec une bedaine de même7,0 $$1 6,0, tu dois pu être capable de voir ta queue hein?
+  ..CouCHe:/say 7,0 $$1 6,0tu pu! Oups c'est ta couche qui fuit!!
+  ..Plein D Marde:/say 6,0C'est l'heure de changer ta couche7,0 $$1 6,0! T'es un gros plein d'marde! 
+  ..NouVeLLe EsPèce:/me 6,0a prie une photo de7,0 $$1 6,0, l'a envoyé à National Geographic qui à déclaré que c'était une nouvelle espèce : l'horibilus sapien!
+  ..VuarNeT:say 6,0Heille 7,0 $$1 6,0, les gilets Vuarnet ça fait 10 ans que c'est pu à la mode! Change ça!
+  ..Q-Tips:/me 7,0 $$1 6,0pourquoi ta un Q-Tips qui sors de ta fermeture éclaire?!?!?! Oups c'est ta queue!
+  ..Studio Sex:/me 6,0pense que les gars comme7,0 $$1 6,0qui passe toutes leurs soirées au Studio Sex à essayer de se pogner une danseus ça manque de classe
+  ..Pikatchu:/me 6,0donne un calice de Pikatchu a7,0 $$1 6,0pour qu'il arrête de brailler pis lui enfonce dans la gueule pour pu l'entendre! Kein étouffe toi avec!
+  ..Lopette:/me 6,0pense que7,0 $$1 6,0est jsute une lopette, une loque humaine, un déchet de la société, un moins que rien, un parasite, une personne qui ferait mieux de se suicider pour le bien del a société!
+  ..Plein l'cul:/me 6,0demande à tout le monde quel est la différence entre du poil et7,0 $$1 6,0? Y'EN A PAS! LES DEUX ONT EN A PLEIN L'CUL!
+  ..Dictionnaire:/me 6,0demande à tout le monde quel est la différence entre un dictionnaire et7,0 $$1 6,0? Le dictionnaire est un peu moins épais... 
+  ..Epais:/say 7,0 $$1 6,0est tellement épais qu'il pense qu'un trip à trois c'est le nouveau spécial du mois chez McDonald!
+  ..Colon:/me 6,0a surpris l'autre jour7,0 $$1 6,0à s'enfermer chez lui, mettre ses lunettes fumées, se regarder devant le mirroir et se mettre à chanter: ICE ICE BABY. Criss que y'avait l'air épais!
+  ..Muslix:/me 6,0prend un bol de Muslix et force7,0 $$1 6,0à le manger au complet! Kein toi!
+  ..Kleenex:/me 6,0donne des kleenex à7,0 $$1 6,0pour qu'elle puisse rembourrer son soutient-gorge un peu, ça va faire moins pitié!
+  .Méchant
+  ..ReProDuCTioN:/say 6,0J'TrouVe QuE7,0 $$1 6,0EsT TeLLeMent InteLLiGent Que Si C'ÉtaiT JusTe De Moi J'Le LaiSSeRaiT MêMe PaS Se ReProDuire!
+  ..Tu Vas ALLer LoiN:/say 6,0J'PeNse Que7,0 $$1 6,0Va ALLeR LoiN DanS La ViE... Et Le Plus TôT Qu'il Va ParTir On Va être HeuReux!
+  ..iDioT du ViLLaGe:/say 7,0 $$1 6,0PriVe Un ViLLaGe, QueLQue ParT, D'un IdioT
+  ..MeMoiRe PhoTo:/say 7,0 $$1 6,0A UnE MéMoiRe PhoToGraPhiQue... MaiS Avec Le CaPuChoN De La LenTiLLe CoLLée DeSSuS
+  ..Idees CLaiReS:/say 6,0LeS IDéeS De7,0 $$1 6,0SonT AuSSi CLaiReS Que Le GroeNLanD En JanVier!
+  ..TesT QI:/say 6,0Un OrGaNiSMe UniCeLLuLaiRe BaTTrait7,0 $$1 6,0DanS Tous Les TesTs de QI
+  ..CerVEau ScienCe:/say 6,0J'PenSe Que7,0 $$1 6,0a DoNNé SoN CerVEau A La Science AvanT D'en AvoiR Fini Avec
+  ..TaXe MaTiere GriSe:/say 6,0Si on MeTTaiT Une TaXe Sur La MaTièRe GriSe7,0 $$1 6,0AuRait SûreMenT Eu Un RaBais
+  ..ARRoSe StuPiDe:/say 6,0Si7,0 $$1 6,0ÉTaiT PLus StupiDe Y FauDRaiT L'aRRoSeR DeuX FoiS Par SeMaiNe
+  ..UnE CeNNe PenSÉe:/say 6,0Si Tu DoNNaiS UNe CeNNe PouR CHaCuNe DEs PenSéeS De7,0 $$1 6,0... Ben T'ObTienDrait Du ChanGe
+  ..EnTendRe OcéAn:/say 6,0Si Tu T'CoLLeS La TêTe ProChe D'uNe OreiLLe De7,0 $$1 6,0BeN Tu PeuX EnTenDre L'OcéAn
+  ..SpeRMaToZoïde:/say 6,0C'esT DuR De CRoiRe Que Le SperMaTozoïDe Qui à DonnÉ7,0 $$1 6,0CoMMe RéSulTat A RéuSSi a En BaTTre Un MiLLioN D'auTreS!
+  ..ConSanGuiN:/say 7,0 $$1 6,0, esT-Ce Que C'esT Vrai La ruMeuR Qui Dit que Tes ParenTs ÉtaiEnt FrèRe Et SoeuR ?
+  ..FonTaiNe ConnAiSSance:/say 6,0Si CErTaiNe PErsONNe BoiVenT A La FOntAiNe De La CoNNaiSSance,7,0 $$1 6,0Ne FaiT Que si GarGaRisER
+  ..Une HyPerBoLe:/say 7,0 $$1 6,0EsT TeLLeMenT Con Qu'iL PenSe Qu'Une HyPerBoLe C'esT Une EsPèCe De CouVErcLe De ToiLeTTe GÉanT! 
+  ..Le TéLéPhoNe:/say 6,0Si vous étes un obsessionnel compulsif, pressez le 1 répetivement. 5,0Si vous êtes une personalité dépendante, demandez à quelqu'un d'appuyer sur le  2.6,0 Si vous êtes une personalité multiple, appuyez sur 3, 4, 5, et 6 5,0Si vous êtes paranoiaque, nous savons qui vous êtes et nous enregistrons cet appel! 6,0Si vous êtes schizophrene, une petite voix va vous dire quoi faire.... 5,0Si vous êtes dépressif, y'a rien à faire. 6,0Si vous êtes7,0 $$1 6,0RACROCHEZ ON VEUT PAS VOUS PARLER! 
+  .TéTeuX
+  ..ComPté Les JOurS:/say 6,0Tu M'aS TeLlEmEnt MaNqUé7,0 $$1 6,0QuE j'Ai CoMpTé Le NoMbRe De PeRsOnNeS sUr IRC eN t'AtTeNdAnt, Y eN a 17086 ExAcTeMeNt 7,0;)
+  ..RejoiNdre MoDeM:/me 6,0essaie De Se FaIrE lE + PeTiT PoSsIbLe pOuR EnTrEr DaNs SoN MoDeM eT rEjOinDrE7,0 $$1 6,0!! :)
+  ..PaPouILLeS:/say 6,0ôOOo7,0 $$1 6,0 , Je Te FaiS DEs BiSOuS CHauDs Et HumiDeS, DAnS Le Cou...MHhMMMmmmhm..Sur La NuQue..Et Mes MainS7,0 $$1 6,0Te FonT TOuT PLeiN PLeiN De PaPouiLLeS DAns Les CHeVeux :)))) mmMmHHhhhHHhhhh  ....:)))))
+  .Bienvenue/Bye
+  ..Allo à toi:/me dit...12Allo4 $$1 12!10¡4!10¡ 12  3Õ12¿3Õ 
+  ..Gros Allo!:/say 0 | /say   9,9...3,3.  12,12.2,2.    13,13.6,6.     8,8...7,7. | /say  9,9.3,3.  9,9.3,3. 12,12.2,2.    13,13.6,6.    8,8.7,7.  8,8.7,7. | /say  9,9.....3,3. 12,12.2,2.    13,13.6,6.    8,8.7,7.  8,8.7,7.    4 $$1 | /say  9,9.3,3.  9,9.3,3. 12,12.2,2.    13,13.6,6.    8,8.7,7.  8,8.7,7. | /say  9,9.3,3.  9,9.3,3. 12,12....2,2. 13,13....6,6.  8,8...7,7. | /say 0
+  ..Heureux de te voir:  /me 13 (º¿º) 12(º¿º)13 (º¿º)12 (º¿º) 12,8 $$1  13 (º¿º)12 (º¿º)13 (º¿º)12 (º¿º)13 je suis très heureux de te voir!
+  ..Sbranle le cul:/me 13se branle le cul 3~ 4(_/_) 3~ 4(_I_) 3~ 4(_\_) 3~4(_I_) 3~ 4(_/_) 3~ 13 d'un bord pis d'l'autre.. | /me 13Pis y dit... : " Salut à toi 12 $$1 4!13"
+  ..Content de te voir: /me 4,1 dit:1,1. 10,1{  12,1S10,1a13,1L15,1u11,1T1,1..4,1 $$1 4,1 13,1b4,1E13,1n 7,1C11,1o10,1N12,1t13,1E10,1n11,1t 4,1d7,1E 12,1T10,1e 13,1v10,1O12,1i10,1R10,1!  }1,1.
+  ..-
+  ..Bonne nuit à toi: /me te souhaite une bonne nuit13 $$1
+  ..Fait de beaux rêves!: /me te dis fait de beaux rêves 13 $1
+  .Msg/Question
+  ..ASV?: /me demande à 4,1 $$1 quel est son asv??? stp :o)
+  ..@+tard: /me reviens plus tard...fak... @+...
+  ..Revient dans 2 sec:/me Je 4,1{1,4©4,1}1,4R4,1e1,4v4,1i1,4e4,1n4,1 1,4P4,1l1,4u4,1s1,4 4,1T1,4a4,1r1,4{4,1©4,1}...dans 2 sec...
+  ..nanananèreeee:/me      13_   13_ | /me 13 \|/(_)_(_)\|/ | /me   13@~ (o.o) ~@ | /me 13 /___( * )___\ | /me     13/ `U' \ 10Na na na nanèèèèèrrrrrrrrrrrrreeeeee!!!!! | /me    13(   13.   13)------>12 $$1 | /me     13`>---<' | /me      13_\ /_
+  ..Revient dans 2 min:/me Je 4,1{1,4©4,1}1,4R4,1e1,4v4,1i1,4e4,1n4,1 1,4P4,1l1,4u4,1s1,4 4,1T1,4a4,1r1,4{4,1©4,1}...dans 2 min...
+  ..Ha! Ha!:/me 4,1HA!1,8:)4,1HA!1,8:)4,1HA!1,8:)1 $$1 1,8(:4,1HA!1,8(:4,1HA!1,8(:4,1HA!
+  ..Sourire:/me 1,8:) 4,4:) 1,13:) 11,2:) 0,1:) 5,7:) 1,15:)11,5 4,9:) $$1  13,11:) 11,4:) 12,11:) 11,5:) 5,11:) 4,6:) 0,2:) 1,9:) 4,8:)
+  ..-
+  ..Ignore moi: /notice $$1 dit ...si t pas content $$1 fait:  /ignore $me   | /notice $$1 pis oubli moi merci...
+  .You Hou
+  ..Tu me réponds svp?: /notice $$1 ...tu me réponds svp $$1 ???
+  ..Notice:/notice $$1 $?="Entrez le message" | /.notice $$2 $! | /.notice $$3 $! | /.notice $$4 $! | /.notice $$5 $! | /.notice $$6 $! | /.notice $$7 $! | /.notice $$8 $!
+  ..You-hou!1:/me 4,1OºO.oo.o.OºOo.0  You hou  $$1 !!!!  4,1.oOºO.oo.o.OºOo | /me 4,1OºO.oo.o.OºOo.0  You hou  $$1 !!!!  4,1.oOºO.oo.o.OºOo | /me 4,1OºO.oo.o.OºOo.0  You hou  $$1 !!!!  4,1.oOºO.oo.o.OºOo
+  ..Je te parles!:/me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | /me 13 YOUHOU ---> 4 $$1 !!! 13 $me te parles!!!!!!!!!! | 
+  ..Non et étoile:/me 3{4*3{4*3{4*3{4*3{4*3{4*3{4*15 $$1 4*3}4*3}4*3}4*3}4*3}4*3}4*3}
+  ..Roses:/me 3---}--}-4@ 13 $$1 4@3-}--}---4 YoUhOu!! 3---}--}-4@ 13 $$1 4@3-}--}--- | /me 3---}--}-4@ 13 $$1 4@3-}--}---4 YoUhOu!! 3---}--}-4@ 13 $$1 4@3-}--}--- | /me 3---}--}-4@ 13 $$1 4@3-}--}---4 YoUhOu!! 3---}--}-4@ 13 $$1 4@3-}--}---
+  ..Lapin!: /me 10Lapin  4. (Y)     13(Y)  4 $$1   13(Y)     4(Y)  10 Caresse | /me 10Lapin 4. (°.°)   13(°.°) 4 $$1  13(°.°)   4(°.°) 10 Caresse | /me 10Lapin 12.()¯°¯() 13()¯°¯()12 $$1 13()¯°¯() 12()¯°¯()10 Caresse | /me 10Lapin 12.(_)-(_) 13(_)-(_)4 $$1 13(_)-(_) 12(_)-(_)10 Caresse | /halt 
+  ..Sourire:/me 1(:)) $$1 2(:)) $$1 3(:)) $$1 4(:)) $$1 5(:)) $$1 6(:)) $$1 7(:)) $$1 4(:)) $$1 10(:)) $$1 10(:)) $$1 11(:)) $$1 12(:)) $$1 13(:)) $$1 14(:)) $$1 15(:))
+  ..Flèches de couleurs:/me 13-------------> $$1 <-------  | /me 12----------> $$1 <---------- |  /me 11-------> $$1 <------------- |  /me 10----------> $$1 <---------- |  /me 10-------------> $$1 <------- | /me 4----------> $$1 <----------  | /me 7-------> $$1 <-------------  | /me 6----------> $$1 <---------- |  /me 5-------------> $$1 <-------  | /me 4----------> $$1 <---------- |  /me 3-------> $$1 <-------------  | /me 2----------> $$1 <---------- |  /me 1-------------> $$1 <-------0
+  ..Flèches de couleurs/:/me 13-------------> $1 | /me 12------------> $1  | /me 11-----------> $1  | /me 10----------> $1  | /me 10---------> $1  | /me 4--------> $1  | /me 7-------> $1  | /me 6------> $1  | /me 5-----> $1  | /me 4----> $1  | /me 3---> $1  | /me 2--> $1  | /me 4-> $1
+  ..Question!:/me  3*4¿3*4?3*4¿3*4?3*4¿3*4?3*4{{{15 $$1 4}}}3*4¿3*4?3*4¿3*4?3*4¿3*4?3* 12:) 
+  ..Lumière:/me 2 !3¡4!6¡7!4¡10!10¡11!12¡13!14¡2!3¡46!7¡4!10¡10!11¡ 4*  * $$1 * *2 !3¡4!6¡7!4¡10!10¡11!12¡13!14¡2!3¡46!7¡4!10¡10!11¡11
+  ..{{}}: /me10 {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{ 10 12 $$1 11 10 }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} 10
+  ..{x}: /me5§§ $$1 §§§7§§ $$1 §§3§ $$1 §§4 {{{{{{{{{3 $$1 }}}}}}}}14 §§ $$1 §12§§ $$1 §§5§§§ $$1 §§
+  ..Parenthèse1!:/me 4(¯`'·.¸(¯`'·.¸ *3 *1 4* ¸.·'´¯)¸.·'´¯) | /me 4(_¸.·'´(_¸.·'´ *3 $$1 4* `'·.¸_)`'·.¸_)
+  ..Parenthèse2!:/me 13(¯`'·.¸(¯`'·.¸|12 $$1 13|¸.·'´¯)¸.·'´¯) | /me 13(_¸.·'´(_¸.·'´|12 $$1 13|'·..¸_)`'·.¸_)
+  ..Parenthèse3!:/me 15(¯`'·.¸(¯`'·.¸       ¸.·'´¯)¸.·'´¯) | /me   4***********12 $$1 4***********  | /me  15(_¸.·'´(_¸.·'´       `'·.¸_)`'·.¸_)
+  ..Parenthèse4!: /me 1(2¯3`4·5.6,7¸4¸10.10·11´12¯1`2·3.4¸5¸6.7-4>10 10[11[12[4,1 $$1 12]11]10]10 4<7-6.5¸4¸3.2·1´12¯11`10·10.4¸7¸6.5·4´3¯2)1
+  ..Parenthèse5!:/me 1(2¯3`4·5.6,7¸4¸10.10·11´12¯1`2·3.4¸5¸6.7-4>10 10[11[12[4,1 $$1 12]11]10]10 4<7-6.5¸4¸3.2·1´12¯11`10·10.4¸7¸6.5·4´3¯2)1
+  .Cruising
+  ..Embrasse
+  ...Tendrement!: /say 13embrasse4 $$1 13tendrement 4xxx hmmmmm
+  ...Passionément!: /say 13embrasse4 $$1 13passionnément 4xxx hmmmm
+  ...Amicalement!: /say 13embrasse4 $$1 13amicalement :o)
+  ...Becs partout:/say 12te donne des 4becs partout 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»4 $$1 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»
+  ...Baiser Chocolat:/say 12t'envoie  4des baisers chocolatés 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»4 4 $$1 
+  ...Baisers partout:/say 12te donne des 4baisers partout 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»4 $$1 12»»--4(¯`°´¯)12=4(¯`°´¯)12---»»
+  ..Embrasse Où?
+  ...Sur la joue:/say 13embrasse4 $$1 13sur la joue 4xxx
+  ...Sur la bouche:/say 13embrasse4 $$1 13sur la bouche 4xxx
+  ...Sur les lèvres:/say 13embrasse4 $$1 13sur les lèvres 4xxx
+  ...Sur le ventre:/say 13embrasse4 $$1 13sur le ventre 4xxx
+  ...Dans le cou:/say 13embrasse4 $$1 13dans le cou 4xxx
+  ...Dans la bouche: /say 13embrasse4 $$1 13dans la bouche 4xxx
+  ...Dans le front:/say13embrasse4 $$1 13dans l'front! 4xxx
+  ...Partout!: /say 13embrasse4 $$1 13partout....hummmm 4xXxXxXx
+  ..Roses
+  ...Bouquet pour $snick($active,1): /me             3:*4{@}3*.; | /me          3:*4{@}3*4{@}3*.; | /me         4{@}3*4{@}3*4{@} | /me          3:*4{@}3*4{@}3*.; | /me      4{@}3*4{@}3*4{@}3*4{@}   | /me          3*\;\*;4{@}3*/;*/: | /me             3 ;\\ \ \ / / /; | /me            3   \ \ Y/ / | /me               3 `_\ //_'     4 Une douzaine de roses | /me            13 ( ,->=<-, )   4 Juste pour $$1 | /me             13 \_/))13((\_/      4  | /me                13\(( 13))/
+  ...Rose juste pour toi $snick($active,1):  4Une rose juste pour toi $$1
+  ...Nom et roses:/me 4,8 3,1 '10-<<--7<4@ 0 $$1 1,1 4@7>10-->>-3,1' 4,8i
+  ...Rose rouge: /me donne à $1 une rose rouge 4@3}>-}--}----
+  ...Superbe rose rouge à:/me donne à  $$1 une superbe rose 4,1@3--}--}-------
+  ...Super belle rose rouge à:/me offre à 12 $$1 une super de belle rose rouge  4@3-}--}---
+  ...Te donne une rose: /me 0,1 donne une  4©10}---`,--`,-------- 0à 4 $$1 1§
+  ...Rose gentille : /me offre une rose 13@3}--»»--»»-- 4 a   $$1     pour sa gentilesse
+  ...4Rose:/me 4,1@10,1}-`-,-- 4,1@10,1}-`-,--12,8 $$1 4,1@10,1}-`-,-- 4,1@10,1}-`-,--');
+  ...Rose beauté:/me donne à $$1 une rose....... 4@3}>-`--,--`--- car elle est d'une beaute radieuse
+  ...Rose paske ca me tente:/me donne à $$1 une rose....... 4@3}>-`--,--`--- parce que ca y tente :o)
+  ...Rose unique:/me offre  12 $$1  une unique Rose rouge ! 4@3-}--}--- pour une personne unique
+  ...12 Roses jaunes:/me donne à $$1 une douzaine de Roses! 4@3-}--}--- 4@3-}--}--- 4@3-}--}---4 4@3-}--}--- 4@3-}--}--- 4@3-}--}--- 4@3-}--}--- 4@3-}--}--- 4@3-}--}--- 4@3-}--}--- 4@3-}--}--- 4@3-}--}---
+  ...Roses1: /me  4@10}->6--·´¯`·.¸¸.·´¯`·10 $$1 6 .¸.·´¯`·.¸.10--<-{4@ .
+  ..Poésie 3X
+  ...Ma chaire:/me dit que sa chaire tremble en imaginant les saveurs du corps de $1
+  ...Déhabille:/me déshabille $1 de ses yeux gourmands
+  ...Bouche affamée:/me parcourt de sa bouche affamée la peau douce et delicieuse de $1
+  ...Rêve de gouter:/me rêve de gouter les saveurs de ton corps $1
+  ...Par derrière:/me arrive derrière $1 et pose ses lèvres dans son cou
+  ...Colle son corps:/me colle son corps brulant de desir contre celui de $1
+  ...Contour des lèvres:/me rêve de gouter le contour des lèvres de $1 avec le bout de sa langue
+  ...Baisés partout:/me donne des baisers à $1 partout partout xxxxxx
+  ...S'approche de:/me s'approche de $1 et colle son corps enflammé contre le sien
+  ..Pensées
+  ...Amour Vs Amitié: /me  10 Un jour l'amour dit a l'amitié: 7Pourquoi existe tu pauvre insencée??? 4L'amitié de lui répondre: 2Je suis la pour essuyer les larmes que tu fais verser!!!
+  ...Rivière Vs Intelligence: /me 2L'intelligence est comparable à une rivière...4Plus elle est Profonde... 7moins elle fais de Bruit...
+  ...L'amour: /me 12Si la fin du monde arrivrais... 4Si j'était sur le point de mourrir à tes coté... 7S'il ne me restais que quelques secondes à vivre... 10Je prendrais ces derniers instant pour te dire... | /say 6Je t'aime.....
+  ...Minute..seconde..toi: /me 10On m'a toujours apprit qu'un jour c'etait 24 heures... 4On m'a toujours apprit qu'une heure c'etait 60 minutes... 2Mais on ne m'a jamais apprit qu'une minute sans toi 7 $$1 2c'etait 7l'éternité....
+  ..Caresses
+  ...Cool Carèsse: /me  12(¯`'·.¸(¯`'·.¸ _______________ ¸.·'´¯)¸.·'´¯) | /me 11 (¯`'·.¸(¯`'·.¸  ¸.·'´¯)¸.·'´¯) |  /me 1 -----==>>>>------>4 $$1 1<------<<<<==----- | /me 11 (_¸.·'´(_¸.·'´  `'·.¸_)`'·.¸_) | /me 12 (_¸.·'´(_¸.·'´ ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯ `'·.¸_)`'·.¸_) 
+  ...Carèsse vague:  /me 12 (¯`'·.¸(¯`'·.¸ 4,12 $$1  12 ¸.·'´¯)¸.·'´¯) | /me 4 (¯`'·.¸(¯`'·.¸ 4,12 $$1  4 ¸.·'´¯)¸.·'´¯) | /me  12 (¯`'·.¸(¯`'·.¸ 4,12 $$1  12 ¸.·'´¯)¸.·'´¯) | /me 4 (¯`'·.¸(¯`'·.¸ 4,12 $$1  4 ¸.·'´¯)¸.·'´¯) 
+  ...Vague-carèsses:/me  Caresseø,¸¸,ø¤°`° $$1 `°¤ø,¸¸,øCaresseø,¸¸,ø¤° `° $$1 `°¤ø,¸¸,ø¤°`°Caresseø,¸¸,ø¤°`° $$1 `°¤ø,¸¸,øCaresseø,¸¸,ø¤° `° $$1 `°¤ø,¸¸,ø¤°`° 
+  ...Très grosse caresse:/me caresse {{{{{{ $1 }}}}}} d'une très très grosse caresse!!! 
+  ...Caresse:/me 8,12 Caresse§ Caresse§ Caresse§{{ $$1 }} Caresse§ Caresse§ Caresse§ 
+  ...Caresse serrée:/me 15donne à11«¡»¥«¡»(®)12«¡»¥«¡»(®)13 $$1 12(®)«¡»¥«¡»11(®)«¡»¥«¡» 4une caresse serrée!! 
+  ...Caresse et allo:/me 3donne  4""¨¨°º©o.,.o©º°¨¨°º©[3 $$1 4]©º°¨¨°º©o.,.o©º°¨¨"" 15une 12grosse 4caresse et dit 4allo!  13 $$1
+  ..Quetene
+  ...Souris: /me   7 .--,         7.--,     10 12allo $$1 | /me  7 ( ( \.-----./ )  7)      10 ma p'tite  | /me  7 '.__/6o o7\__.'       4souris d'amour!!!!!!  | /me       7{= 4^ 7=}                    10  | /me        7 > - <               4
+  ...Bulles: /me Lance des bulles ....autour de $$1 o°·°.o··3°.o·o4.o°.°·.o10°o.o°.°13·.o°·.o6·°.o·o12.o°.°·.o7°°.o°.·°.10o·.o°.°·4.·°o·o.o°15.°·.o°o°·3°.o·o.o4°.°·.o°°11·.o°·°.o·o.o13°.°·.o°·°.6o·°.o·o.°.12°·.o°·o.o7°.°·.o°·°.o10·o.o°.°·.o°·2°.o·.o1
+  ...Confettie:/me 12 lance des confetties tout autour de4~`;.2~`;.3*`;. 12 $$1 4`~;6;.~`11;.*` 12 $$1 7;.`~12`~`13*~14`; 12 $$1 15.~`1;.*3`;4.~; 12 $$1 5*`7;.13`~;4~`10*~` 12 $$1 2`~6`*11`;.13`;.4*`; 12 $$1 14.`~15;`4~`*5~`;7.~` 12 $$1 4;.11*`;13.`~2;`5`*~ 12 $$1 15`;.10``~`12*~`7`~`11*; 12 $$1 13.`1;.*2`;.3`~;14`~`6*~` 12 $$1 13;.~4`;.11*`15;. 12 $$1 4`~ 12..... 13wheeeeeeeeeeeee
+  ...Confetti:/me 14lance des 6CONFETTI & 11BALLOONS 10dans les airs pour $$1 `;~12'O~~~*`;.'13O~~~~*`; ^ $$1 .'`~;`~`10O~~~~*`;.'``2O~~~~*`;.'`~;`~`3 O~~~*`; $$1 .~~``4'O~~~~*`;.'`~;`~`5O~~~~*`;.'12O~~~~*` $$1 ;.'`~;`~`13O~~~*`;.'10O~~~~*`; $$1 .'`~;`~`4O~~~~*`;.2O````~~~~``*1310~~O``````~~~*''"'
+  ...Multicolore:/me 1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 4,1 $$1 1,1 1,2 1,3 1,4 1,5 1,6 1,7 1,8 1,9 1,10 1,11 1,12 1,13 1,14 1,15 1,17 1,18 1
+  ...Mandela:/say 329(16¯3`1'31·25.20¸27(21¯19`21'2·13.20¸14(3¯1`10'2·17.20¸21(24¯2`18'29·4.13¸24¸13.12·10'4´2¯5)30¸15.10·12'2´14¯18)17¸15.27·13'17´27¯5)28¸17.30·1'26´7¯4)29  | /say  1021(7¯4`22'3·10.11¸28(25¯2`1'13·23.23¸15 660431202531202930272232019 15¸22.27·11'15´5¯18)29¸15.26·2'20´7¯28)13  | /say  0,0. 14----==>>-----> 13 $$1 14 <----<<==----  | /say  53(3_28¸13.21·6'1´28(7_14¸19.27·30'26´15 302302119267171729155151561326 19`30'21·21.12¸3_5)3`21'
+  ...Étoile!: /me 13lance de la poussière d'étoile tout autour de  $$1 7 ';`*^"',*;~`;.,*`.`*~;*~`;,.'*`.;*``;.^.*`~..;`*.^;.,*`;~..*;`~*.,:*`**13parce-que TU es vraiement SPÉCIAL.
+  ...Poudre Magique:  /me 13 lance de la poudre magique sur  4,13 $$1  13 `;~'~~~*`;4.'~~~~*`;  4,13 $$1  13` .'`~;`~`~~~~*`;4.'~~~~*`;.'`~13;`~`~~~*`; 4,13 $$1  13.'~~~~*`;.4'`~;`~`~~~~*`13;.'~~~~*`;  4,13 $$1  13` ;.'`~;`~`~~~*`;4.'~~~~*`; 4,13 $$1  13.'`~;`~`~~~4~*`;.'~~~*`; 4,13 $$1  13;.'`~;`~...12ps, c pas pour sniffer!!!
+  ...Poussières: /me soupoudre de la poussière d'étoile et des pétales de roses tout autour de  son ami(e) spécial4*13 ,*11`.`*12~7;*4*13 ~11`;,12.'* `4*13;.11^.12*`* 4*13~.11^.;`12*.7^;.4*13 ,*11`;12~..12 $$1 13 *;11`~7*.12,:* 4*13 ;11.,*12`.`4*13 *11~7;*12~`* 4*13 ;,.11'*`12.;*4*13*;`7~*12~`* 4*13 ;,.11'*`12.;*4*13*;`7~*.11'*`12.;*4*13*;`7~*
+  ...Anges:/me 13t'envoie de petits anges gardiens pour te surveiller 4 $$1 2~Å~ 4~Å~ 2~Å~ 12~Å~ 3~Å~ 4 $$1 10~Å~ 13~Å~ 4 $$1 11~Å~ 6~Å~ 14~Å~ 4 $$1 4~Å~ 13~Å~ 15~Å~
+  ...Anges!: /me 13place de petits anges souriants tout autour du cou de  4 $$1 13 ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ ~Å~~Å~~Å~ en espérant que ça lui apporte  de la joie et de l'amour!!!!!
+  ...Ailles d'ange:/me 4 ¯`13°²º4¤æ=«4.,¸_13 $$1 ! 4_¸,.4»=æ¤13º²°4`¯12 les ailes d'un 13Ange!!
+  ..Moi aime $snick($active,1): /me aimes 4 $$1
+  ..Sexy $snick($active,1):/me Dit4 WOW..4 ¡!§êxÿ¡4!*¡!§êxÿ¡!13==> $$1 <==4¡!§êxÿ¡4!*¡!§êxÿ¡!
+  ..Jolie-cul:/me regarde 13 $$1 12bouger son joli p'tit cul 13"(_/_)"(_!_)"(_\_)"(_!_)"(_/_)" 12et 4WOW! Maudit de beau cul my friends12!!!4 On ne peut s'empecher de le r'garder12!!!
+  ..Excité:/me 7 regarde autour de la pièce et voit  12 $$1   | /me 7cours aussi vite qu'il peut et glisse sur le plancher mouillé  | /me 7 plonge son regard dans les yeux de 12 $$1   |  /me 7 dit "arrêtes de me regarder  12 $$1  7 pis aides moi à me relever" ...........<hihihihihi>
+  ..T'aime!:/me 4(¯`'·.¸(¯`'·.¸ $colr(12,$1) 4¸.·'´¯)¸.·'´¯) 13t'aime | me 4(_¸.·'´(_¸.·'´  $colr(12,$1) 4`'·.¸_)`'·.¸_) 13 $$1 d'amour! | /halt
+  ..Je t'm à la folie $snick($active,1) $+ !:/say  13-------------> Je t'aime à la folie $1 | /say 12------------> Je t'aime à la folie $1  | /say 11-----------> Je t'aime à la folie $1  | /say 10----------> Je t'aime à la folie $1  | /say 10---------> Je t'aime à la folie $1  | /say 4--------> Je t'aime à la folie $1  | /say 7-------> Je t'aime à la folie $1  | /say 6------> Je t'aime à la folie $1
+  ..Fou!:/me est absolument *4FOU6* de $$1
+  ..En or:/me 1,1*2,2*3,3*4,4*5,5*7,7*4,8*1,311,4 Tu est  8L'OR 11dans mon arc-en-ciel,8 $$1 1,1*2,2*3,3*4,4*5,5*7,7*4,8*0,0*
+  ..Douche:/me et $$1 prenne leur douche avec du champagne en se caressant partout!!hmm   13* * ,,ºº " ¤¤ ·· ºº ** ^^ ,, ¤¤¤ ** ^^ ,, « % »»** ,, ^^ ¤¤¤ $$1 * * ,,ºº " ¤¤ ·· ºº ,, ¤¤¤ * * ,,ºº " ¤¤ ·· ºº ,, ¤¤¤ * * ,,ºº " ¤¤ ·· ºº ,, ¤¤¤0
+  ..Ange:/me 3^Å^ 4^Å^ 5 ^Å^ 6^Å^ 12 $$1  6^Å^ 5^Å^ 4^Å^ 3^Å^ 12,8Quel ange tu es $$1
+  ..Cupidon:/me 10 »»---4(¯`°´¯)10---»»6 $$1 10»»--- 104(¯`°´¯)10---»»
+  ..Taime à mort:/me 4""¨¨°º©o.,.o©º°¨¨°º©[2je 10taime 13à 2mort 10 $$1 13damour] 4©º°¨¨°º©o.,.o©º°¨¨"" 
+  ..Je taime: /me 10""¨¨°º©o.,.o©º°¨¨°º©4 aime 10""¨¨°º©o.,.o©º°¨¨°º© 4 $$1
+  ..Calin: /me 44 prend 4 $$1 44dans ces bras, y pogne le cul en passant et lui fait un gros calin!!!
+  ..Les fesses: /me : 4 Hey ! Regardez4 $1 5se fait balancer les foufounes 7"(_/_)"(_!_)"(_\_)"(_!_)"(_/_)" 5 7WOW !!  Jolies Fesses!! 7,5 :o)
+  ..Long Baiser: /me 4te regarde $$1, 2longuement, 10passionnément, 12et t'embrasse à tout rompre!! 4wow!!!!! 44kel Baiser!! 7wouuuuhouuuu!!!
+  ..12 Roses: /me 2sort de derrière son dos.... 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}-- 4@3-}--}--2 et les offre à $1 
+  ..tadore:/me 10 椺²°`¯ ¯`°²º¤æ-13J'TADORE 4 $$1 10椺²°`¯ ¯`°²º¤æ-
+  ..Baiser:/me 6 donne un baiser sur la joue de4 $1 6*smack* 
+  .Dépanneur
+  ..Alcool
+  ...JD's:/me donne à  $1 une bouteille de  4,1Jack Daniels...     hmmmmm...
+  ...Budweiser:/me donne à  $1 une 4Budweiser bien froide
+  ...Molson:/me donne à  $1 une 12Molson bien froide
+  ...Coors:/me donne à $1 une 4Coors bien froide
+  ...Miller:/me donne à   $$1 $2 $3 $4 $5 une bonne Miller Genuine Draft...
+  ...Labats ice:/me donne à   $$1 $2 $3 $4 $5 une  4,12Labat's 11ICE...bien froide
+  ...Labats bleue:/me donne à   $$1 $2 $3 $4 $5 une  4,15Labat's 2bleue...bien froide
+  ...WineCooler:/me donne à   $$1 $2 $3 $4 $5 une grosse bouteille de Cooler bien frostée... hmmmm...
+  ...50 chaude:/me donne à $$1 une 4,8.4 504,8,. chaude comme dla pisse!!!
+  ...-
+  ...Au choix (bière):{ 
+    set %biere.temp $?="Entrez une marque de biere"
+    if %biere.temp  == $null { set %biere.temp  bière }
+    me donne à  $1 une %biere.temp   bien froide... hmmm
+    unset %biere.temp
+  }
+  ..-
+  ..Une smoke à: /me offre une bonne 1(1,8)¯¯¯¯)1¯12)¯¯¯¯¯¯¯))4)15~~ 10à 4 $$1
+  ..LifeSaver #1:/me 13offre un paquet de 15,15.0,2L1,9I0,3F0,4E1,8S0,10A0,4V0,3E1,9R0,5S15,15. 12 a $$1 Hmmm c bon ca !!
+  ..LifeSaver #2:/me 4,1Préssé comme du Citron 0,4L0,8I0,12F0,6E0,9S0,3A0,8V0,12E0,00,8R13 a $$1
+  ..M&M:/me 4D3O4N3N4E3 $$1  M&M'1s1 4(4m4)4 3(3m3)3 4(4m4)4 12(12m12)1 14(14m14)1 4m4m4m4m4 4c4 44v4r4a4i4m4e4n4t4 4b4o4n4!4
+  ..Coke:/me offre a $$1 un 15,15I0,4 Coke 15,15I avec de la glace 
+  ..coke:/me donne à $$1 une canette de coke glacée.
+  ..Café:/me  offre une bonne tasse de café à $$1 :4[1,5__4]D 
+  ..7 Up:/me 4offre a $$1 un 15,15!1,140,3 74,3°0,3UP 15,15! avec de la glace
+  ..Juicy Fruit:/me dit: Tien $$1 15,15l1,8<~Juicy-Fruit~>15,15l  juste pour toi!
+  ..Gum:/me donne a  4 $$1 10,0 une gomme 15,15l4,9<~ DoubleMenthe ~>15,15l
+  ..Milky:/me donne a 4 $$1  une | /me       5__________  | /me       5,5.3,0MilkyWay5,5.    4Hmmmm c est bon ! | /me      5¯¯¯¯¯¯¯¯¯¯ 
+  ..Snicker:/me donne a 4 $$1 1une | /me       5__________  |  /me       5,5.2,0SNICKERS5,5.  Hmmmm c bon! |  /me      5¯¯¯¯¯¯¯¯¯¯ 
+  ..Pepermint:/me 4 $$1 veux tu | /me       4_______________  | /me       0,4P4,0e0,4P4,0P0,4e4,0R0,4M4,0i0,4n4,0T0,4s4,0T0,4i4,0c0,4K ? | /me       4¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯   
+  ..Bonbon!:/me demande à7 $$1 13Lequel  4désire6 tu 12? 5,44.0,5TootsieRoll4,45,4.? 15,15.0,2L1,9I0,3F0,4E1,8S0,10A0,4V0,3E1,9R0,5S15,15.? 15,15 0,5 HERSHEY'S BAR 15,15 ? 15,15l1,8<~Juicy-Fruit~>15,15l?
+  .Platitudes
+  ..Nordique:/me pogne $$1 lui met un chandail des nordiques de Québec et le lance sur la 40 attaché apres le bumber de son char!
+  ..Fleuve:/me pogne $$1 $+ , lui attache 2 bloques de ciment après le cou pis le sacre dans le fleuve!
+  ..Gateau aux banannes: /me vous dit...:"2F3é4L5i6c3i2T7a4T10i10O11n4 $$1 12vous venez de remportez une boîte de gateau aux bananes signés:4 "dunkin' heinz"!!!...12d'une valeur approximative de 3.99$!!
+  ..Chameau!:/me croit que $$1 est gay fak y dit à $$1 d'aller se faire enculler pas un chameau :)
+  ..Pete pis repete:/say 7Pete pis repete s'en vont en bateau... Pete tombe a l'eau...qui qui reste $$1 ???
+  ..Guenon: /say 12ho!!!...mais que vois-je à l'horizon???......est-ce un singe ou une guenon???....mais non....c'est 4 $$1 12en cann'çons!!!
+  ..Tapette:/say 4Attention!! Tenez vous les fesses serré, paske, ya un gay du nom de4 $$1 (pour pas le nommez) qui est sur le canal!! 
+  ..Tapette "privé":/set %nickfif $$1 | fif
+  ..Piano à queue:/me prend un piano à queue et le lance en plein dans face à $$1 et |  /me dit: 6K4I12N 6T4O12I4!7!9!
+  ..4 sortes d'hommes:/set %nickfiftemps $$1 | /4sortes
+  ..Marteau:/me prend un marteau pis le plante sous la marboulette de $$1 $+ , puis tire d'un bon coup sec! SloCk! !!!
+  ..BaZoOkA:/me prend un Bazooka, le pose sur la tempe de $$1 et appuis sur la gachette... 4POW!
+  ..Poissons:/me déverse un baril de poissons dans le chandail de $$1 ,.... 4<º))))><¸.·´¯`·.¸1<º))))><¸.·´¯`·.¸2<º))))><¸.·´¯`·.¸3<º))))><¸ ´¯`·.¸5<º))))><¸.·´¯`·.¸4<º))))><¸.·´¯`·.¸13<º))))><¸.·´¯`·.¸10<º))) )><¸.·´¯`·.¸ 4<º))))><¸.·´¯`·.¸1<º))))><¸.·´¯`·.¸2<º))))><¸.·´¯`· .¸3<º))))><¸.·´¯`·.¸5<º))))><¸.·´¯`·.¸4.....¸.·´¯`·.¸><((((º>1¸.·´ ¯`·.¸><((((º>2¸.·´¯`·.¸><((((º>3¸.·´¯`·.¸><((((º>13¸.·´¯`·.¸><(((( º>7¸.·´¯`·.¸><((((º>4¸.·´¯`·.¸><((((º>1 pour lui faire des chatouilles
+  ..CombaT:/me part à courir vers $$1 $+ , lui donne un uppercut...PoW! une savate...PiF!Il lui prend les jambes et les tire en l'air... $$1 tombe tête première sur le ciment. Sa cervelle ce répend partout mélangée avec son sang...
+  ..Face de rat!: /me   7 .--,         7.--,     10 4Aye toi $$1! | /me  7 ( ( \.-----./ )  7)      4 espece de  | /me  7 '.__/6o o7\__.'         4face de rat!!!!!!  | /me       7{= 4^ 7=}                    10  | /me        7 > - <               4
+  ..Chainsaw:/me Découpe $$1 en petits morceaux avec sa chainsaw fisher-price et vend les petits morceaux à des handicapés!!!!
+  ..Alerte $snick($active,1) est la!: /me (¯`·._ (¯`·._- VOILA $1 4ALERTE CACHEZ VOUS!!!! -_.·`¯)_.·`¯)
+  ..45magnum:/say prend deux 45 magnums, les accotent sur les tempes de $$1 puis!... il appuie sur les gachettes 4PPOOWW!!!!
+  ..Jaune:/me 1,1*2,2*3,3*4,4*5,5*7,7*4,8*1,311,4 Tu est  8Le Jaune 11dans mes oreilles,0 $$1 1,1*2,2*3,3*4,4*5,5*7,7*4,8*0,0*
+  ..Brun:/me 1,1*2,2*3,3*4,4*5,5*7,7*4,8*1,311,4 Tu est  5Le Brun 11dans mes shorts,0 $$1 1,1*2,2*3,3*4,4*5,5*7,7*4,8*0,0*
+  ..Coup au choix:/me donne un gros coup de $$?="Avec quoi?" à $$1 ... 4J'espere que ca fait mal!!  
+  ..maudate machine: /say 12maudate machine à morde...4j'ai des bols de fasils dans l'cruze..12.épille moé ine ambulance au plus sacrant,  4tabarnalakla!
+  ..ski-doo: /say 6...un ski-doo on peu tu laisser ca dans cours?
+}

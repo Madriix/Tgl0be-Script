@@ -1,0 +1,103 @@
+;-----------------------------------------------------------
+;                     Aliases Modération
+;                          Par Xor
+;-----------------------------------------------------------
+
+Alias raisona { say %av.coul $+ $$1- > $$?="Avertissement :" }
+Alias flooda { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\flood.txt }
+Alias inciflooda { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\inciflood.txt }
+Alias vulgairea { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\vulgarité.txt }
+Alias sexea { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\sexe.txt }
+Alias abusscripta { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\script.txt }
+Alias puba { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\pub.txt }
+Alias foota { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\foot.txt }
+Alias coorda { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\coord.txt }
+Alias maja { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\maj.txt }
+Alias pseudoa { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\pseudo.txt }
+Alias clonesa { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\clones.txt }
+Alias netiquettea { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\netiquette.txt }
+Alias racismea { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\racisme.txt }
+Alias noticea { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\notice.txt }
+Alias cama { say  %av.coul $+ $$1- > $read $mircdirModeration\Avertissements\cam.txt }
+
+Alias raisonk { kick $active $$1 %av.coul $$?="Raison :" }
+Alias floodk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\flood.txt }
+Alias incifloodk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\inciflood.txt }
+Alias vulgairek { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\vulgarité.txt }
+Alias sexek { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\sexe.txt }
+Alias abusscriptk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\script.txt }
+Alias pubk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\pub.txt }
+Alias footk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\foot.txt }
+Alias coordk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\coord.txt }
+Alias majk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\maj.txt }
+Alias pseudok { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\pseudo.txt }
+Alias clonesk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\clones.txt }
+Alias netiquettek { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\netiquette.txt }
+Alias racismek { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\racisme.txt }
+Alias noticek { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\notice.txt }
+Alias camk { kick $active $$1 %av.coul $+ $read $mircdirModeration\Avertissements\cam.txt }
+
+Alias raisonkb { 
+  b $$1
+  kick $active $$1 %av.coul $$?="Raison :" 
+}
+Alias floodkb {
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\flood.txt 
+}
+Alias incifloodkb { 
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\inciflood.txt 
+}
+Alias vulgairekb { 
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\vulgarité.txt
+}
+Alias sexekb { 
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\sexe.txt 
+}
+Alias abusscriptkb {
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\script.txt 
+}
+Alias pubkb { 
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\pub.txt 
+}
+Alias footkb {
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\foot.txt 
+}
+Alias coordkb { 
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\coord.txt
+}
+Alias majkb { 
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\maj.txt
+}
+Alias pseudokb { 
+  ban $active * $+ $$1 $+ *!*@*
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\pseudo.txt
+}
+Alias cloneskb {
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\clones.txt
+}
+Alias netiquettekb {
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\netiquette.txt 
+}
+Alias racismekb {
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\racisme.txt 
+}
+Alias noticekb { 
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\notice.txt 
+}
+Alias camkb { 
+  b $$1
+  kick $active $$1 %av.coul $+ $read $mircdirModeration\Bans\cam.txt 
+}

@@ -1,0 +1,720 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;         Menu pour Anope 2.0.6
+;; Dernière mise à jour: 16/06/2019)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+menu status,channel {
+  -
+  $iif(%mb.chanserv == on,Menu ChanServ,$null) 
+  .Aide ChanServ:/msg Chanserv HELP 
+  .Aide ChanServ ALL:/msg Chanserv HELP ALL
+  .Enregistrer son salon:/msg ChanServ REGISTER $chan $$?="Description du chan :" 
+  .S'inviter sur un salon:/msg ChanServ INVITE $$?="Nom du salon (avec le #) :" | 
+  .Configuration de son salon 
+  ..Mettre un successeur:/msg ChanServ SET $chan successor $$?="Pseudo du successeur :" 
+  ..Changer le founder:/msg ChanServ SET founder $chan $$?="Pseudo du nouveau founder :" 
+  ..Changer le mot de passe:/msg ChanServ SET $chan password $$?*="Nouveau mot de passe :" 
+  ..Changer la description:/msg ChanServ SET desc $chan  $$?="Nouvelle description :" 
+  ..Mettre une URL:/msg ChanServ SET $chan url $$?="Entre l'URL :" 
+  ..Mettre un e-mail:/msg ChanServ SET $chan email $$?="Entre l'e-mail :" 
+  ..Gestion message d'entrée 
+  ...Mettre un message d'entrée:/msg ChanServ entrymsg $chan ADD $$?="Entre le message d'entrée :" 
+  ...Effacer un message d'entrée:/msg ChanServ entrymsg $chan DEL $$?="Numéro :" 
+  ...Liste des messages d'entrées:/msg ChanServ entrymsg $chan LIST
+  ...Nettoyer les messages d'entrées (reset):/msg ChanServ entrymsg $chan CLEAR
+  ..Mettre un topic (sujet du salon):/msg ChanServ topic $chan $$?="Entre le topic :" 
+  ..Choisir le mode de ban 
+  ...*!user@host:/msg ChanServ SET $chan bantype 1 
+  ...*!*user@host:/msg ChanServ SET $chan bantype 2 
+  ...*!*@host:/msg ChanServ SET $chan bantype 3 
+  ...*!*user@*.domain:/chanserv SET $chan bantype 4 
+  ..Bloquer les modes du salon 
+  ...Mode à maintenir:/msg ChanServ SET $chan mlock $$?="Entre les modes à maintenir (ex: +msT) :" 
+  ...- 
+  ...Activer:/msg ChanServ SET mlock $chan on 
+  ...Désactiver:/msg ChanServ SET mlock $chan off 
+  ..Maintenir le topic 
+  ...Activer:/msg ChanServ SET keeptopic $chan on 
+  ...Désactiver:/msg ChanServ SET keeptopic $chan off 
+  ..Envoie notice quand OP/DEOP 
+  ...Activer:/msg ChanServ SET opnotice $chan on 
+  ...Désactiver:/msg ChanServ SET opnotice $chan off 
+  ..Commandes sensibles 
+  ...Activer:/msg ChanServ SET peace $chan on 
+  ...Désactiver:/msg ChanServ SET peace $chan off 
+  ..Salon caché 
+  ...Activer:/msg ChanServ SET private $chan on 
+  ...Désactiver:/msg ChanServ SET private $chan off 
+  ..Restreindre le salon 
+  ...Activer:/msg ChanServ SET restricted $chan on 
+  ...Désactiver:/msg ChanServ SET restricted $chan off 
+  ..Sécurité ChanServ 
+  ...Activer:/msg ChanServ SET secure $chan on 
+  ...Désactiver:/msg ChanServ SET secure $chan off 
+  ..Sécurité des Ops 
+  ...Activer:/msg ChanServ SET secureops $chan on 
+  ...Désactiver:/msg ChanServ SET secureops $chan off 
+  ..Sécurité du founder 
+  ...Activer:/msg ChanServ SET securefounder $chan on 
+  ...Désactiver:/msg ChanServ SET securefounder $chan off 
+  ..Signature des kicks 
+  ...Activer:/msg ChanServ SET signkick $chan on 
+  ...Désactiver:/msg ChanServ SET signkick $chan off 
+  ..Bloquer le topic 
+  ...Activer:/msg ChanServ SET topiclock $chan on 
+  ...Désactiver:/msg ChanServ SET topiclock $chan off 
+  ..Mode persist 
+  ...Activer:/msg ChanServ SET persist $chan on 
+  ...Désactiver:/msg ChanServ SET persist $chan off 
+  .Configuration des access 
+  ..Access 
+  ...Ajouter (avec level):/msg ChanServ ACCESS $chan add $$?="Entre le pseudo :" $$?="Entre le level :" 
+  ...Effacer:/msg ChanServ ACCESS $chan del $$?="Entre le pseudo :" 
+  ...Liste:/msg ChanServ ACCESS $chan list 
+  ...Tout effacer:/msg ChanServ ACCESS $chan clear 
+  ..- 
+  ..Passer en mode XOP 
+  ...Activer:/msg ChanServ SET $chan xop on 
+  ...Désactiver:/msg ChanServ SET $chan xop off 
+  ..SOP (SuperOp) 
+  ...Ajouter:/msg ChanServ SOP $chan add $$?="Entre le pseudo :" 
+  ...Supprimer:/msg ChanServ SOP $chan del $$?="Entre le pseudo :" 
+  ...Liste:/msg ChanServ SOP $chan list 
+  ...Tout effacer:/msg ChanServ SOP $chan clear 
+  ..AOP (AutoOp) 
+  ...Ajouter:/msg ChanServ AOP $chan add $$?="Entre le pseudo :" 
+  ...Supprimer:/msg ChanServ AOP $chan del $$?="Entre le pseudo :" 
+  ...Liste:/msg ChanServ AOP $chan list 
+  ...Tout effacer:/msg ChanServ AOP $chan clear 
+  ..HOP (HalfOp) 
+  ...Ajouter:/msg ChanServ HOP $chan add $$?="Entre le pseudo :" 
+  ...Supprimer:/msg ChanServ HOP $chan del $$?="Entre le pseudo :" 
+  ...Liste:/msg ChanServ HOP $chan list 
+  ...Tout effacer:/msg ChanServ HOP $chan clear 
+  ..VOP (AutoVoice) 
+  ...Ajouter:/msg ChanServ VOP $chan add $$?="Entre le pseudo :" 
+  ...Supprimer:/msg ChanServ VOP $chan del $$?="Entre le pseudo :" 
+  ...Liste:/msg ChanServ VOP $chan list 
+  ...Tout effacer:/msg ChanServ VOP $chan clear 
+  ..Liste de tous les access:/msg ChanServ ACCESS $chan list 
+  .Kick automatique 
+  ..Ajouter:/msg ChanServ AKICK $chan add $$?="Entre le pseudo :" 
+  ..Effacer:/msg ChanServ AKICK $chan del $$?="Entre le pseudo :" 
+  ..Renforcer:/msg ChanServ AKICK $chan enforce $$?="Entre le pseudo :" 
+  ..Liste:/msg ChanServ AKICK $chan view 
+  ..Tout effacer:/msg ChanServ AKICK $chan clear 
+  .Fermer son salon 
+  ..[!] /!\ WARNING /!\ [!] 
+  ...Continuer:/msg ChanServ DROP $chan $chan
+  ...Annuler:/echo -a 4[!] /!\ Commande ChanServ DROP annuler /!\ [!] 
+  .Retrouver son mot de passe:/msg ChanServ SEENDPASS $chan 
+  .Op/Hop/Voice par ChanServ 
+  ..Op:/msg ChanServ OP $chan $$?="Entre le pseudo :" 
+  ..Deop:/msg ChanServ DEOP $chan $$?="Entre le pseudo :" 
+  ..Halfop:/msg ChanServ HALFOP $chan $$?="Entre le pseudo :" 
+  ..Dehalfop:/msg ChanServ DEHALFOP $chan $$?="Entre le pseudo :" 
+  ..Voice:/msg ChanServ VOICE $chan $$?="Entre le pseudo :" 
+  ..Devoice:/msg ChanServ DEVOICE $chan $$?="Entre le pseudo :" 
+  .Kick/Ban par ChanServ 
+  ..Kick:/msg ChanServ KICK $chan $$?="Entre le pseudo :" $$?="Raison ? :" 
+  ..Ban:/msg ChanServ BAN $chan $$?="Entre le pseudo :" $$?="Raison ? :" 
+  ..Deban:/msg ChanServ UNBAN $chan $$?="Entre le pseudo :" 
+  .Changer le topic:/msg ChanServ TOPIC $chan $$?="Entre le topic :" 
+  .Information d'un salon:/msg ChanServ INFO $chan 
+  .Plus d'information:/msg ChanServ INFO $chan ALL 
+  .Protection pseudo 
+  ..Activer:/msg ChanServ PROTECT $chan $$?="Entre le pseudo :" 
+  ..Désactiver:/msg ChanServ DEPROTECT $chan $$?="Entre le pseudo :" 
+  .Owner 
+  ..Activer:/msg ChanServ OWNER $chan $me 
+  ..Désactiver:/msg ChanServ DEOWNER $chan $me 
+  .Liste des salons:/msg ChanServ LIST $$?="Mot clef (optionnel) :" 
+  .Enlever certains aspects d'un channel 
+  ..Effacer tous les MODEs:/msg Chanserv CLEAR $chan MODES 
+  ..Effacer tous les BANs:/msg Chanserv CLEAR $chan BANS 
+  ..Effacer tous les EXCEPTs:/msg ChanServ CLEAR $chan EXCEPTS 
+  ..Déopper tous les OPs:/msg Chanserv CLEAR $chan OPS 
+  ..Déhalfopper tous les HOPs:/msg ChanServ CLEAR $chan HOPS 
+  ..Dévoicer tous les VOICEs:/msg Chanserv CLEAR $chan VOICES 
+  ..Kicker tous les USERs:/msg Chanserv CLEAR $chan USERS 
+  .-
+  ;.Commandes administrateur
+  .$iif(o isin $usermode,Commandes Services Admins,$null) 
+  ..Supprimer l'identification d'un nick pour $chan:/msg ChanServ LOGOUT $chan $$?="Entre le nick :" 
+  ..Effacer un channel 
+  ...[!] /!\ WARNING /!\ [!] 
+  ....Continuer:/msg ChanServ DROP $$?="Entre le channel (avec le #) :" 
+  ....Annuler:/echo -a 4[!] /!\ Commande ChanServ DROP annuler /!\ [!] 
+  ..Non expiration du channel 
+  ...Activer sur un channel:/msg ChanServ SET NOEXPIRE $chan ON 
+  ...Désactiver sur un channel:/msg ChanServ SET NOEXPIRE $chan OFF 
+  ..Toutes les informations sur un channel:/msg ChanServ INFO $$?="Entre le channel (avec le #) :" ALL 
+  ..Liste 
+  ...Liste de tous les channels non expirants:/msg ChanServ LIST NOEXPIRE 
+  ...Liste de tous les channels privés:/msg ChanServ LIST PRIVATE 
+  ...Liste de tous les channels interdits:/msg ChanServ LIST FORBIDDEN 
+  ..Retrouver le passe d'un channel:/msg ChanServ GETPASS $$?="Entre le channel (avec le #) :" 
+  ..Interdir un channel:/msg ChanServ FORBIDDEN $$?="Entre le channel (avec le #) :" $$?="Entre la raison :" 
+  ..Interdir un channel d'être enregistrer 
+  ...Activer sur un channel:/msg ChanServ SUSPEND $$?="Entre le channel (avec le #) :" $$?="Entre la raison :" 
+  ...Désactiver sur un channel:/msg ChanServ UNSUSPEND $$?="Entre le channel (avec le #) :" 
+  ..Retrouver le level d'un nick sur un channel:/msg ChanServ STATUTS $$?="Entre le channel (avec le #) :" $$?="Entre le nick :" 
+  $iif(%mb.nickserv == on,Menu NickServ,$null) 
+  .Aide NickServ:/msg NickServ HELP 
+  .Aide NickServ ALL:/msg NickServ HELP ALL
+  .Enregistrer son pseudo:/msg NickServ REGISTER $$?*="Entre ton mot de passe :" $$?="Entre ton adresse e-mail :" 
+  .Identifier son pseudo:/msg NickServ IDENTIFY $$?*="Entre ton mot de passe :" 
+  .Effacer son pseudo 
+  ..[!] /!\ WARNING [!] /!\ 
+  ...Continuer:/msg NickServ DROP $$?="Entre ton pseudo :" 
+  ...Annuler:/echo -a 4[!] /!\ Commande NickServ DROP annuler /!\ [!] 
+  .Désidentifier son nick:/msg NickServ LOGOUT 
+  .Retrouver son mot de passe:/msg NickServ SENDPASS $$?="Entre ton nick :" 
+  .Changer le nick d'un utilisateur qui a pris votre nick:/msg NickServ RECOVER $$?="Entre le nick :" $$?*="Entre le mot de passe :" 
+  .Supprimer toute tutelle sur votre nick:/msg NickServ RELEASE $$?="Entre le nick :" $$?*="Entre le mot de passe :" 
+  .Information sur un nick:/msg NickServ INFO $$?="Entre le nick :" 
+  .Groupe 
+  ..Joindre un groupe:/msg NickServ GROUP $$?="Entre le cible" $$?*="Entre le mot de passe de la cible :" 
+  ..Liste des pseudos de votre groupe:/msg NickServ GLIST 
+  .Liste d'accès de votre nick 
+  ..Modifier:/msg NickServ ACCESS ADD $$?="Entre le mask :" 
+  ..Supprimer:/msg NickServ ACCESS DEL $$?="Entre le mask :" 
+  ..Liste:/msg NickServ ACCESS LIST 
+  .Configuration du pseudo 
+  ..Changer de mot de passe:/msg NickServ SET password $$?*="Entre ton nouveau mot de passe :" 
+  ..Mettre une URL:/msg NickServ SET url $$?="Entre l'URL de ton site :" 
+  ..Mettre un e-mail:/msg NickServ SET email $$?="Entre ton adresse e-mail :" 
+  ..Mettre un numéro ICQ:/msg NickServ SET icq $$?="Entre ton numéro ICQ :" 
+  ..Mettre un message d'accueil à votre nick:/msg NickServ SET greet $$?="Entre ton message d'accueil :" 
+  ..Changer l'affichage de votre groupe:/msg NickServ SET DISPLAY $$?=" Entre le nouvel affichage :" 
+  ..Language 
+  ...1=English:/msg NickServ SET LANGUAGE 1 
+  ...2=French:/msg NickServ SET LANGUAGE 2 
+  ...3=German:/msg NickServ SET LANGUAGE 3 
+  ...4=Italiano:/msg NickServ SET LANGUAGE 4 
+  ...5=Portuguese:/msg NickServ SET LANGUAGE 5 
+  ...6=Spanich:/msg NickServ SET LANGUAGE 6 
+  ...7=Turkish:/msg NickServ SET LANGUAGE 7 
+  ...8=Catalan:/msg NickServ SET LANGUAGE 8 
+  ...9=Greek:/msg NickServ SET LANGUAGE 9 
+  ...10=Dutch:/msg NickServ SET LANGUAGE 10 
+  ...11=Russian:/msg NickServ SET LANGUAGE 11 
+  ...12=Hungarian:/msg NickServ SET LANGUAGE 12 
+  ...13=Polish:/msg NickServ SET LANGUAGE 13 
+  ..Protection kill 
+  ...Activer:/msg NickServ SET kill on 
+  ...Désactiver:/msg NickServ SET kill off 
+  ..Temps pour l'identification 
+  ...20secondes:/msg NickServ SET KILL QUICK 
+  ...Aucune chance:/msg NickServ SET KILL IMMED 
+  ..Sécurité pseudo 
+  ...Activer:/msg NickServ SET secure on 
+  ...Désactiver:/msg NickServ SET secure off 
+  ..Privé/masqué 
+  ...Activer:/msg NickServ SET private on 
+  ...Désactiver:/msg NickServ SET private off 
+  ..Réglage de l'affichage des informations 
+  ...E-mail 
+  ....Activer:/msg NickServ SET HIDE EMAIL ON 
+  ....désactiver:/msg NickServ SET HIDE EMAIL OFF 
+  ...UserMask 
+  ....Activer:/msg NickServ SET HIDE USERMASK ON 
+  ....Désactiver:/msg NickServ SET HIDE USERMASK OFF 
+  ...Quit 
+  ....Activer:/msg NickServ SET HIDE QUIT ON 
+  ....Désactiver:/msg NickServ SET HIDE QUIT OFF 
+  ..Communication des services 
+  ...Messages:/msg NickServ SET MSG ON 
+  ...Notices:/msg NickServ SET MSG OFF 
+  .Liste 
+  ..Liste des nicks enregistrés suivant un modèle:/msg NickServ LIST $$?="Entre le modèle :" 
+  ..- 
+  ..Liste les channels où vous possédez un access:/msg NickServ ALIST $$?="Entre le level (format XOP ou ACCESS) :" 
+  .Status d'un nick 
+  ..Voir le statut d'un nick:/msg nickserv status $$?="Entrez le nick" 
+  ..- 
+  ..Résultats:/echo -a 4Résultat : | /echo -a 40 Utilisateur non online ou le nick n'est pas enregistré | /echo -a 4 1 Utilisateur non reconnu comme propriétaire | /echo -a 4 2 Utilisateur reconnu comme propriétaire uniquement via la liste d'accès | /echo -a 4 3 Utilisateur reconnu comme propriétaire via l'identification 
+  ..0 Utilisateur non online ou le nick n'est pas enregistré:/echo -a 4Résultat : | /echo -a 40 Utilisateur non online ou le nick n'est pas enregistré | /echo -a 4 1 Utilisateur non reconnu comme propriétaire | /echo -a 4 2 Utilisateur reconnu comme propriétaire uniquement via la liste d'accès | /echo -a 4 3 Utilisateur reconnu comme propriétaire via l'identification 
+  ..1 Utilisateur non reconnu comme propriétaire:/echo -a 4Résultat : | /echo -a 40 Utilisateur non online ou le nick n'est pas enregistré | /echo -a 4 1 Utilisateur non reconnu comme propriétaire | /echo -a 4 2 Utilisateur reconnu comme propriétaire uniquement via la liste d'accès | /echo -a 4 3 Utilisateur reconnu comme propriétaire via l'identification 
+  ..2 Utilisateur reconnu comme propriétaire uniquement via la liste d'accès:/echo -a 4Résultat : | /echo -a 40 Utilisateur non online ou le nick n'est pas enregistré | /echo -a 4 1 Utilisateur non reconnu comme propriétaire | /echo -a 4 2 Utilisateur reconnu comme propriétaire uniquement via la liste d'accès | /echo -a 4 3 Utilisateur reconnu comme propriétaire via l'identification 
+  ..3 Utilisateur reconnu comme propriétaire via l'identification:/echo -a 4Résultat : | /echo -a 40 Utilisateur non online ou le nick n'est pas enregistré | /echo -a 4 1 Utilisateur non reconnu comme propriétaire | /echo -a 4 2 Utilisateur reconnu comme propriétaire uniquement via la liste d'accès | /echo -a 4 3 Utilisateur reconnu comme propriétaire via l'identification 
+  .- 
+  ;.Commandes administrateur
+  .$iif(o isin $usermode,Commandes Services Admins,$null) 
+  ..Désidentifier le nick d'une personne: 
+  ...Avec demande de réidentification:/msg NickServ LOGOUT $$?="Entre le nick :" REVALIDATE 
+  ...Sans demande de réidentification:/msg NickServ LOGOUT $$?="Entre le nick :" 
+  ..Effacer un nick:/msg NickServ DROP $$?="Entre le nick :" 
+  ..Non expiration d'un nick 
+  ...Activer sur un nick:/msg NickServ saSET NOEXPIRE $$?="Entre le nick :" ON 
+  ...Désactiver sur un nick:/msg NickServ saSET NOEXPIRE $$?="Entre le nick :" OFF 
+  ..Liste 
+  ...Nicks enregistrés correspondent à un modèle donné:/msg NickServ LIST $$?="Entre le mask :" 
+  ...Nicks interdits:/msg NickServ LIST * FORBIDDEN 
+  ...Nicks non expirants:/msg NickServ LIST * NOEXPIRE 
+  ...Lister les nicks dans le groupe du nick donné:/msg NickServ GLIST $$?="Entre le nick :" 
+  ..Retrouver le passe d'un nick:/msg NickServ GETPASS $$?="Entre le nick :" 
+  ..Interdir un nick:/msg NickServ FORBID $$?="Entre le nick :" $$?="Entre la raison :" 
+  $iif(%mb.botserv == on,Menu BotServ,$null) 
+  .Aide BotServ:/msg BotServ HELP 
+  .Aide BotServ ALL:/msg BotServ HELP ALL
+  .Liste des bots:/msg BotServ botlist 
+  .Assigner un bot:/msg BotServ ASSIGN $chan $$?="Entre le nom du bot :" 
+  .Désassigner un bot:/msg BotServ UNASSIGN $chan 
+  .Information sur un bot:/msg BotServ INFO $$?="Entre le nom du bot :" 
+  .Information sur un chan:/msg BotServ INFO $$?="Entre le nom du chan (avec le #) :" 
+  .Configuration du bot 
+  ..Mots interdits 
+  ...Ajouter:/msg BotServ BADWORDS $chan add $$?="Entre le mot :" 
+  ...Supprimer:/msg BotServ BADWORDS $chan del $$?="Entre le mot :" 
+  ...Liste:/msg BotServ BADWORDS $chan list 
+  ...Tout supprimer:/msg BotServ BADWORDS $chan clear 
+  ..Ne pas kicker les Ops 
+  ...Activer:/msg BotServ SET $chan dontkickops on 
+  ...Désactiver:/msg BotServ SET $chan dontkickops off 
+  ..Ne pas kicker les voices 
+  ...Activer:/msg BotServ SET dontkickvoices $chan on 
+  ...Désactiver:/msg BotServ SET dontkickvoices $chan off 
+  ..Commandes fantasy "!" 
+  ...Activer:/msg Botserv SET fantasy $chan on 
+  ...Désactiver:/msg BotServ SET fantasy $chan off 
+  ..Message d'accueil 
+  ...Activer:/msg BotServ SET greet $chan on 
+  ...Désactiver:/msg BotServ SET greet $chan off 
+  ..Un vrai bot 
+  ...Activer:/msg BotServ SET symbiosis $chan on 
+  ...Désactiver:/msg BotServ SET symbiosis $chan off 
+  .Configuration des kicks 
+  ..Kicker le gras 
+  ...Activer:/msg BotServ KICK bolds $chan on $$?="Entre le nombre de kick avant le ban :" 
+  ...Désactiver:/msg BotServ KICK bolds $chan off 
+  ..Kicker les mots interdits 
+  ...Activer:/msg BotServ KICK badwords $chan on $$?="Entre le nombre de kick avant le ban :"
+  ...Désactiver:/msg BotServ KICK badwords $chan off 
+  ..Kicker Les Majuscules 
+  ...Activer:/msg botserv kick caps $chan on $$?="Entre le nombre de kick avant le Ban :"
+  ...Désactiver:/msg botserv kick caps $chan off 
+  ..Kicker Les Couleurs 
+  ...Activer:/msg botserv kick colors $chan on $$?="Entre le nombre de kick avant le Ban :" 
+  ...Désactiver:/msg botserv kick colors $chan off 
+  ..Kické Le Flood 
+  ...Activer:/msg botserv kick flood $chan on $$?="Entre le nombre de kick avant le Ban :" 4 5
+  ...Désactiver:/msg botserv kick flood $chan off 
+  ..Kické Les Répétitions 
+  ...Activer:/msg botserv kick repeat $chan on $$?="Entre le nombre de kick avant le Ban :" 
+  ...Désactiver:/msg botserv kick repeat $chan off 
+  ..Kicker Les Reverses 
+  ...Activer:/msg botserv kick reverses $chan on $$?="Entre le nombre de kick avant le Ban :" 
+  ...Désactiver:/msg botserv kick reverses $chan off 
+  ..Kicker le Souligné 
+  ...Activer:/msg botserv kick underlines $chan on $$?="Entre le nombre de kick avant le Ban :" 
+  ...Désactiver:/msg botserv kick $chan underlines off 
+  .Faire parler le Bot:/msg botserv say $chan $$?="Entre la phrase a faire dire au Bot :" 
+  .Faire un /me avec le Bot:/msg botserv act $chan $$?="Entre la phrase a faire dire au Bot :" 
+  .Désassigné un Bot:/msg botserv unassign $chan 
+  .-
+  ;.Commandes administrateur
+  .$iif(o isin $usermode,Commandes Services Admins,$null) 
+  ..Gèrer la liste des bots du réseau 
+  ...Ajouter un bot:/msg BotServ BOT ADD $$?="Entre le nick du bot :" $$?="Entre l'username du bot :" $$?="Entre l'hostname du bot :" $$?="Entre le realname du bot :" 
+  ...Changer le nick d'un bot:/msg BotServ BOT CHANGE $$?="Entre l'actuel nick :" $$?="Entre le nouveau nick :" 
+  ...Supprimer un bot:/msg BotServ BOT DEL $$?="Entre le nick du bot :" 
+  ...Liste des bots du réseau:/msg BotServ BOT LIST 
+  ..Empêcher un channel d'avoir un bot 
+  ...Activer sur un channel:/msg BotServ SET $$?="Entre le channel (avec le #) :" NOBOT ON 
+  ...Désactiver sur un channel:/msg BotServ SET $$?="Entre le channel (avec le #) :" NOBOT OFF 
+  ..Rendre un bot privé 
+  ...Activer sur un bot:/msg BotServ SET $$?="Entre le nick du bot :" PRIVATE ON 
+  ...Désactiver sur un bot:/msg BotServ SET $$?="Entre le nick du bot :" PRIVATE OFF 
+  $iif(%mb.memoserv == on,Menu MemoServ,$null) 
+  .Aide MemoServ:/msg memoserv help 
+  .Aide MemoServ ALL:/msg memoserv help ALL
+  .Envoyer un Mémo 
+  ..A un pseudo:/msg memoserv send $$?="Entre le pseudo :" $$?="Entre le message a envoyer :" 
+  ..A un salon:/msg memoserv send #$$?="Entre le salon :" $$?="Entre le message a envoyer :" 
+  .Annuler un Mémo 
+  ..[!] /!\ WARNING /!\ [!] 
+  ...Annulation du dernier mémo envoyer, le mémo ne devras pas etre lu pour etre effacés !:/ 
+  ..- 
+  ..D'un pseudo:/msg memoserv cancel $$?="Entre le pseudo :" 
+  ..D'un salon:/msg memoserv cancel $$?="Entre le pseudo :" 
+  .Lire un Mémo 
+  ..D'un pseudo 
+  ...Dernier:/msg memoserv read last 
+  ...Nouveau:/msg memoserv read new 
+  ..- 
+  ..D'un Salon:/msg memoserv read $chan liste 
+  .Effacer un Mémo 
+  ..D'un pseudo 
+  ...Un seul:/msg memoserv del $$?="Entre le numero du mémo :" 
+  ...Tous:/msg memoserv del all 
+  ..- 
+  ..D'un Salon 
+  ...Liste:/msg memoserv del $chan liste 
+  ...Tous:/msg memoserv del $chan all 
+  .Configuration 
+  ..Etre prévenu quand nouveau 
+  ...Activer:/msg memoserv set notify on 
+  ...Désactiver:/msg memoserv set notify off 
+  ..Recevoir au départ et desaway:/msg memoserv set notify logon 
+  ..Recevoir lorsqu'ils vous sont envoyés uniquement:/msg memoserv set notify new 
+  ..Ne rien recevoir:/msg memoserv set notify off 
+  ..Nombre de messages:/msg set limit $$?="Nombre de messages ( 0 à 20 max ) :" 
+  .Infos sur les messages 
+  ..Sur vos messages:/msg memoserv info 
+  ..Sur votre channel:/msg memoserv info $chan 
+  .-
+  ;.Commandes administrateur
+  .$iif(o isin $usermode,Commandes Services Admins,$null) 
+  ..Limitte 
+  ...Pour un nick 
+  ....Définir la limitte de mémos d'un nick:/msg MemoServ SET LIMIT $$?="Entre le nick :" $$?="Entre la limitte (0 pour empêcher le nick d'en reçevoir) :" 
+  ....Permettre au nick de recevoir et garder autant de memos qu'il veut:/msg MemoServ SET LIMIT $$?="Entre le nick :" NONE 
+  ...Pour un channel 
+  ....Définir la limitte de mémos d'un channel:/msg MemoServ SET LIMIT $$?="Entre le channel (avec le #) :" $$?="Entre la limitte (0 pour empêcher le channel d'en reçevoir) :" 
+  ....Permettre au channel de recevoir et garder autant de memos qu'il veut:/msg MemoServ SET LIMIT $$?="Entre le channel (avec le #) :" NONE 
+  ..Infos sur les messages 
+  ...Sur les messages d'un nick:/msg memoserv info $$?="Entre le nick :" 
+  ...Sur un channel:/msg memoserv info $$?="Entre le channel (avec le #) :" 
+  ; - o isin $usermode && 
+  -
+  .$iif(o isin $usermode,Menu OperServ,$null) 
+  .Aide OperServ:/msg OperServ HELP 
+  .Aide OperServ ALL:/msg OperServ HELP ALL
+  .Commandes OperServ 
+  ..Envoyer un message à tous les utilisateurs:/msg OperServ GLOBAL $$?="Entre le message :" 
+  ..Afficher le status des Services et du réseau 
+  ....Nombre d'utilisateurs et d'IRCops:/msg OperServ STATS 
+  ....Afficher la taille actuelle de l'AKILL list:/msg OperServ STATS akill 
+  ....Afficher des informations sur l'utilisation de la mémoire par les Services:/msg OperServ STATS all 
+  ....Réinitialiser le nombre maximum d'utilisateurs:/msg OperServ STATS reset 
+  .Commandes réservées aux opérateurs et administrateurs des Services 
+  ..Changer les modes d'un channel:/msg OperServ MODE $chan $$?="Entre le mode :" 
+  ..Expulser un utilisateur d'un channel:/msg OperServ KICK $chan $$?=Entre le nick :" $$?="Entre la raison :" 
+  ..Supprimer tous les modes d'un channel 
+  ....Enlever tous les modes binaires (i,k,l,m,n,p,s,t):/msg OperServ CLEARMODES $chan 
+  ....Enlever également tous les ops et voices (+o et +v):/msg OperServ CLEARMODES $chan ALL 
+  ..Déconnecter tous les utilisateurs ayant un certain hostname:/msg OperServ KILLCLONES $$?="Entre le nick :" 
+  ..Contrôler la liste des AKILLs 
+  ....Ajouter:/msg OperServ AKILL ADD $$?="+échéance (+0 pour AKILL à durer non limiter) :" $$?="Entre le masque :" $$?="Entre la raison" 
+  ....Supprimer:/msg OperServ AKILL DEL $$?="Entre le masque :" 
+  ....Liste:/msg OperServ AKILL LIST 
+  ....Version plus détaillée de AKILL LIST:/msg OperServ AKILL VIEW 
+  ....Tout supprimer:/msg OperServ AKILL CLEAR 
+  ..Contrôler la liste des SGLINEs 
+  ....Ajouter:/msg OperServ SGLINE ADD $$?="+échéance (+0 pour AKILL à durer non limiter) :" $$?="Entre le masque :" $$?="Entre la raison" 
+  ....Supprimer:/msg OperServ SGLINE DEL $$?="Entre le masque :" 
+  ....Liste:/msg OperServ SGLINE LIST 
+  ....Version plus détaillée de SGLINE LIST:/msg OperServ SGLINE VIEW 
+  ....Tout supprimer:/msg OperServ SGLINE CLEAR 
+  ..Contrôler la liste des SQLINEs 
+  ....Ajouter:/msg OperServ SQlINE ADD $$?="+échéance (+0 pour AKILL à durer non limiter) :" $$?="Entre le masque :" $$?="Entre la raison" 
+  ....Supprimer:/msg OperServ SQLINE DEL $$?="Entre le masque :" 
+  ....Liste:/msg OperServ SQLINE LIST 
+  ....Version plus détaillée de SQLINE LIST:/msg OperServ SQLINE VIEW 
+  ....Tout supprimer:/msg OperServ SQLINE CLEAR 
+  ..Contrôler la liste des SZLINEs 
+  ....Ajouter:/msg OperServ SZlINE ADD $$?="+échéance (+0 pour AKILL à durer non limiter) :" $$?="Entre le masque :" $$?="Entre la raison :" 
+  ....Supprimer:/msg OperServ SZLINE DEL $$?="Entre le masque :" 
+  ....Liste:/msg OperServ SZLINE LIST 
+  ....Version plus détaillée de SZLINE LIST:/msg OperServ SZLINE VIEW 
+  ....Tout supprimer:/msg OperServ SZLINE CLEAR 
+  .Commandes réservées aux administrateurs des Services 
+  ..Modifier la liste des opérateurs des Services 
+  ...Ajouter:/msg OperServ OPER ADD $$?="Entre le nick :" 
+  ...Supprimer:/msg OperServ OPER DEL $$?="Entre le nick :" 
+  ...Liste:/msg OperServ OPER LIST 
+  ...Tout supprimer:/msg OperServ OPER CLEAR 
+  ..Liste de tous les channels 
+  ...Liste:/msg OperServ CHANLIST 
+  ...Avec un modèle:/msg OperServ CHANLIST $$?="Entre le modèle :" 
+  ...Avec un nickname:/msg OperServ CHANLIST $$?="Entre le nickname :" 
+  ...Avec un modèle et SECRET spécifié:/msg OperServ CHANLIST $$?="Entre le modèle :" SECRET 
+  ..Liste de tous les utilisateurs 
+  ...Liste:/msg OperServ USERLIST 
+  ...Avec un modèle:/msg OperServ USERLIST $$?="Entre le modèle (format nick!user@host) :" 
+  ...Avec un channel:/msg OperServ USERLIST $$?="Entre le channel :" 
+  ...Avec SECRET spécifié:/msg OperServ USERLIST SECRET 
+  ...Avec un modèle et SECRET spécifié:/msg OperServ USERLIST $$?="Entre le modèle :" SECRET 
+  ...Avec un channel et SECRET spécifié:/msg OperServ USERLIST $$?="Entre le chan :" SECRET 
+  ..Définir les messages affichés aux utilisateurs à la connexion 
+  ...Ajouter:/msg OperServ LOGONNEWS ADD $$?="Entre le message :" 
+  ...Supprimer:/msg OperServ LOGONNEWS DEL $$?="Entre le numéro du message à supprimer :" 
+  ..Définir les messages affichés aléatoirement aux utilisateurs à la connexion 
+  ...Ajouter:/msg OperServ RANDOMNEWS ADD $$?="Entre le message :" 
+  ...Supprimer:/msg OperServ RANDOMNEWS DEL $$?="Entre le numéro du message à supprimer :" 
+  ..Définir les messages affichés aux utilisateurs qui deviennent IRCops 
+  ...Ajouter:/msg OperServ OPERNEWS ADD $$?="Entre le message :" 
+  ...Supprimer:/msg OperServ OPERMNEWS DEL $$?="Entre le numéro du message à supprimer :" 
+  ..Afficher la liste des sessions par host 
+  ...Liste:/msg OperServ SESSION LIST 
+  ...Liste avec un minimal:/msg OperServ SESSION LIST $$?="Entre le minimal (supérieur à 1) :" 
+  ...Afficher des informations détaillées sur une host spécifique:/msg OperServ SESSION VIEW $$?="Entre l'host :" 
+  ..Modifier la liste d'exceptions à la limite de session 
+  ...Ajouter:/msg OperServ EXCEPTION ADD $$?="Entre le mask (masks nick!user@host et user@host sont invalides ! Masks box.host.dom ou *.host.dom autorisés !) :" $$?="Entre la limite (supérieur ou égal à 0) :" $$?="Entre la raison :" 
+  ...Supprimer:/msg OperServ EXCEPTION DEL $$?="Entre le mask|liste :" 
+  ...Déplacer une exception num vers position:/msg OperServ EXCEPTION MOVE $$?="Entre le num :" $$?="Entre la position :" 
+  ...Liste 
+  ....Toutes les exceptions:/msg OperServ LIST 
+  ....Recherche avec un mask:/msg OperServ LIST $$?=Entre le mask :" 
+  ...Plus d'information (donne le nick, la personne l'ayant ajouté, sa limite de sessions, la raison, le mask et la dte de l'échéance) 
+  ....Toutes les exceptions:/msg OperServ EXCEPTION VIEW 
+  ....Recherche avec un mask:/msg OperServ EXCEPTION VIEW $$?="Entre le mask :" 
+  ..Lister le cache de noms d'hôte utilisé par le detecteur de proxy 
+  ...Supprimer du cache le nom d'hôte spécifié:/msg OperServ CACHE DEL $$?="Entre le nom d'hôte :" 
+  ...Liste 
+  ....Lister tous les proxies correspondants à un modèle donné:/msg OperServ CACHE LIST $$?="Entre le modèle :" 
+  ....Avec l'option QUEUED:/msg OperServ CACHE LIST $$?="Entre le modèle :" QUEUED 
+  ....Avec l'option ALL:/msg OperServ CACHE LIST $$?="Entre le modèle :" ALL 
+  ..Supprimer temporairement toutes les Olines d'un serveur 
+  ...Supprimer toutes les Olines et déconnecter tous les IRCops d'un serveur donné:/msg OperServ NOOP SET $$?="Entre le serveur :" 
+  ...Remettre en place toutes les Olines supprimées d'un serveur donné:/msg OperServ NOOP REVOKE $$?="Entre le serveur :" 
+  ...- 
+  ...Note, le paramètre serveur n'est pas vérifié par les services:\ 
+  ..Juper un serveur:/msg OperServ JUPE $$?="Entre le serveur :" $$?="Entre la raison :" 
+  ..Ignore 
+  ...Attention! Unités reconnues pour le temps de l'ignore, cliquez ici pour l'aide!:/echo -a 4Aide aux durées des ignores : s pour les secondes, m pour les minutes, h pour les heures et d pour les jours. Vous ne pouvez pas les combiner ! 0 = permanent. 
+  ...- 
+  ...Ajouter:/msg OperServ IGNORE ADD $$?="Entre le temps de l'ignore :" $$?="Entre le nick :" 
+  ...Supprimer:/msg OperServ IGNORE DEL $$?="Entre le .:" 
+  ...Liste:/msg OperServ IGNORE LIST 
+  ..Changer un mode d'un utilisateur:/msg OperServ UMODE $$?="Entre le nick :" $$?="Entre le(s) mode(s) :" 
+  ..Donner les flags d'un Oper à un utilisateur (UnrealIRCd seulement):/msg OperServ OLINE $$?="Entre le nick :" $$?="Entre les flags (préfixes : + et - , pour tout supprimer, spécifier -) :" 
+  ..Configurer les options globales des services 
+  ...Mode lecture-seule 
+  ....Activer:/msg OperServ SET READONLY ON 
+  ....Désactiver:/msg OperServ SET READONLY OFF 
+  ...Mode LogChannel sur un chan 
+  ....Activer:/msg OperServ SET LOGCHAN ON 
+  ....Désactiver:/msg OperServ SET LOGCHAN OFF 
+  ...Mode déboguage 
+  ....Activer:/msg OperServ SET DEBUG ON 
+  ....Désactiver:/msg OperServ SET DEBUG OFF 
+  ...Mode sans expiration 
+  ....Activer:/msg OperServ SET NOEXPIRE ON 
+  ....Désactiver:/msg OperServ SET NOEXPIRE OFF 
+  ...Mode super-admin 
+  ....Activer:/msg OperServ SET SUPERADMIN ON 
+  ....Désactiver:/msg OperServ SET SUPERADMIN OFF
+
+  ...Mode SQL
+  ....Activer:/msg OperServ SET SQL ON 
+  ....Désactiver:/msg OperServ SET SQL OFF
+
+  ...Voir LIST
+  ....Voir:/msg OperServ SET LIST
+
+  ..Recharger le fichier de configuration des services:/msg OperServ RELOAD 
+  ..Sauvegarder les bases de données des services immédiatement:/msg OperServ UPDATE 
+  ..Sauvegarder les bases de données et relancer les services:/msg OperServ RESTART 
+  ..Arréter les services sans sauvegarde:/msg OperServ QUIT 
+  ..Arréter les services avec sauvegarde:/msg OperServ SHUTDOWN 
+  ..Envoyer une chaîne de texte directement au serveur où sont connectés les services:/msg OperServ RAW $$?="Entre le texte :" 
+  .Commandes réservées aux super-utilisateurs des Services 
+  ..Modifier la liste des administrateurs des Services 
+  ....Ajouter:/msg OperServ ADMIN ADD $$?="Entre le nick :" 
+  ....Supprimer:/msg OperServ ADMIN DEL $$?=Entre le nick :" 
+  ....Liste:/msg OperServ ADMIN LIST 
+  ....Tout supprimer:/msg OperServ ADMIN CLEAR 
+  $iif(%mb.hostserv == on,Menu HostServ,$null) 
+  .Aide:/msg HostServ HELP 
+  .Activer la vhost:/msg HostServ ON 
+  .Désactiver la vhost:/msg HostServ OFF 
+  .Enregistrer la vhost du nick actuellement pour tous les pseudos du groupe:/msg HostServ GROUP 
+  .-
+  ;.Commandes administrateur
+  .$iif(o isin $usermode,Commandes pour les ServicesOpérateurs,$null) 
+  ..Configurer la vhost donnée pour le pseudo indiqué:/msg HostServ SET $$?="Entre le nick:" $$?="Entre hostmask :" 
+  ..Configurer la vhost pour toutes les pseudos d'un même groupe:/msg HostServ SETALL $$?="Entre le nick :" $$?="Entre hostmask :" 
+  ..Supprimer la vhost pour le pseudo indiqué:/msg HostServ DEL $$?="Entre le nick :" 
+
+  ;.Commandes administrateur
+  .$iif(o isin $usermode,Commandes pour les ServicesAdmins seulement, $null) 
+  ..Retourner la liste des vhost correspondante:/msg HostServ LIST $$?="Entre le nick|vhost :" 
+  - 
+  $iif(%mb.cmdmirc == on,Commandes mIRC,$null) 
+  .Commandes Générales 
+  ..Message sur un chan:/msg $$?="Entre le chan(avec le #):" $$?="Entre le message :" 
+  ..Message à un nick:/msg $$?="Entre le nick:" $$?="Entre le message :" 
+  ..Message sur tous les chan:/amsg $$?="Entre le message :" 
+  ..Dire quelque chose sur un chan:/say $$?="Entre le message :" 
+  ..Faire une action:/me $$?="Entre le message :" 
+  ..Faire une action sur tous les chan:/ame $$?="Entre le message :" 
+  ..Notice:/notice $$?="Entre le nick:" $$?="Entre le message:" 
+  ..Faire un pv avec une personne:/query $$?="Entre le nick :" $$?="Entre le message :" 
+  ..Whois:/whois $$?="Entre le nick :" 
+  ..Changer de nick:/nick $$?="Entre le nouveau nick :" 
+  ..Vous mettre away:/away $$?="Entre la raison :" 
+  ..Liste des canaux:/list 
+  ..Auto-join sur invite 
+  ....Activer:/ajinvite on 
+  ....Désactiver:/ajinvite off 
+  ..Inviter un nick sur un chan:/invite $$?="Entre le nick:" $$?="Entre le chan(avec le #):" 
+  ..Joindre un chan:/join $$?="Entre le chan(avec le #):" 
+  ..Partir d'un chan:/part $$?="Entre le chan(avec le #):" $$?="Entre la raison :" 
+  ..Partir de l'IRC:/quit $$?="Entre la raison :" 
+  ..Fermer mIRC:/exit 
+  .Commandes d'Usagers et de Canal 
+  ..Kicker une personne:/kick $$?="Entre le nick:" $$?="Entre la raison :" 
+  ..Bannir une personne:/ban $$?="Entre le nick (ou l'adresse):" 
+  ..Statut 
+  ....Op (+@):/mode $chan +o $$?="Entre le nick :" 
+  ....DeOp (-@):/mode $chan -o $$?="Entre le nick :" 
+  ....HalfOp (+%):/mode $chan +h $$?="Entre le nick :" 
+  ....DeHalfOp (-%):/mode $chan -h $$?="Entre le nick :" 
+  ....Voice (+v):/mode $chan +v $$?="Entre le nick :" 
+  ....DeVoice (-v):/mode $chan -v $$?="Entre le nick :" 
+  ..Mode du chan 
+  ....Canal est sur invitation seulement 
+  ...Activer:/mode $chan +i 
+  ...Désactiver:/mode chan -i 
+  ....Canal limité 
+  ...Activer:/mode $chan +l $$?="Nombre de personnes :" 
+  ...Désactiver:/mode $chan -l 
+  ....Canal modérer 
+  ...Activer:/mode $chan +m 
+  ...Désactiver:/mode $chan -m 
+  ....Messages externes aux canal non permis 
+  ...Activer:/mode $chan +n 
+  ...Désactiver:/mode $chan -n 
+  ....Canal priver 
+  ...Activer:/mode $chan +p 
+  ...Désactiver:/mode $chan -p 
+  ....Canal secret 
+  ...Activer:/mode $chan +s 
+  ...Désactiver:/mode $chan -s 
+  ....Sujet limiter 
+  ...Activer:/mode $chan +t 
+  ...Désactiver:/mode $chan -t 
+  ....Canal avec clé 
+  ...Activer:/mode $chan +k $$?="Entre le mot de passe :" 
+  ...Désactiver:/mode $chan -k 
+  ....Plus de modes:/HELPOP CHMODES 
+  ..Mode d'un nick 
+  ....Invisible 
+  ...Activer:/mode $me +i 
+  ...Désactiver:/mode $me -i 
+  ....Recevoir des notices du serveur 
+  ...Activer:/mode $me +s 
+  ...Désactiver:/mode $me -s 
+  ....Sourd 
+  ...Activer:/mode $me +d 
+  ...Désactiver:/mode $me -d 
+  ....Lire et envoyer des notices des GlobOps, et LocOps 
+  ...Activer:/mode $me +g 
+  ...Désactiver:/mode $me -g 
+  ....Cacher tous les salons dans /whois et /who 
+  ...Activer:/mode $me +p 
+  ...Désactiver:/mode $me -p 
+  ....Dire que vous utilisez un /VHOST 
+  ...Activer:/mode $me +t 
+  ...Désactiver:/mode $me -t 
+  ....Reçevoir les notices de rejet de DCC infectés 
+  ...Activer:/mode $me +v 
+  ...Désactiver:/mode $me -v 
+  ....Pouvoir recevoir les Wallops 
+  ...Activer:/mode $me +w 
+  ...Désactiver:/mode $me -w 
+  ....Marquer comme étant un Bot 
+  ...Activer:/mode $me +B 
+  ...Désactiver:/mode $me -B 
+  ....Remplacer tous les 'Bad words' dans vos messages par <censored> 
+  ...Activer:/mode $me +G 
+  ...Désactiver:/mode $me -G 
+  ....Permet de ne recevoir des PRIVMSGs/NOTICEs que d'utilisateurs enregistrés (+r) 
+  ...Activer:/mode $me +R 
+  ...Désactiver:/mode $me -R 
+  ....Empecher de recevoir des CTCPs 
+  ...Activer:/mode $me +T 
+  ...Désactiver:/mode $me -T 
+  ....Indiquer que le client est un utilisateur de WebTV 
+  ...Activer:/mode $me +V 
+  ...Désactiver:/mode $me -V 
+  ....Plus de modes:/HELPOP UMODES 
+  .UnrealIRCd services d'aide 
+  ..Toutes les commandes serveurs et les options disponibles:/HELPOP 
+  ..Obtenir la liste de commandes utilisateurs:/HELPOP USERCMDS 
+  ..Obtenir la liste de commandes opérateurs:/HELPOP OPERCMDS 
+  ..Commandes envoyées via les serveurs ULined (Services):/HELPOP SVSCMDS 
+  ..Obtenir la liste des modes utilisateurs:/HELPOP UMODES 
+  ..Obtenir la liste des Snomasks:/HELPOP SNOMASKS 
+  ..Obtenir la liste des modes des salons:/HELPOP CHMODES 
+  ..Obtenir la liste des Flags Oline:/HELPOP OFLAGS 
+  - 
+  Configuration:/menubot 
+  - 
+} 
+dialog menubot { 
+  title "MenuBot v4.0" 
+  size -1 -1 84 130 
+  option dbu 
+  check "ChanServ", 2, 3 11 36 10 
+  check "NickServ", 3, 3 21 32 10 
+  check "BotServ", 4, 45 11 32 10 
+  check "MemoServ", 5, 45 21 37 10 
+  check "OperServ", 6, 3 31 36 10 
+  check "HostServ", 7, 45 31 34 10 
+  check "Commandes mIRC", 8, 3 41 55 10 
+  check "Mode par défault*", 9, 11 57 55 10, flat 
+  text "*Active tous les menus. Note : certain menu sont réservés aux utilisateurs ayant le mode +o", 10, 11 68 60 27, disable center 
+  box "Choix personnalisé des menus", 1, 1 2 82 53 
+  button "&Aide", 11, 3 99 37 12, flat 
+  button "&Ok", 12, 44 99 37 12, flat ok 
+  link "E-mail", 13, 2 122 15 8 
+  link "Web", 14, 36 122 12 8 
+  link "IRC", 15, 72 122 10 8 
+  text "Menu Bot V4.0 pour Anope 2", 16, 9 113 75 8, disable 
+} 
+alias menubot { dialog -m menubot menubot } 
+on *:dialog:menubot:*:*:{ 
+  if ($devent == init) { 
+    if (%mb.chanserv == on) { did -c $dname 2 } 
+    if (%mb.nickserv == on) { did -c $dname 3 } 
+    if (%mb.botserv == on) { did -c $dname 4 } 
+    if (%mb.memoserv == on) { did -c $dname 5 } 
+    if (%mb.operserv == on) { did -c $dname 6 } 
+    if (%mb.hostserv == on) { did -c $dname 7 } 
+    if (%mb.cmdmirc == on) { did -c $dname 8 } 
+    if (%mb.default == on) { did -c $dname 9 | did -b $dname 2,3,4,5,6,7,8 } 
+    if (%mb.chanserv == on) && (%mb.nickserv == on) && (%mb.botserv == on) && (%mb.memoserv == on) && (%mb.operserv == on) && (%mb.hostserv == on) && (%mb.cmdmirc == on) { set %mb.default on | did -c $dname 9 | did -b $dname 2,3,4,5,6,7,8 } 
+  } 
+  if ($devent == sclick) { 
+    if ($did == 2) { 
+      if ($did(2).state == 1) { set %mb.chanserv on } 
+      else { set %mb.chanserv off } 
+    } 
+    elseif ($did == 3) { 
+      if ($did(3).state == 1) { set %mb.nickserv on } 
+      else { set %mb.nickserv off } 
+    } 
+    elseif ($did == 4) { 
+      if ($did(4).state == 1) { set %mb.botserv on } 
+      else { set %mb.botserv off } 
+    } 
+    elseif ($did == 5) { 
+      if ($did(5).state == 1) { set %mb.memoserv on } 
+      else { set %mb.memoserv off } 
+    } 
+    elseif ($did == 6) { 
+      if ($did(6).state == 1) { set %mb.operserv on } 
+      else { set %mb.operserv off } 
+    } 
+    elseif ($did == 7) { 
+      if ($did(7).state == 1) { set %mb.hostserv on } 
+      else { set %mb.hostserv off } 
+    } 
+    elseif ($did == 8) { 
+      if ($did(8).state == 1) { set %mb.cmdmirc on } 
+      else { set %mb.cmdmirc off } 
+    } 
+    elseif ($did == 9) { 
+      if ($did(9).state == 1) { set %mb.chanserv on | set %mb.nickserv on | set %mb.botserv on | set %mb.memoserv on | set %mb.operserv on | set %mb.hostserv on | set %mb.cmdmirc on | set %mb.default on | did -c $dname 2,3,4,5,6,7,8 | did -b $dname 2,3,4,5,6,7,8 } 
+      else { set %mb.operserv off | set %mb.hostserv off | did -e $dname 2,3,4,5,6,7,8 | did -u $dname 6,7 | set %mb.default off } 
+    } 
+    elseif ($did == 11) { run https://irc.mimacy.net/ } 
+    elseif ($did == 13) { run https://irc.mimacy.net/ } 
+    elseif ($did == 14) { run https://irc.mimacy.net/ } 
+    elseif ($did == 15) { server -m irc.mimacy.com:6667 -j #aide } 
+  } 
+} 
+ON 1:LOAD:{ echo -a echo -a 3Merci $me $+ , d'avoir installer 4MenuBot v4.0 3et bonne utilisation !7 Il est conseillé d'effectuer votre 4configuration 7maintenant :) | set %mb.chanserv on | set %mb.nickserv on | set %mb.botserv on | set %mb.memoserv on | set %mb.operserv on | set %mb.hostserv on | set %mb.cmdmirc on | set %mb.default on | menubot } 
+ON 1:UNLOAD: { echo -a 4Désinstallation de 3MenuBot v4.0 4 terminée | unset %mb.chanserv | unset %mb.nickserv | unset %mb.botserv | unset %mb.memoserv | unset %mb.operserv | unset %mb.hostserv | unset %mb.cmdmirc | unset %mb.default } 

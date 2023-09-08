@@ -1,0 +1,253 @@
+;-----------------------------------------------------------
+;                               Vote
+;                            Par Xor
+;-----------------------------------------------------------
+
+off 1:START:{ set %tglbvoting.stations CLOSED }
+
+alias votebox {
+  set %tglbnooo 1
+  set %tglbvote.chan $active
+  dialog -md votebox votebox
+}
+
+alias VOTE {
+  if ( %tglbvoting.stations != OPEN ) {
+    set %tglbstatusindex 53
+    set %tglbmakeSure 0
+    if ($did(votebox,32).state == 1) { set %tglbmyVote abs }
+    if ($did(votebox,33).state == 1) { set %tglbmyVote yes }
+    if ($did(votebox,34).state == 1) { set %tglbmyVote no }
+    if ($did(votebox,28).state == 1) { set %tglbhalfway 1 }
+    else { set %tglbhalfway 0 }
+    if ($did(votebox,29).state == 1) { set %tglbusecommand 1 }
+    else { set %tglbusecommand 0 }
+    set %tglbvote.chan $did(votebox,20)
+    set %tglbvote.question $did(votebox,22)
+    set %tglbbefore $calc(%tglbtime / 2)
+    set %tglbafter $calc(%tglbtime / 2)
+    set %tglbchoice1 $did(votebox,26)
+    set %tglbchoice2 $did(votebox,35)
+    /msg %tglbvote.chan 2Vote - Question : %tglbvote.question
+    /msg  %tglbvote.chan 2Vote - Réponse : Tapez %tglbchoice1 ou %tglbchoice2 
+    /msg  %tglbvote.chan 2Vote - Temps : %tglbtime Secondes restantes pour voter !
+    set %tglbvoting.stations OPEN
+    .timer6 1 %tglbbefore halfway
+    set %tglbvoted.agree 0
+    set %tglbvoted.disagree 0
+    set %tglbvoted.people 0
+    if ( %tglbmyVote == yes ) {
+      inc %tglbvoted.agree
+      inc %tglbvoted.people
+    }
+    else if ( %tglbmyVote == no ) {
+      inc %tglbvoted.disagree
+      inc %tglbvoted.people
+    }
+  }
+}
+
+on *:TEXT:*Secondes restantes*:{
+  set %tglbnotNow 1
+  .timer 1 $1 set %tglbnotNow 0
+}
+
+on 1:TEXT:%tglbchoice1:*:{
+  if (%tglbvoting.stations == OPEN) {
+    .notice $nick 2Vote - Tu as voté : %tglbchoice1
+    inc %tglbvoted.people
+    inc %tglbvoted.agree
+    inc %tglbstatusindex
+    if ( %tglbstatusindex > 57 ) { set %tglbstatusindex 54 | did -r votebox 54,55,56,57 1 }
+    if ( %tglbmakeSure != 1 ) { did -o votebox %tglbstatusindex 1 $nick a voté %tglbchoice1 | initialise }
+  }
+  else { notice.p $nick 2Vote - Aucun vote en cours ! }
+}
+
+
+on 1:TEXT:%tglbchoice2:*:{
+  if (%tglbvoting.stations == OPEN) {
+    .notice $nick 2Vote - Tu as voté : %tglbchoice2
+    inc %tglbvoted.disagree
+    inc %tglbvoted.people
+    inc %tglbstatusindex
+    if ( %tglbstatusindex > 57 ) { set %tglbstatusindex 54 | did -r votebox 54,55,56,57 1 }
+    if ( %tglbmakeSure != 1 ) { did -o votebox %tglbstatusindex 1 $nick a voté %tglbchoice2 | initialise }
+  }
+  else { notice.p $nick 2Vote - Aucun vote en cours ! }
+}
+alias halfway {
+  if ( %tglbhalfway == 1 ) {
+    /msg %tglbvote.chan 2Vote - Fin dans : in %tglbafter Secs
+    /msg %tglbvote.chan 2Vote - Question : %tglbvote.question
+    /msg %tglbvote.chan 2Vote - Votes : %tglbchoice1 - %tglbvoted.agree
+    /msg %tglbvote.chan 2Vote - Votes : %tglbchoice2 - %tglbvoted.disagree
+  }
+  .timer7 1 %tglbafter closed
+}
+
+
+alias closed {
+  set %tglbvoting.stations CLOSED
+  set %tglbvote.perc.voted $calc((%tglbvoted.people / $nick(%tglbvote.chan,0)) * 100)
+  set %tglbvoted.perc.agree $calc((%tglbvoted.agree / %tglbvoted.people) * 100)
+  set %tglbvoted.perc.disagree $calc((%tglbvoted.disagree / %tglbvoted.people) * 100)
+  /msg %tglbvote.chan 2Vote - Pourcentages de votants : %tglbvote.perc.voted $+ % des membres de %tglbvote.chan .
+  /msg %tglbvote.chan 2Vote - Total : %tglbchoice1 - %tglbvoted.agree ( $+ %tglbvoted.perc.agree $+ % $+ )
+  /msg %tglbvote.chan 2Vote - Total : %tglbchoice2 - %tglbvoted.disagree ( $+ %tglbvoted.perc.disagree $+ % $+ )
+  results 
+}
+
+alias results {
+  if (%tglbvoted.agree > %tglbvoted.disagree) {
+    /msg %tglbvote.chan 2Vote - Résultat : %tglbchoice1 ( %tglbvote.question )
+    if (%tglbusecommand = 1) {
+      %tglbvote.question
+    }
+  }
+  if (%tglbvoted.agree < %tglbvoted.disagree) {
+    /msg %tglbvote.chan 2Vote - Résultat : %tglbchoice2 ( %tglbvote.question )
+  }
+  if (%tglbvoted.agree == %tglbvoted.disagree) {
+    /msg %tglbvote.chan 2Vote - Résultat : égalité ( %tglbvote.question )
+  }
+}
+
+dialog votebox {
+  title "Tgl0beSCRIPT - Vote"
+  icon images/icones/votes.ico
+  size -1 -1 129 154
+  option dbu
+  tab "Vote",202,2 0 124 135
+
+  box "",19,5 23 118 48,tab 202
+  box "",60,5 67 118 30,tab 202
+  box "",61,5 93 118 20,tab 202
+
+  edit "%tglbvote.chan",20,50 28 70 10,tab 202
+  text "Salon :",21,8 30 35 10,tab 202 autohs
+
+  edit "",22,50 38 70 10,tab 202 autohs
+  text "Question :",23,8 40 37 10,tab 202
+
+  edit "",24,50 48 30 10,tab 202
+  text "Durée :",25,8 50 35 10,tab 202
+  text "Secs",67,82 50 15 10,tab 202
+
+  check "Informations à mi-vote",28,8 72 70 10,tab 202 group right,flat
+  check "Exécuter le vote comme commande à la fin",29,8 80 113 10,tab 202 group right,flat
+  text "du vote (ex: /kick #SALON PSEUDO)",30,17 88 100 10,tab 202
+
+  edit "",26,50 58 30 10,tab 202
+  edit "",35,90 58 30 10,tab 202
+  text "Réponses :",27,8 60 40 10,tab 202
+  text "ou",64, 82 60 7 10,tab 202
+
+  text "Mon propre vote",31,8 102 40 10,tab 202
+  radio "/",32,50 100 23 10,tab 202 group push,flat
+  radio "Oui",33,73 100 23 10,tab 202 push,flat
+  radio "Non",34,96 100 23 10,tab 202 push,flat
+
+  button "V&oter",102,50 118 35 12,tab 202,flat
+  box "",62,48 113 39 19,tab 202
+
+  tab "Résultats",203
+  box "",50,5 23 118 33,tab 203
+
+  edit "%tglbchoice1",68,20 30 30 10,tab 203 autohs
+  text ":",69,51 32 5 10,tab 203
+  edit "%tglbvoted.agree",70,53 30 30 10,tab 203 autohs
+  edit "%tglbvoted.perc.agree $+ %",71,83 30 25 10,tab 203
+  edit "%tglbchoice2",72,20 42 30 10,tab 203 autohs
+  text ":",73,51 44 5 10,tab 203
+  edit "%tglbvoted.disagree",74,53 42 30 10,tab 203 autohs
+  edit "%tglbvoted.perc.disagree $+ %",75,83 42 25 10,tab 203
+  text %tglbchoice1 : %tglbvoted.agree,52,15 60 110 10,tab 203
+  text %tglbchoice2 : %tglbvoted.disagree,53,15 70 110 10,tab 203
+  text "",54,15 80 110 10,tab 203
+  text "",55,15 90 110 10,tab 203
+  text "",56,15 100 110 10,tab 203
+  text "",57,15 110 110 8,tab 203
+
+  button "&Appliquer",101,4 140 30 10,flat
+  box "",63,2 135 34 17
+  button "&Fermer",120,94 140 30 10,ok,flat
+  box "",65,92 135 34 17
+}
+
+alias saveIt {
+  if ($did(votebox,32).state == 1) { set %tglbmyVote abs }
+  if ($did(votebox,33).state == 1) { set %tglbmyVote yes }
+  if ($did(votebox,34).state == 1) { set %tglbmyVote no }
+  if ($did(votebox,28).state == 1) { set %tglbhalfway 1 }
+  else { set %tglbhalfway 0 }
+  if ($did(votebox,29).state == 1) { set %tglbusecommand 1 }
+  else { set %tglbusecommand 0 }
+  set %tglbvote.chan $did(votebox,20)
+  set %tglbvote.question $did(votebox,22)
+  set %tglbtime $did(votebox,24)
+  set %tglbchoice1 $did(votebox,26)
+  set %tglbchoice2 $did(votebox,35)
+}
+
+alias initialise {
+  did -o votebox 68 1 %tglbchoice1
+  did -o votebox 70 1 %tglbvoted.agree
+  did -o votebox 71 1 %tglbvoted.perc.agree $+ %
+  did -o votebox 72 1 %tglbchoice2
+  did -o votebox 74 1 %tglbvoted.disagree
+  did -o votebox 75 1 %tglbvoted.perc.disagree $+ %
+  did -o votebox 20 1 %tglbvote.chan
+  did -o votebox 22 1 %tglbvote.question
+  did -o votebox 24 1 %tglbtime
+  did -o votebox 33 1 %tglbchoice1
+  did -o votebox 34 1 %tglbchoice2
+  did -o votebox 26 1 %tglbchoice1
+  did -o votebox 35 1 %tglbchoice2
+  set %tglbnooo 0
+  if ( %tglbhalfway == 1 ) { did -c votebox 28 }
+  else { did -u votebox 28 }
+  if ( %tglbusecommand == 1 ) { did -c votebox 29 }
+  else { did -u votebox 29 }
+  if ( %tglbmyVote == yes ) { did -c votebox 33 }
+  if ( %tglbmyVote == abs ) { did -c votebox 32 }
+  if ( %tglbmyVote == no ) { did -c votebox 34 }
+}
+
+On *:DIALOG:votebox:init:0:{
+  initialise
+  mdx SetMircVersion $version
+  mdx MarkDialog $dname
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 2 text 255
+  mdx SetColor $dname 10 text 16711680
+  mdx SetColor $dname 202,19,20,60,61,21,22,23,24,25,67,28,29,30,26,35,27,64,31,32,33,34,62,50,68,69,70,71,72,73,74,75,52,53,63,65,54,55,56,57 textbg 16772585
+  mdx SetColor $dname 202,19,20,60,61,21,22,23,24,25,67,28,29,30,26,35,27,64,31,32,33,34,62,50,68,69,70,71,72,73,74,75,52,53,63,65,54,55,56,57 background 16772585
+}
+
+On *:DIALOG:votetbox:sclick:100:{ saveIt }
+on *:DIALOG:votebox:sclick:120:{ set %tglbmakeSure 1 }
+
+On *:DIALOG:votebox:sclick:102:{ did -f votebox 203 | VOTE | initialise }
+
+On *:DIALOG:votebox:sclick:101:{ did -o votebox 33 1 $did(votebox,26) | did -o votebox 34 1 $did(votebox,35) | did -o votebox 68 1 $did(votebox,26) | did -o votebox 72 1 $did(votebox,35) | saveIt }
+
+On *:DIALOG:votebox:edit:26:{
+  did -o votebox 68 1 $did(votebox,26)
+  if ( %tglbnooo != 1 ) {
+    did -o votebox 33 1 $did(votebox,26)
+  }
+  else {
+    .timer 1 3 did -o votebox 33 1 %tglbchoice1
+  }
+}
+
+On *:DIALOG:votebox:edit:35:{
+  did -o votebox 72 1 $did(votebox,35)
+  if ( %tglbnooo != 1 ) {
+    did -o votebox 34 1 $did(votebox,35)
+  }
+  else {
+    .timer 1 3 did -o votebox 34 1 %tglbchoice2
+  }
+}

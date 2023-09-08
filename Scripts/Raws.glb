@@ -1,0 +1,256 @@
+;-----------------------------------------------------------
+;                       Gestion des Raws
+;                          Par Xor
+;-----------------------------------------------------------
+
+Alias RawErr { Echo 4 -at $1- } 
+Alias RawMess { Echo $color(info text) -at $1- }
+RAW 401:*: { RawErr Le nickname $2 n'existe pas. | HALT }
+RAW 402:*: { RawErr Le serveur $2 n'existe pas. | HALT }
+RAW 403:*: { RawErr Vous n'avez pas indiqué le nom du salon. | HALT }
+RAW 404:*: { RawErr Impossible d'envoyer un message sur $2, mode modéré (+m) | HALT }
+RAW 405:*: { RawErr Impossible d'ouvrir un autre salon, vous avez atteint le nombre maximal de salon ouvrables autorisé par le serveur. | HALT }
+RAW 406:*: { RawErr Le nickname $2 n'existe pas. | HALT }
+RAW 407:*: { RawErr Destination du message dupliquée. | HALT }
+RAW 409:*: { RawErr Aucune origine spécifiée pour la commande PING/PONG. | HALT }
+RAW 411:*: { RawErr Aucune destination pour la commande $5 | HALT }
+RAW 412:*: { RawErr Aucun texte à envoyer. | HALT }
+RAW 413:*: { RawErr Aucun domaine de spécifié pour le masque ( $+ $2 $+ ). | HALT }
+RAW 414:*: { RawErr Masque invalide ( $+ $2 $+ ). | HALT }
+RAW 422:*: { RawErr Aucun message du jour (MOTD) pour le serveur $network | HALT }
+RAW 423:*: { RawErr Aucune information sur l'administrateur n'est disponible. | HALT }
+RAW 424:*: { RawErr Erreur lors du traitement du message ( $+ $2 $+ ). | HALT }
+RAW 431:*: { RawErr Vous n'avez pas indiqué de Nickname. | HALT }
+RAW 432:*: { RawErr Le nickname ( $+ $2 $+ ) est erroné. | HALT }
+RAW 433:*: { RawErr Le nickname ( $+ $2 $+ ) est déjà utilisé. | HALT }
+RAW 436:*: { RawErr Collision de nick (nickname déjà existant sur un autre serveur). | HALT }
+RAW 441:*: { RawErr $2 n'est pas sur $3 | HALT }
+RAW 442:*: { RawErr Vous n'êtes pas sur $2 | HALT }
+RAW 443:*: { RawErr $2 est déjà sur $3 | HALT }
+RAW 444:*: { RawErr Impossible d'exécuter le commande (SUMMON), vous n'êtes pas loggé. | HALT }
+RAW 445:*: { RawErr La commande SUMMON n'est pas disponible sur ce serveur. | HALT }
+RAW 446:*: { RawErr La commande USERS n'est pas disponible sur ce serveur. | HALT }
+RAW 461:*: { RawErr Pas assez de paramètres pour la commande ( $+ $2 $+ ). | HALT }
+RAW 462:*: { RawErr Vous êtes déjà enregistré auprès du serveur. | HALT }
+RAW 463:*: { RawErr Votre host $host n'est pas permis sur ce serveur. | HALT }
+RAW 464:*: { RawErr Mot de passe incorrect. | HALT }
+RAW 465:*: { RawErr Vous êtes banni de ce serveur. | HALT }
+RAW 467:*: { RawErr Le salon $2 exige une clé pour y rentrer. | HALT }
+RAW 471:*: { RawErr Impossible de rejoindre $2, le salon a atteint son nombre de users maximal. | HALT }
+RAW 472:*: { RawErr Caractère inconnu ( $+ $2 $+ ) pour la commande MODE. | HALT }
+RAW 473:*: { chan_invite $2 | HALT }
+RAW 474:*: { RawErr Vous êtes banni du salon $2 | HALT }
+RAW 475:*: { chan_key $2 | HALT }
+RAW 481:*: { RawErr Permission refusée, vous n'êtes pas un ircop. | HALT }
+RAW 482:*: { RawErr Vous n'êtes pas opérateur sur le salon $2 | HALT }
+RAW 483:*: { RawErr Vous ne pouvez pas stopper le serveur. | HALT }
+RAW 491:*: { RawErr Aucun IrcOp avec votre host ( $+ $host $+ ) n'est permi sur ce serveur. | HALT }
+RAW 501:*: { RawErr Flag inconnu ( $+ $2 $+ ) pour la commande MODE. | HALT }
+RAW 502:*: { RawErr Vous ne pouvez pas changer le mode d'un autre utilisateur. | HALT }
+RAW 302:*: { RawMess [USERHOST] --> $2-  | HALT }
+RAW 303:*: { RawMess [ISON] --> $2-  | HALT }
+RAW 305:*: HALT
+RAW 306:*: HALT
+RAW 333:*: { Echo $color(topic text) -t $2 Mis par  $+ $3 $+  le  $+ $TraduireDate($4) $+  | HALT }
+RAW 331:*: { Echo -t $2 4Aucune Topic de défini pour ce chan. | HALT }
+RAW 332:*: { Echo $color(topic text) -t $2 Topic : $3- | HALT }
+RAW 341:*: { RawMess Vous avez invité $2 sur $3 | HALT }
+RAW 381:*: { RawMess Vous êtes un IrcOp. Yaaaaaaaalllllllllllaaaaaaaaaaaaaaaaahhhhhhh !!!!!  | HALT }
+RAW 382:*: { RawMess Le fichier de configuration du serveur vient d'être rechargé. | HALT }
+RAW 256:*: { RawMess [ADMIN Info] : $2-  | HALT }
+RAW 257:*: { RawMess [ADMIN Info] : $2-  | HALT }
+RAW 258:*: { RawMess [ADMIN Info] : $2-  | HALT }
+RAW 259:*: { RawMess [ADMIN Info] : $2-  | HALT }
+RAW 391:*: { RawMess [TIME Info] : $2- | HALT }
+RAW 371:*: { RawMess [SERVER Info]  $2- | HALT }
+RAW 374:*: HALT
+Dialog MOTD {
+  TITLE     "Message du jour"
+  SIZE      -1 -1 350 200
+  LIST 100, 2 2 346 180, VSBAR, HSBAR
+  CHECK "&Ne plus afficher", 200, 10 175 120 20,flat
+  BUTTON "&Fermer", 10, 265 175 70 20, OK, CANCEL, DEFAULT, FLAT
+}
+on *:dialog:motd:init:*:{
+  mdx SetMircVersion $version
+  mdx  MarkDialog $dname
+  mdx  SetControlMDX 30 listview showsel rowselect infotip report extsel > $cc_views
+  mdx SetDialog $dname bgcolor 16772585
+  mdx SetColor $dname 2 text 255
+  mdx SetColor $dname 200,100 textbg 16772585
+  mdx SetColor $dname 200,100 background 16772585
+}
+ON *:DIALOG:MOTD:SCLICK:200: { %Raws.MotdAfficher = $iif(%Raws.MotdAfficher == $true,$false,$true) }
+RAW 375:*: { 
+  If (%Raws.MotdAfficher == $true) {
+    If (%Raws.MotdOnWindows == $true) { /Dialog -amd Motd Motd | Did -a Motd 100 $2- }
+    Else { RawMess [MOTD] *** Message du jour du serveur $2 }
+  }
+  HALT
+}
+RAW 372:*: { 
+  If (%Raws.MotdAfficher == $true) {
+    If (%Raws.MotdOnWindows == $true) { Did -a Motd 100 $2- }
+    Else { RawMess [MOTD] $2- }
+  }
+  HALT
+}
+RAW 376:*: { .TimerEffaceMotd 0 5 EffacerMotd | HALT }
+Alias EffacerMotd {
+  If $dialog(MOTD).hwnd != $null { Dialog -x MOTD } 
+  TimerEffaceMotd Off 
+}
+RAW 351:*: { RawMess [VERSION Info] $2- | HALT }
+RAW 211:*: { RawMess [STATS Serveurs] $2- | HALT } 
+RAW 212:*: { RawMess [STATS Commandes] $2- | HALT }   
+RAW 213:*: { RawMess [STATS CLines] $2- | HALT }  
+RAW 214:*: { RawMess [STATS NLines] $2- | HALT }   
+RAW 215:*: { RawMess [STATS ILines] $2- | HALT }
+RAW 216:*: { RawMess [STATS Bans] $2- | HALT }
+RAW 218:*: { RawMess [STATS YLines] $2- | HALT }
+RAW 219:*: { RawMess [STATS Fin de la liste] | HALT }
+RAW 241:*: { RawMess [STATS HLines] $2- | HALT }
+RAW 242:*: { RawMess [STATS Time] $2- | HALT }
+RAW 243:*: { RawMess [STATS OLines] $2- | HALT }
+RAW 244:*: { RawMess [STATS HLines] $2- | HALT }
+RAW 001:*: { RawMess [SERVER Info] $2- | HALT }
+RAW 002:*: { RawMess [SERVER Info] $2- | HALT }
+RAW 003:*: { RawMess [SERVER Info] $2- | HALT }
+RAW 004:*: { RawMess [SERVER Info] $2- | HALT }
+RAW 005:*: { RawMess [SERVER Info] Le serveur est indisponible, essayez plutôt $4 sur le port $6 | HALT }
+RAW 251:*: { RawMess [SERVER Info] $4 utilisateurs et $7 invisibles sur $10 serveur(s). | HALT }
+RAW 252:*: { RawMess [SERVER Info] $2 opérateurs en ligne. | HALT }
+RAW 253:*: { RawMess [SERVER Info] $2 connexions inconnues. | HALT }
+RAW 254:*: { RawMess [SERVER Info] $2 salons formés. | HALT }
+RAW 255:*: { RawMess [SERVER Info] $4 clients et $7 serveur(s). | HALT }
+RAW 265:*: { RawMess [SERVER Info] $5 utilisateurs locaux pour un maximum de $7 $+ . | HALT }
+RAW 266:*: { RawMess [SERVER Info] $5 utilisateurs globaux pour un maximum de $7 $+ . | HALT }
+RAW 353:*: { HALT }
+RAW 366:*: { 
+  Var %NamesOp =  $+ $SkinsCouleursNicklist(Op) Ops[ $nick($2,0,o) / $nick($2,0) ] 
+  Var %NamesVc =  $+ $SkinsCouleursNicklist(Voice) Voices[ $nick($2,0,v) / $nick($2,0) ] 
+  Var %NamesUs =  $+ $SkinsCouleursNicklist(User) Utilisateurs[ $nick($2,0,r) / $nick($2,0) ] 
+  Echo $color(other text) -t $2 Statistiques : %NamesOp %NamesVc %NamesUs
+  HALTDEF
+}
+;RAW 352:*: If ($dialog(IrcOps).hwnd == $null) && (%Sc.Chan == $null) && (%IrcOps. [ $+ [ $2 ] ] == $null) { Echo $color(whois text) -st [Who $6 $+ ] $2-5 $7- | HALT }
+RAW 315:*: HALT
+RAW 221:*: { Echo $color(mode text) -at $iif($left($1,1) == $chr(35),$1) [Mode $1 $+ ] $2- | HALT }
+RAW 324:*:{
+  if (($3 == + ) && ($me isop $2)) { mode $2 +tn }
+  If ($dialog(modelist).hwnd == $null) {
+    if ($3 != + ) { Echo $color(mode text) -t $2 [Mode $2 $+ ] $3- | HALT }
+    else { Echo $color(mode text) -t $2 [Mode $2 $+ ] Aucun mode de défini | HALT }
+  }
+}
+RAW 301:*: {
+  if ( $gettok(%whois.tmp,1,33) == $2 ) Echo $Color(Whois Text) -at Absence : $+ $color(Normal Text) $2 est 4away $+ $color(Normal Text) pour la raison : $3- | HALT
+}
+RAW 310:*: { Echo $color(whois text) -at Complément : $+ $color(Normal Text) $2 est disponible pour de l'aide. | HALT }
+RAW 311:*: { 
+  Set %WhoIs.Ok $true
+  If (%Raws.WhoIsOnQuery == $true)  { If ($Query($2) != $null) { Window -a $2 } | { Else /Query $2 } }
+  Else If (%Raws.WhoIsOnWindow == $true)  { Window -a @Info }
+  Echo $color(whois text) -at [WhoIs $2 $+ ] 
+  Echo $color(whois text) -at  VraiNom : $+ $color(Normal Text) $6-
+  Echo $color(whois text) -at  Adresse : $+ $color(Normal Text) $2 $+ ! $+ $3 $+ @ $+ $4
+  set %whois.tmp $2 $+ ! $+ $3 $+ @ $+ $4
+  HALT 
+}
+RAW 307:*: {
+  if ( $gettok(%whois.tmp,1,33) == $2 ) {
+    Echo $color(whois text) -at Complément : $+ $color(Normal Text) $gettok( $2 , 1, 124) est un pseudo enregistré. 
+  } 
+  HALT 
+}
+RAW 275:*: {
+  if ( $gettok(%whois.tmp,1,33) == $2 ) {
+    Echo $color(whois text) -at Complément : $+ $color(Normal Text) $gettok( $2 , 1, 124) utilise une connexion sécurisée (SSL).
+  } 
+  HALT 
+}
+RAW 671:*: {
+  if ( $gettok(%whois.tmp,1,33) == $2 ) {
+    Echo $color(whois text) -at Complément : $+ $color(Normal Text) $gettok( $2 , 1, 124) utilise une connexion sécurisée (SSL).
+  } 
+  HALT 
+}
+RAW 335:*: {
+  if ( $gettok(%whois.tmp,1,33) == $2 ) {
+    Echo $color(whois text) -at Complément : $+ $color(Normal Text) $gettok( $2 , 1, 124) est un Robot.
+  } 
+  HALT 
+}
+RAW 312:*: { Echo $color(whois text) -at Serveur : $+ $color(Normal Text) $3- | HALT }
+RAW 313:*: { Echo $color(whois text) -at Statut : $+ $color(Normal Text) IrcOp. | HALT }
+RAW 317:*: { Echo $color(whois text) -at Connecté depuis le : $+ $color(Normal Text) $TraduireDate($4) Idle : $+ $color(Normal Text) $duration($3) | HALT }
+RAW 318:*: { If (%WhoIs.Ok == $true) { ScanClonesNickAllChan $2 | Echo $color(whois text) -at [Fin du Whois] } | Unset %WhoIs.* | HALT }
+RAW 319:*: { 
+  Var %NumChan = 3, %NChan, %ChanComm, %ChanCommun, %ChanNonCommun, %NomChan
+  While (%NumChan <= $0) {
+    %ChanComm = $false
+    %NChan = 1
+    While (%NChan <= $comchan($2,0)) {
+      %NomChan = $replace($ [ $+ [ %NumChan ] ],$chr(64),$chr(0),$chr(43),$chr(0))
+      If ( %NomChan == $comchan($2,%NChan) ) { %ChanComm = $true | Goto Suite }
+      Inc %NChan
+    }
+    :Suite
+    If %ChanComm == $true { %ChanCommun = %ChanCommun $ [ $+ [ %NumChan ] ] }
+    Else { %ChanNonCommun = %ChanNonCommun $ [ $+ [ %NumChan ] ] }
+    Inc %NumChan
+  }
+  If %ChanNonCommun != $null { Echo $color(whois text) -at Salons non communs : $+ $color(Normal Text) %ChanNonCommun }
+  If %ChanCommun != $null { Echo $color(whois text) -at Salons communs : $+ $color(Normal Text) %ChanCommun }
+  HALT
+}
+RAW 320:*: { Echo $color(whois text) -at Connexion : Protégé | HALT }
+RAW 314:*: { Echo $color(whois text) [WhoWas $2 $+] $3- | HALT }
+RAW 369:*: { Echo $color(whois text) [Fin du WhoWas] | HALT }
+RAW 392:*: { RawMess [USERS Info] $2- | HALT }
+RAW 393:*: { RawMess [USERS Info] $2- | HALT }
+RAW 394:*: HALT
+RAW 367:*: HALT
+RAW 368:*: HALT
+RAW 200:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+RAW 201:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+RAW 202:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+RAW 203:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+RAW 204:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+RAW 205:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+RAW 206:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+RAW 208:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+RAW 261:* { Echo $color(info text) -st [TRACE] $2- | HALT }
+
+Alias chan_invite {
+  Var %run = $true
+  if  ( $ReadIni($MircDirSalon.ini , $1 , Pass ) != $null ) && ( $VerifieServeur($1) == $True ) {
+    .Msg $Nick.Bot($1) invite $ReadIni($MircDirSalon.ini , $1 , Pass ) $1
+    hadd salons_pending $1 $1
+    var %run = $false
+  }
+  if ( %run )  {
+    RawErr Impossible de rejoindre $1 $+ , ce salon est en mode Invite (+i). 
+  }
+  HALT
+}
+
+Alias chan_key {
+  Var %run = $true
+  if  ( $ReadIni($MircDirSalon.ini , $1 , Pass ) != $null ) && ( $VerifieServeur($1) == $True ) {
+    .Msg $Nick.Bot($1) invite $ReadIni($MircDirSalon.ini , $1 , Pass ) $1
+    hadd salons_pending $1 $1
+    var %run = $false
+  }
+  if ( %run )  {
+    RawErr La clé indiquée pour rentrer sur le salon $1 est incorrecte (+k).
+  }
+  HALT
+}
+
+on 1:INVITE:*:{
+  if ( $hget(salons_pending, $chan ) != $null ) {
+    join $chan
+    hdel salons_pending $chan
+  }
+}
